@@ -25,6 +25,7 @@ function toast(html, kind = '') {
   el.className = `toast ${kind}`;
   el.innerHTML = html;
   document.getElementById('toasts').append(el);
+  if (kind === 'update') return el; // stays until the learner acts on it
   setTimeout(() => el.classList.add('out'), 4200);
   setTimeout(() => el.remove(), 4800);
   return el;
