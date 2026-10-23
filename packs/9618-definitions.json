@@ -1,0 +1,3717 @@
+{
+  "id": "9618-definitions",
+  "title": "Computer Science definitions",
+  "subject": "Computer Science",
+  "syllabus": "Cambridge International AS & A Level Computer Science (9618)",
+  "kind": "definition",
+  "description": "Definitions and 'state what is meant by' answers for AS & A Level Computer Science, worded as Cambridge mark schemes accept them.",
+  "units": [
+    {
+      "id": "information-representation",
+      "title": "Information representation",
+      "items": [
+        {
+          "id": "colour-depth",
+          "term": "Colour depth",
+          "prompt": "Define the bitmap term colour depth.",
+          "answer": "Colour depth is the number of bits used to represent the colour of each pixel; it determines the number of colours that can be represented in the image.",
+          "alt": [
+            "the number of bits per pixel",
+            "the number of colours that can be represented in an image"
+          ],
+          "notes": "Also called bit depth. Mark scheme: 'number of bits used to represent a colour // number of bits per pixel'.",
+          "sources": [
+            {
+              "paper": "9618/12",
+              "session": "October/November 2024",
+              "question": "7(a)(i)"
+            },
+            {
+              "paper": "9618/11",
+              "session": "May/June 2023",
+              "question": "1(a)"
+            },
+            {
+              "paper": "9618/11",
+              "session": "October/November 2023",
+              "question": "1(b)"
+            }
+          ]
+        },
+        {
+          "id": "pixel",
+          "term": "Pixel",
+          "prompt": "Define the term pixel.",
+          "answer": "A pixel is the smallest picture element (part) of an image that can be drawn; one square or dot of one colour.",
+          "alt": [
+            "smallest part of the image"
+          ],
+          "sources": [
+            {
+              "paper": "9618/11",
+              "session": "May/June 2023",
+              "question": "1(a)"
+            },
+            {
+              "paper": "9608/11",
+              "session": "May/June 2017",
+              "question": "3(b)(i)"
+            }
+          ]
+        },
+        {
+          "id": "screen-resolution",
+          "term": "Screen resolution",
+          "prompt": "Define the term screen resolution.",
+          "answer": "Screen resolution is the number of pixels which can be viewed horizontally and vertically on the screen.",
+          "notes": "Also accepted by example, e.g. 1680 pixels x 1080 pixels.",
+          "sources": [
+            {
+              "paper": "9608/11",
+              "session": "May/June 2017",
+              "question": "3(b)(i)"
+            }
+          ]
+        },
+        {
+          "id": "image-resolution",
+          "term": "Image resolution",
+          "prompt": "Define the term image resolution.",
+          "answer": "Image resolution is the number of pixels in an image, given as the number of pixels wide by the number of pixels high.",
+          "alt": [
+            "the number of pixels per unit measurement",
+            "number of pixels per row by the number of rows"
+          ],
+          "sources": [
+            {
+              "paper": "9608/12",
+              "session": "May/June 2017",
+              "question": "3(b)(i)"
+            }
+          ]
+        },
+        {
+          "id": "bitmap-image",
+          "term": "Bitmap image",
+          "prompt": "Describe what is meant by a bitmap image.",
+          "answer": "A bitmap image is made up of pixels. Each pixel has one colour and the colour of each pixel is stored as a binary number.",
+          "sources": [
+            {
+              "paper": "9608/11",
+              "session": "May/June 2018",
+              "question": "2(a)"
+            }
+          ]
+        },
+        {
+          "id": "bitmap-file-header",
+          "term": "File header (bitmap)",
+          "prompt": "Define the bitmap term file header.",
+          "answer": "The file header of a bitmap image file stores data about the image file (metadata).",
+          "alt": [
+            "Stores data about the file contents/image/metadata"
+          ],
+          "sources": [
+            {
+              "paper": "9618/12",
+              "session": "October/November 2024",
+              "question": "7(a)(i)"
+            },
+            {
+              "paper": "9618/13",
+              "session": "October/November 2022",
+              "question": "2(e)"
+            }
+          ]
+        },
+        {
+          "id": "drawing-list",
+          "term": "Drawing list",
+          "prompt": "Define the vector graphic term drawing list.",
+          "answer": "A drawing list stores all the drawing objects (shapes) in an image, including the commands (descriptions) required to draw each object.",
+          "alt": [
+            "all the drawing objects in an image",
+            "a list that stores the commands required to draw each object"
+          ],
+          "sources": [
+            {
+              "paper": "9618/12",
+              "session": "October/November 2024",
+              "question": "7(b)"
+            },
+            {
+              "paper": "9618/11",
+              "session": "May/June 2023",
+              "question": "1(a)"
+            },
+            {
+              "paper": "9618/12",
+              "session": "October/November 2021",
+              "question": "5(a)"
+            }
+          ]
+        },
+        {
+          "id": "drawing-property",
+          "term": "Property (vector graphic)",
+          "prompt": "Define the vector graphic term property.",
+          "answer": "A property is an attribute of a drawing object; it is data about a shape that defines one aspect of the appearance of the drawing object.",
+          "alt": [
+            "defines one aspect of the appearance of the drawing object, e.g. line colour or fill"
+          ],
+          "sources": [
+            {
+              "paper": "9618/12",
+              "session": "October/November 2024",
+              "question": "7(b)"
+            },
+            {
+              "paper": "9618/12",
+              "session": "October/November 2021",
+              "question": "5(a)"
+            }
+          ]
+        },
+        {
+          "id": "analogue-data",
+          "term": "Analogue data",
+          "prompt": "State what is meant by analogue data.",
+          "answer": "Analogue data is data with values that are continuously changing (variable); it can take any value.",
+          "sources": [
+            {
+              "paper": "9618/13",
+              "session": "October/November 2023",
+              "question": "1(a)"
+            }
+          ]
+        },
+        {
+          "id": "sampling",
+          "term": "Sampling",
+          "prompt": "Define the term sampling.",
+          "answer": "Sampling is taking measurements (of the amplitude of the analogue sound wave) at regular intervals and storing the values.",
+          "notes": "Mark scheme term-description matching question, reworded as a definition.",
+          "sources": [
+            {
+              "paper": "9618/13",
+              "session": "October/November 2023",
+              "question": "1(b)"
+            },
+            {
+              "paper": "9608/12",
+              "session": "May/June 2020",
+              "question": "2(a)"
+            }
+          ]
+        },
+        {
+          "id": "sampling-rate",
+          "term": "Sampling rate",
+          "prompt": "State what is meant by sampling rate.",
+          "answer": "The sampling rate is the number of samples taken per unit time (per second).",
+          "alt": [
+            "the number of times the amplitude is measured per unit time"
+          ],
+          "sources": [
+            {
+              "paper": "9618/11",
+              "session": "October/November 2022",
+              "question": "1(d)(i)"
+            },
+            {
+              "paper": "9608/11",
+              "session": "May/June 2017",
+              "question": "3(a)"
+            },
+            {
+              "paper": "9618/13",
+              "session": "October/November 2023",
+              "question": "1(b)"
+            }
+          ]
+        },
+        {
+          "id": "sampling-resolution",
+          "term": "Sampling resolution",
+          "prompt": "Define the term sampling resolution.",
+          "answer": "The sampling resolution is the number of bits used to store (encode) each sample.",
+          "alt": [
+            "the number of distinct values available to encode each sample",
+            "sometimes referred to as bit depth"
+          ],
+          "sources": [
+            {
+              "paper": "9608/12",
+              "session": "May/June 2017",
+              "question": "3(a)"
+            },
+            {
+              "paper": "9618/13",
+              "session": "October/November 2023",
+              "question": "1(b)"
+            },
+            {
+              "paper": "9608/12",
+              "session": "May/June 2020",
+              "question": "2(a)"
+            }
+          ]
+        },
+        {
+          "id": "lossy-compression",
+          "term": "Lossy compression",
+          "prompt": "Define the term lossy compression.",
+          "answer": "Lossy compression is compression in which data is lost, so the decompressed file is not the same as the original.",
+          "notes": "9608 mark scheme; 9618 papers use the idea in justification questions but do not define it.",
+          "sources": [
+            {
+              "paper": "9608/11",
+              "session": "May/June 2019",
+              "question": "1(d)(ii)"
+            }
+          ]
+        },
+        {
+          "id": "run-length-encoding",
+          "term": "Run-length encoding (RLE)",
+          "prompt": "Explain what is meant by run-length encoding.",
+          "answer": "Run-length encoding is a lossless method of compression that reduces a string of adjacent, identical characters, pixels or bytes by encoding each run as two values: the run count and the run value.",
+          "alt": [
+            "the repeating string (a run) is encoded into two values: the number of identical items and the code of the item"
+          ],
+          "sources": [
+            {
+              "paper": "9608/11",
+              "session": "May/June 2016",
+              "question": "4(b)(ii)"
+            },
+            {
+              "paper": "9608/12",
+              "session": "May/June 2016",
+              "question": "4(b)(ii)"
+            }
+          ]
+        },
+        {
+          "id": "overflow-binary-addition",
+          "term": "Overflow",
+          "prompt": "State what is meant by an overflow in binary addition.",
+          "answer": "An overflow is when the answer is too long to be represented in the same number of bits as the binary numbers being added.",
+          "sources": [
+            {
+              "paper": "9618/13",
+              "session": "May/June 2024",
+              "question": "1(c)"
+            }
+          ]
+        },
+        {
+          "id": "binary-and-decimal-prefixes",
+          "term": "Kibibyte and megabyte",
+          "prompt": "State one difference between a kibibyte and a megabyte.",
+          "answer": "A kibibyte is 1024 bytes and has a binary prefix, whereas a megabyte is 1000 kilobytes (1 000 000 bytes) and has a denary (decimal) prefix.",
+          "notes": "Mark scheme accepts either the sizes or 'kibi is a binary prefix and mega is a denary prefix'.",
+          "sources": [
+            {
+              "paper": "9618/12",
+              "session": "October/November 2023",
+              "question": "3(a)"
+            },
+            {
+              "paper": "9618/13",
+              "session": "May/June 2024",
+              "question": "1(a)"
+            }
+          ]
+        },
+        {
+          "id": "character-set",
+          "term": "Character set",
+          "prompt": "Define the term character set.",
+          "answer": "A character set is the list of characters (symbols) that the computer hardware and software recognise and use.",
+          "sources": [
+            {
+              "paper": "9608/12",
+              "session": "May/June 2018",
+              "question": "4(b)(i)"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "communication",
+      "title": "Communication",
+      "items": [
+        {
+          "id": "lan",
+          "term": "LAN (characteristics)",
+          "prompt": "Give two characteristics of a LAN.",
+          "answer": "A LAN covers a small geographical area and its infrastructure is privately owned (not controlled by external organisations).",
+          "alt": [
+            "can use wired or wireless communication"
+          ],
+          "sources": [
+            {
+              "paper": "9618/12",
+              "session": "May/June 2023",
+              "question": "1(b)"
+            },
+            {
+              "paper": "9618/12",
+              "session": "October/November 2025",
+              "question": "5(a)"
+            }
+          ]
+        },
+        {
+          "id": "wan",
+          "term": "WAN (characteristics)",
+          "prompt": "Describe the characteristics of a WAN.",
+          "answer": "A WAN covers a large geographical area, uses external (public) infrastructure and uses non-dedicated hardware.",
+          "alt": [
+            "ownership of a WAN can be private or public"
+          ],
+          "sources": [
+            {
+              "paper": "9618/13",
+              "session": "October/November 2024",
+              "question": "9(a)"
+            },
+            {
+              "paper": "9618/13",
+              "session": "May/June 2023",
+              "question": "2(a)"
+            }
+          ]
+        },
+        {
+          "id": "ethernet",
+          "term": "Ethernet",
+          "prompt": "Describe what is meant by Ethernet.",
+          "answer": "Ethernet is a protocol for data transmission over standard wired (cabled) network connections. It uses CSMA/CD and data is transmitted in frames with a source and destination address and error checking data.",
+          "sources": [
+            {
+              "paper": "9618/12",
+              "session": "May/June 2023",
+              "question": "1(d)"
+            }
+          ]
+        },
+        {
+          "id": "thick-client",
+          "term": "Thick client",
+          "prompt": "Describe what is meant by a thick-client model.",
+          "answer": "In a thick-client model the server performs minimal processing for the client and the clients do most of their own processing independently (most of the resources are installed locally).",
+          "sources": [
+            {
+              "paper": "9618/12",
+              "session": "May/June 2023",
+              "question": "1(e)"
+            }
+          ]
+        },
+        {
+          "id": "thin-client",
+          "term": "Thin client",
+          "prompt": "Identify two characteristics of a thin-client.",
+          "answer": "A thin client does not store data on the client computer, is reliant on access to the server and the network, requires few local resources and performs minimal processing.",
+          "alt": [
+            "client computer requires few local resources/memory",
+            "client computer performs minimal functions/processes"
+          ],
+          "sources": [
+            {
+              "paper": "9618/12",
+              "session": "May/June 2024",
+              "question": "3(b)"
+            }
+          ]
+        },
+        {
+          "id": "client-server",
+          "term": "Client-server",
+          "prompt": "Describe what is meant by the client-server model.",
+          "answer": "In the client-server model the server holds the data or provides the service, the client (e.g. a browser) sends requests to the server and the server returns the result of the request to the client.",
+          "notes": "9608 mark schemes: application to the given scenario is also expected in the exam.",
+          "sources": [
+            {
+              "paper": "9608/12",
+              "session": "May/June 2017",
+              "question": "6(a)"
+            },
+            {
+              "paper": "9608/11",
+              "session": "October/November 2019",
+              "question": "4(a)(i)"
+            }
+          ]
+        },
+        {
+          "id": "peer-to-peer",
+          "term": "Peer-to-peer network",
+          "prompt": "Describe the key features of a peer-to-peer network.",
+          "answer": "In a peer-to-peer network all computers are of equal status, each computer provides access to resources and data, computers can communicate and share resources and each computer is responsible for its own security.",
+          "sources": [
+            {
+              "paper": "9618/11",
+              "session": "May/June 2021",
+              "question": "4(a)"
+            }
+          ]
+        },
+        {
+          "id": "mesh-topology",
+          "term": "Mesh topology",
+          "prompt": "Describe what is meant by a mesh topology.",
+          "answer": "In a mesh topology all computers are connected to at least one other device, there are multiple routes between devices and the computers can act as relays, passing packets on towards the final destination.",
+          "sources": [
+            {
+              "paper": "9618/13",
+              "session": "May/June 2023",
+              "question": "2(b)(i)"
+            }
+          ]
+        },
+        {
+          "id": "private-cloud",
+          "term": "Private cloud",
+          "prompt": "Define the term private cloud.",
+          "answer": "A private cloud is dedicated (bespoke) services or storage on a remote server that is only available to the company.",
+          "sources": [
+            {
+              "paper": "9618/13",
+              "session": "May/June 2024",
+              "question": "5(a)(i)"
+            }
+          ]
+        },
+        {
+          "id": "public-ip-address",
+          "term": "Public IP address",
+          "prompt": "Describe the following type of IP address: public.",
+          "answer": "A public IP address is an IP address that is assigned to a device to allow direct access on the internet (so the device is visible on the internet).",
+          "notes": "Mark scheme table, reworded as a definition.",
+          "sources": [
+            {
+              "paper": "9618/12",
+              "session": "October/November 2023",
+              "question": "7(d)"
+            },
+            {
+              "paper": "9618/11",
+              "session": "October/November 2025",
+              "question": "7(a)"
+            }
+          ]
+        },
+        {
+          "id": "private-ip-address",
+          "term": "Private IP address",
+          "prompt": "Describe the following type of IP address: private.",
+          "answer": "A private IP address is an IP address used for internal LAN communication only.",
+          "notes": "Mark scheme table, reworded as a definition.",
+          "sources": [
+            {
+              "paper": "9618/12",
+              "session": "October/November 2023",
+              "question": "7(d)"
+            }
+          ]
+        },
+        {
+          "id": "static-ip-address",
+          "term": "Static IP address",
+          "prompt": "Describe the following type of IP address: static.",
+          "answer": "A static IP address is an IP address that is fixed; it does not change each time a device re-joins a LAN or network.",
+          "notes": "Mark scheme table, reworded as a definition.",
+          "sources": [
+            {
+              "paper": "9618/12",
+              "session": "October/November 2023",
+              "question": "7(d)"
+            },
+            {
+              "paper": "9618/11",
+              "session": "October/November 2025",
+              "question": "7(a)"
+            }
+          ]
+        },
+        {
+          "id": "dynamic-ip-address",
+          "term": "Dynamic IP address",
+          "prompt": "Describe the following type of IP address: dynamic.",
+          "answer": "A dynamic IP address is an IP address that may be refreshed (changed) each time a device re-joins a LAN or network.",
+          "notes": "Mark scheme table, reworded as a definition.",
+          "sources": [
+            {
+              "paper": "9618/12",
+              "session": "October/November 2023",
+              "question": "7(d)"
+            }
+          ]
+        },
+        {
+          "id": "static-private-ip-address",
+          "term": "Static private IP address",
+          "prompt": "State what is meant by a static private IP address.",
+          "answer": "Static means the IP address for that device does not change and private means it can only be accessed, seen or used within the LAN.",
+          "sources": [
+            {
+              "paper": "9618/13",
+              "session": "May/June 2024",
+              "question": "5(d)"
+            }
+          ]
+        },
+        {
+          "id": "ipv4-ipv6-structure",
+          "term": "IPv4 and IPv6 addresses",
+          "prompt": "Complete the description of IP addresses.",
+          "answer": "An IPv4 address contains 4 groups of digits, each represented in 8 bits and separated by full stops. An IPv6 address contains 8 groups of digits, each represented in 16 bits; multiple groups of zeros can be replaced with a double colon.",
+          "notes": "Gap-fill sentences from the mark scheme joined together.",
+          "sources": [
+            {
+              "paper": "9618/11",
+              "session": "May/June 2023",
+              "question": "4(d)(i)"
+            }
+          ]
+        },
+        {
+          "id": "subnetting",
+          "term": "Subnetting",
+          "prompt": "Describe the purpose of subnetting in a network.",
+          "answer": "Subnetting allows the network to be divided into smaller networks, which reduces traffic and congestion because traffic only travels through the parts necessary, and allows easier maintenance of the network.",
+          "sources": [
+            {
+              "paper": "9618/13",
+              "session": "October/November 2024",
+              "question": "9(d)(ii)"
+            }
+          ]
+        },
+        {
+          "id": "bit-streaming",
+          "term": "Bit streaming",
+          "prompt": "State what is meant by bit streaming.",
+          "answer": "Bit streaming is a continuous, ordered flow of bits over a communication path.",
+          "sources": [
+            {
+              "paper": "9618/11",
+              "session": "May/June 2024",
+              "question": "2(e)(i)"
+            }
+          ]
+        },
+        {
+          "id": "router",
+          "term": "Router",
+          "prompt": "Describe the function of a router in a network.",
+          "answer": "A router receives packets from the internet or an external network, analyses the destination IP address of each packet and forwards the packet towards its destination using the routing table.",
+          "alt": [
+            "implements a firewall",
+            "allocates private IP addresses",
+            "finds the most efficient route to the destination"
+          ],
+          "sources": [
+            {
+              "paper": "9618/11",
+              "session": "October/November 2023",
+              "question": "2(a)"
+            },
+            {
+              "paper": "9618/12",
+              "session": "October/November 2022",
+              "question": "10(b)(ii)"
+            }
+          ]
+        },
+        {
+          "id": "switch",
+          "term": "Switch",
+          "prompt": "State the purpose of a switch used to support a LAN.",
+          "answer": "A switch connects individual devices to each other so that they can communicate; it receives transmissions and forwards them to their destination.",
+          "notes": "Mark scheme table; 1 mark for any one of the three bullets.",
+          "sources": [
+            {
+              "paper": "9618/11",
+              "session": "October/November 2023",
+              "question": "2(b)"
+            }
+          ]
+        },
+        {
+          "id": "wireless-access-point",
+          "term": "Wireless access point (WAP)",
+          "prompt": "State the purpose of a wireless access point (WAP) used to support a LAN.",
+          "answer": "A wireless access point allows wireless enabled devices to connect to a wired network using radio signals (Wi-Fi).",
+          "notes": "Mark scheme table; 1 mark for any one of the three bullets.",
+          "sources": [
+            {
+              "paper": "9618/11",
+              "session": "October/November 2023",
+              "question": "2(b)"
+            }
+          ]
+        },
+        {
+          "id": "bridge",
+          "term": "Bridge",
+          "prompt": "State the purpose of a bridge used to support a LAN.",
+          "answer": "A bridge connects two LANs (segments) that use the same protocol and transmits data between the two networks.",
+          "notes": "Mark scheme table; 1 mark for either bullet.",
+          "sources": [
+            {
+              "paper": "9618/11",
+              "session": "October/November 2023",
+              "question": "2(b)"
+            }
+          ]
+        },
+        {
+          "id": "modem",
+          "term": "Modem",
+          "prompt": "State how a modem is used when data is transmitted over the internet.",
+          "answer": "A modem converts digital data into analogue for transmission down phone lines and converts analogue data into digital after transmission down phone lines.",
+          "sources": [
+            {
+              "paper": "9618/11",
+              "session": "May/June 2025",
+              "question": "2(c)"
+            }
+          ]
+        },
+        {
+          "id": "dedicated-line",
+          "term": "Dedicated line",
+          "prompt": "State how a dedicated line is used when data is transmitted over the internet.",
+          "answer": "A dedicated line is used to provide a direct (private) connection, which therefore provides faster transmission.",
+          "sources": [
+            {
+              "paper": "9618/11",
+              "session": "May/June 2025",
+              "question": "2(c)"
+            }
+          ]
+        },
+        {
+          "id": "csma-cd",
+          "term": "CSMA/CD",
+          "prompt": "Describe how Carrier Sense Multiple Access / Collision Detection (CSMA/CD) is used in a bus network.",
+          "answer": "Before transmitting, a device checks if the channel is busy and waits if it is. If a collision is detected, transmission is aborted and a jamming signal is sent. Both devices then wait a (different) random time and try again.",
+          "alt": [
+            "CSMA/CD stands for Carrier Sense Multiple Access with Collision Detection"
+          ],
+          "sources": [
+            {
+              "paper": "9618/11",
+              "session": "October/November 2022",
+              "question": "8"
+            },
+            {
+              "paper": "9608/31",
+              "session": "October/November 2019",
+              "question": "3(b)"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "hardware",
+      "title": "Hardware",
+      "items": [
+        {
+          "id": "embedded-system",
+          "term": "Embedded system",
+          "prompt": "Describe what is meant by an embedded system, using the washing machine as an example.",
+          "answer": "An embedded system is a microprocessor (microcontroller) within a larger system that performs one specific task.",
+          "notes": "The paper also asks for an example, e.g. it only controls the washing programs and does nothing else in the machine.",
+          "sources": [
+            {
+              "paper": "9618/11",
+              "session": "May/June 2021",
+              "question": "5(a)"
+            }
+          ]
+        },
+        {
+          "id": "embedded-system-characteristics",
+          "term": "Embedded system (characteristics)",
+          "prompt": "Describe the characteristics of an embedded system.",
+          "answer": "An embedded system is built into (integrated into) a device, is a combination of hardware and software designed for a specific function, must have a processor, memory and input/output, and is not easily changed or updated by the owner.",
+          "sources": [
+            {
+              "paper": "9618/13",
+              "session": "October/November 2022",
+              "question": "10(b)(ii)"
+            }
+          ]
+        },
+        {
+          "id": "buffer",
+          "term": "Buffer",
+          "prompt": "Explain the purpose of a buffer in a computer system.",
+          "answer": "A buffer acts as temporary storage for data before it is used by the receiving device, allowing processes or devices to operate at different speeds, independently of each other.",
+          "notes": "The paper also asks for an example, e.g. a printer buffer, video buffer when streaming, keyboard buffer.",
+          "sources": [
+            {
+              "paper": "9618/13",
+              "session": "October/November 2022",
+              "question": "1(c)"
+            }
+          ]
+        },
+        {
+          "id": "ram-and-rom",
+          "term": "RAM and ROM (purpose)",
+          "prompt": "State the purpose of RAM and ROM memory in the computer.",
+          "answer": "RAM stores currently running parts of files, programs, processes and the OS. ROM stores boot-up instructions (the OS kernel) and data permanently.",
+          "notes": "9608 mark scheme. For an embedded system (9618 M/J21 5(b)): RAM stores the wash program choices and sensor data; ROM stores the start-up instructions.",
+          "sources": [
+            {
+              "paper": "9608/12",
+              "session": "October/November 2019",
+              "question": "6(c)"
+            }
+          ]
+        },
+        {
+          "id": "immediate-access-store",
+          "term": "Immediate Access Store (IAS)",
+          "prompt": "Describe what is meant by the Immediate Access Store (IAS) in a computer system.",
+          "answer": "The Immediate Access Store holds all the data, instructions and programs currently in use. It is volatile memory with fast access times.",
+          "sources": [
+            {
+              "paper": "9618/11",
+              "session": "October/November 2023",
+              "question": "5(b)"
+            }
+          ]
+        },
+        {
+          "id": "prom",
+          "term": "PROM",
+          "prompt": "State the type of read only memory whose contents can be written only once after manufacture.",
+          "answer": "PROM (programmable read only memory) is a read only memory where the contents can be written only once after manufacture.",
+          "notes": "Mark scheme term-description table, reworded as a definition.",
+          "sources": [
+            {
+              "paper": "9618/13",
+              "session": "October/November 2025",
+              "question": "4(c)"
+            }
+          ]
+        },
+        {
+          "id": "eprom",
+          "term": "EPROM",
+          "prompt": "State the type of read only memory whose contents are erased using ultraviolet light.",
+          "answer": "EPROM is a read only memory where the contents are erased using ultraviolet (UV) light; the memory must be physically removed to be reprogrammed.",
+          "notes": "Mark scheme term-description table, reworded as a definition.",
+          "sources": [
+            {
+              "paper": "9618/13",
+              "session": "October/November 2025",
+              "question": "4(c)"
+            }
+          ]
+        },
+        {
+          "id": "eeprom",
+          "term": "EEPROM",
+          "prompt": "State the type of read only memory whose contents can be erased using a voltage pulse.",
+          "answer": "EEPROM is a read only memory where the contents can be erased using a voltage pulse; the contents can be changed multiple times without physically removing the memory.",
+          "notes": "Mark scheme term-description table, reworded as a definition.",
+          "sources": [
+            {
+              "paper": "9618/13",
+              "session": "October/November 2025",
+              "question": "4(c)"
+            }
+          ]
+        },
+        {
+          "id": "nand-gate",
+          "term": "NAND gate",
+          "prompt": "Describe the function of the NAND logic gate.",
+          "answer": "A NAND gate outputs 0 only when both inputs are 1; otherwise the output is 1.",
+          "sources": [
+            {
+              "paper": "9618/11",
+              "session": "May/June 2023",
+              "question": "5(b)"
+            }
+          ]
+        },
+        {
+          "id": "nor-gate",
+          "term": "NOR gate",
+          "prompt": "Describe the function of the NOR logic gate.",
+          "answer": "A NOR gate outputs 1 only when both inputs are 0; otherwise the output is 0.",
+          "sources": [
+            {
+              "paper": "9618/11",
+              "session": "May/June 2023",
+              "question": "5(b)"
+            }
+          ]
+        },
+        {
+          "id": "resistive-touchscreen",
+          "term": "Resistive touchscreen",
+          "prompt": "Describe the principal operation of a resistive touchscreen.",
+          "answer": "A resistive touchscreen has two layers. When the user touches the screen the layers touch and a circuit is completed. A microprocessor identifies the coordinates of the touch.",
+          "notes": "Gap-fill sentences from the mark scheme.",
+          "sources": [
+            {
+              "paper": "9618/13",
+              "session": "May/June 2023",
+              "question": "3(a)"
+            }
+          ]
+        },
+        {
+          "id": "capacitive-touchscreen",
+          "term": "Capacitive touchscreen",
+          "prompt": "Describe the principal operation of a capacitive touchscreen.",
+          "answer": "A capacitive touchscreen has several layers. When the top layer is touched there is a change in the electric current. A microprocessor identifies the coordinates of the touch.",
+          "notes": "Gap-fill sentences from the mark scheme.",
+          "sources": [
+            {
+              "paper": "9618/13",
+              "session": "May/June 2023",
+              "question": "3(a)"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "processor-fundamentals",
+      "title": "Processor fundamentals",
+      "items": [
+        {
+          "id": "stored-program-concept",
+          "term": "Stored program concept",
+          "prompt": "State what is meant by the stored program concept in the Von Neumann model of a computer system.",
+          "answer": "In the stored program concept, instructions and data are stored in the same memory space (in main memory).",
+          "sources": [
+            {
+              "paper": "9618/11",
+              "session": "October/November 2022",
+              "question": "5(a)"
+            }
+          ]
+        },
+        {
+          "id": "program-counter",
+          "term": "Program Counter (PC)",
+          "prompt": "Describe the purpose of the Program Counter (PC).",
+          "answer": "The Program Counter stores the address of the next instruction to be fetched (executed).",
+          "sources": [
+            {
+              "paper": "9618/12",
+              "session": "October/November 2024",
+              "question": "3(a)"
+            },
+            {
+              "paper": "9618/11",
+              "session": "May/June 2021",
+              "question": "3(a)"
+            }
+          ]
+        },
+        {
+          "id": "memory-address-register",
+          "term": "Memory Address Register (MAR)",
+          "prompt": "Describe the purpose of the Memory Address Register (MAR).",
+          "answer": "The Memory Address Register stores the address of the memory location where data will be read from or written to.",
+          "sources": [
+            {
+              "paper": "9618/12",
+              "session": "October/November 2024",
+              "question": "3(a)"
+            }
+          ]
+        },
+        {
+          "id": "memory-data-register",
+          "term": "Memory Data Register (MDR)",
+          "prompt": "Describe the purpose of the Memory Data Register (MDR).",
+          "answer": "The Memory Data Register stores the data read from the address in the MAR (or the data to be written to the address in the MAR).",
+          "sources": [
+            {
+              "paper": "9618/12",
+              "session": "October/November 2024",
+              "question": "3(a)"
+            }
+          ]
+        },
+        {
+          "id": "index-register",
+          "term": "Index Register (IX)",
+          "prompt": "Describe the purpose of the Index Register (IX).",
+          "answer": "The Index Register stores a number that will be added to the operand to form the address of the data.",
+          "sources": [
+            {
+              "paper": "9618/12",
+              "session": "October/November 2024",
+              "question": "3(a)"
+            }
+          ]
+        },
+        {
+          "id": "accumulator",
+          "term": "Accumulator (ACC)",
+          "prompt": "Describe the role of the Accumulator (ACC).",
+          "answer": "The Accumulator stores the intermediate results of arithmetic and logical operations (holds the result of a calculation).",
+          "sources": [
+            {
+              "paper": "9618/11",
+              "session": "October/November 2025",
+              "question": "6(a)"
+            }
+          ]
+        },
+        {
+          "id": "current-instruction-register",
+          "term": "Current Instruction Register (CIR)",
+          "prompt": "Describe the role of the Current Instruction Register (CIR).",
+          "answer": "The Current Instruction Register holds the instruction currently being decoded and/or executed.",
+          "sources": [
+            {
+              "paper": "9618/11",
+              "session": "October/November 2025",
+              "question": "6(a)"
+            }
+          ]
+        },
+        {
+          "id": "status-register",
+          "term": "Status Register (SR)",
+          "prompt": "Describe the purpose of the Status Register (SR).",
+          "answer": "The Status Register stores the value of flags (bits) that can be changed, set or cleared after arithmetic or logical operations, so that flags can be checked to change the instruction sequence.",
+          "sources": [
+            {
+              "paper": "9618/11",
+              "session": "October/November 2024",
+              "question": "8(a)"
+            }
+          ]
+        },
+        {
+          "id": "control-unit",
+          "term": "Control Unit (CU)",
+          "prompt": "Describe the purpose of the Control Unit (CU) in a CPU.",
+          "answer": "The Control Unit coordinates (synchronises) the actions of the other components in the CPU, sends and receives control signals along the control bus and manages the execution of instructions.",
+          "sources": [
+            {
+              "paper": "9618/11",
+              "session": "October/November 2022",
+              "question": "5(b)(iii)"
+            },
+            {
+              "paper": "9618/11",
+              "session": "October/November 2024",
+              "question": "3(a)"
+            }
+          ]
+        },
+        {
+          "id": "system-clock",
+          "term": "System clock",
+          "prompt": "Describe the purpose of the system clock.",
+          "answer": "The system clock synchronises operations by creating (and transmitting) timing signals (on the control bus).",
+          "sources": [
+            {
+              "paper": "9618/13",
+              "session": "October/November 2022",
+              "question": "4(b)"
+            },
+            {
+              "paper": "9618/11",
+              "session": "October/November 2024",
+              "question": "3(a)"
+            }
+          ]
+        },
+        {
+          "id": "data-bus-and-address-bus",
+          "term": "Data bus and address bus",
+          "prompt": "Complete the description of the data bus and the address bus.",
+          "answer": "The data bus carries data to components, while the address bus carries the address where data is being written to or read from.",
+          "notes": "Gap-fill sentence from the mark scheme.",
+          "sources": [
+            {
+              "paper": "9618/12",
+              "session": "May/June 2021",
+              "question": "5(a)"
+            }
+          ]
+        },
+        {
+          "id": "alu",
+          "term": "Arithmetic Logic Unit (ALU)",
+          "prompt": "Complete the description of the arithmetic logic unit.",
+          "answer": "The arithmetic logic unit (ALU) performs mathematical operations and logical comparisons.",
+          "notes": "Gap-fill sentence from the mark scheme.",
+          "sources": [
+            {
+              "paper": "9618/12",
+              "session": "May/June 2021",
+              "question": "5(a)"
+            }
+          ]
+        },
+        {
+          "id": "interrupt",
+          "term": "Interrupt",
+          "prompt": "State what is meant by an interrupt.",
+          "answer": "An interrupt is a signal from a source (a hardware device or software process) seeking the attention of the processor.",
+          "sources": [
+            {
+              "paper": "9618/11",
+              "session": "October/November 2022",
+              "question": "5(c)"
+            },
+            {
+              "paper": "9608/13",
+              "session": "October/November 2018",
+              "question": "6(b)"
+            }
+          ]
+        },
+        {
+          "id": "direct-addressing",
+          "term": "Direct addressing",
+          "prompt": "Complete the description of addressing modes: direct.",
+          "answer": "Direct addressing is when the operand holds the memory address of the data.",
+          "notes": "Gap-fill sentence from the mark scheme.",
+          "sources": [
+            {
+              "paper": "9618/12",
+              "session": "May/June 2023",
+              "question": "3(b)"
+            }
+          ]
+        },
+        {
+          "id": "indirect-addressing",
+          "term": "Indirect addressing",
+          "prompt": "Complete the description of addressing modes: indirect.",
+          "answer": "Indirect addressing is when the operand holds a memory address that stores the memory address of the data.",
+          "notes": "Gap-fill sentence from the mark scheme.",
+          "sources": [
+            {
+              "paper": "9618/12",
+              "session": "May/June 2023",
+              "question": "3(b)"
+            }
+          ]
+        },
+        {
+          "id": "immediate-addressing",
+          "term": "Immediate addressing",
+          "prompt": "Complete the description of addressing modes: immediate.",
+          "answer": "Immediate addressing is when the operand is the data.",
+          "notes": "Gap-fill sentence from the mark scheme.",
+          "sources": [
+            {
+              "paper": "9618/12",
+              "session": "May/June 2023",
+              "question": "3(b)"
+            }
+          ]
+        },
+        {
+          "id": "indexed-addressing",
+          "term": "Indexed addressing",
+          "prompt": "Identify and describe the indexed mode of addressing.",
+          "answer": "In indexed addressing the address of the data is formed by adding the contents of the Index Register (IX) to the operand.",
+          "sources": [
+            {
+              "paper": "9618/13",
+              "session": "May/June 2025",
+              "question": "5(a)(ii)"
+            },
+            {
+              "paper": "9608/13",
+              "session": "October/November 2018",
+              "question": "2(a)"
+            }
+          ]
+        },
+        {
+          "id": "relative-addressing",
+          "term": "Relative addressing",
+          "prompt": "State what is meant by relative addressing.",
+          "answer": "In relative addressing the value of the operand is an offset which is added to a base address to give the address from which the contents are loaded to the accumulator.",
+          "sources": [
+            {
+              "paper": "9618/12",
+              "session": "October/November 2025",
+              "question": "3(a)(i)"
+            },
+            {
+              "paper": "9608/13",
+              "session": "October/November 2018",
+              "question": "2(a)"
+            }
+          ]
+        },
+        {
+          "id": "absolute-addressing",
+          "term": "Absolute addressing",
+          "prompt": "State what is meant by absolute addressing.",
+          "answer": "In absolute addressing the operand is a numeric address; the numeric address is given, referring directly to a memory location.",
+          "notes": "9608 mark scheme.",
+          "sources": [
+            {
+              "paper": "9608/12",
+              "session": "October/November 2018",
+              "question": "3(a)(i)"
+            }
+          ]
+        },
+        {
+          "id": "symbolic-addressing",
+          "term": "Symbolic addressing",
+          "prompt": "State what is meant by symbolic addressing.",
+          "answer": "In symbolic addressing the operand is a word or symbol, and the word or symbol represents the memory location (address).",
+          "notes": "9608 mark scheme.",
+          "sources": [
+            {
+              "paper": "9608/12",
+              "session": "October/November 2018",
+              "question": "3(a)(i)"
+            }
+          ]
+        },
+        {
+          "id": "assembly-macro",
+          "term": "Macro",
+          "prompt": "Explain what is meant by a macro.",
+          "answer": "A macro is a group of instructions given a name that need to be executed several times in a program; the statements are written once and the macro code is inserted into the source at each place it is called.",
+          "notes": "9608 mark scheme.",
+          "sources": [
+            {
+              "paper": "9608/12",
+              "session": "October/November 2017",
+              "question": "4(c)(i)"
+            }
+          ]
+        },
+        {
+          "id": "assembly-directive",
+          "term": "Directive",
+          "prompt": "Explain what is meant by a directive.",
+          "answer": "A directive is an instruction that directs the assembler to do something; it is information for the assembler, not a program instruction.",
+          "notes": "9608 mark scheme.",
+          "sources": [
+            {
+              "paper": "9608/12",
+              "session": "October/November 2017",
+              "question": "4(c)(i)"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "system-software",
+      "title": "System software",
+      "items": [
+        {
+          "id": "program-library",
+          "term": "Program library",
+          "prompt": "Define the term program library.",
+          "answer": "A program library is a set of pre-written (pre-compiled, pre-tested) subroutines which can be called in other programs by installing (importing) the library.",
+          "sources": [
+            {
+              "paper": "9618/12",
+              "session": "May/June 2023",
+              "question": "7(a)(i)"
+            }
+          ]
+        },
+        {
+          "id": "dll",
+          "term": "Dynamic Link Library (DLL)",
+          "prompt": "Describe what is meant by a Dynamic Link Library (DLL).",
+          "answer": "A DLL is a shared library file of already compiled code that is stored separately from the main .EXE file, is only loaded into main memory when required at run-time and can be made available to several applications at the same time.",
+          "notes": "9608 mark schemes.",
+          "sources": [
+            {
+              "paper": "9608/11",
+              "session": "May/June 2019",
+              "question": "3(a)(ii)"
+            },
+            {
+              "paper": "9608/11",
+              "session": "October/November 2016",
+              "question": "2(c)"
+            }
+          ]
+        },
+        {
+          "id": "library-routine",
+          "term": "Library routine",
+          "prompt": "Describe what is meant by a library routine.",
+          "answer": "A library routine is pre-existing (pre-compiled, pre-written) code that can be linked into a program (without amendment) to perform common or complex tasks.",
+          "notes": "9608 mark scheme.",
+          "sources": [
+            {
+              "paper": "9608/12",
+              "session": "October/November 2018",
+              "question": "6(b)(i)"
+            }
+          ]
+        },
+        {
+          "id": "operating-system",
+          "term": "Operating system (purpose)",
+          "prompt": "Describe the purpose of an OS in a computer.",
+          "answer": "An operating system provides a user interface so the user can communicate with the hardware, manages memory, files, inputs and outputs, and handles processes so that each has fair access.",
+          "notes": "Mark scheme: any five points, e.g. manage memory so multitasking is possible, manage files (create, edit, update, delete).",
+          "sources": [
+            {
+              "paper": "9618/11",
+              "session": "May/June 2025",
+              "question": "6(b)"
+            }
+          ]
+        },
+        {
+          "id": "memory-management",
+          "term": "Memory management",
+          "prompt": "State the operating system management task: memory management.",
+          "answer": "Memory management handles the allocation of memory to processes, ensures two programs do not attempt to use the same memory locations and keeps track of allocated and free memory locations.",
+          "notes": "9608 mark scheme table, reworded.",
+          "sources": [
+            {
+              "paper": "9608/13",
+              "session": "May/June 2019",
+              "question": "1(a)"
+            }
+          ]
+        },
+        {
+          "id": "security-management",
+          "term": "Security management",
+          "prompt": "State the operating system management task: security management.",
+          "answer": "Security management provides user accounts and passwords.",
+          "notes": "9608 mark scheme table, reworded.",
+          "sources": [
+            {
+              "paper": "9608/13",
+              "session": "May/June 2019",
+              "question": "1(a)"
+            }
+          ]
+        },
+        {
+          "id": "interrupt-processing",
+          "term": "Interrupt processing (OS task)",
+          "prompt": "State the operating system management task: interrupt processing.",
+          "answer": "Interrupt processing handles the signals sent when the attention of the processor is required elsewhere.",
+          "notes": "9608 mark scheme table, reworded.",
+          "sources": [
+            {
+              "paper": "9608/13",
+              "session": "May/June 2019",
+              "question": "1(a)"
+            }
+          ]
+        },
+        {
+          "id": "software-platform",
+          "term": "Provision of a software platform",
+          "prompt": "State the operating system management task: provision of a software platform.",
+          "answer": "Provision of a software platform provides an environment within which programs can be run.",
+          "notes": "9608 mark scheme table, reworded.",
+          "sources": [
+            {
+              "paper": "9608/13",
+              "session": "May/June 2019",
+              "question": "1(a)"
+            }
+          ]
+        },
+        {
+          "id": "utility-software",
+          "term": "Utility software",
+          "prompt": "Describe the purpose of utility software in a computer.",
+          "answer": "Utility software helps users to set up, configure, analyse, optimise or maintain the computer, for example by making memory allocation more efficient or by checking the system for faults.",
+          "sources": [
+            {
+              "paper": "9618/12",
+              "session": "May/June 2023",
+              "question": "5(d)(ii)"
+            }
+          ]
+        },
+        {
+          "id": "defragmentation-software",
+          "term": "Defragmentation software",
+          "prompt": "Write the name of the utility program that reorganises files on a disk to improve efficiency.",
+          "answer": "Defragmentation software reorganises files on a disk to improve efficiency.",
+          "notes": "9608 mark scheme table, reworded as a definition.",
+          "sources": [
+            {
+              "paper": "9608/11",
+              "session": "May/June 2020",
+              "question": "9(a)"
+            }
+          ]
+        },
+        {
+          "id": "disk-repair-software",
+          "term": "Disk repair software",
+          "prompt": "Describe the purpose of disk repair software.",
+          "answer": "Disk repair software checks for errors, inconsistencies or bad sectors on the disk, resolves the errors, and marks bad sectors as unusable.",
+          "notes": "9608 mark scheme.",
+          "sources": [
+            {
+              "paper": "9608/12",
+              "session": "October/November 2019",
+              "question": "1(b)"
+            },
+            {
+              "paper": "9608/11",
+              "session": "May/June 2020",
+              "question": "9(a)"
+            }
+          ]
+        },
+        {
+          "id": "disk-formatter",
+          "term": "Disk formatter",
+          "prompt": "Write the name of the utility program that prepares a hard disk for first use.",
+          "answer": "A disk formatter prepares a hard disk for first use.",
+          "notes": "9608 mark scheme table, reworded as a definition.",
+          "sources": [
+            {
+              "paper": "9608/11",
+              "session": "May/June 2020",
+              "question": "9(a)"
+            }
+          ]
+        },
+        {
+          "id": "virus-checker",
+          "term": "Virus checker",
+          "prompt": "Describe the utility program: virus checker.",
+          "answer": "A virus checker scans files stored on a computer system (and files entering the system) for malicious code, isolates, quarantines or deletes viruses, and regularly updates its virus definitions.",
+          "notes": "9608 mark scheme.",
+          "sources": [
+            {
+              "paper": "9608/11",
+              "session": "October/November 2019",
+              "question": "2(c)"
+            }
+          ]
+        },
+        {
+          "id": "backup-software",
+          "term": "Backup software",
+          "prompt": "Describe the utility program: backup software.",
+          "answer": "Backup software creates a copy of the contents of a disk or partition, can be set to back up automatically on a schedule, lets the user decide what is backed up and restores the data if necessary.",
+          "notes": "9608 mark scheme.",
+          "sources": [
+            {
+              "paper": "9608/11",
+              "session": "October/November 2019",
+              "question": "2(c)"
+            }
+          ]
+        },
+        {
+          "id": "ide-breakpoint",
+          "term": "Breakpoint",
+          "prompt": "Describe the typical IDE feature: breakpoints.",
+          "answer": "Breakpoints stop the code at a specific line to check the current progress and values.",
+          "sources": [
+            {
+              "paper": "9618/12",
+              "session": "May/June 2023",
+              "question": "7(c)"
+            }
+          ]
+        },
+        {
+          "id": "ide-single-stepping",
+          "term": "Single stepping",
+          "prompt": "Describe the typical IDE feature: single stepping.",
+          "answer": "Single stepping runs the code one line at a time so that the values can be checked.",
+          "sources": [
+            {
+              "paper": "9618/12",
+              "session": "May/June 2023",
+              "question": "7(c)"
+            }
+          ]
+        },
+        {
+          "id": "ide-dynamic-syntax-checks",
+          "term": "Dynamic syntax checks",
+          "prompt": "Describe the typical IDE feature: dynamic syntax checks.",
+          "answer": "Dynamic syntax checks highlight (underline or colour) syntax errors as the code is entered.",
+          "sources": [
+            {
+              "paper": "9618/12",
+              "session": "May/June 2023",
+              "question": "7(c)"
+            }
+          ]
+        },
+        {
+          "id": "ide-context-sensitive-prompts",
+          "term": "Context-sensitive prompts",
+          "prompt": "Describe the typical IDE feature: context-sensitive prompts.",
+          "answer": "Context-sensitive prompts suggest the code to add (automatically complete statements) as the user types.",
+          "sources": [
+            {
+              "paper": "9618/12",
+              "session": "May/June 2023",
+              "question": "7(c)"
+            },
+            {
+              "paper": "9618/12",
+              "session": "May/June 2024",
+              "question": "8(b)"
+            }
+          ]
+        },
+        {
+          "id": "ide-pretty-printing",
+          "term": "Pretty-printing",
+          "prompt": "Describe the IDE feature: pretty-printing.",
+          "answer": "Pretty-printing colour codes keywords so that the user can identify any errors.",
+          "sources": [
+            {
+              "paper": "9618/12",
+              "session": "May/June 2024",
+              "question": "8(b)"
+            }
+          ]
+        },
+        {
+          "id": "compiler",
+          "term": "Compiler",
+          "prompt": "Describe what is meant by a compiler.",
+          "answer": "A compiler is usually used when a high-level language program is complete. It translates all the code at the same time and then runs the program, producing an executable (object code) file that can run without the source code.",
+          "sources": [
+            {
+              "paper": "9618/11",
+              "session": "October/November 2021",
+              "question": "4(d)"
+            },
+            {
+              "paper": "9618/13",
+              "session": "May/June 2025",
+              "question": "3(a)"
+            }
+          ]
+        },
+        {
+          "id": "interpreter",
+          "term": "Interpreter",
+          "prompt": "Describe what is meant by an interpreter.",
+          "answer": "An interpreter translates one line of a high-level language program at a time and then runs that line of code. It is most useful while developing programs because errors can be corrected immediately and the program then continues from that line.",
+          "sources": [
+            {
+              "paper": "9618/11",
+              "session": "October/November 2021",
+              "question": "4(d)"
+            },
+            {
+              "paper": "9618/13",
+              "session": "May/June 2025",
+              "question": "3(a)"
+            }
+          ]
+        },
+        {
+          "id": "assembler",
+          "term": "Assembler",
+          "prompt": "Describe what is meant by an assembler.",
+          "answer": "An assembler is used to translate assembly code into binary (machine code).",
+          "sources": [
+            {
+              "paper": "9618/11",
+              "session": "October/November 2021",
+              "question": "4(d)"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "security-privacy-integrity",
+      "title": "Security, privacy and data integrity",
+      "items": [
+        {
+          "id": "data-privacy",
+          "term": "Privacy of data",
+          "prompt": "State the meaning of privacy of data.",
+          "answer": "Privacy of data is ensuring that data can only be accessed by (disclosed to) authorised persons and cannot be accessed by unauthorised persons.",
+          "sources": [
+            {
+              "paper": "9618/12",
+              "session": "October/November 2023",
+              "question": "5(a)"
+            }
+          ]
+        },
+        {
+          "id": "data-integrity",
+          "term": "Integrity of data",
+          "prompt": "State the meaning of integrity of data.",
+          "answer": "Integrity of data is ensuring the accuracy, completeness and consistency of data (during and after processing), and that the data is up to date.",
+          "alt": [
+            "ensure data is consistent / accurate"
+          ],
+          "sources": [
+            {
+              "paper": "9618/12",
+              "session": "October/November 2023",
+              "question": "5(b)"
+            },
+            {
+              "paper": "9618/11",
+              "session": "May/June 2023",
+              "question": "2(a)(ii)"
+            },
+            {
+              "paper": "9608/13",
+              "session": "May/June 2018",
+              "question": "2(b)"
+            }
+          ]
+        },
+        {
+          "id": "data-validation",
+          "term": "Data validation",
+          "prompt": "Describe how data validation helps to protect the integrity of the data.",
+          "answer": "Validation checks that data is reasonable (sensible), e.g. that it is the right number or type of characters.",
+          "sources": [
+            {
+              "paper": "9618/11",
+              "session": "October/November 2021",
+              "question": "2(b)(i)"
+            },
+            {
+              "paper": "9618/12",
+              "session": "October/November 2022",
+              "question": "4(a)"
+            }
+          ]
+        },
+        {
+          "id": "data-verification",
+          "term": "Data verification",
+          "prompt": "Describe what is meant by verification.",
+          "answer": "Verification is checking that the data entered matches (is consistent with) the source, by comparing two versions of the data, e.g. double entry or visual checking. It does not check that the data is sensible.",
+          "alt": [
+            "checking if input data is the same as the original"
+          ],
+          "sources": [
+            {
+              "paper": "9608/12",
+              "session": "October/November 2017",
+              "question": "3(c)"
+            },
+            {
+              "paper": "9618/12",
+              "session": "October/November 2022",
+              "question": "4(a)"
+            }
+          ]
+        },
+        {
+          "id": "parity-check",
+          "term": "Parity check",
+          "prompt": "Complete the description of parity check when Computer A is transmitting data to Computer B.",
+          "answer": "Computer A and Computer B agree on odd or even parity. Computer A divides the data into groups of 7 bits and counts the 1s. If the agreed parity is odd and the group has an even number of 1s, a parity bit of 1 is appended, otherwise a parity bit of 0.",
+          "notes": "Gap-fill sentences from the mark scheme.",
+          "sources": [
+            {
+              "paper": "9618/11",
+              "session": "May/June 2024",
+              "question": "5(b)"
+            }
+          ]
+        },
+        {
+          "id": "parity-block-check",
+          "term": "Parity block check",
+          "prompt": "Complete the description of a parity block check.",
+          "answer": "In a parity block check the bytes are grouped together, for example in a grid. The number of 1s in each column (bit position) is counted and a bit is assigned to each column to make it match the parity. These parity bits are transmitted with the data as a parity byte.",
+          "notes": "Gap-fill sentences from the mark scheme.",
+          "sources": [
+            {
+              "paper": "9618/11",
+              "session": "May/June 2024",
+              "question": "5(b)"
+            }
+          ]
+        },
+        {
+          "id": "checksum",
+          "term": "Checksum",
+          "prompt": "Describe how a checksum is used.",
+          "answer": "A checksum value is calculated from the data before transmission and transmitted with the data. The receiving computer recalculates the checksum from the received data; if the two match no error has occurred, otherwise an error has occurred.",
+          "sources": [
+            {
+              "paper": "9618/12",
+              "session": "October/November 2022",
+              "question": "4(b)"
+            }
+          ]
+        },
+        {
+          "id": "virus",
+          "term": "Virus",
+          "prompt": "Explain what is meant by a virus.",
+          "answer": "A virus is malicious program (software) that replicates (copies) itself and deletes or alters files (data) stored on a computer.",
+          "alt": [
+            "malicious software that replicates by inserting a copy of itself into a file of data"
+          ],
+          "sources": [
+            {
+              "paper": "9618/11",
+              "session": "October/November 2025",
+              "question": "8(a)"
+            },
+            {
+              "paper": "9608/31",
+              "session": "May/June 2017",
+              "question": "2(a)(iii)"
+            }
+          ]
+        },
+        {
+          "id": "pharming",
+          "term": "Pharming",
+          "prompt": "Explain what is meant by pharming.",
+          "answer": "Pharming is malicious code (software) installed on a computer which redirects the user to a fake website to obtain personal data.",
+          "sources": [
+            {
+              "paper": "9618/11",
+              "session": "October/November 2025",
+              "question": "8(a)"
+            },
+            {
+              "paper": "9608/31",
+              "session": "October/November 2016",
+              "question": "6(a)"
+            }
+          ]
+        },
+        {
+          "id": "phishing",
+          "term": "Phishing",
+          "prompt": "State the term for an email that encourages the receiver to access a website and give their banking details.",
+          "answer": "Phishing is when an email encourages the receiver to access a website and give their banking details (confidential data).",
+          "notes": "9608 mark schemes; term-description table, reworded as a definition.",
+          "sources": [
+            {
+              "paper": "9608/31",
+              "session": "October/November 2016",
+              "question": "6(a)"
+            },
+            {
+              "paper": "9608/31",
+              "session": "May/June 2017",
+              "question": "2(a)(ii)"
+            }
+          ]
+        },
+        {
+          "id": "worm",
+          "term": "Worm",
+          "prompt": "State the term for a standalone piece of malicious software that can replicate itself using a network.",
+          "answer": "A worm is a standalone piece of malicious software that can replicate itself using a network.",
+          "notes": "9608 mark scheme; term-description table, reworded as a definition.",
+          "sources": [
+            {
+              "paper": "9608/31",
+              "session": "May/June 2017",
+              "question": "2(a)(i)"
+            }
+          ]
+        },
+        {
+          "id": "firewall",
+          "term": "Firewall",
+          "prompt": "Identify and describe a type of software that can be installed to prevent threats over a network: firewall.",
+          "answer": "A firewall monitors incoming and outgoing traffic and compares it to criteria set by the user, such as a whitelist or blacklist, and blocks the traffic that does not match the criteria.",
+          "alt": [
+            "identifying allowed / blocked IP addresses"
+          ],
+          "sources": [
+            {
+              "paper": "9618/13",
+              "session": "May/June 2023",
+              "question": "6(b)"
+            }
+          ]
+        },
+        {
+          "id": "antivirus-software",
+          "term": "Antivirus software",
+          "prompt": "Identify and describe a type of software that can be installed to prevent threats over a network: antivirus.",
+          "answer": "Antivirus software scans the computer for viruses and checks against a stored database of viruses that needs to be updated regularly, then deletes or quarantines them.",
+          "sources": [
+            {
+              "paper": "9618/13",
+              "session": "May/June 2023",
+              "question": "6(b)"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ethics-and-ownership",
+      "title": "Ethics and ownership",
+      "items": [
+        {
+          "id": "copyright",
+          "term": "Copyright",
+          "prompt": "Describe what is meant by copyright.",
+          "answer": "Copyright is the formal and legal right of ownership (intellectual property rights); it protects against unauthorised reproduction of work and provides the legal right of redress.",
+          "alt": [
+            "formal or legal restriction / permissions on use of the program"
+          ],
+          "sources": [
+            {
+              "paper": "9618/11",
+              "session": "May/June 2021",
+              "question": "1(d)"
+            },
+            {
+              "paper": "9608/12",
+              "session": "May/June 2019",
+              "question": "4(d)(i)"
+            },
+            {
+              "paper": "9618/12",
+              "session": "October/November 2025",
+              "question": "2(a)"
+            }
+          ]
+        },
+        {
+          "id": "software-licence",
+          "term": "Software licence",
+          "prompt": "Describe the term software licence.",
+          "answer": "A software licence is a (legal) agreement that defines the rights and terms of usage for the software.",
+          "sources": [
+            {
+              "paper": "9618/12",
+              "session": "October/November 2025",
+              "question": "2(a)"
+            }
+          ]
+        },
+        {
+          "id": "open-source",
+          "term": "Open source software",
+          "prompt": "Describe what is meant by open source.",
+          "answer": "Open source software has its source code released with the program; users can edit the source code to suit their needs and can freely copy, distribute or adapt it, re-releasing their version under the same terms.",
+          "sources": [
+            {
+              "paper": "9608/13",
+              "session": "May/June 2016",
+              "question": "3(a)"
+            },
+            {
+              "paper": "9608/11",
+              "session": "October/November 2018",
+              "question": "3(a)"
+            },
+            {
+              "paper": "9618/12",
+              "session": "October/November 2025",
+              "question": "2(a)"
+            },
+            {
+              "paper": "9618/13",
+              "session": "October/November 2024",
+              "question": "5(a)"
+            }
+          ]
+        },
+        {
+          "id": "shareware",
+          "term": "Shareware",
+          "prompt": "Describe what is meant by shareware.",
+          "answer": "Shareware gives users a free trial of the software (a trial period, possibly with limited features), after which they have to pay or sign up for the full software; the source code cannot be accessed.",
+          "sources": [
+            {
+              "paper": "9608/11",
+              "session": "October/November 2018",
+              "question": "3(a)"
+            },
+            {
+              "paper": "9618/12",
+              "session": "October/November 2025",
+              "question": "2(a)"
+            },
+            {
+              "paper": "9618/13",
+              "session": "October/November 2024",
+              "question": "5(a)"
+            }
+          ]
+        },
+        {
+          "id": "commercial-software",
+          "term": "Commercial software",
+          "prompt": "Explain what is meant by commercial software.",
+          "answer": "Commercial software is purchased (a fee is paid before it can be used) under a licence which restricts the number of users or period of use, and its program code cannot be edited.",
+          "alt": [
+            "a fee is charged, the source code cannot be accessed and users do not get a free trial"
+          ],
+          "sources": [
+            {
+              "paper": "9608/13",
+              "session": "May/June 2016",
+              "question": "3(b)"
+            },
+            {
+              "paper": "9608/11",
+              "session": "May/June 2019",
+              "question": "2(a)"
+            },
+            {
+              "paper": "9618/13",
+              "session": "October/November 2024",
+              "question": "5(a)"
+            }
+          ]
+        },
+        {
+          "id": "free-software",
+          "term": "Free software",
+          "prompt": "Describe what is meant by Free Software.",
+          "answer": "Free software is free of restrictions (it is not necessarily free of charge); the source code comes with the program so a user can edit it to add functionality or suit their needs, and users can share the software with others.",
+          "notes": "9608 M/J19 2(a) names the licence as 'Free Software Licence': source code supplied, free to be downloaded, edited and distributed, possibly without restriction.",
+          "sources": [
+            {
+              "paper": "9618/12",
+              "session": "October/November 2025",
+              "question": "10(b)"
+            },
+            {
+              "paper": "9608/11",
+              "session": "May/June 2019",
+              "question": "2(a)"
+            }
+          ]
+        },
+        {
+          "id": "ethics",
+          "term": "Ethics",
+          "prompt": "Describe what is meant by ethics.",
+          "answer": "Ethics is a system of moral principles that guide behaviour and decision making, based on philosophical or religious views.",
+          "notes": "9608 mark scheme.",
+          "sources": [
+            {
+              "paper": "9608/13",
+              "session": "October/November 2017",
+              "question": "6(a)"
+            }
+          ]
+        },
+        {
+          "id": "code-of-conduct",
+          "term": "Code of conduct (purpose)",
+          "prompt": "Describe the purpose of a code of conduct.",
+          "answer": "A code of conduct creates a safe, respectable and professional working environment, ensures employees understand the expectations and consequences of their actions, and provides a clear outline of what is considered good practice.",
+          "sources": [
+            {
+              "paper": "9618/12",
+              "session": "October/November 2025",
+              "question": "2(b)"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "databases",
+      "title": "Databases",
+      "items": [
+        {
+          "id": "entity",
+          "term": "Entity",
+          "prompt": "State what is meant by an entity in a relational database model.",
+          "answer": "An entity is an object about which data can be stored.",
+          "alt": [
+            "any object, person or thing about which it is possible to store data"
+          ],
+          "sources": [
+            {
+              "paper": "9618/12",
+              "session": "October/November 2023",
+              "question": "2(a)"
+            },
+            {
+              "paper": "9618/13",
+              "session": "May/June 2023",
+              "question": "4(b)"
+            }
+          ]
+        },
+        {
+          "id": "table",
+          "term": "Table (database)",
+          "prompt": "Describe the relational database term table.",
+          "answer": "A table is a dataset organised in rows and columns; the columns form the structure and the rows form the content.",
+          "notes": "9608 mark scheme matching question, reworded as a definition.",
+          "sources": [
+            {
+              "paper": "9608/11",
+              "session": "October/November 2016",
+              "question": "1(a)"
+            }
+          ]
+        },
+        {
+          "id": "primary-key",
+          "term": "Primary key",
+          "prompt": "State what is meant by a primary key in a relational database model.",
+          "answer": "A primary key is the unique attribute (or combination of attributes) used to identify a record (tuple).",
+          "sources": [
+            {
+              "paper": "9618/12",
+              "session": "October/November 2023",
+              "question": "2(a)"
+            },
+            {
+              "paper": "9608/11",
+              "session": "October/November 2016",
+              "question": "1(a)"
+            }
+          ]
+        },
+        {
+          "id": "candidate-key",
+          "term": "Candidate key",
+          "prompt": "State what is meant by a candidate key in a relational database.",
+          "answer": "A candidate key is an attribute (field), or set of attributes, that could be a primary key.",
+          "alt": [
+            "an attribute or smallest set of attributes in a table where no tuple has the same value"
+          ],
+          "sources": [
+            {
+              "paper": "9618/12",
+              "session": "October/November 2022",
+              "question": "5(c)"
+            },
+            {
+              "paper": "9618/11",
+              "session": "October/November 2024",
+              "question": "2(c)"
+            }
+          ]
+        },
+        {
+          "id": "secondary-key",
+          "term": "Secondary key",
+          "prompt": "Complete the table by writing the missing description: secondary key.",
+          "answer": "A secondary key is an additional (alternative) key used as well as the primary key to locate specific data; a candidate key that has not been chosen as the primary key.",
+          "notes": "Mark scheme table, reworded as a definition.",
+          "sources": [
+            {
+              "paper": "9618/13",
+              "session": "May/June 2023",
+              "question": "4(b)"
+            }
+          ]
+        },
+        {
+          "id": "foreign-key",
+          "term": "Foreign key",
+          "prompt": "Complete the table by writing the missing description: foreign key.",
+          "answer": "A foreign key is a field in one table that is linked to a primary key in another table.",
+          "alt": [
+            "attribute(s) in a table that link to a primary key in another table to form a relationship"
+          ],
+          "notes": "Mark scheme table, reworded as a definition.",
+          "sources": [
+            {
+              "paper": "9618/13",
+              "session": "May/June 2023",
+              "question": "4(b)"
+            }
+          ]
+        },
+        {
+          "id": "tuple",
+          "term": "Tuple",
+          "prompt": "State what is meant by a tuple.",
+          "answer": "A tuple is a single row (record) in a table; one instance of an entity.",
+          "sources": [
+            {
+              "paper": "9618/11",
+              "session": "October/November 2022",
+              "question": "4(c)(i)"
+            },
+            {
+              "paper": "9618/11",
+              "session": "October/November 2024",
+              "question": "2(c)"
+            },
+            {
+              "paper": "9618/13",
+              "session": "May/June 2023",
+              "question": "4(b)"
+            }
+          ]
+        },
+        {
+          "id": "referential-integrity",
+          "term": "Referential integrity",
+          "prompt": "State what is meant by referential integrity.",
+          "answer": "Referential integrity ensures that every foreign key has a corresponding primary key, so that data that does not exist cannot be referenced and related records stay consistent when data is changed.",
+          "alt": [
+            "makes sure that if data is changed in one place the change is reflected in all related records (cascading update / delete)"
+          ],
+          "sources": [
+            {
+              "paper": "9618/12",
+              "session": "October/November 2023",
+              "question": "2(a)"
+            },
+            {
+              "paper": "9618/11",
+              "session": "October/November 2024",
+              "question": "2(c)"
+            },
+            {
+              "paper": "9608/11",
+              "session": "October/November 2016",
+              "question": "1(b)"
+            }
+          ]
+        },
+        {
+          "id": "data-dictionary",
+          "term": "Data dictionary",
+          "prompt": "State what is meant by a data dictionary.",
+          "answer": "A data dictionary holds data about the data in the database (metadata); it identifies the characteristics of the data that will be stored, e.g. field names, table names, validation rules, data types and keys.",
+          "sources": [
+            {
+              "paper": "9618/11",
+              "session": "May/June 2023",
+              "question": "2(a)(i)"
+            },
+            {
+              "paper": "9618/11",
+              "session": "May/June 2024",
+              "question": "6(b)"
+            },
+            {
+              "paper": "9618/12",
+              "session": "October/November 2022",
+              "question": "5(d)(i)"
+            }
+          ]
+        },
+        {
+          "id": "logical-schema",
+          "term": "Logical schema",
+          "prompt": "Describe what is meant by a logical schema.",
+          "answer": "A logical schema is an overview of the database structure that models the problem, using methods such as an ER diagram, and is independent of any particular DBMS.",
+          "alt": [
+            "a model of a database that is not specific to one DBMS"
+          ],
+          "sources": [
+            {
+              "paper": "9618/12",
+              "session": "October/November 2022",
+              "question": "5(d)(ii)"
+            },
+            {
+              "paper": "9618/11",
+              "session": "May/June 2024",
+              "question": "6(b)"
+            },
+            {
+              "paper": "9618/12",
+              "session": "May/June 2023",
+              "question": "2(a)"
+            }
+          ]
+        },
+        {
+          "id": "query-processor",
+          "term": "Query processor",
+          "prompt": "Describe the purpose of a query processor in a DBMS.",
+          "answer": "A query processor allows the user to enter criteria, searches for the data that meets the entered criteria and organises the results to be displayed to the user.",
+          "sources": [
+            {
+              "paper": "9618/13",
+              "session": "October/November 2022",
+              "question": "2(f)"
+            }
+          ]
+        },
+        {
+          "id": "developer-interface",
+          "term": "Developer interface",
+          "prompt": "Describe the purpose of a developer interface in a Database Management System (DBMS).",
+          "answer": "A developer interface allows the user to create, modify and delete tables, set up relationships, create forms and reports and inspect the database contents by creating and running SQL queries.",
+          "alt": [
+            "a software tool that allows the user to create items such as tables, forms and reports"
+          ],
+          "sources": [
+            {
+              "paper": "9618/12",
+              "session": "October/November 2025",
+              "question": "4(d)"
+            }
+          ]
+        },
+        {
+          "id": "data-redundancy",
+          "term": "Data redundancy",
+          "prompt": "State what is meant by the term data redundancy.",
+          "answer": "Data redundancy is repeated (duplicated) data.",
+          "notes": "9608 mark scheme.",
+          "sources": [
+            {
+              "paper": "9608/12",
+              "session": "May/June 2019",
+              "question": "5(a)(i)"
+            }
+          ]
+        },
+        {
+          "id": "first-normal-form",
+          "term": "First Normal Form (1NF)",
+          "prompt": "Define the three stages of database normalisation: 1NF.",
+          "answer": "A table is in first normal form (1NF) when there are no repeated groups of attributes, all attributes are atomic and there are no duplicate rows.",
+          "notes": "9608 mark scheme (1 mark per stage); 9618 asks how to modify a table into 1NF.",
+          "sources": [
+            {
+              "paper": "9608/12",
+              "session": "May/June 2018",
+              "question": "7(c)"
+            },
+            {
+              "paper": "9618/12",
+              "session": "October/November 2023",
+              "question": "2(c)"
+            }
+          ]
+        },
+        {
+          "id": "second-normal-form",
+          "term": "Second Normal Form (2NF)",
+          "prompt": "Define the three stages of database normalisation: 2NF.",
+          "answer": "A table is in second normal form (2NF) when it is in 1NF and there are no partial dependencies.",
+          "notes": "9608 mark scheme.",
+          "sources": [
+            {
+              "paper": "9608/12",
+              "session": "May/June 2018",
+              "question": "7(c)"
+            }
+          ]
+        },
+        {
+          "id": "third-normal-form",
+          "term": "Third Normal Form (3NF)",
+          "prompt": "Describe the characteristics of a database that is in Third Normal Form (3NF).",
+          "answer": "A database in 3NF has no repeating groups of attributes (data is atomic), no partial key dependencies and no non-key (transitive) dependencies.",
+          "sources": [
+            {
+              "paper": "9618/11",
+              "session": "October/November 2022",
+              "question": "4(b)"
+            },
+            {
+              "paper": "9608/12",
+              "session": "May/June 2018",
+              "question": "7(c)"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "algorithm-design-and-problem-solving",
+      "title": "Algorithm design and problem-solving",
+      "items": [
+        {
+          "id": "decomposition",
+          "term": "Decomposition",
+          "prompt": "Describe decomposition.",
+          "answer": "Decomposition is breaking down a problem (task) into sub-problems (smaller parts) in order to understand it or make it easier to solve, leading to the concept of program modules.",
+          "alt": [
+            "makes the program easier to test / debug",
+            "leading to the program being designed as a series of modules / procedures / functions"
+          ],
+          "sources": [
+            {
+              "paper": "9618/22",
+              "session": "October/November 2021",
+              "question": "1(a)"
+            },
+            {
+              "paper": "9618/21",
+              "session": "May/June 2025",
+              "question": "1(c)"
+            }
+          ]
+        },
+        {
+          "id": "abstraction",
+          "term": "Abstraction",
+          "prompt": "State the purpose of applying abstraction to a problem.",
+          "answer": "Abstraction is used to filter out information (data) that is not necessary for the task, keeping only the information that is necessary.",
+          "sources": [
+            {
+              "paper": "9618/23",
+              "session": "May/June 2023",
+              "question": "7(a)(i)"
+            },
+            {
+              "paper": "9618/21",
+              "session": "October/November 2022",
+              "question": "2(a)"
+            }
+          ]
+        },
+        {
+          "id": "structure-chart-selection",
+          "term": "Structure chart: diamond symbol",
+          "prompt": "Explain the meaning of the diamond symbol in a structure chart.",
+          "answer": "The diamond symbol in a structure chart means selection: the module calls one of the modules below it (which one is called is decided at runtime).",
+          "notes": "Mark scheme wording is specific to the diagram (e.g. 'Update calls one of Sub-A, Sub-B or Sub-C'); the mark is for reference to selection and naming the modules.",
+          "sources": [
+            {
+              "paper": "9618/22",
+              "session": "October/November 2023",
+              "question": "7(b)"
+            },
+            {
+              "paper": "9618/21",
+              "session": "May/June 2024",
+              "question": "7(b)(i)"
+            }
+          ]
+        },
+        {
+          "id": "structure-chart-iteration",
+          "term": "Structure chart: curved arrow",
+          "prompt": "Explain the meaning of the curved arrow symbol in a structure chart.",
+          "answer": "The curved arrow in a structure chart means iteration: the module repeatedly calls the modules below it, in the order shown.",
+          "notes": "Mark scheme wording is specific to the diagram (e.g. 'Sync repeatedly calls Reset and Enable'); the mark is for reference to iteration/repetition and naming the modules in sequence.",
+          "sources": [
+            {
+              "paper": "9618/21",
+              "session": "October/November 2024",
+              "question": "7(b)"
+            },
+            {
+              "paper": "9618/22",
+              "session": "October/November 2025",
+              "question": "7(a)"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "data-types-and-structures",
+      "title": "Data types and structures",
+      "items": [
+        {
+          "id": "queue-and-stack",
+          "term": "Stack and queue",
+          "prompt": "Compare and contrast the queue and stack Abstract Data Types (ADT).",
+          "answer": "A queue is a first in first out (FIFO) data structure and a stack is a first in last out (LIFO) data structure.",
+          "alt": [
+            "data is removed from a queue in the order it is received and from a stack in the reverse order",
+            "both ADTs can vary in size"
+          ],
+          "sources": [
+            {
+              "paper": "9618/31",
+              "session": "October/November 2023",
+              "question": "10(c)"
+            }
+          ]
+        },
+        {
+          "id": "queue-features",
+          "term": "Queue (features)",
+          "prompt": "Describe two features of a queue.",
+          "answer": "A queue is a first in first out (FIFO) structure: the first value added is the first value removed. It uses two pointers for the start and end of the queue and is manipulated using enqueue and dequeue operations.",
+          "alt": [
+            "may behave as a circular queue"
+          ],
+          "sources": [
+            {
+              "paper": "9618/23",
+              "session": "May/June 2025",
+              "question": "2(c)"
+            }
+          ]
+        },
+        {
+          "id": "null-pointer",
+          "term": "Null pointer",
+          "prompt": "Explain the meaning of the value given to this item (null pointer).",
+          "answer": "A null pointer means there are no further nodes in the list.",
+          "notes": "Context: the end-of-list pointer in a linked list.",
+          "sources": [
+            {
+              "paper": "9618/22",
+              "session": "May/June 2021",
+              "question": "3(c)"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "programming",
+      "title": "Programming",
+      "items": [
+        {
+          "id": "procedure-interface",
+          "term": "Procedure interface",
+          "prompt": "Explain the term procedure interface.",
+          "answer": "A procedure interface provides a mechanism to allow the calling program to pass data; it defines the parameters of the procedure, giving their data type and order.",
+          "sources": [
+            {
+              "paper": "9618/23",
+              "session": "October/November 2022",
+              "question": "5(a)(ii)"
+            }
+          ]
+        },
+        {
+          "id": "parameter-by-value-and-by-reference",
+          "term": "Passing parameters by value and by reference",
+          "prompt": "Explain the effect of passing a parameter by value and by reference.",
+          "answer": "When a parameter is passed by reference, any change made to the parameter in the called module is reflected in the calling module afterwards. When passed by value, such a change is not reflected in the calling module.",
+          "sources": [
+            {
+              "paper": "9618/23",
+              "session": "May/June 2024",
+              "question": "7(a)(ii)"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "software-development",
+      "title": "Software development",
+      "items": [
+        {
+          "id": "stub-testing",
+          "term": "Stub testing",
+          "prompt": "Describe stub testing.",
+          "answer": "In stub testing, simple (dummy) modules are written to replace each unfinished module; each returns an expected value or outputs a message to show it has been called.",
+          "notes": "Also used when a module that does not work properly is replaced so testing can continue (9618 M/J23 21 8(c)(ii)).",
+          "sources": [
+            {
+              "paper": "9618/22",
+              "session": "May/June 2025",
+              "question": "2(b)(ii)"
+            },
+            {
+              "paper": "9618/23",
+              "session": "October/November 2024",
+              "question": "5(b)"
+            }
+          ]
+        },
+        {
+          "id": "walkthrough-method",
+          "term": "Walkthrough method",
+          "prompt": "Describe the walkthrough method and explain how it can be used to identify errors.",
+          "answer": "In the walkthrough method the program is gone through a line (statement) at a time, like a dry run, by creating a trace table using test data. Errors are indicated when a variable or output gives an unexpected value.",
+          "sources": [
+            {
+              "paper": "9618/23",
+              "session": "May/June 2025",
+              "question": "4(b)"
+            }
+          ]
+        },
+        {
+          "id": "alpha-testing",
+          "term": "Alpha testing",
+          "prompt": "Complete the table: which test method is carried out as soon as a program module has been coded?",
+          "answer": "Alpha testing is carried out as soon as a program module has been coded.",
+          "notes": "Mark scheme table (alpha is the worked first row); description reworded as a definition.",
+          "sources": [
+            {
+              "paper": "9618/21",
+              "session": "October/November 2025",
+              "question": "1(b)"
+            }
+          ]
+        },
+        {
+          "id": "integration-testing",
+          "term": "Integration testing",
+          "prompt": "Complete the table: which test method is carried out as program modules are being combined?",
+          "answer": "Integration testing is carried out as program modules are being combined.",
+          "notes": "Mark scheme table, reworded as a definition.",
+          "sources": [
+            {
+              "paper": "9618/21",
+              "session": "October/November 2025",
+              "question": "1(b)"
+            }
+          ]
+        },
+        {
+          "id": "black-box-testing",
+          "term": "Black-box testing",
+          "prompt": "Complete the table: which test method is completed by the developers without referring to the code?",
+          "answer": "Black-box testing is completed by the developers without referring to the code.",
+          "notes": "Mark scheme table, reworded as a definition.",
+          "sources": [
+            {
+              "paper": "9618/21",
+              "session": "October/November 2025",
+              "question": "1(b)"
+            }
+          ]
+        },
+        {
+          "id": "beta-testing",
+          "term": "Beta testing",
+          "prompt": "Identify and describe a final stage of testing that should take place before the website is made available to all customers.",
+          "answer": "Beta testing is testing carried out by a small group of (potential) users, who check that the software works as required in the real world, give feedback on problems and suggestions, which are addressed before the program is sold.",
+          "alt": [
+            "acceptance testing: testing completed by the customer"
+          ],
+          "sources": [
+            {
+              "paper": "9618/21",
+              "session": "May/June 2023",
+              "question": "5(b)"
+            },
+            {
+              "paper": "9618/21",
+              "session": "October/November 2025",
+              "question": "1(b)"
+            }
+          ]
+        },
+        {
+          "id": "rapid-application-development",
+          "term": "Rapid Application Development (RAD)",
+          "prompt": "State one principle of the Rapid Application Development (RAD) life cycle.",
+          "answer": "RAD develops modules in parallel (as prototypes) with minimal detailed planning, allowing changes to requirements, with small incremental releases and the client involved during development.",
+          "notes": "Mark scheme: any one point, e.g. modules developed in parallel / as prototypes; minimal planning; flexible; small incremental releases; client involved.",
+          "sources": [
+            {
+              "paper": "9618/23",
+              "session": "October/November 2022",
+              "question": "1(c)(i)"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "a-data-representation",
+      "title": "A Level: Data representation",
+      "items": [
+        {
+          "id": "user-defined-data-type",
+          "term": "User-defined data type",
+          "prompt": "State what is meant by a user-defined data type.",
+          "answer": "A user-defined data type is derived from one or more existing data types and is used to extend the built-in data types, creating data types specific to the programmer's requirements.",
+          "sources": [
+            {
+              "paper": "9608/32",
+              "session": "October/November 2019",
+              "question": "6(a)"
+            },
+            {
+              "paper": "9618/31",
+              "session": "May/June 2021",
+              "question": "2(a)"
+            }
+          ]
+        },
+        {
+          "id": "non-composite-data-type",
+          "term": "Non-composite data type",
+          "prompt": "Define the term non-composite data type.",
+          "answer": "A non-composite data type is defined without referencing another data type; it can be a primitive data type available in a programming language or a user-defined data type.",
+          "sources": [
+            {
+              "paper": "9618/32",
+              "session": "October/November 2023",
+              "question": "2"
+            },
+            {
+              "paper": "9618/32",
+              "session": "May/June 2024",
+              "question": "3(a)"
+            },
+            {
+              "paper": "9608/31",
+              "session": "May/June 2018",
+              "question": "2(a)"
+            }
+          ]
+        },
+        {
+          "id": "composite-data-type",
+          "term": "Composite data type",
+          "prompt": "Define the term composite data type.",
+          "answer": "A composite data type is a data type constructed from other data types: a collection of data that can consist of multiple elements of different or the same data types grouped under a single identifier.",
+          "alt": [
+            "can be a record, set or class"
+          ],
+          "sources": [
+            {
+              "paper": "9618/32",
+              "session": "October/November 2023",
+              "question": "2"
+            },
+            {
+              "paper": "9608/31",
+              "session": "May/June 2018",
+              "question": "2(c)"
+            }
+          ]
+        },
+        {
+          "id": "enumerated-data-type",
+          "term": "Enumerated data type",
+          "prompt": "State what is meant by the term enumerated data type.",
+          "answer": "An enumerated data type is a (user-defined non-composite) data type with an ordered list of possible values.",
+          "sources": [
+            {
+              "paper": "9618/31",
+              "session": "October/November 2022",
+              "question": "3(a)"
+            },
+            {
+              "paper": "9618/31",
+              "session": "October/November 2023",
+              "question": "3"
+            }
+          ]
+        },
+        {
+          "id": "pointer-data-type",
+          "term": "Pointer data type",
+          "prompt": "State what is meant by the term pointer data type.",
+          "answer": "A pointer data type is a user-defined non-composite data type used to reference a memory location; it stores addresses only and indicates the type of data stored in that location.",
+          "sources": [
+            {
+              "paper": "9618/31",
+              "session": "October/November 2022",
+              "question": "3(b)"
+            },
+            {
+              "paper": "9618/31",
+              "session": "October/November 2023",
+              "question": "3"
+            }
+          ]
+        },
+        {
+          "id": "floating-point-overflow",
+          "term": "Floating-point overflow",
+          "prompt": "Complete the description: overflow in a floating-point number.",
+          "answer": "Overflow can occur in the exponent of a floating-point number, when the exponent has become too large to be represented using the number of bits available.",
+          "notes": "9608 mark scheme gap-fill: the missing term is overflow.",
+          "sources": [
+            {
+              "paper": "9608/31",
+              "session": "October/November 2019",
+              "question": "1(d)"
+            }
+          ]
+        },
+        {
+          "id": "floating-point-underflow",
+          "term": "Floating-point underflow",
+          "prompt": "Complete the description: a calculation results in a number so small that it cannot be represented.",
+          "answer": "Underflow is when a calculation results in a number so small that it cannot be represented by the number of bits available.",
+          "notes": "9608 mark scheme gap-fill: the missing term is underflow.",
+          "sources": [
+            {
+              "paper": "9608/31",
+              "session": "October/November 2019",
+              "question": "1(d)"
+            }
+          ]
+        },
+        {
+          "id": "hashing-algorithm",
+          "term": "Hashing algorithm",
+          "prompt": "Explain what is meant by a hashing algorithm in the context of file access.",
+          "answer": "A hashing algorithm is a mathematical formula used to perform a calculation on the key field of the record being searched for or stored; the result of the calculation gives the address where the record should be found or stored.",
+          "sources": [
+            {
+              "paper": "9618/31",
+              "session": "October/November 2024",
+              "question": "5(a)"
+            }
+          ]
+        },
+        {
+          "id": "hash-collision",
+          "term": "Collision (hashing)",
+          "prompt": "Outline what is meant by the term collision in this context.",
+          "answer": "A collision is when the key fields of two records result in the same hash value, so the location identified may already be in use (two records cannot occupy the same address).",
+          "sources": [
+            {
+              "paper": "9618/32",
+              "session": "October/November 2023",
+              "question": "3(a)"
+            }
+          ]
+        },
+        {
+          "id": "direct-access",
+          "term": "Direct access (file access)",
+          "prompt": "Outline what is meant by direct access as a method of file access.",
+          "answer": "Direct access allows a record to be found in a file without other records being read; records are found by using the key field of the target record (the location is found using a hashing algorithm).",
+          "sources": [
+            {
+              "paper": "9618/32",
+              "session": "May/June 2024",
+              "question": "7(a)"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "a-communication-and-internet-technologies",
+      "title": "A Level: Communication and internet technologies",
+      "items": [
+        {
+          "id": "protocol",
+          "term": "Protocol",
+          "prompt": "Define the term protocol.",
+          "answer": "A protocol is a (known) set of rules; an agreed (standard) method for data transmission that governs how two devices communicate.",
+          "notes": "9608 mark scheme.",
+          "sources": [
+            {
+              "paper": "9608/31",
+              "session": "October/November 2017",
+              "question": "4(a)(i)"
+            }
+          ]
+        },
+        {
+          "id": "circuit-switching",
+          "term": "Circuit switching",
+          "prompt": "Describe circuit switching.",
+          "answer": "In circuit switching a circuit (dedicated communication channel) is established between sender and receiver at the start of the communication, lasts for the duration of the call or data transfer, and the links are then removed.",
+          "notes": "9608 mark schemes. 9618 asks for benefits and drawbacks only.",
+          "sources": [
+            {
+              "paper": "9608/31",
+              "session": "May/June 2020",
+              "question": "3(a)(i)"
+            },
+            {
+              "paper": "9608/31",
+              "session": "May/June 2017",
+              "question": "5(b)(ii)"
+            }
+          ]
+        },
+        {
+          "id": "packet-switching",
+          "term": "Packet switching",
+          "prompt": "Describe packet switching as a method of transmitting messages across the internet.",
+          "answer": "In packet switching the data is divided into packets, each with a header containing the sender and receiver IP addresses. Each packet is sent independently, possibly by different routes, and the packets are reassembled in the correct order at the destination.",
+          "alt": [
+            "missing / damaged packets are re-sent"
+          ],
+          "sources": [
+            {
+              "paper": "9618/31",
+              "session": "May/June 2025",
+              "question": "3(b)"
+            },
+            {
+              "paper": "9608/31",
+              "session": "May/June 2020",
+              "question": "3(b)(i)"
+            }
+          ]
+        },
+        {
+          "id": "packet-header",
+          "term": "Packet header",
+          "prompt": "Describe the purpose of a packet header.",
+          "answer": "A packet header stores data about the packet and its routing (to ensure it reaches its destination) and ensures that the message can be properly reconstructed.",
+          "notes": "9608 mark scheme.",
+          "sources": [
+            {
+              "paper": "9608/31",
+              "session": "October/November 2019",
+              "question": "7(b)(ii)"
+            }
+          ]
+        },
+        {
+          "id": "router-in-packet-switching",
+          "term": "Router (packet switching)",
+          "prompt": "Outline the function of a router in packet switching.",
+          "answer": "A router examines the packet's header, reads the destination IP address, uses its routing table to decide the next hop (best route) and sends the packet on its next hop.",
+          "sources": [
+            {
+              "paper": "9618/31",
+              "session": "October/November 2021",
+              "question": "6(b)"
+            }
+          ]
+        },
+        {
+          "id": "application-layer",
+          "term": "TCP/IP Application layer",
+          "prompt": "Explain the purpose and function of the Application Layer in the TCP/IP protocol suite.",
+          "answer": "The Application layer provides access to the programs that exchange data (it interacts directly with the user) and defines the protocols that any application uses to allow the exchange of data.",
+          "sources": [
+            {
+              "paper": "9618/32",
+              "session": "October/November 2024",
+              "question": "5(b)"
+            }
+          ]
+        },
+        {
+          "id": "transport-layer",
+          "term": "TCP/IP Transport layer",
+          "prompt": "Describe the purpose of the Transport Layer.",
+          "answer": "The Transport layer provides logical communication between applications on different hosts and ensures error-free, end-to-end delivery of data in sequence, breaking data into segments when sent and reassembling them at the destination.",
+          "alt": [
+            "to regulate network connections // flow control"
+          ],
+          "sources": [
+            {
+              "paper": "9618/31",
+              "session": "May/June 2025",
+              "question": "3(a)"
+            }
+          ]
+        },
+        {
+          "id": "internet-layer",
+          "term": "TCP/IP Internet layer",
+          "prompt": "Describe the purpose of the Internet layer.",
+          "answer": "The Internet layer identifies the intended network and host, adds a header containing the source and destination IP addresses, formats packets into datagrams and routes the datagrams through the optimum route over a network.",
+          "sources": [
+            {
+              "paper": "9618/33",
+              "session": "May/June 2025",
+              "question": "4(a)"
+            }
+          ]
+        },
+        {
+          "id": "link-layer",
+          "term": "TCP/IP Link layer",
+          "prompt": "Outline the purpose of the Link layer in the TCP/IP protocol suite.",
+          "answer": "The Link layer formats the data (datagrams) into frames for transmission, is responsible for transporting data within the local network segments, maps IP addresses to MAC (physical) addresses and ensures the correct network protocols are followed.",
+          "sources": [
+            {
+              "paper": "9618/31",
+              "session": "October/November 2023",
+              "question": "2(b)"
+            },
+            {
+              "paper": "9618/33",
+              "session": "May/June 2025",
+              "question": "4(a)"
+            }
+          ]
+        },
+        {
+          "id": "bittorrent",
+          "term": "BitTorrent",
+          "prompt": "Explain the meaning of the phrase: BitTorrent protocol provides peer-to-peer file sharing.",
+          "answer": "BitTorrent allows the sharing of files between thousands of users connected over the internet; users share files directly with each other (their computers act as peers) and no web server or central device is used.",
+          "sources": [
+            {
+              "paper": "9618/32",
+              "session": "May/June 2024",
+              "question": "2(c)"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "a-hardware-and-virtual-machines",
+      "title": "A Level: Hardware and virtual machines",
+      "items": [
+        {
+          "id": "risc-features",
+          "term": "RISC processor",
+          "prompt": "Identify four features of a RISC processor.",
+          "answer": "A RISC processor has a low number of instruction formats, single-clock cycle instructions, fixed length instructions, many general-purpose registers and works well with pipelining.",
+          "alt": [
+            "hard-wired control unit",
+            "makes extensive use of RAM",
+            "low number of addressing modes",
+            "the design emphasis is on the software"
+          ],
+          "sources": [
+            {
+              "paper": "9618/31",
+              "session": "October/November 2024",
+              "question": "2"
+            }
+          ]
+        },
+        {
+          "id": "cisc-features",
+          "term": "CISC processor",
+          "prompt": "Identify four features of a CISC processor.",
+          "answer": "A CISC processor has many instruction formats, a large instruction set, many addressing modes, variable length (multi-operation) instructions and multi-clock cycle instructions.",
+          "alt": [
+            "complex decoding of instructions",
+            "makes frequent use of cache memory",
+            "programmable (micro-programmed) control unit",
+            "the design emphasis is on the hardware"
+          ],
+          "sources": [
+            {
+              "paper": "9618/32",
+              "session": "October/November 2024",
+              "question": "8"
+            }
+          ]
+        },
+        {
+          "id": "pipelining",
+          "term": "Pipelining",
+          "prompt": "Explain what is meant by pipelining.",
+          "answer": "Pipelining is instruction level parallelism: the execution of an instruction is split into a number of stages and another instruction can start executing before the previous one has finished.",
+          "notes": "9608 mark scheme.",
+          "sources": [
+            {
+              "paper": "9608/32",
+              "session": "October/November 2017",
+              "question": "2(b)(i)"
+            }
+          ]
+        },
+        {
+          "id": "sisd",
+          "term": "SISD",
+          "prompt": "Complete the table with the appropriate term: only one processor executing one set of instructions on one set of data.",
+          "answer": "SISD (single instruction single data) has only one processor, which executes one set of instructions on one set of data.",
+          "notes": "9608 mark scheme table, reworded as a definition.",
+          "sources": [
+            {
+              "paper": "9608/31",
+              "session": "October/November 2019",
+              "question": "9(a)"
+            }
+          ]
+        },
+        {
+          "id": "simd",
+          "term": "SIMD",
+          "prompt": "Complete the table with the appropriate term: several ALUs executing the same instructions on different data.",
+          "answer": "SIMD (single instruction multiple data) has a processor with several ALUs, each ALU executing the same set of instructions on different sets of data at the same time.",
+          "notes": "9608 mark scheme table, reworded as a definition.",
+          "sources": [
+            {
+              "paper": "9608/31",
+              "session": "October/November 2019",
+              "question": "9(a)"
+            }
+          ]
+        },
+        {
+          "id": "misd",
+          "term": "MISD",
+          "prompt": "Complete the table with the appropriate term: several processors executing different instructions on one set of data.",
+          "answer": "MISD (multiple instruction single data) has several processors, each executing different sets of instructions on one set of data at the same time.",
+          "notes": "9608 mark scheme table, reworded as a definition.",
+          "sources": [
+            {
+              "paper": "9608/31",
+              "session": "October/November 2019",
+              "question": "9(a)"
+            }
+          ]
+        },
+        {
+          "id": "mimd",
+          "term": "MIMD",
+          "prompt": "Complete the table with the appropriate term: several processors executing different instructions on different data.",
+          "answer": "MIMD (multiple instruction multiple data) has several processors, each executing a different set of instructions and operating on different sets of data.",
+          "notes": "9608 mark scheme table, reworded as a definition.",
+          "sources": [
+            {
+              "paper": "9608/31",
+              "session": "October/November 2019",
+              "question": "9(a)"
+            }
+          ]
+        },
+        {
+          "id": "massively-parallel-computer",
+          "term": "Massively parallel computer",
+          "prompt": "Describe what is meant by a massively parallel computer.",
+          "answer": "A massively parallel computer has a large number of processors working collaboratively (simultaneously) on the same program, communicating via a messaging interface.",
+          "notes": "9608 mark schemes.",
+          "sources": [
+            {
+              "paper": "9608/32",
+              "session": "May/June 2019",
+              "question": "7(b)(ii)"
+            },
+            {
+              "paper": "9608/31",
+              "session": "October/November 2019",
+              "question": "9(b)"
+            }
+          ]
+        },
+        {
+          "id": "virtual-machine",
+          "term": "Virtual machine",
+          "prompt": "Describe what is meant by a virtual machine.",
+          "answer": "A virtual machine is the emulation of a computer system (hardware and/or software) using a host computer system, using guest operating system(s) for the emulation.",
+          "sources": [
+            {
+              "paper": "9618/32",
+              "session": "October/November 2022",
+              "question": "5"
+            }
+          ]
+        },
+        {
+          "id": "flip-flop",
+          "term": "Flip-flop",
+          "prompt": "State the purpose of a flip-flop.",
+          "answer": "The purpose of a flip-flop is to store a binary digit (a single bit).",
+          "sources": [
+            {
+              "paper": "9618/32",
+              "session": "October/November 2022",
+              "question": "8(b)"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "a-system-software",
+      "title": "A Level: System software",
+      "items": [
+        {
+          "id": "virtual-memory",
+          "term": "Virtual memory",
+          "prompt": "Explain what is meant by virtual memory.",
+          "answer": "Virtual memory uses disk (secondary storage) to extend the RAM available, so the CPU appears to be able to access more memory space than the available RAM; only the data in use needs to be in main memory and data is swapped between RAM and virtual memory.",
+          "sources": [
+            {
+              "paper": "9618/31",
+              "session": "October/November 2022",
+              "question": "8(a)"
+            },
+            {
+              "paper": "9608/32",
+              "session": "October/November 2019",
+              "question": "4(a)"
+            }
+          ]
+        },
+        {
+          "id": "disk-thrashing",
+          "term": "Disk thrashing",
+          "prompt": "Explain what is meant by disk thrashing.",
+          "answer": "Disk thrashing is a problem that may occur when virtual memory is being used: as main memory fills up, more and more pages are swapped in and out, so more time is spent swapping pages than processing data and the program may freeze.",
+          "alt": [
+            "continuous swapping of the same pages, so no useful processing happens"
+          ],
+          "sources": [
+            {
+              "paper": "9618/31",
+              "session": "October/November 2024",
+              "question": "8(b)"
+            },
+            {
+              "paper": "9608/32",
+              "session": "October/November 2019",
+              "question": "4(b)(iii)"
+            }
+          ]
+        },
+        {
+          "id": "page",
+          "term": "Page",
+          "prompt": "Explain what is meant by a page.",
+          "answer": "A page is a block of virtual memory of a fixed size.",
+          "notes": "9608 mark scheme.",
+          "sources": [
+            {
+              "paper": "9608/31",
+              "session": "October/November 2019",
+              "question": "6(a)"
+            }
+          ]
+        },
+        {
+          "id": "page-frame",
+          "term": "Page frame",
+          "prompt": "Explain what is meant by a page frame.",
+          "answer": "A page frame is a block of main memory of the same size as a page.",
+          "notes": "9608 mark scheme.",
+          "sources": [
+            {
+              "paper": "9608/31",
+              "session": "October/November 2019",
+              "question": "6(a)"
+            }
+          ]
+        },
+        {
+          "id": "page-table",
+          "term": "Page table",
+          "prompt": "Explain what is meant by a page table.",
+          "answer": "The page table (page map table) shows the mapping of pages to page frames.",
+          "notes": "9608 mark scheme.",
+          "sources": [
+            {
+              "paper": "9608/31",
+              "session": "October/November 2019",
+              "question": "6(a)"
+            }
+          ]
+        },
+        {
+          "id": "multitasking",
+          "term": "Multi-tasking",
+          "prompt": "State what is meant by the term multitasking in an Operating System.",
+          "answer": "Multi-tasking allows computers to carry out (or seem to carry out) more than one process at a time, with processor time and common resources shared between tasks.",
+          "sources": [
+            {
+              "paper": "9618/32",
+              "session": "October/November 2024",
+              "question": "9(b)(i)"
+            },
+            {
+              "paper": "9618/31",
+              "session": "May/June 2025",
+              "question": "8(a)"
+            },
+            {
+              "paper": "9618/33",
+              "session": "October/November 2025",
+              "question": "5(a)"
+            }
+          ]
+        },
+        {
+          "id": "process-state-running",
+          "term": "Process state: running",
+          "prompt": "State one reason why a process could be in the running state.",
+          "answer": "A process is running when CPU time has been allocated and the process is being executed.",
+          "sources": [
+            {
+              "paper": "9618/32",
+              "session": "October/November 2025",
+              "question": "5(b)"
+            }
+          ]
+        },
+        {
+          "id": "process-state-ready",
+          "term": "Process state: ready",
+          "prompt": "State one reason why a process could be in the ready state.",
+          "answer": "A process is ready when it is waiting (in the ready queue) for a slice of CPU time; it could run.",
+          "alt": [
+            "it has been displaced by a higher priority process and could otherwise still run"
+          ],
+          "sources": [
+            {
+              "paper": "9618/32",
+              "session": "October/November 2025",
+              "question": "5(b)"
+            }
+          ]
+        },
+        {
+          "id": "process-state-blocked",
+          "term": "Process state: blocked",
+          "prompt": "State one reason why a process could be in the blocked state.",
+          "answer": "A process is blocked when it is waiting for an I/O operation (or some event) to take place or be completed.",
+          "sources": [
+            {
+              "paper": "9618/32",
+              "session": "October/November 2025",
+              "question": "5(b)"
+            }
+          ]
+        },
+        {
+          "id": "lexical-analysis",
+          "term": "Lexical analysis",
+          "prompt": "Explain what is meant by lexical analysis during program compilation.",
+          "answer": "Lexical analysis is the first stage of compilation: white space and comments are removed, the source code is broken into a series of tokens, each token is categorised and identifiers are stored in a symbol table.",
+          "alt": [
+            "invalid tokens generate an error; acceptable data passes to the syntax analyser"
+          ],
+          "sources": [
+            {
+              "paper": "9618/32",
+              "session": "May/June 2025",
+              "question": "8"
+            }
+          ]
+        },
+        {
+          "id": "syntax-analysis",
+          "term": "Syntax analysis",
+          "prompt": "Outline the purpose of syntax analysis.",
+          "answer": "Syntax analysis checks that the code matches the grammar of the language (the tokens conform with the rules of the programming language), reports syntax errors and produces a parse tree.",
+          "sources": [
+            {
+              "paper": "9618/32",
+              "session": "October/November 2022",
+              "question": "2(b)"
+            }
+          ]
+        },
+        {
+          "id": "compiler-optimisation",
+          "term": "Optimisation (compilation)",
+          "prompt": "State the purpose of the optimisation stage in the compilation of a program.",
+          "answer": "The optimisation stage improves the code by making it use minimum resources (CPU, memory/storage, time).",
+          "sources": [
+            {
+              "paper": "9618/32",
+              "session": "October/November 2025",
+              "question": "8(a)"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "a-security",
+      "title": "A Level: Security",
+      "items": [
+        {
+          "id": "plain-text-and-cipher-text",
+          "term": "Plain text and cipher text",
+          "prompt": "Explain the terms plain text and cipher text.",
+          "answer": "Plain text is the original text (the original data to be transmitted as a message); cipher text is the encrypted version of the plain text, the result of encryption that is transmitted to the recipient.",
+          "notes": "9608 mark schemes.",
+          "sources": [
+            {
+              "paper": "9608/31",
+              "session": "October/November 2016",
+              "question": "6(b)(i)"
+            },
+            {
+              "paper": "9608/32",
+              "session": "October/November 2019",
+              "question": "1(a)"
+            }
+          ]
+        },
+        {
+          "id": "private-key",
+          "term": "Private key",
+          "prompt": "State what is meant by a private key.",
+          "answer": "A private key is the unpublished (secret) key, never transmitted anywhere; it has a matching public key and is used to decrypt data that was encrypted with its matching public key.",
+          "sources": [
+            {
+              "paper": "9618/31",
+              "session": "October/November 2022",
+              "question": "6(a)"
+            }
+          ]
+        },
+        {
+          "id": "asymmetric-key-cryptography",
+          "term": "Asymmetric key cryptography",
+          "prompt": "Describe the purpose of asymmetric key cryptography.",
+          "answer": "Asymmetric key cryptography provides better security by using two different keys, a public key and a private key: one key is used to encrypt the message and the matching key is used to decrypt it.",
+          "sources": [
+            {
+              "paper": "9618/31",
+              "session": "May/June 2023",
+              "question": "9(a)"
+            }
+          ]
+        },
+        {
+          "id": "digital-certificate",
+          "term": "Digital certificate",
+          "prompt": "Describe what is meant by a digital certificate.",
+          "answer": "A digital certificate is an electronic (online) document used to authenticate (prove) the identity of a website or the online identity of an individual or organisation, typically issued by a certificate authority (CA), containing the owner's identity and a public key.",
+          "sources": [
+            {
+              "paper": "9618/31",
+              "session": "May/June 2024",
+              "question": "7(a)"
+            },
+            {
+              "paper": "9608/32",
+              "session": "October/November 2018",
+              "question": "6(a)"
+            }
+          ]
+        },
+        {
+          "id": "digital-signature",
+          "term": "Digital signature (purpose)",
+          "prompt": "Explain the purpose of a digital signature.",
+          "answer": "A digital signature ensures a document is authentic (came from a trusted source), ensures the document has not been altered during transmission and provides non repudiation.",
+          "alt": [
+            "the message is hashed to produce a digest, which is encrypted with the sender's private key"
+          ],
+          "notes": "9608 mark scheme.",
+          "sources": [
+            {
+              "paper": "9608/32",
+              "session": "October/November 2019",
+              "question": "1(b)(i)"
+            }
+          ]
+        },
+        {
+          "id": "ssl-tls",
+          "term": "SSL and TLS (purpose)",
+          "prompt": "Describe the purpose of the Secure Sockets Layer (SSL) and Transport Layer Security (TLS).",
+          "answer": "SSL and TLS provide communications security over the internet (a network), providing encryption, enabling two parties to identify and authenticate each other and communicate with confidentiality and integrity.",
+          "sources": [
+            {
+              "paper": "9618/31",
+              "session": "October/November 2021",
+              "question": "8(a)"
+            }
+          ]
+        },
+        {
+          "id": "tls-handshake-and-record",
+          "term": "TLS handshake and record protocols",
+          "prompt": "Identify the two main protocols that form Transport Layer Security (TLS) and state the purpose of each.",
+          "answer": "The handshake protocol establishes a secure and reliable connection between two devices, letting the server and client authenticate each other. The record protocol provides a secure and reliable way to send and receive data, encrypting and authenticating the data exchanged.",
+          "sources": [
+            {
+              "paper": "9618/32",
+              "session": "May/June 2025",
+              "question": "10"
+            }
+          ]
+        },
+        {
+          "id": "quantum-cryptography",
+          "term": "Quantum cryptography",
+          "prompt": "Describe the purpose of quantum cryptography.",
+          "answer": "Quantum cryptography produces a virtually unbreakable encryption system, using the laws (principles) of quantum mechanics and the properties of photons, and detects eavesdropping because the properties of photons change.",
+          "sources": [
+            {
+              "paper": "9618/32",
+              "session": "May/June 2023",
+              "question": "5(a)"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "a-artificial-intelligence",
+      "title": "A Level: Artificial intelligence",
+      "items": [
+        {
+          "id": "artificial-neural-network",
+          "term": "Artificial neural network",
+          "prompt": "Explain what is meant by the term artificial neural network.",
+          "answer": "An artificial neural network is the component of artificial intelligence that simulates the functioning of a biological brain; it has interconnected layers (input, hidden and output), weights between nodes are adjusted through training to give a more accurate result.",
+          "alt": [
+            "a key component of machine learning",
+            "more hidden layers give more complex learning capabilities / more accurate results"
+          ],
+          "sources": [
+            {
+              "paper": "9618/31",
+              "session": "October/November 2023",
+              "question": "12"
+            }
+          ]
+        },
+        {
+          "id": "deep-learning",
+          "term": "Deep learning",
+          "prompt": "Describe what is meant by deep learning.",
+          "answer": "Deep learning uses artificial neural network(s) that contain a high number of hidden layers, modelled on the human brain, to progressively extract higher level features from the raw input; it is a specialised form of machine learning.",
+          "alt": [
+            "it is trained using large quantities of unlabelled data"
+          ],
+          "sources": [
+            {
+              "paper": "9618/31",
+              "session": "October/November 2022",
+              "question": "9(a)"
+            },
+            {
+              "paper": "9618/31",
+              "session": "May/June 2024",
+              "question": "9"
+            }
+          ]
+        },
+        {
+          "id": "reinforcement-learning",
+          "term": "Reinforcement learning",
+          "prompt": "Explain what is meant by Reinforcement Learning in relation to Artificial Intelligence.",
+          "answer": "Reinforcement learning is a machine learning technique based on feedback (rewards and punishment) in which an agent learns to behave in an environment by performing actions and seeing the results; good actions get positive feedback and bad actions negative feedback.",
+          "sources": [
+            {
+              "paper": "9618/32",
+              "session": "May/June 2024",
+              "question": "11"
+            }
+          ]
+        },
+        {
+          "id": "supervised-learning",
+          "term": "Supervised learning",
+          "prompt": "Describe supervised learning.",
+          "answer": "Supervised learning uses sample data with known outputs (labelled input data) in training, so it can predict future outcomes based on past data.",
+          "sources": [
+            {
+              "paper": "9618/32",
+              "session": "October/November 2022",
+              "question": "7"
+            }
+          ]
+        },
+        {
+          "id": "unsupervised-learning",
+          "term": "Unsupervised learning",
+          "prompt": "Describe unsupervised learning.",
+          "answer": "Unsupervised learning only requires input data (unlabelled data) and helps to find unknown patterns in the data; it is not trained on the right output.",
+          "sources": [
+            {
+              "paper": "9618/32",
+              "session": "October/November 2022",
+              "question": "7"
+            }
+          ]
+        },
+        {
+          "id": "back-propagation",
+          "term": "Back propagation of errors",
+          "prompt": "Describe the back propagation of errors method in Machine Learning.",
+          "answer": "Back propagation compares the initial outputs with the expected outputs and feeds the results back into the neural network so that the weightings of each node are adjusted to minimise the difference; the process repeats until results are more accurate.",
+          "sources": [
+            {
+              "paper": "9618/32",
+              "session": "October/November 2025",
+              "question": "9(b)"
+            }
+          ]
+        },
+        {
+          "id": "ai-graph",
+          "term": "Graph (AI)",
+          "prompt": "Describe the purpose of a graph when used in an Artificial Intelligence (AI) system.",
+          "answer": "A graph is used in AI to record relationships between entities using vertices (nodes) and edges, for example places on a map and the distances between them, in order to find the shortest route.",
+          "sources": [
+            {
+              "paper": "9618/31",
+              "session": "May/June 2025",
+              "question": "10(a)"
+            }
+          ]
+        },
+        {
+          "id": "a-star-and-dijkstra",
+          "term": "A* algorithm and Dijkstra's algorithm",
+          "prompt": "Describe the purpose of both the A* algorithm and Dijkstra's algorithm.",
+          "answer": "The A* algorithm and Dijkstra's algorithm find the optimal (shortest, most cost-effective) route between two nodes in a graph, based on distance, cost or time.",
+          "sources": [
+            {
+              "paper": "9618/31",
+              "session": "May/June 2023",
+              "question": "2(b)"
+            },
+            {
+              "paper": "9618/33",
+              "session": "May/June 2025",
+              "question": "10(a)"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "a-computational-thinking-and-problem-solving",
+      "title": "A Level: Computational thinking and problem-solving",
+      "items": [
+        {
+          "id": "recursion",
+          "term": "Recursion",
+          "prompt": "Describe what is meant by recursion.",
+          "answer": "Recursion is a process using a function or procedure that is defined in terms of itself (calls itself). A recursive process must have a base case, which returns without making a recursive call, and a general case where the recursive call takes place.",
+          "alt": [
+            "the general case moves towards the base case",
+            "unwinding occurs once the base case is reached"
+          ],
+          "sources": [
+            {
+              "paper": "9618/31",
+              "session": "May/June 2023",
+              "question": "12(a)"
+            },
+            {
+              "paper": "9618/31",
+              "session": "May/June 2025",
+              "question": "4(b)"
+            },
+            {
+              "paper": "9618/31",
+              "session": "October/November 2021",
+              "question": "10(a)"
+            }
+          ]
+        },
+        {
+          "id": "big-o-log-n",
+          "term": "O(log n)",
+          "prompt": "Describe the meaning of O(log n) as it applies to a binary search algorithm.",
+          "answer": "O(log n) is a time complexity that uses logarithmic time: the time taken goes up linearly as the number of items rises exponentially, and it is the worst case time complexity for a binary search.",
+          "sources": [
+            {
+              "paper": "9618/31",
+              "session": "October/November 2022",
+              "question": "12(b)(ii)"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "a-further-programming",
+      "title": "A Level: Further programming",
+      "items": [
+        {
+          "id": "oop-instance",
+          "term": "Instance",
+          "prompt": "Define the Object-Oriented Programming (OOP) term instance.",
+          "answer": "An instance is an occurrence of an object; a specific object based on the class (an instantiation of a class).",
+          "sources": [
+            {
+              "paper": "9618/31",
+              "session": "October/November 2022",
+              "question": "11(a)"
+            }
+          ]
+        },
+        {
+          "id": "oop-object",
+          "term": "Object",
+          "prompt": "Complete the table: describe the OOP term object.",
+          "answer": "An object is an instantiation (instance) of a class.",
+          "sources": [
+            {
+              "paper": "9618/33",
+              "session": "May/June 2025",
+              "question": "5"
+            }
+          ]
+        },
+        {
+          "id": "oop-method",
+          "term": "Method",
+          "prompt": "Complete the table: describe the OOP term method.",
+          "answer": "A method is a programmed function (procedure, subroutine) defined as part of a class.",
+          "sources": [
+            {
+              "paper": "9618/33",
+              "session": "May/June 2025",
+              "question": "5"
+            }
+          ]
+        },
+        {
+          "id": "oop-inheritance",
+          "term": "Inheritance",
+          "prompt": "Describe what is meant by the OOP feature inheritance.",
+          "answer": "Inheritance is where a derived class takes the properties (attributes) and methods of a parent (super, base) class, which can also be extended or overridden in the subclass.",
+          "alt": [
+            "the capability of defining a new class of objects that has all the attributes and methods from a parent class"
+          ],
+          "sources": [
+            {
+              "paper": "9618/31",
+              "session": "May/June 2025",
+              "question": "11(b)(ii)"
+            },
+            {
+              "paper": "9618/31",
+              "session": "October/November 2022",
+              "question": "11(a)"
+            }
+          ]
+        },
+        {
+          "id": "oop-polymorphism",
+          "term": "Polymorphism",
+          "prompt": "Describe what is meant by the OOP term polymorphism.",
+          "answer": "Polymorphism is when methods with the same name are redefined (behave differently) in derived (inherited) classes (subclasses).",
+          "alt": [
+            "allows the same method to take on different behaviours depending on which class is instantiated"
+          ],
+          "sources": [
+            {
+              "paper": "9618/32",
+              "session": "May/June 2025",
+              "question": "12(b)(ii)"
+            },
+            {
+              "paper": "9618/31",
+              "session": "October/November 2022",
+              "question": "11(a)"
+            }
+          ]
+        },
+        {
+          "id": "oop-encapsulation",
+          "term": "Encapsulation",
+          "prompt": "Define the Object-Oriented Programming (OOP) term encapsulation.",
+          "answer": "Encapsulation is putting properties and methods inside a class; it ensures sensitive data is hidden from users by hiding the values of a structured data object inside a class.",
+          "sources": [
+            {
+              "paper": "9618/32",
+              "session": "October/November 2022",
+              "question": "10(a)"
+            }
+          ]
+        },
+        {
+          "id": "oop-getter",
+          "term": "Getter",
+          "prompt": "Define the Object-Oriented Programming (OOP) term getter.",
+          "answer": "A getter is a method that is used to return (access) the value of a property.",
+          "sources": [
+            {
+              "paper": "9618/32",
+              "session": "October/November 2022",
+              "question": "10(a)"
+            },
+            {
+              "paper": "9618/33",
+              "session": "May/June 2025",
+              "question": "5"
+            }
+          ]
+        },
+        {
+          "id": "oop-setter",
+          "term": "Setter",
+          "prompt": "Define the Object-Oriented Programming (OOP) term setter.",
+          "answer": "A setter is a method that is used to update (change) the value of a property.",
+          "sources": [
+            {
+              "paper": "9618/32",
+              "session": "October/November 2022",
+              "question": "10(a)"
+            },
+            {
+              "paper": "9618/33",
+              "session": "May/June 2025",
+              "question": "5"
+            }
+          ]
+        },
+        {
+          "id": "exception",
+          "term": "Exception",
+          "prompt": "Explain what is meant by an exception.",
+          "answer": "An exception is an unplanned (unexpected) event that occurs when a program is running, which disrupts the normal flow of instructions and may cause the program to halt unexpectedly.",
+          "alt": [
+            "due to an error in programming/logic that was not detected during construction or compilation"
+          ],
+          "sources": [
+            {
+              "paper": "9618/33",
+              "session": "October/November 2025",
+              "question": "12(a)"
+            },
+            {
+              "paper": "9618/32",
+              "session": "October/November 2023",
+              "question": "12(a)"
+            }
+          ]
+        },
+        {
+          "id": "exception-handling",
+          "term": "Exception handling",
+          "prompt": "Define the term exception handling.",
+          "answer": "Exception handling is the process of responding to an unexpected event when the program is running so that it does not halt unexpectedly.",
+          "sources": [
+            {
+              "paper": "9618/31",
+              "session": "October/November 2023",
+              "question": "8(b)"
+            },
+            {
+              "paper": "9618/31",
+              "session": "October/November 2025",
+              "question": "10"
+            }
+          ]
+        },
+        {
+          "id": "imperative-programming",
+          "term": "Imperative programming",
+          "prompt": "Describe what is meant by an imperative (procedural) programming language.",
+          "answer": "Imperative languages use variables which are changed using (assignment) statements; the statements provide a sequence of commands for the computer to perform in the order written, and they rely on a method of repetition (iteration).",
+          "sources": [
+            {
+              "paper": "9618/31",
+              "session": "May/June 2021",
+              "question": "9(a)"
+            }
+          ]
+        },
+        {
+          "id": "declarative-programming",
+          "term": "Declarative programming",
+          "prompt": "Describe what is meant by a declarative programming language.",
+          "answer": "A declarative language instructs a program on what needs to be done instead of how to do it, using facts and rules and using queries to satisfy goals; it can be logical or functional.",
+          "sources": [
+            {
+              "paper": "9618/31",
+              "session": "May/June 2021",
+              "question": "9(b)"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

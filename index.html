@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Verbatim: type the mark scheme</title>
+  <meta name="description" content="Typing practice for Cambridge International AS & A Level definitions and pseudocode, worded as the official mark schemes accept them. Earn XP, level up, and learn each answer word for word.">
+  <meta name="theme-color" content="#e8eef3" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#13202e" media="(prefers-color-scheme: dark)">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="icons/icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="icons/icon-192.png">
+  <link rel="preload" href="fonts/atkinson-400.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="css/app.css">
+  <script>
+    // Apply the saved theme before first paint to avoid a flash.
+    try {
+      const t = JSON.parse(localStorage.getItem('verbatim:v1') || '{}').settings?.theme;
+      if (t && t !== 'system') document.documentElement.dataset.theme = t;
+    } catch {}
+  </script>
+  <script type="module" src="js/main.js"></script>
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+  <header class="top">
+    <a class="brand" href="#/" aria-label="Verbatim home">
+      <svg class="brand-mark" viewBox="0 0 32 32" aria-hidden="true"><path d="M6 17l6 6L26 8" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <span>Verbatim</span>
+    </a>
+    <nav class="nav" aria-label="Main">
+      <a href="#/" data-nav="home">Practice</a>
+      <a href="#/progress" data-nav="progress">Progress</a>
+      <a href="#/settings" data-nav="settings">Settings</a>
+    </nav>
+    <div class="me" id="me" aria-live="polite"></div>
+  </header>
+  <main id="main" tabindex="-1"></main>
+  <div class="toasts" id="toasts" role="status" aria-live="polite"></div>
+  <noscript><p class="noscript">Verbatim needs JavaScript to run.</p></noscript>
+</body>
+</html>

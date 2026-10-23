@@ -1,0 +1,973 @@
+{
+  "id": "9618-pseudocode",
+  "title": "Computer Science pseudocode",
+  "subject": "Computer Science",
+  "syllabus": "Cambridge International AS & A Level Computer Science (9618)",
+  "kind": "code",
+  "description": "Official Cambridge pseudocode: model answers from 9618 mark schemes plus constructs from the Pseudocode Guide.",
+  "units": [
+    {
+      "id": "basics",
+      "title": "Basics: declarations, selection and iteration",
+      "items": [
+        {
+          "id": "guide-declarations-constants",
+          "term": "Declarations and constants",
+          "prompt": "Declare an INTEGER variable Counter, a REAL variable TotalToPay, a BOOLEAN variable GameOver, and constants HourlyRate (6.50) and DefaultText (\"N/A\").",
+          "answer": "DECLARE Counter : INTEGER\nDECLARE TotalToPay : REAL\nDECLARE GameOver : BOOLEAN\nCONSTANT HourlyRate = 6.50\nCONSTANT DefaultText = \"N/A\"",
+          "sources": [
+            {
+              "paper": "Pseudocode Guide",
+              "session": "2026, Version 1",
+              "question": "2.4 and 2.5"
+            }
+          ],
+          "notes": "Example declarations from the guide (sections 2.4 and 2.5) combined. Constants take a literal value only."
+        },
+        {
+          "id": "guide-nested-if",
+          "term": "Nested IF statements",
+          "prompt": "Output who is champion, comparing ChallengerScore with ChampionScore and with HighestScore (nested IF with ELSE).",
+          "answer": "IF ChallengerScore > ChampionScore THEN\n    IF ChallengerScore > HighestScore THEN\n        OUTPUT ChallengerName, \" is champion and highest scorer\"\n    ELSE\n        OUTPUT ChallengerName, \" is the new champion\"\n    ENDIF\nELSE\n    OUTPUT ChampionName, \" is still the champion\"\n    IF ChampionScore > HighestScore THEN\n        OUTPUT ChampionName, \" is also the highest scorer\"\n    ENDIF\nENDIF",
+          "sources": [
+            {
+              "paper": "Pseudocode Guide",
+              "session": "2026, Version 1",
+              "question": "6.1"
+            }
+          ],
+          "notes": "Every IF needs its own ENDIF; the inner IF is indented one level."
+        },
+        {
+          "id": "guide-case",
+          "term": "CASE statement with OTHERWISE",
+          "prompt": "Input a character Move and use a CASE statement to change Position by -10 for 'W', +10 for 'S', -1 for 'A' and +1 for 'D'; any other value calls procedure Beep.",
+          "answer": "INPUT Move\nCASE OF Move\n    'W' : Position <- Position - 10\n    'S' : Position <- Position + 10\n    'A' : Position <- Position - 1\n    'D' : Position <- Position + 1\n    OTHERWISE : CALL Beep\nENDCASE",
+          "sources": [
+            {
+              "paper": "Pseudocode Guide",
+              "session": "2026, Version 1",
+              "question": "6.2"
+            }
+          ],
+          "notes": "Char literals use single quotes. OTHERWISE must be the last case. The guide uses a true minus sign; ASCII hyphen used here."
+        },
+        {
+          "id": "guide-nested-for",
+          "term": "Nested FOR loops (row totals)",
+          "prompt": "Using the 2D array Amount, output the total of each row (10 columns, MaxRow rows) and then the grand total.",
+          "answer": "Total <- 0\nFOR Row <- 1 TO MaxRow\n    RowTotal <- 0\n    FOR Column <- 1 TO 10\n        RowTotal <- RowTotal + Amount[Row, Column]\n    NEXT Column\n    OUTPUT \"Total for Row \", Row, \" is \", RowTotal\n    Total <- Total + RowTotal\nNEXT Row\nOUTPUT \"The grand total is \", Total",
+          "sources": [
+            {
+              "paper": "Pseudocode Guide",
+              "session": "2026, Version 1",
+              "question": "7.1"
+            }
+          ],
+          "notes": "Repeat the loop identifier after NEXT, especially for nested loops."
+        },
+        {
+          "id": "guide-repeat-until",
+          "term": "REPEAT ... UNTIL loop",
+          "prompt": "Repeatedly ask for a password until the user enters \"Secret\".",
+          "answer": "REPEAT\n    OUTPUT \"Please enter the password\"\n    INPUT Password\nUNTIL Password = \"Secret\"",
+          "sources": [
+            {
+              "paper": "Pseudocode Guide",
+              "session": "2026, Version 1",
+              "question": "7.2"
+            }
+          ],
+          "notes": "A post-condition loop: the body always runs at least once and the loop ends when the condition is TRUE."
+        },
+        {
+          "id": "guide-while",
+          "term": "WHILE ... ENDWHILE loop",
+          "prompt": "Reduce Number by 9 repeatedly while it is greater than 9.",
+          "answer": "WHILE Number > 9\n    Number <- Number - 9\nENDWHILE",
+          "sources": [
+            {
+              "paper": "Pseudocode Guide",
+              "session": "2026, Version 1",
+              "question": "7.3"
+            }
+          ],
+          "notes": "A pre-condition loop: the condition is tested before each pass, so the body may not run at all."
+        },
+        {
+          "id": "total-positive-integers",
+          "term": "Total of positive integers (FOR)",
+          "prompt": "Write pseudocode that inputs 100 integers, one at a time, and outputs the total of the positive values only.",
+          "answer": "DECLARE Count, Total, NextNumber : INTEGER\nTotal <- 0\nFOR Count <- 1 TO 100\n    OUTPUT \"Input an integer value\"\n    INPUT NextNumber\n    IF NextNumber > 0 THEN\n        Total <- Total + NextNumber\n    ENDIF\nNEXT Count\nOUTPUT Total",
+          "sources": [
+            {
+              "paper": "9618/23",
+              "session": "October/November 2024",
+              "question": "2(a)"
+            }
+          ],
+          "notes": "Marks: declarations, initialise Total, count-controlled loop of 100, input, test for positive, accumulate, output after the loop."
+        },
+        {
+          "id": "guessing-game",
+          "term": "Guessing game (REPEAT loop)",
+          "prompt": "Write pseudocode for a game: generate a random integer from 1 to 100, repeatedly ask for a guess and say whether it was too high or too low, until the guess is correct.",
+          "answer": "DECLARE GeneratedValue : INTEGER\nDECLARE Guess : INTEGER\nGeneratedValue <- INT(RAND(100)) + 1\nREPEAT\n    OUTPUT \"Enter a guess between 1 and 100: \"\n    INPUT Guess\n    IF Guess > GeneratedValue THEN\n        OUTPUT \"Guess was too high\"\n    ENDIF\n    IF Guess < GeneratedValue THEN\n        OUTPUT \"Guess was too low\"\n    ENDIF\nUNTIL Guess = GeneratedValue\nOUTPUT \"Number guessed correctly\"",
+          "sources": [
+            {
+              "paper": "9618/21",
+              "session": "May/June 2025",
+              "question": "3"
+            }
+          ],
+          "notes": "RAND(100) gives a real in the range 0 to 100 (not inclusive), so INT(RAND(100)) + 1 gives 1 to 100."
+        },
+        {
+          "id": "count-odd-even",
+          "term": "Count odd and even numbers (sentinel)",
+          "prompt": "Write a procedure Count() that inputs integers until 99 is entered, then outputs how many were odd and how many were even.",
+          "answer": "PROCEDURE Count()\n    DECLARE COdd, CEven, ThisNum : INTEGER\n    COdd <- 0\n    CEven <- 0\n    INPUT ThisNum\n    WHILE ThisNum <> 99\n        IF ThisNum MOD 2 = 1 THEN\n            COdd <- COdd + 1\n        ELSE\n            CEven <- CEven + 1\n        ENDIF\n        INPUT ThisNum\n    ENDWHILE\n    OUTPUT \"Count of odd and even numbers: \", COdd, CEven\nENDPROCEDURE",
+          "sources": [
+            {
+              "paper": "9618/22",
+              "session": "October/November 2023",
+              "question": "4(a)"
+            }
+          ],
+          "notes": "Input before the loop and again at the end of the loop body, so 99 itself is not counted."
+        }
+      ]
+    },
+    {
+      "id": "strings-and-arrays",
+      "title": "Strings, arrays and records",
+      "items": [
+        {
+          "id": "guide-array-declare-fill",
+          "term": "Array declaration and fill loop",
+          "prompt": "Declare a 1D array StudentNames of 30 STRING elements, then use a loop to set every element to the empty string.",
+          "answer": "DECLARE StudentNames : ARRAY[1:30] OF STRING\nFOR Index <- 1 TO 30\n    StudentNames[Index] <- \"\"\nNEXT Index",
+          "sources": [
+            {
+              "paper": "Pseudocode Guide",
+              "session": "2026, Version 1",
+              "question": "3.1 and 3.2"
+            }
+          ],
+          "notes": "Declaration from 3.1 followed by the loop from 3.2; a group of elements is never assigned in one statement."
+        },
+        {
+          "id": "guide-record-type",
+          "term": "Record type definition",
+          "prompt": "Define a record type StudentRecord holding LastName, FirstName (STRING), DateOfBirth (DATE), YearGroup (INTEGER) and FormGroup (CHAR).",
+          "answer": "TYPE StudentRecord\n    DECLARE LastName : STRING\n    DECLARE FirstName : STRING\n    DECLARE DateOfBirth : DATE\n    DECLARE YearGroup : INTEGER\n    DECLARE FormGroup : CHAR\nENDTYPE",
+          "sources": [
+            {
+              "paper": "Pseudocode Guide",
+              "session": "2026, Version 1",
+              "question": "4.1"
+            }
+          ]
+        },
+        {
+          "id": "count-char-function",
+          "term": "Count occurrences of a character (function)",
+          "prompt": "Write a function GetNum(ThisString, ThisChar) that returns the number of times ThisChar appears in ThisString.",
+          "answer": "FUNCTION GetNum(ThisString : STRING, ThisChar : CHAR) RETURNS INTEGER\n    DECLARE Index, Count : INTEGER\n    Count <- 0\n    FOR Index <- 1 TO LENGTH(ThisString)\n        IF MID(ThisString, Index, 1) = ThisChar THEN\n            Count <- Count + 1\n        ENDIF\n    NEXT Index\n    RETURN Count\nENDFUNCTION",
+          "sources": [
+            {
+              "paper": "9618/22",
+              "session": "May/June 2023",
+              "question": "4"
+            }
+          ],
+          "notes": "The heading in the mark scheme wraps over two lines (RETURNS INTEGER). Marks: heading/end, local integers, loop over LENGTH, MID comparison, increment, RETURN after loop."
+        },
+        {
+          "id": "make-string-function",
+          "term": "Build a repeated string (function)",
+          "prompt": "Write a function MakeString(Count, AChar) that returns a string of Count copies of AChar, or \"ERROR\" if Count is less than 1.",
+          "answer": "FUNCTION MakeString(Count : INTEGER, AChar : CHAR) RETURNS STRING\n    DECLARE MyString : STRING\n    DECLARE Index : INTEGER\n    IF Count < 1 THEN\n        MyString <- \"ERROR\"\n    ELSE\n        MyString <- \"\"\n        FOR Index <- 1 TO Count\n            MyString <- MyString & AChar\n        NEXT Index\n    ENDIF\n    RETURN MyString\nENDFUNCTION",
+          "sources": [
+            {
+              "paper": "9618/23",
+              "session": "May/June 2023",
+              "question": "4"
+            }
+          ],
+          "notes": "String concatenation uses &. Declaration layout tidied; logic unchanged."
+        },
+        {
+          "id": "parity-bit",
+          "term": "Add an odd parity bit (function)",
+          "prompt": "Write a function Parity(BitString) that counts the '1' characters in a bit string and returns the string with '1' appended if the count is odd, otherwise '0'.",
+          "answer": "FUNCTION Parity(BitString : STRING) RETURNS STRING\n    DECLARE Index, Count : INTEGER\n    Count <- 0\n    FOR Index <- 1 TO LENGTH(BitString)\n        IF MID(BitString, Index, 1) = '1' THEN\n            Count <- Count + 1\n        ENDIF\n    NEXT Index\n    IF Count MOD 2 = 1 THEN\n        BitString <- BitString & '1'\n    ELSE\n        BitString <- BitString & '0'\n    ENDIF\n    RETURN BitString\nENDFUNCTION",
+          "sources": [
+            {
+              "paper": "9618/23",
+              "session": "May/June 2025",
+              "question": "5"
+            }
+          ],
+          "notes": "Marks: count the 1s in a loop, test odd/even with MOD, append the parity bit, return the string."
+        },
+        {
+          "id": "unpack-line",
+          "term": "Unpack a text line with BYREF parameters",
+          "prompt": "Write a procedure UnPack(TLine, SID, SDesc, SCost) that splits a line: SID is the first 5 characters, SDesc the next 32 characters, SCost everything after character 37. SID, SDesc and SCost are passed by reference.",
+          "answer": "PROCEDURE UnPack(BYVAL TLine : STRING, BYREF SID, SDesc, SCost : STRING)\n    SID <- LEFT(TLine, 5)\n    SDesc <- MID(TLine, 6, 32)\n    SCost <- RIGHT(TLine, LENGTH(TLine) - 37)\nENDPROCEDURE",
+          "sources": [
+            {
+              "paper": "9618/23",
+              "session": "October/November 2022",
+              "question": "5(a)(i)"
+            }
+          ],
+          "notes": "The heading wraps over two lines in the mark scheme. BYVAL/BYREF apply to the parameters that follow them. The mark scheme uses an en dash before 37; ASCII hyphen used here."
+        },
+        {
+          "id": "delete-comment",
+          "term": "Remove a trailing // comment (function)",
+          "prompt": "Write a function DeleteComment(Line) that returns Line with any comment (from the first \"//\" onwards) removed.",
+          "answer": "FUNCTION DeleteComment(Line : STRING) RETURNS STRING\n    DECLARE NewLine, TwoChars : STRING\n    DECLARE Count, TrimTo : INTEGER\n    CONSTANT Comment = \"//\"\n    NewLine <- Line\n    TrimTo <- 0\n    Count <- 1\n    WHILE Count < LENGTH(Line) AND TrimTo = 0\n        TwoChars <- MID(Line, Count, 2)\n        IF TwoChars = Comment THEN\n            TrimTo <- Count\n        ENDIF\n        Count <- Count + 1\n    ENDWHILE\n    IF TrimTo <> 0 THEN\n        NewLine <- LEFT(Line, TrimTo - 1)\n    ENDIF\n    RETURN NewLine\nENDFUNCTION",
+          "sources": [
+            {
+              "paper": "9618/21",
+              "session": "May/June 2024",
+              "question": "8(a)"
+            }
+          ],
+          "notes": "The model answer's short // comment was dropped. Marks: constant for the comment marker, loop that extracts two characters at a time, record the trim position, LEFT to trim, return."
+        },
+        {
+          "id": "mix-2d-array",
+          "term": "Average of selected values in a 2D array",
+          "prompt": "Sample is a 2D array [1:6, 1:128] of INTEGER. For each of the 128 samples, find the average (whole number) of the values greater than 10 across the 6 users and store it in Result.",
+          "answer": "PROCEDURE Mix()\n    DECLARE Count, Total, ThisNum : INTEGER\n    DECLARE ThisUser, ThisSample : INTEGER\n    FOR ThisSample <- 1 TO 128\n        Count <- 0\n        Total <- 0\n        FOR ThisUser <- 1 TO 6\n            IF Sample[ThisUser, ThisSample] > 10 THEN\n                Count <- Count + 1\n                Total <- Total + Sample[ThisUser, ThisSample]\n            ENDIF\n        NEXT ThisUser\n        Result[ThisSample] <- INT(Total / Count)\n    NEXT ThisSample\nENDPROCEDURE",
+          "sources": [
+            {
+              "paper": "9618/21",
+              "session": "May/June 2023",
+              "question": "6"
+            }
+          ],
+          "notes": "Fixed a missing comma in the mark scheme's DECLARE line (Total ThisNum). Marks: nested loops, reset Count and Total for each sample, conditional accumulation, INT of the average."
+        }
+      ]
+    },
+    {
+      "id": "procedures-and-functions",
+      "title": "Procedures and functions",
+      "items": [
+        {
+          "id": "guide-procedures",
+          "term": "Procedures with and without parameters",
+          "prompt": "Write a procedure DefaultSquare() that calls procedure Square with 100, and a procedure Square(Size) that moves forward Size and turns 90 degrees four times.",
+          "answer": "PROCEDURE DefaultSquare()\n    CALL Square(100)\nENDPROCEDURE\nPROCEDURE Square(Size : INTEGER)\n    FOR Side <- 1 TO 4\n        CALL MoveForward(Size)\n        CALL Turn(90)\n    NEXT Side\nENDPROCEDURE",
+          "sources": [
+            {
+              "paper": "Pseudocode Guide",
+              "session": "2026, Version 1",
+              "question": "8.1"
+            }
+          ],
+          "notes": "Procedures are invoked with CALL, which is a complete statement. Blank lines in the guide's layout were dropped."
+        },
+        {
+          "id": "guide-max-function",
+          "term": "Function with RETURN",
+          "prompt": "Write a function Max(Number1, Number2) that returns the larger of two integers.",
+          "answer": "FUNCTION Max(Number1 : INTEGER, Number2 : INTEGER) RETURNS INTEGER\n    IF Number1 > Number2 THEN\n        RETURN Number1\n    ELSE\n        RETURN Number2\n    ENDIF\nENDFUNCTION",
+          "sources": [
+            {
+              "paper": "Pseudocode Guide",
+              "session": "2026, Version 1",
+              "question": "8.2"
+            }
+          ],
+          "notes": "A function's definition states the type returned. Functions are called inside expressions, never with CALL."
+        },
+        {
+          "id": "guide-swap-byref",
+          "term": "Pass parameters by reference (SWAP)",
+          "prompt": "Write a procedure SWAP that exchanges the values of two integers passed by reference.",
+          "answer": "PROCEDURE SWAP(BYREF X : INTEGER, Y : INTEGER)\n    Temp <- X\n    X <- Y\n    Y <- Temp\nENDPROCEDURE",
+          "sources": [
+            {
+              "paper": "Pseudocode Guide",
+              "session": "2026, Version 1",
+              "question": "8.3"
+            }
+          ],
+          "notes": "BYREF need not be repeated for parameters passed by the same method."
+        },
+        {
+          "id": "is-right-angled-function",
+          "term": "Right-angled triangle test (function)",
+          "prompt": "Write a function IsRA(x1, y1, x2, y2, x3, y3) that takes the coordinates of a triangle's corners and returns TRUE if it is right-angled, using the squares of the side lengths.",
+          "answer": "FUNCTION IsRA(x1, y1, x2, y2, x3, y3 : INTEGER) RETURNS BOOLEAN\n    DECLARE Len1, Len2, Len3 : INTEGER\n    Len1 <- (x1 - x2) ^ 2 + (y1 - y2) ^ 2\n    Len2 <- (x1 - x3) ^ 2 + (y1 - y3) ^ 2\n    Len3 <- (x2 - x3) ^ 2 + (y2 - y3) ^ 2\n    IF (Len1 = Len2 + Len3) OR (Len2 = Len1 + Len3) OR (Len3 = Len1 + Len2) THEN\n        RETURN TRUE\n    ELSE\n        RETURN FALSE\n    ENDIF\nENDFUNCTION",
+          "sources": [
+            {
+              "paper": "9618/21",
+              "session": "May/June 2024",
+              "question": "6(a)"
+            }
+          ],
+          "notes": "The mark scheme splits the IF condition over three lines with the continuation marker __; joined onto one line here. Heading also wrapped in the mark scheme."
+        },
+        {
+          "id": "status-function",
+          "term": "Accept / reject / recheck (function)",
+          "prompt": "Write a function Status(Actual, Min, Max) returning 'R' if Actual is more than 2 outside the range Min to Max, 'A' if it is more than 2 inside the range, otherwise 'C'.",
+          "answer": "FUNCTION Status(Actual, Min, Max : INTEGER) RETURNS CHAR\n    DECLARE Result : CHAR\n    CONSTANT Accept = 'A'\n    CONSTANT Reject = 'R'\n    CONSTANT ReCheck = 'C'\n    Result <- ReCheck\n    IF Actual > Max + 2 OR Actual < Min - 2 THEN\n        Result <- Reject\n    ENDIF\n    IF Actual < Max - 2 AND Actual > Min + 2 THEN\n        Result <- Accept\n    ENDIF\n    RETURN Result\nENDFUNCTION",
+          "sources": [
+            {
+              "paper": "9618/23",
+              "session": "October/November 2022",
+              "question": "6(b)"
+            }
+          ],
+          "notes": "Keyword capitalised (the mark scheme has 'Function') and en dash replaced with a hyphen; two short // comments dropped. A default result is set first, then overridden by each test."
+        },
+        {
+          "id": "find-base-number",
+          "term": "Find the number whose factorial is given (function)",
+          "prompt": "Write a function FindBaseNumber(ThisValue) that returns the integer Num such that Num factorial equals ThisValue, or -1 if there is no such number.",
+          "answer": "FUNCTION FindBaseNumber(ThisValue : INTEGER) RETURNS INTEGER\n    DECLARE Num, Try : INTEGER\n    Try <- 1\n    FOR Num <- 1 TO ThisValue\n        Try <- Try * Num\n        IF Try = ThisValue THEN\n            RETURN Num\n        ENDIF\n    NEXT Num\n    RETURN -1\nENDFUNCTION",
+          "sources": [
+            {
+              "paper": "9618/22",
+              "session": "October/November 2022",
+              "question": "6(a)"
+            }
+          ],
+          "notes": "Second of the two example solutions (loop with early RETURN). Heading wrapped over two lines in the mark scheme."
+        },
+        {
+          "id": "check-digit-string",
+          "term": "Generate a check digit (string method)",
+          "prompt": "Write a function Generate(Number) that adds up the digits of Number, takes the total MOD 10 as a check digit, appends it to the number and returns the new number.",
+          "answer": "FUNCTION Generate(Number : INTEGER) RETURNS INTEGER\n    DECLARE Total, Index, CheckDigit : INTEGER\n    DECLARE NumString : STRING\n    Total <- 0\n    NumString <- NUM_TO_STR(Number)\n    FOR Index <- 1 TO LENGTH(NumString)\n        Total <- Total + STR_TO_NUM(MID(NumString, Index, 1))\n    NEXT Index\n    CheckDigit <- Total MOD 10\n    Number <- Number * 10 + CheckDigit\n    RETURN Number\nENDFUNCTION",
+          "sources": [
+            {
+              "paper": "9618/21",
+              "session": "October/November 2025",
+              "question": "6(b)"
+            }
+          ],
+          "notes": "First example solution. The alternative inline comments were dropped. Appending the check digit is done arithmetically (x10 + digit)."
+        },
+        {
+          "id": "adjust-clock",
+          "term": "Date of the third Sunday in March (function)",
+          "prompt": "Write a function AdjustClock(ThisYear) that returns the day number in March of the third Sunday, using SETDATE() and DAYINDEX() (Sunday has index 1).",
+          "answer": "FUNCTION AdjustClock(ThisYear : INTEGER) RETURNS INTEGER\n    DECLARE ThisDayNumber, SundayCount : INTEGER\n    DECLARE ThisDate : DATE\n    ThisDayNumber <- 0\n    SundayCount <- 0\n    REPEAT\n        ThisDayNumber <- ThisDayNumber + 1\n        ThisDate <- SETDATE(ThisDayNumber, 3, ThisYear)\n        IF DAYINDEX(ThisDate) = 1 THEN\n            SundayCount <- SundayCount + 1\n        ENDIF\n    UNTIL SundayCount = 3\n    RETURN ThisDayNumber\nENDFUNCTION",
+          "sources": [
+            {
+              "paper": "9618/23",
+              "session": "October/November 2024",
+              "question": "6"
+            }
+          ],
+          "notes": "First example solution (loop through the days counting Sundays). SETDATE and DAYINDEX are provided date functions."
+        },
+        {
+          "id": "roll-dice-average",
+          "term": "Dice rolls: average (function)",
+          "prompt": "Write a function RollDice(NoOfTimes) that simulates rolling a six-sided die NoOfTimes, outputs each roll, and returns the average roll.",
+          "answer": "FUNCTION RollDice(NoOfTimes : INTEGER) RETURNS REAL\n    DECLARE RollValue : INTEGER\n    DECLARE Average : REAL\n    DECLARE Count : INTEGER\n    DECLARE Sum : INTEGER\n    Sum <- 0\n    FOR Count <- 1 TO NoOfTimes\n        RollValue <- INT(RAND(6)) + 1\n        OUTPUT RollValue\n        Sum <- Sum + RollValue\n    NEXT Count\n    Average <- Sum / NoOfTimes\n    RETURN Average\nENDFUNCTION",
+          "sources": [
+            {
+              "paper": "9618/23",
+              "session": "May/June 2025",
+              "question": "3"
+            }
+          ],
+          "notes": "Marks: heading with REAL return, random 1 to 6 with INT(RAND(6)) + 1, loop NoOfTimes, output, running sum, average and RETURN."
+        }
+      ]
+    },
+    {
+      "id": "searching-and-sorting",
+      "title": "Searching and sorting",
+      "items": [
+        {
+          "id": "linear-search-customer",
+          "term": "Linear search of a 2D array (function)",
+          "prompt": "Loyalty is a 2D array [1:1000, 1:2] holding customer ID and points, with unused rows holding ID 99999 at the end. Write a function FindCustomer(CustomerID) returning the customer's points, or -1 if the ID is out of range (10001 to 11000) or not found.",
+          "answer": "FUNCTION FindCustomer(CustomerID : INTEGER) RETURNS INTEGER\n    DECLARE Index : INTEGER\n    IF CustomerID < 10001 OR CustomerID > 11000 THEN\n        RETURN -1\n    ENDIF\n    FOR Index <- 1 TO 1000\n        IF Loyalty[Index, 1] = CustomerID THEN\n            RETURN Loyalty[Index, 2]\n        ENDIF\n        IF Loyalty[Index, 1] = 99999 THEN\n            RETURN -1\n        ENDIF\n    NEXT Index\nENDFUNCTION",
+          "sources": [
+            {
+              "paper": "9618/22",
+              "session": "May/June 2025",
+              "question": "7(a)"
+            }
+          ],
+          "notes": "One of several example solutions (linear search with early RETURN). The heading is wrapped over two lines in the mark scheme; the short // comment was dropped."
+        },
+        {
+          "id": "binary-search-function",
+          "term": "Binary search of a sorted 2D array (function)",
+          "prompt": "Loyalty is sorted by customer ID. Write a function FindCustomer(CustomerID) using a binary search that returns the customer's points (column 2), or -1 if the ID is out of range (10001 to 11000) or not found.",
+          "answer": "FUNCTION FindCustomer(CustomerID : INTEGER) RETURNS INTEGER\n    DECLARE Start : INTEGER\n    DECLARE End : INTEGER\n    DECLARE Mid : INTEGER\n    IF CustomerID < 10001 OR CustomerID > 11000 THEN\n        RETURN -1\n    ENDIF\n    Start <- 1\n    End <- 1000\n    WHILE Start <= End\n        Mid <- (Start + End) DIV 2\n        IF Loyalty[Mid, 1] = CustomerID THEN\n            RETURN Loyalty[Mid, 2]\n        ELSE\n            IF Loyalty[Mid, 1] > CustomerID THEN\n                End <- Mid - 1\n            ELSE\n                Start <- Mid + 1\n            ENDIF\n        ENDIF\n    ENDWHILE\n    RETURN -1\nENDFUNCTION",
+          "sources": [
+            {
+              "paper": "9618/22",
+              "session": "May/June 2025",
+              "question": "7(a)"
+            }
+          ],
+          "notes": "The mark scheme writes the middle branch as 'ELSE IF' with a single ENDIF; written here as an ELSE containing a nested IF so every IF has its own ENDIF. Short // comment dropped."
+        },
+        {
+          "id": "binary-search-names",
+          "term": "Binary search of a sorted array (program)",
+          "prompt": "Names is a sorted array [1:100000] of STRING. Write pseudocode that asks for a name and uses a binary search (flags Found and NotInList, pointers TopOfList, EndOfList and CurrentItem) to look for it.",
+          "answer": "TopOfList <- 1\nEndOfList <- 100000\nOUTPUT \"Which name do you wish to find? \"\nINPUT ToFind\nFound <- FALSE\nNotInList <- FALSE\nWHILE Found = FALSE AND NotInList = FALSE\n    CurrentItem <- (TopOfList + EndOfList) DIV 2\n    IF ToFind = Names[CurrentItem] THEN\n        Found <- TRUE\n    ELSE\n        IF TopOfList >= EndOfList THEN\n            NotInList <- TRUE\n        ELSE\n            IF ToFind > Names[CurrentItem] THEN\n                TopOfList <- CurrentItem + 1\n            ELSE\n                EndOfList <- CurrentItem - 1\n            ENDIF\n        ENDIF\n    ENDIF\nENDWHILE",
+          "sources": [
+            {
+              "paper": "9618/31",
+              "session": "May/June 2024",
+              "question": "10(b)"
+            }
+          ],
+          "notes": "Gap-fill question; this is the whole search loop. The seven DECLARE lines at the top and the final IF that outputs the result are omitted. The mark scheme accepts Names[CurrentItem] = ToFind as well."
+        },
+        {
+          "id": "binary-search-repeat",
+          "term": "Binary search with REPEAT ... UNTIL",
+          "prompt": "Names is a sorted array with indices 0 to 99. Write pseudocode that inputs a Target name, uses a binary search, and outputs the location where it was found or that it does not exist.",
+          "answer": "Lower <- 0\nUpper <- 99\nMid <- 0\nExit <- FALSE\nOUTPUT \"Enter the name to be found \"\nINPUT Target\nREPEAT\n    IF Upper < Lower THEN\n        OUTPUT Target, \" does not exist\"\n        Exit <- TRUE\n    ENDIF\n    Mid <- Lower + (Upper - Lower + 1) DIV 2\n    IF Names[Mid] < Target THEN\n        Lower <- Mid + 1\n    ENDIF\n    IF Names[Mid] > Target THEN\n        Upper <- Mid - 1\n    ENDIF\n    IF Names[Mid] = Target THEN\n        OUTPUT Target, \" was found at location \", Mid\n        Exit <- TRUE\n    ENDIF\nUNTIL Exit",
+          "sources": [
+            {
+              "paper": "9618/31",
+              "session": "October/November 2022",
+              "question": "12(a)"
+            }
+          ],
+          "notes": "The mark scheme also accepts UNTIL Exit = TRUE. En dash replaced with a hyphen."
+        },
+        {
+          "id": "search-sorted-error-array",
+          "term": "Linear search of a sorted array (procedure)",
+          "prompt": "ErrCode[1:500] is sorted in ascending order with the matching messages in ErrText. Write a procedure OutputError(LineNum, ErrNum) that searches for ErrNum and outputs its message and the line number, or 'Unknown error' with the line number if it is not present.",
+          "answer": "PROCEDURE OutputError(LineNum, ErrNum : INTEGER)\n    DECLARE Index : INTEGER\n    Index <- 0\n    REPEAT\n        Index <- Index + 1\n    UNTIL ErrCode[Index] >= ErrNum OR Index = 500\n    IF ErrCode[Index] = ErrNum THEN\n        OUTPUT ErrText[Index], \" on line \", LineNum\n    ELSE\n        OUTPUT \"Unknown error on line \", LineNum\n    ENDIF\nENDPROCEDURE",
+          "sources": [
+            {
+              "paper": "9618/22",
+              "session": "October/November 2022",
+              "question": "7(a)"
+            }
+          ],
+          "notes": "Stops as soon as the element is found or passes where it would be (sorted data). The mark scheme misspells the end keyword as ENDPROCEURE; corrected. // comments dropped."
+        },
+        {
+          "id": "bubble-sort-parallel-arrays",
+          "term": "Bubble sort with a flag (parallel arrays)",
+          "prompt": "Write a procedure SortArrays() that sorts ErrCode[1:500] into ascending order using a bubble sort with a NoSwaps flag, keeping the parallel array ErrText in step.",
+          "answer": "PROCEDURE SortArrays()\n    DECLARE TempInt, J, Boundary : INTEGER\n    DECLARE TempStr : STRING\n    DECLARE NoSwaps : BOOLEAN\n    Boundary <- 499\n    REPEAT\n        NoSwaps <- TRUE\n        FOR J <- 1 TO Boundary\n            IF ErrCode[J] > ErrCode[J + 1] THEN\n                TempInt <- ErrCode[J]\n                ErrCode[J] <- ErrCode[J + 1]\n                ErrCode[J + 1] <- TempInt\n                TempStr <- ErrText[J]\n                ErrText[J] <- ErrText[J + 1]\n                ErrText[J + 1] <- TempStr\n                NoSwaps <- FALSE\n            ENDIF\n        NEXT J\n        Boundary <- Boundary - 1\n    UNTIL NoSwaps = TRUE\nENDPROCEDURE",
+          "sources": [
+            {
+              "paper": "9618/22",
+              "session": "October/November 2022",
+              "question": "7(b)"
+            }
+          ],
+          "notes": "Marks: flag reset each pass, inner loop to a shrinking boundary, compare neighbours, swap using a temporary (both arrays), set the flag, stop when no swaps. // comments dropped."
+        },
+        {
+          "id": "bubble-sort-2d",
+          "term": "Bubble sort of a 2D array",
+          "prompt": "Reading is a 2D array [1:2000, 1:2] holding a sensor value (column 1) and an ID (column 2). Write a procedure Sort() that sorts the rows into ascending order of sensor value using a bubble sort with a NoSwaps flag.",
+          "answer": "PROCEDURE Sort()\n    DECLARE Temp, J, Boundary : INTEGER\n    DECLARE NoSwaps : BOOLEAN\n    Boundary <- 1999\n    REPEAT\n        NoSwaps <- TRUE\n        FOR J <- 1 TO Boundary\n            IF Reading[J, 1] > Reading[J + 1, 1] THEN\n                Temp <- Reading[J, 1]\n                Reading[J, 1] <- Reading[J + 1, 1]\n                Reading[J + 1, 1] <- Temp\n                Temp <- Reading[J, 2]\n                Reading[J, 2] <- Reading[J + 1, 2]\n                Reading[J + 1, 2] <- Temp\n                NoSwaps <- FALSE\n            ENDIF\n        NEXT J\n        Boundary <- Boundary - 1\n    UNTIL NoSwaps = TRUE\nENDPROCEDURE",
+          "sources": [
+            {
+              "paper": "9618/21",
+              "session": "May/June 2025",
+              "question": "6(b)"
+            }
+          ],
+          "notes": "Both columns of the row are swapped using the same temporary. // comments dropped."
+        },
+        {
+          "id": "insertion-sort",
+          "term": "Insertion sort",
+          "prompt": "Write pseudocode that sorts the array DataArray[1:1000] into ascending order using an insertion sort.",
+          "answer": "FOR Index <- 2 TO 1000\n    Value <- DataArray[Index]\n    Position <- Index - 1\n    IF DataArray[Position] > Value THEN\n        WHILE Position >= 1 AND DataArray[Position] > Value\n            DataArray[Position + 1] <- DataArray[Position]\n            Position <- Position - 1\n        ENDWHILE\n        DataArray[Position + 1] <- Value\n    ENDIF\nNEXT Index",
+          "sources": [
+            {
+              "paper": "9618/33",
+              "session": "May/June 2025",
+              "question": "12(b)"
+            }
+          ],
+          "notes": "Lower-case 'to' in the mark scheme corrected to TO; en dashes replaced with hyphens."
+        }
+      ]
+    },
+    {
+      "id": "files",
+      "title": "File handling",
+      "items": [
+        {
+          "id": "guide-text-file-copy",
+          "term": "Copy a text file (OPENFILE / READFILE / WRITEFILE)",
+          "prompt": "Copy all the lines from FileA.txt to FileB.txt, replacing any blank lines by a line of dashes.",
+          "answer": "DECLARE LineOfText : STRING\nOPENFILE \"FileA.txt\" FOR READ\nOPENFILE \"FileB.txt\" FOR WRITE\nWHILE NOT EOF(\"FileA.txt\")\n    READFILE \"FileA.txt\", LineOfText\n    IF LineOfText = \"\" THEN\n        WRITEFILE \"FileB.txt\", \" ----------------------------\"\n    ELSE\n        WRITEFILE \"FileB.txt\", LineOfText\n    ENDIF\nENDWHILE\nCLOSEFILE \"FileA.txt\"\nCLOSEFILE \"FileB.txt\"",
+          "sources": [
+            {
+              "paper": "Pseudocode Guide",
+              "session": "2026, Version 1",
+              "question": "9.1"
+            }
+          ],
+          "notes": "Files are opened in one mode at a time (READ, WRITE or APPEND), tested with EOF and closed with CLOSEFILE."
+        },
+        {
+          "id": "guide-random-file",
+          "term": "Random file: SEEK, GETRECORD, PUTRECORD",
+          "prompt": "StudentFile.Dat is a random file of Student records. Move the records in positions 10 to 20 up one place, then store NewPupil in position 10.",
+          "answer": "OPENFILE \"StudentFile.Dat\" FOR RANDOM\nFOR Position <- 20 TO 10 STEP -1\n    SEEK \"StudentFile.Dat\", Position\n    GETRECORD \"StudentFile.Dat\", Pupil\n    SEEK \"StudentFile.Dat\", Position + 1\n    PUTRECORD \"StudentFile.Dat\", Pupil\nNEXT Position\nSEEK \"StudentFile.Dat\", 10\nPUTRECORD \"StudentFile.Dat\", NewPupil\nCLOSEFILE \"StudentFile.Dat\"",
+          "sources": [
+            {
+              "paper": "Pseudocode Guide",
+              "session": "2026, Version 1",
+              "question": "9.2"
+            }
+          ],
+          "notes": "Trimmed from the guide's example (the DECLAREs and the NewPupil assignments are omitted). The guide's last line has a lower-case file name (.dat); made consistent with the OPENFILE line."
+        },
+        {
+          "id": "check-file-function",
+          "term": "Check a file has enough lines (function)",
+          "prompt": "Write a function CheckFile(ThisFile) that returns TRUE if the text file contains more than 9 non-blank lines, otherwise FALSE. Stop reading as soon as the answer is known.",
+          "answer": "FUNCTION CheckFile(ThisFile : STRING) RETURNS BOOLEAN\n    DECLARE Valid : BOOLEAN\n    DECLARE ThisLine : STRING\n    DECLARE Count : INTEGER\n    Count <- 0\n    Valid <- FALSE\n    OPENFILE ThisFile FOR READ\n    WHILE NOT EOF(ThisFile) AND Valid = FALSE\n        READFILE ThisFile, ThisLine\n        IF ThisLine <> \"\" THEN\n            Count <- Count + 1\n            IF Count > 9 THEN\n                Valid <- TRUE\n            ENDIF\n        ENDIF\n    ENDWHILE\n    CLOSEFILE ThisFile\n    RETURN Valid\nENDFUNCTION",
+          "sources": [
+            {
+              "paper": "9618/21",
+              "session": "October/November 2022",
+              "question": "8(a)"
+            }
+          ],
+          "notes": "The mark scheme writes 'OPEN ThisFile FOR READ'; the keyword is OPENFILE. The parameter name Thisfile in the heading was made ThisFile to match the body."
+        },
+        {
+          "id": "create-files-procedure",
+          "term": "Create numbered files",
+          "prompt": "Write a procedure CreateFiles(NameRoot, NumFiles) that creates NumFiles text files named NameRoot.001, NameRoot.002 and so on, each containing the single line 'This is File <file name>'.",
+          "answer": "PROCEDURE CreateFiles(NameRoot : STRING, NumFiles : INTEGER)\n    DECLARE FileName, Suffix : STRING\n    DECLARE Count : INTEGER\n    FOR Count <- 1 TO NumFiles\n        Suffix <- NUM_TO_STR(Count)\n        WHILE LENGTH(Suffix) <> 3\n            Suffix <- '0' & Suffix\n        ENDWHILE\n        FileName <- NameRoot & '.' & Suffix\n        OPENFILE FileName FOR WRITE\n        WRITEFILE FileName, \"This is File \" & FileName\n        CLOSEFILE FileName\n    NEXT Count\nENDPROCEDURE",
+          "sources": [
+            {
+              "paper": "9618/22",
+              "session": "October/November 2023",
+              "question": "6(a)"
+            }
+          ],
+          "notes": "The suffix is padded to three digits with a WHILE loop. The mark scheme heading wraps over two lines."
+        },
+        {
+          "id": "copy-without-comments",
+          "term": "Copy a file, stripping comments (function)",
+          "prompt": "Write a function Stage_1(StudentName) that copies StudentName_src.txt to StudentName_S1.txt, removing comments from each line with DeleteComment() and not writing lines that become empty. Return the number of lines written.",
+          "answer": "FUNCTION Stage_1(StudentName : STRING) RETURNS INTEGER\n    DECLARE OldFile, NewFile, Line : STRING\n    DECLARE Count : INTEGER\n    OldFile <- StudentName & \"_src.txt\"\n    NewFile <- StudentName & \"_S1.txt\"\n    OPENFILE OldFile FOR READ\n    OPENFILE NewFile FOR WRITE\n    Count <- 0\n    WHILE NOT EOF(OldFile)\n        READFILE OldFile, Line\n        Line <- DeleteComment(Line)\n        IF LENGTH(Line) <> 0 THEN\n            WRITEFILE NewFile, Line\n            Count <- Count + 1\n        ENDIF\n    ENDWHILE\n    CLOSEFILE OldFile\n    CLOSEFILE NewFile\n    RETURN Count\nENDFUNCTION",
+          "sources": [
+            {
+              "paper": "9618/21",
+              "session": "May/June 2024",
+              "question": "8(b)"
+            }
+          ],
+          "notes": "File names are built by concatenation and held in variables, so the variables are used as file identifiers."
+        },
+        {
+          "id": "count-lines-per-hour",
+          "term": "Read a file and count by group (control break)",
+          "prompt": "TimeTaken.txt holds one record per line, in time order, each starting with a two-digit hour. Write pseudocode that outputs each hour and how many lines have that hour.",
+          "answer": "DECLARE Count : INTEGER\nDECLARE Line : STRING\nDECLARE NextHour, Hour : STRING\nOPENFILE \"TimeTaken.txt\" FOR READ\nCount <- 1\nREADFILE \"TimeTaken.txt\", Line\nHour <- LEFT(Line, 2)\nWHILE NOT EOF(\"TimeTaken.txt\")\n    READFILE \"TimeTaken.txt\", Line\n    NextHour <- LEFT(Line, 2)\n    IF NextHour = Hour THEN\n        Count <- Count + 1\n    ELSE\n        OUTPUT \"Hour : \", Hour, \" Total : \", Count\n        Hour <- NextHour\n        Count <- 1\n    ENDIF\nENDWHILE\nOUTPUT \"Hour : \", Hour, \" Total : \", Count\nCLOSEFILE \"TimeTaken.txt\"",
+          "sources": [
+            {
+              "paper": "9618/22",
+              "session": "May/June 2025",
+              "question": "5(b)"
+            }
+          ],
+          "notes": "First of two example solutions. The first line is read before the loop and the last group is output after the loop."
+        },
+        {
+          "id": "save-records-to-file",
+          "term": "Write array records to a text file",
+          "prompt": "Character is an array of 45 records (fields Player, Role, Name and Level). Write a procedure Save() that writes each record to SaveFile.txt as one line, with the fields separated by '^'.",
+          "answer": "PROCEDURE Save()\n    DECLARE Index : INTEGER\n    DECLARE Line : STRING\n    CONSTANT SEP = '^'\n    OPENFILE \"SaveFile.txt\" FOR WRITE\n    FOR Index <- 1 TO 45\n        Line <- NUM_TO_STR(Character[Index].Player) & SEP\n        Line <- Line & Character[Index].Role & SEP\n        Line <- Line & Character[Index].Name & SEP\n        Line <- Line & NUM_TO_STR(Character[Index].Level)\n        WRITEFILE \"SaveFile.txt\", Line\n    NEXT Index\n    CLOSEFILE \"SaveFile.txt\"\nENDPROCEDURE",
+          "sources": [
+            {
+              "paper": "9618/22",
+              "session": "October/November 2024",
+              "question": "8(b)"
+            }
+          ],
+          "notes": "Numeric fields are converted with NUM_TO_STR before concatenation. Spacing in the DECLARE lines tidied."
+        },
+        {
+          "id": "random-file-read-loop",
+          "term": "Random file: read a chosen record in a loop",
+          "prompt": "StockList.dat is a random file of 500 STRING records. Write pseudocode that repeatedly asks for a location from 1 to 500, outputs the item stored there (or that the record is missing), and asks whether to continue.",
+          "answer": "DECLARE Location : INTEGER\nDECLARE Item : STRING\nDECLARE Continue : BOOLEAN\nDECLARE Answer : CHAR\nContinue <- TRUE\nOPENFILE \"StockList.dat\" FOR RANDOM\nWHILE Continue\n    OUTPUT \"Enter a location between 1 and 500: \"\n    INPUT Location\n    SEEK \"StockList.dat\", Location\n    GETRECORD \"StockList.dat\", Item\n    IF Item = \"\" THEN\n        OUTPUT \"This record is missing\"\n    ELSE\n        OUTPUT \"The item in stock is \", Item\n    ENDIF\n    OUTPUT \"Another location (Y or N)?\"\n    INPUT Answer\n    IF Answer <> 'Y' THEN\n        Continue <- FALSE\n    ENDIF\nENDWHILE\nCLOSEFILE \"StockList.dat\"\nOUTPUT \"End of program\"",
+          "sources": [
+            {
+              "paper": "9618/31",
+              "session": "May/June 2025",
+              "question": "12"
+            }
+          ],
+          "notes": "SEEK moves the file pointer before each GETRECORD."
+        }
+      ]
+    },
+    {
+      "id": "abstract-data-types",
+      "title": "Abstract data types",
+      "items": [
+        {
+          "id": "stack-declare-initialise",
+          "term": "Stack: declarations and initialise",
+          "prompt": "Declare a stack of up to 40 REAL values held in an array Stack with BasePointer and TopPointer, and write a procedure Initialise() that makes the stack empty.",
+          "answer": "CONSTANT MaxSize = 40\nDECLARE BasePointer : INTEGER\nDECLARE TopPointer : INTEGER\nDECLARE Stack : ARRAY[1:40] OF REAL\nPROCEDURE Initialise()\n    BasePointer <- 1\n    TopPointer <- 0\nENDPROCEDURE",
+          "sources": [
+            {
+              "paper": "9618/32",
+              "session": "October/November 2023",
+              "question": "9(a)(ii)"
+            }
+          ],
+          "notes": "An empty stack has TopPointer one below BasePointer. Comments dropped."
+        },
+        {
+          "id": "stack-push",
+          "term": "Stack: push",
+          "prompt": "Write a procedure Push(NewItem) that adds a REAL value to the stack (array Stack, pointers BasePointer and TopPointer, constant MaxSize) if there is room.",
+          "answer": "PROCEDURE Push(NewItem : REAL)\n    IF TopPointer < MaxSize THEN\n        TopPointer <- TopPointer + 1\n        Stack[TopPointer] <- NewItem\n    ENDIF\nENDPROCEDURE",
+          "sources": [
+            {
+              "paper": "9618/32",
+              "session": "October/November 2023",
+              "question": "9(a)(ii)"
+            }
+          ],
+          "notes": "The mark scheme heading omits the parameter type (Push(NewItem)); ': REAL' added to match the stack's element type."
+        },
+        {
+          "id": "stack-pop",
+          "term": "Stack: pop",
+          "prompt": "The stack is an array Stack[1:25] of REAL with BasePointer and TopPointer. Write a function Pop() that returns the top value, or outputs an error message and returns 0 if the stack is empty.",
+          "answer": "FUNCTION Pop() RETURNS REAL\n    DECLARE Item : REAL\n    Item <- 0\n    IF TopPointer >= BasePointer THEN\n        Item <- Stack[TopPointer]\n        TopPointer <- TopPointer - 1\n    ELSE\n        OUTPUT \"The stack is empty - error\"\n    ENDIF\n    RETURN Item\nENDFUNCTION",
+          "sources": [
+            {
+              "paper": "9618/31",
+              "session": "October/November 2023",
+              "question": "10(b)"
+            }
+          ],
+          "notes": "En dashes replaced with hyphens; the leading // comment dropped."
+        },
+        {
+          "id": "stack-push-boolean",
+          "term": "Stack: push returning a BOOLEAN",
+          "prompt": "ThisStack is an array of 60 REAL values with stack pointer SP (next free position) and OnStack (count of items). Write a function Push(ThisValue) that returns FALSE if the stack is full, otherwise stores the value and returns TRUE.",
+          "answer": "FUNCTION Push(ThisValue : REAL) RETURNS BOOLEAN\n    DECLARE ReturnValue : BOOLEAN\n    IF OnStack = 60 THEN\n        RETURN FALSE\n    ENDIF\n    ThisStack[SP] <- ThisValue\n    SP <- SP + 1\n    OnStack <- OnStack + 1\n    RETURN TRUE\nENDFUNCTION",
+          "sources": [
+            {
+              "paper": "9618/22",
+              "session": "October/November 2024",
+              "question": "3(b)"
+            }
+          ],
+          "notes": "The mark scheme lists several accepted full-stack tests (OnStack = 60, SP > 60, etc.); the first is used. The unused DECLARE ReturnValue is as in the example solution. The // comment was dropped."
+        },
+        {
+          "id": "queue-declarations",
+          "term": "Queue: declarations (array-based)",
+          "prompt": "Declare an array-based queue of up to 60 STRING print jobs, with a FrontPointer, a RearPointer and a Length.",
+          "answer": "CONSTANT MaxSize = 60\nDECLARE Queue : ARRAY[1:60] OF STRING\nDECLARE FrontPointer : INTEGER\nDECLARE RearPointer : INTEGER\nDECLARE Length : INTEGER",
+          "sources": [
+            {
+              "paper": "9618/31",
+              "session": "May/June 2023",
+              "question": "11(a)"
+            }
+          ],
+          "notes": "The mark scheme accepts several equivalent declarations (0-based, or using MaxSize for the bound); the first is shown."
+        },
+        {
+          "id": "queue-dequeue",
+          "term": "Queue: dequeue (circular)",
+          "prompt": "The print queue is a circular array Queue[1:60] with FrontPointer, RearPointer, Length and MaxSize. Write a function Dequeue() that returns the item at the front, resetting the queue with CALL Initialise when it becomes empty, wrapping FrontPointer round, and returning \"\" with an error message when the queue is empty.",
+          "answer": "FUNCTION Dequeue() RETURNS STRING\n    DECLARE Item : STRING\n    IF Length > 0 THEN\n        Item <- Queue[FrontPointer]\n        FrontPointer <- FrontPointer + 1\n        Length <- Length - 1\n        IF Length = 0 THEN\n            CALL Initialise\n        ELSE\n            IF FrontPointer > MaxSize THEN\n                FrontPointer <- 1\n            ENDIF\n        ENDIF\n    ELSE\n        OUTPUT \"The print queue was empty - error\"\n        Item <- \"\"\n    ENDIF\n    RETURN Item\nENDFUNCTION",
+          "sources": [
+            {
+              "paper": "9618/31",
+              "session": "May/June 2023",
+              "question": "11(b)"
+            }
+          ],
+          "notes": "The mark scheme writes 'FUNCTION Dequeue RETURNS STRING' without brackets; () added to follow the guide. En dashes replaced with hyphens; // comment dropped."
+        },
+        {
+          "id": "queue-initialise",
+          "term": "Queue: declarations and initialise (0-based)",
+          "prompt": "Declare a circular queue of STRING of up to 50 items (array Queue indexed from 0, FrontPointer, RearPointer, Length) and write a procedure Initialise() that makes it empty.",
+          "answer": "CONSTANT MaxLength = 50\nDECLARE FrontPointer : INTEGER\nDECLARE RearPointer : INTEGER\nDECLARE Length : INTEGER\nDECLARE Queue : ARRAY[0:MaxLength - 1] OF STRING\nPROCEDURE Initialise()\n    FrontPointer <- -1\n    RearPointer <- -1\n    Length <- 0\nENDPROCEDURE",
+          "sources": [
+            {
+              "paper": "9618/32",
+              "session": "May/June 2023",
+              "question": "11(a)(ii)"
+            }
+          ],
+          "notes": "Comments dropped; en dash replaced with a hyphen. Brackets added to the procedure name (the mark scheme writes PROCEDURE Initialise)."
+        },
+        {
+          "id": "queue-enqueue",
+          "term": "Queue: enqueue (circular)",
+          "prompt": "Write a procedure Enqueue(NewItem) for the circular queue Queue[0:MaxLength - 1] (pointers FrontPointer, RearPointer, Length) that adds the item if the queue is not full, wrapping RearPointer back to 0 when it passes the end of the array.",
+          "answer": "PROCEDURE Enqueue(NewItem : STRING)\n    IF Length < MaxLength THEN\n        RearPointer <- RearPointer + 1\n        IF RearPointer > MaxLength - 1 THEN\n            RearPointer <- 0\n        ENDIF\n        Queue[RearPointer] <- NewItem\n        Length <- Length + 1\n    ENDIF\nENDPROCEDURE",
+          "sources": [
+            {
+              "paper": "9618/32",
+              "session": "May/June 2023",
+              "question": "11(a)(ii)"
+            }
+          ],
+          "notes": "The mark scheme also accepts Length <= MaxLength - 1 as the full test. Comments dropped."
+        },
+        {
+          "id": "queue-enqueue-record",
+          "term": "Queue: enqueue using a record (function)",
+          "prompt": "A queue is held in a record AQueue with an array QueueArray[0:99] and pointers HeadPointer and TailPointer (HeadPointer is -1 when empty). Write a function Enqueue(AQueue, TheData) that returns 1 if the item is added and -1 if the queue is full.",
+          "answer": "FUNCTION Enqueue(BYREF AQueue : Queue, BYVAL TheData : INTEGER) RETURNS INTEGER\n    IF AQueue.HeadPointer = -1 THEN\n        AQueue.QueueArray[AQueue.TailPointer] <- TheData\n        AQueue.HeadPointer <- 0\n        AQueue.TailPointer <- AQueue.TailPointer + 1\n        RETURN 1\n    ELSE\n        IF AQueue.TailPointer > 99 THEN\n            RETURN -1\n        ELSE\n            AQueue.QueueArray[AQueue.TailPointer] <- TheData\n            AQueue.TailPointer <- AQueue.TailPointer + 1\n            RETURN 1\n        ENDIF\n    ENDIF\nENDFUNCTION",
+          "sources": [
+            {
+              "paper": "9618/42",
+              "session": "October/November 2024",
+              "question": "2(c)"
+            }
+          ],
+          "notes": "Paper 4 model answer given as pseudocode. The record is passed by reference because it is modified. The heading wraps in the mark scheme."
+        },
+        {
+          "id": "linked-list-search",
+          "term": "Linked list: search by name",
+          "prompt": "A linked list is held in arrays Flower and NextPointer, starting at HeadPointer, with 0 as the null pointer. Write pseudocode that inputs a flower name, searches the list and outputs whether it was found.",
+          "answer": "Pointer <- HeadPointer\nFound <- 0\nOUTPUT \"Enter a flower name \"\nINPUT FlowerName\nWHILE Pointer <> 0\n    IF Flower[Pointer] = FlowerName THEN\n        Found <- Pointer\n        Pointer <- 0\n    ELSE\n        Pointer <- NextPointer[Pointer]\n    ENDIF\nENDWHILE\nIF Found <> 0 THEN\n    OUTPUT Flower[Found], \" is found\"\nELSE\n    OUTPUT \"The flower you wanted is not in the list\"\nENDIF",
+          "sources": [
+            {
+              "paper": "9618/32",
+              "session": "October/November 2022",
+              "question": "11(b)"
+            }
+          ],
+          "notes": "The mark scheme gives the final test as 'IF Pointer = 0 THEN // IF Found <> 0 THEN'; only the Found <> 0 form is correct here, because Pointer is always 0 after the loop."
+        },
+        {
+          "id": "binary-tree-search",
+          "term": "Binary tree: search (iterative function)",
+          "prompt": "A binary tree is stored in the array BinTree of records with Data, LeftPtr and RightPtr; RootPtr points to the root and -1 is the null pointer. Write a function SearchTree(Item) that returns the position of Item, or -1 if it is not in the tree.",
+          "answer": "FUNCTION SearchTree(Item : STRING) RETURNS INTEGER\n    NowPtr <- RootPtr\n    WHILE NowPtr <> -1\n        IF BinTree[NowPtr].Data > Item THEN\n            NowPtr <- BinTree[NowPtr].LeftPtr\n        ELSE\n            IF BinTree[NowPtr].Data < Item THEN\n                NowPtr <- BinTree[NowPtr].RightPtr\n            ELSE\n                RETURN NowPtr\n            ENDIF\n        ENDIF\n    ENDWHILE\n    RETURN NowPtr\nENDFUNCTION",
+          "sources": [
+            {
+              "paper": "9618/31",
+              "session": "October/November 2024",
+              "question": "11(c)"
+            }
+          ],
+          "notes": "Go left when the stored item is greater than the search item, right when it is smaller; when NowPtr reaches -1 the item is not present and -1 is returned."
+        }
+      ]
+    },
+    {
+      "id": "recursion",
+      "title": "Recursion",
+      "items": [
+        {
+          "id": "recursive-tree-search",
+          "term": "Recursive binary tree search (function)",
+          "prompt": "A binary tree is stored in the 2D array ArrayNodes: column 0 is the left pointer, column 1 the data and column 2 the right pointer, with -1 meaning no node. Write a recursive function SearchValue(Root, ValueToFind) that returns the index of the node holding the value, or -1.",
+          "answer": "FUNCTION SearchValue(BYVAL Root : INTEGER, ValueToFind : INTEGER) RETURNS INTEGER\n    IF Root = -1 THEN\n        RETURN -1\n    ELSE\n        IF ArrayNodes[Root, 1] = ValueToFind THEN\n            RETURN Root\n        ELSE\n            IF ArrayNodes[Root, 1] = -1 THEN\n                RETURN -1\n            ENDIF\n        ENDIF\n    ENDIF\n    IF ArrayNodes[Root, 1] > ValueToFind THEN\n        RETURN SearchValue(ArrayNodes[Root, 0], ValueToFind)\n    ENDIF\n    IF ArrayNodes[Root, 1] < ValueToFind THEN\n        RETURN SearchValue(ArrayNodes[Root, 2], ValueToFind)\n    ENDIF\nENDFUNCTION",
+          "sources": [
+            {
+              "paper": "9618/41",
+              "session": "October/November 2022",
+              "question": "3(c)"
+            }
+          ],
+          "notes": "Paper 4 model answer. The mark scheme heading has no RETURNS clause; ' RETURNS INTEGER' added and the heading joined onto one line."
+        },
+        {
+          "id": "recursive-factor-sum",
+          "term": "Recursive sum of factors (function)",
+          "prompt": "Write a recursive function RecursiveValue(Number, ToFind) that returns the sum of all the whole numbers from 1 to Number that divide exactly into ToFind.",
+          "answer": "FUNCTION RecursiveValue(Number : INTEGER, ToFind : INTEGER) RETURNS INTEGER\n    IF Number = 0 THEN\n        RETURN 0\n    ELSE\n        IF ToFind MOD Number = 0 THEN\n            RETURN Number + RecursiveValue(Number - 1, ToFind)\n        ELSE\n            RETURN RecursiveValue(Number - 1, ToFind)\n        ENDIF\n    ENDIF\nENDFUNCTION",
+          "sources": [
+            {
+              "paper": "9618/42",
+              "session": "October/November 2023",
+              "question": "2(b)(i)"
+            }
+          ],
+          "notes": "Paper 4 model answer. The mark scheme writes the operator as MODULUS and the type as Integer; MOD and INTEGER used here. Base case Number = 0, then a recursive call on Number - 1 in each branch."
+        }
+      ]
+    },
+    {
+      "id": "oop",
+      "title": "Object-oriented programming",
+      "items": [
+        {
+          "id": "guide-property-method",
+          "term": "Private property and public/private methods",
+          "prompt": "Declare a private integer property Attempts set to 3, a public procedure SetAttempts(Number) that sets it, and a private function GetAttempts() that returns it.",
+          "answer": "PRIVATE Attempts : INTEGER\nAttempts <- 3\nPUBLIC PROCEDURE SetAttempts(Number : INTEGER)\n    Attempts <- Number\nENDPROCEDURE\nPRIVATE FUNCTION GetAttempts() RETURNS INTEGER\n    RETURN Attempts\nENDFUNCTION",
+          "sources": [
+            {
+              "paper": "Pseudocode Guide",
+              "session": "2026, Version 1",
+              "question": "10.1"
+            }
+          ],
+          "notes": "Methods and properties are public unless stated. Objects call methods as Player.SetAttempts(5)."
+        },
+        {
+          "id": "guide-class-constructor",
+          "term": "Class with a constructor",
+          "prompt": "Define a class Pet with a private string property Name and a public constructor that sets Name from the parameter GivenName.",
+          "answer": "CLASS Pet\n    PRIVATE Name : STRING\n    PUBLIC PROCEDURE NEW(GivenName : STRING)\n        Name <- GivenName\n    ENDPROCEDURE\nENDCLASS",
+          "sources": [
+            {
+              "paper": "Pseudocode Guide",
+              "session": "2026, Version 1",
+              "question": "10.2"
+            }
+          ],
+          "notes": "Constructors are procedures named NEW."
+        },
+        {
+          "id": "guide-inheritance",
+          "term": "Inheritance with INHERITS and SUPER",
+          "prompt": "Define a class Cat that inherits from Pet (constructor NEW(GivenName, GivenBreed) calling the parent constructor) and then create an object MyCat.",
+          "answer": "CLASS Cat INHERITS Pet\n    PRIVATE Breed : STRING\n    PUBLIC PROCEDURE NEW(GivenName : STRING, GivenBreed : STRING)\n        SUPER.NEW(GivenName)\n        Breed <- GivenBreed\n    ENDPROCEDURE\nENDCLASS\nMyCat <- NEW Cat(\"Kitty\", \"Shorthaired\")",
+          "sources": [
+            {
+              "paper": "Pseudocode Guide",
+              "session": "2026, Version 1",
+              "question": "10.2"
+            }
+          ],
+          "notes": "The guide declares Breed as INTEGER but assigns the STRING GivenBreed; STRING used here. The object-creation line comes from the guide's following example."
+        },
+        {
+          "id": "car-class",
+          "term": "Class with private properties and constructor",
+          "prompt": "Write the class Car with private STRING properties Make, Model, BodyType and Fuel, a private INTEGER property NumberBuilt, and a public constructor taking CarMake, CarModel and CarBodyType that sets Fuel to the empty string and NumberBuilt to 0.",
+          "answer": "CLASS Car\n    PRIVATE Make : STRING\n    PRIVATE Model : STRING\n    PRIVATE BodyType : STRING\n    PRIVATE Fuel : STRING\n    PRIVATE NumberBuilt : INTEGER\n    PUBLIC PROCEDURE NEW(CarMake : STRING, CarModel : STRING, CarBodyType : STRING)\n        Make <- CarMake\n        Model <- CarModel\n        BodyType <- CarBodyType\n        Fuel <- \"\"\n        NumberBuilt <- 0\n    ENDPROCEDURE\nENDCLASS",
+          "sources": [
+            {
+              "paper": "9618/31",
+              "session": "October/November 2022",
+              "question": "11(b)"
+            }
+          ],
+          "notes": "The mark scheme also shows the stubs getFuel() and getNumberBuilt() before ENDCLASS; they are omitted here."
+        }
+      ]
+    },
+    {
+      "id": "exam-model-answers",
+      "title": "Exam model answers",
+      "items": [
+        {
+          "id": "check-info-function",
+          "term": "Validate a stock line (function)",
+          "prompt": "Write a function CheckInfo(NewLine) that returns TRUE only if NewLine has at least 19 characters, its first four characters are all numeric and between \"0001\" and \"5999\", and characters 5 to 7 are alphabetic (use OnlyAlpha()).",
+          "answer": "FUNCTION CheckInfo(NewLine : STRING) RETURNS BOOLEAN\n    DECLARE ThisNum : STRING\n    DECLARE Index : INTEGER\n    IF LENGTH(NewLine) < 19 THEN\n        RETURN FALSE\n    ENDIF\n    FOR Index <- 1 TO 4\n        IF NOT IS_NUM(MID(NewLine, Index, 1)) THEN\n            RETURN FALSE\n        ENDIF\n    NEXT Index\n    ThisNum <- LEFT(NewLine, 4)\n    IF ThisNum < \"0001\" OR ThisNum > \"5999\" THEN\n        RETURN FALSE\n    ENDIF\n    IF NOT OnlyAlpha(MID(NewLine, 5, 3)) THEN\n        RETURN FALSE\n    ENDIF\n    RETURN TRUE\nENDFUNCTION",
+          "sources": [
+            {
+              "paper": "9618/22",
+              "session": "May/June 2023",
+              "question": "8(a)"
+            }
+          ],
+          "notes": "The mark scheme spells the parameter Newline in the body; NewLine used throughout. Marks: length test, extract first four characters, numeric test, range test, extract characters 5 to 7, OnlyAlpha(), RETURN a BOOLEAN in every case."
+        },
+        {
+          "id": "add-error-function",
+          "term": "Add an entry to sorted parallel arrays (function)",
+          "prompt": "ErrCode[1:500] and ErrText[1:500] hold error numbers and messages, with unused entries holding 999. Write a function AddError(ErrNum, ErrMess) that stores a new error in the first unused entry, calls SortArrays(), and returns the number of unused entries remaining, or -1 if there was no room.",
+          "answer": "FUNCTION AddError(ErrNum : INTEGER, ErrMess : STRING) RETURNS INTEGER\n    DECLARE Index, Remaining : INTEGER\n    CONSTANT Unused = 999\n    Index <- 1\n    Remaining <- -1\n    REPEAT\n        IF ErrCode[Index] = Unused THEN\n            ErrCode[Index] <- ErrNum\n            ErrText[Index] <- ErrMess\n            CALL SortArrays()\n            Remaining <- 500 - Index\n        ENDIF\n        Index <- Index + 1\n    UNTIL Remaining <> -1 OR Index > 500\n    RETURN Remaining\nENDFUNCTION",
+          "sources": [
+            {
+              "paper": "9618/23",
+              "session": "October/November 2022",
+              "question": "7(b)(i)"
+            }
+          ],
+          "notes": "Heading wraps over two lines in the mark scheme. En dash replaced with a hyphen."
+        },
+        {
+          "id": "get-ids-procedure",
+          "term": "Search an array of records (procedure)",
+          "prompt": "Membership is an array of 3000 Student records with fields StudentID, Club_1, Club_2 and Club_3. Write a procedure GetIDs() that inputs a club number, outputs the StudentID of every student in that club, and then outputs how many students are in the club.",
+          "answer": "PROCEDURE GetIDs()\n    DECLARE Index : INTEGER\n    DECLARE ThisClub, Count : INTEGER\n    OUTPUT \"Please Input Club Number: \"\n    INPUT ThisClub\n    Count <- 0\n    FOR Index <- 1 TO 3000\n        IF Membership[Index].Club_1 = ThisClub OR Membership[Index].Club_2 = ThisClub OR Membership[Index].Club_3 = ThisClub THEN\n            Count <- Count + 1\n            OUTPUT Membership[Index].StudentID\n        ENDIF\n    NEXT Index\n    OUTPUT \"There are \", Count, \" Students in the club\"\nENDPROCEDURE",
+          "sources": [
+            {
+              "paper": "9618/22",
+              "session": "October/November 2021",
+              "question": "3(b)"
+            }
+          ],
+          "notes": "The mark scheme splits the IF condition over three lines using the continuation marker __; joined onto one line here."
+        },
+        {
+          "id": "new-loan-function",
+          "term": "Store a new record in the first free slot (function)",
+          "prompt": "Loan is an array of 7000 records with fields StudentID, BookID and OnLoan; an unused entry has a blank StudentID. Write a function NewLoan(ThisStudentID, ThisBookID) that stores a new loan in the first unused entry and returns TRUE, or returns FALSE if there is no room.",
+          "answer": "FUNCTION NewLoan(ThisStudentID, ThisBookID : STRING) RETURNS BOOLEAN\n    DECLARE Index : INTEGER\n    DECLARE IsStored : BOOLEAN\n    CONSTANT Blank = \"\"\n    Index <- 1\n    IsStored <- FALSE\n    WHILE Index <= 7000 AND NOT IsStored\n        IF Loan[Index].StudentID = Blank THEN\n            Loan[Index].StudentID <- ThisStudentID\n            Loan[Index].BookID <- ThisBookID\n            Loan[Index].OnLoan <- TRUE\n            IsStored <- TRUE\n        ENDIF\n        Index <- Index + 1\n    ENDWHILE\n    RETURN IsStored\nENDFUNCTION",
+          "sources": [
+            {
+              "paper": "9618/22",
+              "session": "October/November 2025",
+              "question": "8(b)"
+            }
+          ],
+          "notes": "First example solution. The heading wraps over three lines in the mark scheme (continuation marker __)."
+        },
+        {
+          "id": "return-book-function",
+          "term": "Find a matching record and update it (function)",
+          "prompt": "Loan is an array of 5000 records with fields StudentID, BookID and OnLoan. Write a function ReturnBook(ThisStudentID, ThisBookID) that marks the matching loan as returned and returns TRUE, or returns FALSE if no matching loan exists or it was already returned.",
+          "answer": "FUNCTION ReturnBook(ThisStudentID, ThisBookID : STRING) RETURNS BOOLEAN\n    DECLARE Index : INTEGER\n    Index <- 1\n    WHILE Index < 5001\n        IF Loan[Index].StudentID = ThisStudentID AND Loan[Index].BookID = ThisBookID THEN\n            IF Loan[Index].OnLoan = TRUE THEN\n                Loan[Index].OnLoan <- FALSE\n                RETURN TRUE\n            ELSE\n                RETURN FALSE\n            ENDIF\n        ENDIF\n        Index <- Index + 1\n    ENDWHILE\n    RETURN FALSE\nENDFUNCTION",
+          "sources": [
+            {
+              "paper": "9618/21",
+              "session": "October/November 2025",
+              "question": "8(b)"
+            }
+          ],
+          "notes": "First example solution. 'False' capitalised to FALSE; short // comments dropped; the condition joined onto one line (the mark scheme uses the continuation marker __)."
+        },
+        {
+          "id": "get-field-case",
+          "term": "CASE with OTHERWISE (function)",
+          "prompt": "Write a function GetField(Msg, FieldNo) that returns characters 2 to 4 of Msg for field 1, characters 5 to 7 for field 2, and for field 3 the text from character 8 up to but not including the last character; any other field number returns an empty string.",
+          "answer": "FUNCTION GetField(Msg : STRING, FieldNo : INTEGER) RETURNS STRING\n    DECLARE RetString : STRING\n    CASE OF FieldNo\n        1 : RetString <- MID(Msg, 2, 3)\n        2 : RetString <- MID(Msg, 5, 3)\n        3 : RetString <- MID(Msg, 8, LENGTH(Msg) - 8)\n        OTHERWISE : RetString <- \"\"\n    ENDCASE\n    RETURN RetString\nENDFUNCTION",
+          "sources": [
+            {
+              "paper": "9618/21",
+              "session": "October/November 2023",
+              "question": "8(d)"
+            }
+          ],
+          "notes": "Heading wraps over two lines in the mark scheme. Each CASE branch is a single statement here."
+        }
+      ]
+    }
+  ]
+}

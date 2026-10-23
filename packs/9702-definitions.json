@@ -1,0 +1,3562 @@
+{
+  "id": "9702-definitions",
+  "title": "Physics definitions",
+  "subject": "Physics",
+  "syllabus": "Cambridge International AS & A Level Physics (9702)",
+  "kind": "definition",
+  "description": "Definitions and laws for AS & A Level Physics (9702), worded as the Cambridge mark schemes accept them.",
+  "units": [
+    {
+      "id": "physical-quantities-and-units",
+      "title": "Physical quantities and units",
+      "items": [
+        {
+          "id": "scalar-and-vector-quantities",
+          "term": "Scalar and vector quantities",
+          "prompt": "State what is meant by a scalar quantity and by a vector quantity.",
+          "answer": "A scalar quantity has magnitude only, whereas a vector quantity has magnitude and direction.",
+          "sources": [
+            {
+              "paper": "9702/21",
+              "session": "May/June 2018",
+              "question": "1(a)"
+            },
+            {
+              "paper": "9702/23",
+              "session": "May/June 2014",
+              "question": "2(a)"
+            }
+          ]
+        },
+        {
+          "id": "vector-quantity",
+          "term": "Vector quantity",
+          "prompt": "State what is meant by a vector quantity.",
+          "answer": "A vector quantity is a quantity with magnitude and direction.",
+          "sources": [
+            {
+              "paper": "9702/22",
+              "session": "October/November 2024",
+              "question": "1(a)"
+            },
+            {
+              "paper": "9702/21",
+              "session": "May/June 2018",
+              "question": "1(a)"
+            }
+          ]
+        },
+        {
+          "id": "precision",
+          "term": "Precision",
+          "prompt": "State what is meant by precision.",
+          "answer": "Precision is determined by the range in the measurements, so precise measurements have a small range.",
+          "alt": [
+            "precise results are close together / have little scatter"
+          ],
+          "notes": "The 2016 mark scheme (s16/23 2(b)) also credited 'the size of the smallest division on the measuring instrument'.",
+          "sources": [
+            {
+              "paper": "9702/22",
+              "session": "May/June 2017",
+              "question": "1(c)(ii)"
+            },
+            {
+              "paper": "9702/21",
+              "session": "May/June 2017",
+              "question": "1(b)(ii)"
+            },
+            {
+              "paper": "9702/23",
+              "session": "May/June 2020",
+              "question": "1(b)(i)"
+            },
+            {
+              "paper": "9702/23",
+              "session": "May/June 2023",
+              "question": "1(c)"
+            }
+          ]
+        },
+        {
+          "id": "accuracy",
+          "term": "Accuracy",
+          "prompt": "Explain the difference between accuracy and precision. (accuracy)",
+          "answer": "Accuracy is the closeness of the measured value to the true value.",
+          "alt": [
+            "the (average of the) measurements is close to the true value"
+          ],
+          "sources": [
+            {
+              "paper": "9702/21",
+              "session": "May/June 2017",
+              "question": "1(b)(ii)"
+            },
+            {
+              "paper": "9702/23",
+              "session": "May/June 2016",
+              "question": "2(b)"
+            },
+            {
+              "paper": "9702/23",
+              "session": "May/June 2020",
+              "question": "1(b)(ii)"
+            }
+          ]
+        },
+        {
+          "id": "systematic-error",
+          "term": "Systematic error",
+          "prompt": "Describe the effect of systematic errors when using a micrometer screw gauge to take readings for the diameter of a wire.",
+          "answer": "A systematic error makes the reading larger or smaller than the true reading by a constant amount.",
+          "notes": "Only one mark scheme found. Wording from the micrometer question.",
+          "sources": [
+            {
+              "paper": "9702/23",
+              "session": "May/June 2016",
+              "question": "2(a)"
+            }
+          ]
+        },
+        {
+          "id": "random-error",
+          "term": "Random error",
+          "prompt": "Describe the effect of random errors when using a micrometer screw gauge to take readings for the diameter of a wire.",
+          "answer": "A random error causes scatter in the readings about the true reading.",
+          "notes": "Only one mark scheme found. Wording from the micrometer question.",
+          "sources": [
+            {
+              "paper": "9702/23",
+              "session": "May/June 2016",
+              "question": "2(a)"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "kinematics",
+      "title": "Kinematics",
+      "items": [
+        {
+          "id": "displacement",
+          "term": "Displacement",
+          "prompt": "Define displacement.",
+          "answer": "Displacement is the distance in a specified direction from a point.",
+          "alt": [
+            "distance from a (reference) point in a given direction",
+            "distance (from the point) in a straight line in a given direction"
+          ],
+          "sources": [
+            {
+              "paper": "9702/22",
+              "session": "February/March 2019",
+              "question": "2(a)(i)"
+            },
+            {
+              "paper": "9702/21",
+              "session": "October/November 2018",
+              "question": "1(a)(i)"
+            },
+            {
+              "paper": "9702/23",
+              "session": "May/June 2024",
+              "question": "2(a)"
+            },
+            {
+              "paper": "9702/41",
+              "session": "October/November 2019",
+              "question": "4(a)(i)"
+            }
+          ]
+        },
+        {
+          "id": "speed",
+          "term": "Speed",
+          "prompt": "Define speed.",
+          "answer": "Speed is distance divided by time.",
+          "notes": "Only one mark scheme found (2015, asked together with velocity).",
+          "sources": [
+            {
+              "paper": "9702/21",
+              "session": "May/June 2015",
+              "question": "2(a)"
+            }
+          ]
+        },
+        {
+          "id": "velocity",
+          "term": "Velocity",
+          "prompt": "Define velocity.",
+          "answer": "Velocity is the rate of change of displacement.",
+          "alt": [
+            "change in displacement / time (taken)"
+          ],
+          "sources": [
+            {
+              "paper": "9702/22",
+              "session": "February/March 2017",
+              "question": "3(a)"
+            },
+            {
+              "paper": "9702/22",
+              "session": "May/June 2017",
+              "question": "2(a)"
+            },
+            {
+              "paper": "9702/21",
+              "session": "May/June 2019",
+              "question": "1(a)"
+            },
+            {
+              "paper": "9702/22",
+              "session": "May/June 2020",
+              "question": "1(a)"
+            },
+            {
+              "paper": "9702/23",
+              "session": "October/November 2021",
+              "question": "3(a)"
+            },
+            {
+              "paper": "9702/21",
+              "session": "May/June 2024",
+              "question": "2(a)"
+            }
+          ]
+        },
+        {
+          "id": "acceleration",
+          "term": "Acceleration",
+          "prompt": "Define acceleration.",
+          "answer": "Acceleration is the rate of change of velocity.",
+          "alt": [
+            "change in velocity / time (taken)"
+          ],
+          "sources": [
+            {
+              "paper": "9702/22",
+              "session": "February/March 2024",
+              "question": "2(a)"
+            },
+            {
+              "paper": "9702/23",
+              "session": "October/November 2024",
+              "question": "1(a)"
+            },
+            {
+              "paper": "9702/22",
+              "session": "February/March 2019",
+              "question": "2(a)(ii)"
+            },
+            {
+              "paper": "9702/22",
+              "session": "October/November 2019",
+              "question": "2(a)"
+            },
+            {
+              "paper": "9702/23",
+              "session": "May/June 2021",
+              "question": "2(a)"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "dynamics",
+      "title": "Dynamics",
+      "items": [
+        {
+          "id": "mass",
+          "term": "Mass",
+          "prompt": "State what is meant by the mass of a body.",
+          "answer": "Mass is the property of a body that resists changes in motion.",
+          "alt": [
+            "mass is the quantity of matter in a body"
+          ],
+          "notes": "Only one mark scheme found.",
+          "sources": [
+            {
+              "paper": "9702/21",
+              "session": "May/June 2018",
+              "question": "3(a)"
+            }
+          ]
+        },
+        {
+          "id": "newtons-first-law",
+          "term": "Newton's first law of motion",
+          "prompt": "State Newton's first law of motion.",
+          "answer": "A body continues at rest or at constant velocity unless acted on by a resultant force.",
+          "alt": [
+            "a body/mass/object continues (at rest or) at constant/uniform velocity unless acted on by a resultant force"
+          ],
+          "sources": [
+            {
+              "paper": "9702/22",
+              "session": "May/June 2017",
+              "question": "4(a)"
+            },
+            {
+              "paper": "9702/21",
+              "session": "May/June 2018",
+              "question": "2(a)"
+            },
+            {
+              "paper": "9702/23",
+              "session": "May/June 2020",
+              "question": "2(a)"
+            }
+          ]
+        },
+        {
+          "id": "newtons-second-law",
+          "term": "Newton's second law of motion",
+          "prompt": "State Newton's second law of motion.",
+          "answer": "The resultant force is proportional to the rate of change of momentum.",
+          "alt": [
+            "(resultant) force is equal to the rate of change of momentum"
+          ],
+          "notes": "Must say resultant force; allow 'equal to' for 'proportional to'.",
+          "sources": [
+            {
+              "paper": "9702/23",
+              "session": "May/June 2017",
+              "question": "2(a)"
+            },
+            {
+              "paper": "9702/23",
+              "session": "October/November 2018",
+              "question": "3(a)"
+            },
+            {
+              "paper": "9702/22",
+              "session": "May/June 2019",
+              "question": "2(a)"
+            },
+            {
+              "paper": "9702/21",
+              "session": "May/June 2020",
+              "question": "2(a)"
+            },
+            {
+              "paper": "9702/21",
+              "session": "May/June 2023",
+              "question": "3(a)"
+            }
+          ]
+        },
+        {
+          "id": "newtons-third-law",
+          "term": "Newton's third law of motion",
+          "prompt": "State Newton's third law of motion.",
+          "answer": "The force on body A by body B is equal in magnitude and opposite in direction to the force on body B by body A.",
+          "notes": "s21/22 2(b) and s18/23 3(d) ask how the law applies to a collision, with the same two points.",
+          "sources": [
+            {
+              "paper": "9702/22",
+              "session": "October/November 2019",
+              "question": "3(a)"
+            },
+            {
+              "paper": "9702/22",
+              "session": "May/June 2021",
+              "question": "2(b)"
+            },
+            {
+              "paper": "9702/23",
+              "session": "May/June 2018",
+              "question": "3(d)"
+            }
+          ]
+        },
+        {
+          "id": "force",
+          "term": "Force",
+          "prompt": "Define force.",
+          "answer": "Force is the rate of change of momentum.",
+          "sources": [
+            {
+              "paper": "9702/22",
+              "session": "May/June 2018",
+              "question": "1(a)"
+            },
+            {
+              "paper": "9702/22",
+              "session": "February/March 2021",
+              "question": "1(c)(i)"
+            },
+            {
+              "paper": "9702/21",
+              "session": "October/November 2020",
+              "question": "3(a)"
+            },
+            {
+              "paper": "9702/22",
+              "session": "May/June 2023",
+              "question": "3(a)(i)"
+            }
+          ]
+        },
+        {
+          "id": "linear-momentum",
+          "term": "Linear momentum",
+          "prompt": "Define linear momentum.",
+          "answer": "Momentum is the product of mass and velocity.",
+          "alt": [
+            "mass x velocity"
+          ],
+          "sources": [
+            {
+              "paper": "9702/21",
+              "session": "May/June 2019",
+              "question": "2(a)"
+            },
+            {
+              "paper": "9702/21",
+              "session": "October/November 2021",
+              "question": "2(a)"
+            },
+            {
+              "paper": "9702/21",
+              "session": "October/November 2024",
+              "question": "2(a)"
+            },
+            {
+              "paper": "9702/22",
+              "session": "October/November 2024",
+              "question": "2(a)"
+            }
+          ]
+        },
+        {
+          "id": "conservation-of-momentum",
+          "term": "Principle of conservation of momentum",
+          "prompt": "State the principle of conservation of momentum.",
+          "answer": "The total momentum of a system of bodies is constant provided no resultant external force acts on the system.",
+          "alt": [
+            "total momentum before = total momentum after for an isolated system / no (resultant) external force"
+          ],
+          "notes": "Must include the condition: isolated/closed system or no resultant external force.",
+          "sources": [
+            {
+              "paper": "9702/22",
+              "session": "February/March 2017",
+              "question": "2(a)"
+            },
+            {
+              "paper": "9702/22",
+              "session": "May/June 2018",
+              "question": "2(a)"
+            },
+            {
+              "paper": "9702/23",
+              "session": "October/November 2017",
+              "question": "3(a)"
+            },
+            {
+              "paper": "9702/22",
+              "session": "May/June 2022",
+              "question": "4(a)"
+            },
+            {
+              "paper": "9702/23",
+              "session": "May/June 2023",
+              "question": "3(a)"
+            },
+            {
+              "paper": "9702/21",
+              "session": "May/June 2024",
+              "question": "3(a)"
+            }
+          ]
+        },
+        {
+          "id": "elastic-collision",
+          "term": "Elastic collision",
+          "prompt": "State what is meant by an elastic collision.",
+          "answer": "In an elastic collision there is no loss of kinetic energy.",
+          "alt": [
+            "the total kinetic energy before the collision is equal to the total kinetic energy after the collision"
+          ],
+          "sources": [
+            {
+              "paper": "9702/42",
+              "session": "October/November 2021",
+              "question": "3(a)(i)"
+            },
+            {
+              "paper": "9702/23",
+              "session": "May/June 2016",
+              "question": "5(b)(i)"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "forces-density-pressure",
+      "title": "Forces, density and pressure",
+      "items": [
+        {
+          "id": "density",
+          "term": "Density",
+          "prompt": "Define density.",
+          "answer": "Density is mass per unit volume.",
+          "alt": [
+            "mass / volume"
+          ],
+          "sources": [
+            {
+              "paper": "9702/21",
+              "session": "May/June 2021",
+              "question": "1(a)"
+            },
+            {
+              "paper": "9702/21",
+              "session": "October/November 2021",
+              "question": "1(a)"
+            },
+            {
+              "paper": "9702/21",
+              "session": "October/November 2024",
+              "question": "1(a)"
+            },
+            {
+              "paper": "9702/21",
+              "session": "October/November 2016",
+              "question": "1(a)"
+            }
+          ]
+        },
+        {
+          "id": "pressure",
+          "term": "Pressure",
+          "prompt": "Define pressure.",
+          "answer": "Pressure is force per unit area normal to the force.",
+          "alt": [
+            "force / area (normal to the force)"
+          ],
+          "sources": [
+            {
+              "paper": "9702/22",
+              "session": "May/June 2023",
+              "question": "1(a)(i)"
+            },
+            {
+              "paper": "9702/22",
+              "session": "October/November 2016",
+              "question": "1(a)(i)"
+            }
+          ]
+        },
+        {
+          "id": "centre-of-gravity",
+          "term": "Centre of gravity",
+          "prompt": "State what is meant by the centre of gravity of an object.",
+          "answer": "The centre of gravity is the point where all the weight of the object is taken to act.",
+          "alt": [
+            "the point where (all) the weight (of the body) seems to act"
+          ],
+          "sources": [
+            {
+              "paper": "9702/21",
+              "session": "May/June 2022",
+              "question": "2(a)"
+            },
+            {
+              "paper": "9702/22",
+              "session": "May/June 2023",
+              "question": "2(a)"
+            },
+            {
+              "paper": "9702/22",
+              "session": "October/November 2022",
+              "question": "3(a)"
+            },
+            {
+              "paper": "9702/22",
+              "session": "May/June 2019",
+              "question": "3(a)"
+            },
+            {
+              "paper": "9702/23",
+              "session": "October/November 2020",
+              "question": "2(a)"
+            },
+            {
+              "paper": "9702/21",
+              "session": "May/June 2017",
+              "question": "3(b)(i)"
+            }
+          ]
+        },
+        {
+          "id": "moment-of-a-force",
+          "term": "Moment of a force",
+          "prompt": "Define the moment of a force about a point.",
+          "answer": "The moment of a force about a point is the force multiplied by the perpendicular distance of the line of action of the force from the point.",
+          "alt": [
+            "product of the force and the perpendicular distance to/from a point/pivot"
+          ],
+          "sources": [
+            {
+              "paper": "9702/23",
+              "session": "May/June 2021",
+              "question": "3(a)"
+            },
+            {
+              "paper": "9702/21",
+              "session": "October/November 2020",
+              "question": "1(a)(i)"
+            },
+            {
+              "paper": "9702/22",
+              "session": "October/November 2017",
+              "question": "2(a)"
+            },
+            {
+              "paper": "9702/22",
+              "session": "October/November 2015",
+              "question": "4(a)"
+            }
+          ]
+        },
+        {
+          "id": "torque-of-a-couple",
+          "term": "Torque of a couple",
+          "prompt": "Define the torque of a couple.",
+          "answer": "The torque of a couple is one of the forces multiplied by the perpendicular distance between the forces.",
+          "notes": "Only asked in the 2013 papers within the range searched.",
+          "sources": [
+            {
+              "paper": "9702/21",
+              "session": "October/November 2013",
+              "question": "4(a)"
+            },
+            {
+              "paper": "9702/22",
+              "session": "October/November 2013",
+              "question": "4(a)"
+            }
+          ]
+        },
+        {
+          "id": "principle-of-moments",
+          "term": "Principle of moments",
+          "prompt": "State the principle of moments.",
+          "answer": "For a body in rotational equilibrium, the sum of the clockwise moments about a point equals the sum of the anticlockwise moments about the same point.",
+          "sources": [
+            {
+              "paper": "9702/23",
+              "session": "May/June 2020",
+              "question": "3(a)"
+            },
+            {
+              "paper": "9702/22",
+              "session": "October/November 2019",
+              "question": "4(b)(i)"
+            },
+            {
+              "paper": "9702/23",
+              "session": "October/November 2022",
+              "question": "3(a)"
+            },
+            {
+              "paper": "9702/23",
+              "session": "October/November 2024",
+              "question": "3(a)"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "work-energy-power",
+      "title": "Work, energy and power",
+      "items": [
+        {
+          "id": "work-done",
+          "term": "Work done",
+          "prompt": "State what is meant by work done.",
+          "answer": "Work done is force multiplied by displacement in the direction of the force.",
+          "alt": [
+            "force x distance moved in the direction of the force"
+          ],
+          "sources": [
+            {
+              "paper": "9702/22",
+              "session": "February/March 2020",
+              "question": "3(a)"
+            },
+            {
+              "paper": "9702/22",
+              "session": "February/March 2021",
+              "question": "2(a)"
+            },
+            {
+              "paper": "9702/22",
+              "session": "May/June 2020",
+              "question": "3(a)"
+            },
+            {
+              "paper": "9702/22",
+              "session": "October/November 2022",
+              "question": "1(a)"
+            },
+            {
+              "paper": "9702/23",
+              "session": "October/November 2021",
+              "question": "2(a)"
+            },
+            {
+              "paper": "9702/21",
+              "session": "October/November 2024",
+              "question": "3(a)"
+            }
+          ]
+        },
+        {
+          "id": "kinetic-energy",
+          "term": "Kinetic energy",
+          "prompt": "State what is meant by kinetic energy.",
+          "answer": "Kinetic energy is the energy of a mass due to its motion.",
+          "alt": [
+            "energy (of a mass/body) due to motion/speed/velocity"
+          ],
+          "sources": [
+            {
+              "paper": "9702/23",
+              "session": "October/November 2018",
+              "question": "2(a)"
+            },
+            {
+              "paper": "9702/22",
+              "session": "February/March 2018",
+              "question": "2(a)(ii)"
+            },
+            {
+              "paper": "9702/23",
+              "session": "May/June 2016",
+              "question": "3(a)"
+            }
+          ]
+        },
+        {
+          "id": "gravitational-potential-energy",
+          "term": "Gravitational potential energy",
+          "prompt": "State what is meant by gravitational potential energy.",
+          "answer": "Gravitational potential energy is the energy of a mass due to its position in a gravitational field.",
+          "sources": [
+            {
+              "paper": "9702/21",
+              "session": "October/November 2018",
+              "question": "3(a)(ii)"
+            },
+            {
+              "paper": "9702/23",
+              "session": "May/June 2016",
+              "question": "3(a)"
+            },
+            {
+              "paper": "9702/22",
+              "session": "May/June 2014",
+              "question": "4(a)"
+            }
+          ]
+        },
+        {
+          "id": "elastic-potential-energy",
+          "term": "Elastic potential energy",
+          "prompt": "State what is meant by elastic potential energy.",
+          "answer": "Elastic potential energy is the energy stored in a body due to its extension or compression.",
+          "alt": [
+            "the energy stored in a body due to extension / compression / change in shape"
+          ],
+          "sources": [
+            {
+              "paper": "9702/21",
+              "session": "May/June 2016",
+              "question": "4(a)"
+            },
+            {
+              "paper": "9702/22",
+              "session": "February/March 2016",
+              "question": "3(a)(ii)"
+            }
+          ]
+        },
+        {
+          "id": "power",
+          "term": "Power",
+          "prompt": "Define power.",
+          "answer": "Power is work done per unit time.",
+          "alt": [
+            "work (done) / time (taken)",
+            "energy (transferred) / time (taken)"
+          ],
+          "sources": [
+            {
+              "paper": "9702/21",
+              "session": "May/June 2022",
+              "question": "3(a)(i)"
+            },
+            {
+              "paper": "9702/21",
+              "session": "May/June 2023",
+              "question": "1(a)(i)"
+            },
+            {
+              "paper": "9702/21",
+              "session": "October/November 2022",
+              "question": "3(a)(i)"
+            },
+            {
+              "paper": "9702/23",
+              "session": "October/November 2017",
+              "question": "1(a)(i)"
+            },
+            {
+              "paper": "9702/22",
+              "session": "October/November 2021",
+              "question": "3(a)"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "deformation-of-solids",
+      "title": "Deformation of solids",
+      "items": [
+        {
+          "id": "stress",
+          "term": "Stress",
+          "prompt": "Define stress.",
+          "answer": "Stress is force per unit cross-sectional area.",
+          "alt": [
+            "force / (cross-sectional) area"
+          ],
+          "sources": [
+            {
+              "paper": "9702/22",
+              "session": "February/March 2018",
+              "question": "3(a)(i)"
+            },
+            {
+              "paper": "9702/21",
+              "session": "October/November 2020",
+              "question": "4(a)(i)"
+            },
+            {
+              "paper": "9702/23",
+              "session": "October/November 2024",
+              "question": "4(a)(i)"
+            }
+          ]
+        },
+        {
+          "id": "strain",
+          "term": "Strain",
+          "prompt": "Define strain.",
+          "answer": "Strain is extension per unit original length.",
+          "alt": [
+            "extension / original length"
+          ],
+          "sources": [
+            {
+              "paper": "9702/21",
+              "session": "May/June 2024",
+              "question": "4(a)"
+            },
+            {
+              "paper": "9702/21",
+              "session": "October/November 2017",
+              "question": "4(a)"
+            },
+            {
+              "paper": "9702/21",
+              "session": "October/November 2020",
+              "question": "4(a)(ii)"
+            },
+            {
+              "paper": "9702/22",
+              "session": "February/March 2018",
+              "question": "3(a)(ii)"
+            },
+            {
+              "paper": "9702/23",
+              "session": "October/November 2024",
+              "question": "4(a)(ii)"
+            }
+          ]
+        },
+        {
+          "id": "young-modulus",
+          "term": "Young modulus",
+          "prompt": "Define the Young modulus.",
+          "answer": "The Young modulus is stress divided by strain.",
+          "alt": [
+            "stress per unit strain"
+          ],
+          "sources": [
+            {
+              "paper": "9702/22",
+              "session": "May/June 2016",
+              "question": "3(a)"
+            },
+            {
+              "paper": "9702/23",
+              "session": "May/June 2018",
+              "question": "4(a)"
+            },
+            {
+              "paper": "9702/23",
+              "session": "May/June 2023",
+              "question": "6(a)"
+            },
+            {
+              "paper": "9702/21",
+              "session": "October/November 2024",
+              "question": "4(a)"
+            }
+          ]
+        },
+        {
+          "id": "hookes-law",
+          "term": "Hooke's law",
+          "prompt": "State Hooke's law.",
+          "answer": "The extension is proportional to the applied force, provided the limit of proportionality is not exceeded.",
+          "alt": [
+            "force/load is proportional to extension/compression (provided proportionality limit is not exceeded)"
+          ],
+          "sources": [
+            {
+              "paper": "9702/21",
+              "session": "October/November 2016",
+              "question": "3(a)"
+            },
+            {
+              "paper": "9702/23",
+              "session": "October/November 2020",
+              "question": "4(a)"
+            },
+            {
+              "paper": "9702/23",
+              "session": "May/June 2024",
+              "question": "3(a)"
+            }
+          ]
+        },
+        {
+          "id": "elastic-deformation",
+          "term": "Elastic extension",
+          "prompt": "Explain what is meant by a wire being extended elastically.",
+          "answer": "A wire that is extended elastically returns to its original length when the load is removed.",
+          "notes": "Only one mark scheme found (2013). Mark scheme says original length, not shape.",
+          "sources": [
+            {
+              "paper": "9702/21",
+              "session": "May/June 2013",
+              "question": "1(a)"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "waves",
+      "title": "Waves",
+      "items": [
+        {
+          "id": "wave-displacement",
+          "term": "Displacement (of a wave)",
+          "prompt": "For a progressive wave, state what is meant by displacement.",
+          "answer": "Displacement is the distance of a particle or point on the wave from its equilibrium position.",
+          "alt": [
+            "distance from the equilibrium / undisturbed position"
+          ],
+          "sources": [
+            {
+              "paper": "9702/22",
+              "session": "May/June 2019",
+              "question": "4(a)(i)"
+            },
+            {
+              "paper": "9702/21",
+              "session": "May/June 2014",
+              "question": "5(a)(i)"
+            }
+          ]
+        },
+        {
+          "id": "amplitude",
+          "term": "Amplitude",
+          "prompt": "For a progressive wave, state what is meant by amplitude.",
+          "answer": "Amplitude is the maximum displacement of a particle or point on the wave.",
+          "alt": [
+            "the maximum distance (of particle/point on wave) from the equilibrium position"
+          ],
+          "sources": [
+            {
+              "paper": "9702/22",
+              "session": "February/March 2020",
+              "question": "4(a)(ii)"
+            },
+            {
+              "paper": "9702/22",
+              "session": "May/June 2019",
+              "question": "4(a)(ii)"
+            },
+            {
+              "paper": "9702/23",
+              "session": "October/November 2021",
+              "question": "5(a)"
+            },
+            {
+              "paper": "9702/21",
+              "session": "May/June 2014",
+              "question": "5(a)(i)"
+            }
+          ]
+        },
+        {
+          "id": "period",
+          "term": "Period",
+          "prompt": "For a progressive wave, state what is meant by its period.",
+          "answer": "The period is the time for one oscillation.",
+          "alt": [
+            "time for one vibration / one cycle",
+            "time between adjacent wavefronts passing the same point"
+          ],
+          "sources": [
+            {
+              "paper": "9702/22",
+              "session": "May/June 2021",
+              "question": "4(a)"
+            },
+            {
+              "paper": "9702/21",
+              "session": "May/June 2018",
+              "question": "4(a)(i)"
+            }
+          ]
+        },
+        {
+          "id": "frequency",
+          "term": "Frequency",
+          "prompt": "For a progressive wave, state what is meant by the frequency.",
+          "answer": "The frequency is the number of oscillations per unit time.",
+          "alt": [
+            "the number of wavefronts / crests passing a fixed point per unit time"
+          ],
+          "notes": "Oscillations of the source, of a point on the wave or of a particle of the medium.",
+          "sources": [
+            {
+              "paper": "9702/23",
+              "session": "May/June 2023",
+              "question": "4(a)"
+            },
+            {
+              "paper": "9702/21",
+              "session": "October/November 2016",
+              "question": "4(a)"
+            },
+            {
+              "paper": "9702/22",
+              "session": "May/June 2017",
+              "question": "5(a)"
+            },
+            {
+              "paper": "9702/21",
+              "session": "May/June 2014",
+              "question": "5(a)(ii)"
+            }
+          ]
+        },
+        {
+          "id": "wavelength",
+          "term": "Wavelength",
+          "prompt": "For a progressive wave, state what is meant by wavelength.",
+          "answer": "The wavelength is the distance moved by the wavefront during one oscillation of the source.",
+          "alt": [
+            "minimum distance between two wavefronts",
+            "distance between two adjacent wavefronts"
+          ],
+          "sources": [
+            {
+              "paper": "9702/22",
+              "session": "May/June 2018",
+              "question": "4(a)(i)"
+            },
+            {
+              "paper": "9702/22",
+              "session": "October/November 2019",
+              "question": "5(a)"
+            },
+            {
+              "paper": "9702/21",
+              "session": "May/June 2021",
+              "question": "4(a)"
+            },
+            {
+              "paper": "9702/22",
+              "session": "February/March 2020",
+              "question": "4(a)(i)"
+            },
+            {
+              "paper": "9702/21",
+              "session": "May/June 2018",
+              "question": "4(a)(ii)"
+            }
+          ]
+        },
+        {
+          "id": "transverse-wave",
+          "term": "Transverse wave",
+          "prompt": "By reference to the direction of propagation of energy, state what is meant by a transverse wave.",
+          "answer": "In a transverse wave the oscillations of the particles are perpendicular to the direction of propagation of energy.",
+          "alt": [
+            "vibrations/oscillations (of the particles/wave) are perpendicular to the direction of energy propagation"
+          ],
+          "sources": [
+            {
+              "paper": "9702/22",
+              "session": "February/March 2024",
+              "question": "5(a)"
+            },
+            {
+              "paper": "9702/22",
+              "session": "May/June 2016",
+              "question": "4(a)"
+            },
+            {
+              "paper": "9702/22",
+              "session": "February/March 2016",
+              "question": "4(a)(i)"
+            },
+            {
+              "paper": "9702/23",
+              "session": "October/November 2014",
+              "question": "7(a)(i)"
+            }
+          ]
+        },
+        {
+          "id": "longitudinal-wave",
+          "term": "Longitudinal wave",
+          "prompt": "By reference to the direction of propagation of energy, state what is meant by a longitudinal wave.",
+          "answer": "In a longitudinal wave the oscillations of the particles are parallel to the direction of propagation of energy.",
+          "alt": [
+            "vibrations/oscillations (of the particles/wave) are parallel to the direction of energy propagation"
+          ],
+          "sources": [
+            {
+              "paper": "9702/21",
+              "session": "May/June 2020",
+              "question": "4(a)(i)"
+            },
+            {
+              "paper": "9702/22",
+              "session": "October/November 2018",
+              "question": "4(a)"
+            },
+            {
+              "paper": "9702/21",
+              "session": "October/November 2021",
+              "question": "4(a)"
+            },
+            {
+              "paper": "9702/23",
+              "session": "October/November 2017",
+              "question": "4(a)"
+            },
+            {
+              "paper": "9702/22",
+              "session": "May/June 2016",
+              "question": "4(a)"
+            }
+          ]
+        },
+        {
+          "id": "polarisation",
+          "term": "Polarisation",
+          "prompt": "State the meaning of polarisation.",
+          "answer": "Polarisation is when the oscillations are in a single direction, perpendicular to the direction of propagation of the wave.",
+          "alt": [
+            "oscillations are in a single plane, which contains the direction of propagation (of the wave)"
+          ],
+          "notes": "Only one mark scheme found.",
+          "sources": [
+            {
+              "paper": "9702/21",
+              "session": "October/November 2022",
+              "question": "4(a)(i)"
+            }
+          ]
+        },
+        {
+          "id": "doppler-effect",
+          "term": "Doppler effect",
+          "prompt": "State what is meant by the Doppler effect.",
+          "answer": "The Doppler effect is the change in the observed frequency when the source moves relative to the observer.",
+          "notes": "Must refer to the change in observed/apparent frequency.",
+          "sources": [
+            {
+              "paper": "9702/22",
+              "session": "February/March 2017",
+              "question": "4(a)"
+            },
+            {
+              "paper": "9702/22",
+              "session": "May/June 2016",
+              "question": "4(c)(i)"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "superposition",
+      "title": "Superposition",
+      "items": [
+        {
+          "id": "principle-of-superposition",
+          "term": "Principle of superposition",
+          "prompt": "State the principle of superposition.",
+          "answer": "When two or more waves meet at a point, the resultant displacement is the sum of the individual displacements.",
+          "alt": [
+            "waves meet/overlap (at a point); (resultant) displacement is the sum of the individual displacements"
+          ],
+          "sources": [
+            {
+              "paper": "9702/22",
+              "session": "February/March 2021",
+              "question": "4(a)"
+            },
+            {
+              "paper": "9702/21",
+              "session": "May/June 2020",
+              "question": "4(a)(ii)"
+            },
+            {
+              "paper": "9702/21",
+              "session": "October/November 2018",
+              "question": "4(a)"
+            },
+            {
+              "paper": "9702/22",
+              "session": "May/June 2021",
+              "question": "4(b)"
+            },
+            {
+              "paper": "9702/23",
+              "session": "May/June 2023",
+              "question": "4(d)(i)"
+            },
+            {
+              "paper": "9702/21",
+              "session": "October/November 2023",
+              "question": "4(a)"
+            }
+          ]
+        },
+        {
+          "id": "diffraction",
+          "term": "Diffraction",
+          "prompt": "State what is meant by the diffraction of a wave.",
+          "answer": "Diffraction is the spreading of a wave into the geometrical shadow as it passes through an aperture or by an edge.",
+          "alt": [
+            "wave passes through an aperture or by an edge and spreads"
+          ],
+          "sources": [
+            {
+              "paper": "9702/21",
+              "session": "October/November 2016",
+              "question": "5(a)"
+            },
+            {
+              "paper": "9702/22",
+              "session": "October/November 2016",
+              "question": "4(a)"
+            },
+            {
+              "paper": "9702/22",
+              "session": "October/November 2023",
+              "question": "5(b)"
+            },
+            {
+              "paper": "9702/21",
+              "session": "May/June 2015",
+              "question": "6(a)"
+            }
+          ]
+        },
+        {
+          "id": "interference",
+          "term": "Interference",
+          "prompt": "State what is meant by interference.",
+          "answer": "Interference is the sum of the displacements of overlapping waves.",
+          "alt": [
+            "when two (or more) waves superpose/meet/overlap the resultant displacement is the sum of the displacement of each wave"
+          ],
+          "sources": [
+            {
+              "paper": "9702/21",
+              "session": "May/June 2015",
+              "question": "6(a)"
+            },
+            {
+              "paper": "9702/23",
+              "session": "October/November 2019",
+              "question": "5(a)(ii)"
+            }
+          ]
+        },
+        {
+          "id": "coherence",
+          "term": "Coherence",
+          "prompt": "State what is meant by coherent waves.",
+          "answer": "Coherent waves have a constant phase difference between them.",
+          "sources": [
+            {
+              "paper": "9702/22",
+              "session": "February/March 2019",
+              "question": "5(a)(ii)"
+            },
+            {
+              "paper": "9702/21",
+              "session": "May/June 2019",
+              "question": "5(c)(i)"
+            },
+            {
+              "paper": "9702/21",
+              "session": "October/November 2018",
+              "question": "4(b)(i)"
+            },
+            {
+              "paper": "9702/22",
+              "session": "May/June 2022",
+              "question": "5(a)"
+            },
+            {
+              "paper": "9702/21",
+              "session": "May/June 2023",
+              "question": "5(b)(i)"
+            },
+            {
+              "paper": "9702/23",
+              "session": "October/November 2019",
+              "question": "5(a)(i)"
+            }
+          ]
+        },
+        {
+          "id": "node",
+          "term": "Node",
+          "prompt": "State what is meant by a node of a stationary wave.",
+          "answer": "A node is a position of zero amplitude.",
+          "sources": [
+            {
+              "paper": "9702/22",
+              "session": "May/June 2020",
+              "question": "4(c)(i)"
+            },
+            {
+              "paper": "9702/21",
+              "session": "October/November 2020",
+              "question": "6(b)(i)"
+            }
+          ]
+        },
+        {
+          "id": "antinode",
+          "term": "Antinode",
+          "prompt": "State what is meant by an antinode of a stationary wave.",
+          "answer": "An antinode is a position of maximum amplitude.",
+          "sources": [
+            {
+              "paper": "9702/22",
+              "session": "May/June 2018",
+              "question": "4(a)(ii)"
+            },
+            {
+              "paper": "9702/21",
+              "session": "October/November 2017",
+              "question": "3(b)(i)"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "electricity",
+      "title": "Electricity",
+      "items": [
+        {
+          "id": "electric-current",
+          "term": "Electric current",
+          "prompt": "State what is meant by an electric current.",
+          "answer": "Electric current is the flow of charge carriers.",
+          "alt": [
+            "movement of charge carriers"
+          ],
+          "sources": [
+            {
+              "paper": "9702/22",
+              "session": "October/November 2017",
+              "question": "6(a)"
+            },
+            {
+              "paper": "9702/22",
+              "session": "February/March 2016",
+              "question": "5(a)(i)"
+            }
+          ]
+        },
+        {
+          "id": "coulomb",
+          "term": "Coulomb",
+          "prompt": "Define the coulomb.",
+          "answer": "The coulomb is the ampere second.",
+          "sources": [
+            {
+              "paper": "9702/21",
+              "session": "May/June 2016",
+              "question": "6(a)"
+            },
+            {
+              "paper": "9702/22",
+              "session": "October/November 2017",
+              "question": "5(a)"
+            },
+            {
+              "paper": "9702/23",
+              "session": "October/November 2018",
+              "question": "6(a)"
+            }
+          ]
+        },
+        {
+          "id": "quantisation-of-charge",
+          "term": "Quantisation of charge",
+          "prompt": "State what is meant by quantisation of charge.",
+          "answer": "Charge exists only in discrete amounts, which are integral multiples of the elementary charge.",
+          "alt": [
+            "charge exists in discrete and equal quantities"
+          ],
+          "notes": "The 2016 mark scheme accepted 'charge exists only in discrete amounts'.",
+          "sources": [
+            {
+              "paper": "9702/22",
+              "session": "May/June 2016",
+              "question": "7(a)"
+            },
+            {
+              "paper": "9702/41",
+              "session": "May/June 2014",
+              "question": "8(a)"
+            },
+            {
+              "paper": "9702/43",
+              "session": "October/November 2014",
+              "question": "7(a)"
+            }
+          ]
+        },
+        {
+          "id": "potential-difference",
+          "term": "Potential difference",
+          "prompt": "Define potential difference.",
+          "answer": "Potential difference is the energy transferred from electrical to other forms per unit charge.",
+          "alt": [
+            "work done / charge"
+          ],
+          "notes": "Must say energy (or work done) per unit charge.",
+          "sources": [
+            {
+              "paper": "9702/22",
+              "session": "February/March 2023",
+              "question": "6(a)"
+            },
+            {
+              "paper": "9702/22",
+              "session": "October/November 2022",
+              "question": "6(a)"
+            },
+            {
+              "paper": "9702/22",
+              "session": "February/March 2024",
+              "question": "7(a)"
+            },
+            {
+              "paper": "9702/22",
+              "session": "October/November 2024",
+              "question": "5(a)"
+            },
+            {
+              "paper": "9702/21",
+              "session": "October/November 2019",
+              "question": "6(a)"
+            },
+            {
+              "paper": "9702/23",
+              "session": "October/November 2020",
+              "question": "6(a)"
+            }
+          ]
+        },
+        {
+          "id": "volt",
+          "term": "Volt",
+          "prompt": "Define the volt.",
+          "answer": "The volt is the joule per coulomb.",
+          "sources": [
+            {
+              "paper": "9702/21",
+              "session": "May/June 2018",
+              "question": "6(a)"
+            },
+            {
+              "paper": "9702/22",
+              "session": "October/November 2018",
+              "question": "6(a)"
+            },
+            {
+              "paper": "9702/23",
+              "session": "May/June 2020",
+              "question": "5(a)"
+            }
+          ]
+        },
+        {
+          "id": "emf",
+          "term": "Electromotive force (e.m.f.)",
+          "prompt": "Define the electromotive force (e.m.f.) of a source.",
+          "answer": "The e.m.f. of a source is the energy transferred from other forms to electrical energy per unit charge driven around a complete circuit.",
+          "alt": [
+            "energy per unit charge"
+          ],
+          "sources": [
+            {
+              "paper": "9702/22",
+              "session": "May/June 2017",
+              "question": "7(a)"
+            },
+            {
+              "paper": "9702/23",
+              "session": "May/June 2021",
+              "question": "5(a)"
+            }
+          ]
+        },
+        {
+          "id": "resistance",
+          "term": "Resistance",
+          "prompt": "Define resistance.",
+          "answer": "Resistance is potential difference per unit current.",
+          "alt": [
+            "potential difference / current"
+          ],
+          "sources": [
+            {
+              "paper": "9702/23",
+              "session": "May/June 2019",
+              "question": "1(a)(i)"
+            },
+            {
+              "paper": "9702/23",
+              "session": "October/November 2024",
+              "question": "6(a)"
+            }
+          ]
+        },
+        {
+          "id": "ohm",
+          "term": "Ohm",
+          "prompt": "Define the ohm.",
+          "answer": "The ohm is the volt per ampere.",
+          "sources": [
+            {
+              "paper": "9702/21",
+              "session": "May/June 2017",
+              "question": "6(a)"
+            },
+            {
+              "paper": "9702/21",
+              "session": "October/November 2017",
+              "question": "7(a)"
+            },
+            {
+              "paper": "9702/22",
+              "session": "February/March 2020",
+              "question": "5(a)"
+            },
+            {
+              "paper": "9702/22",
+              "session": "May/June 2021",
+              "question": "5(a)"
+            },
+            {
+              "paper": "9702/23",
+              "session": "May/June 2016",
+              "question": "6(a)"
+            },
+            {
+              "paper": "9702/23",
+              "session": "May/June 2019",
+              "question": "6(a)"
+            }
+          ]
+        },
+        {
+          "id": "ohms-law",
+          "term": "Ohm's law",
+          "prompt": "State Ohm's law.",
+          "answer": "The current through a conductor is directly proportional to the potential difference across the conductor, provided that the temperature remains constant.",
+          "sources": [
+            {
+              "paper": "9702/21",
+              "session": "October/November 2022",
+              "question": "5(a)"
+            },
+            {
+              "paper": "9702/23",
+              "session": "October/November 2023",
+              "question": "7(a)"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "dc-circuits",
+      "title": "D.C. circuits",
+      "items": [
+        {
+          "id": "kirchhoffs-first-law",
+          "term": "Kirchhoff's first law",
+          "prompt": "State Kirchhoff's first law.",
+          "answer": "The sum of the currents into a junction is equal to the sum of the currents out of the junction.",
+          "alt": [
+            "the (algebraic) sum of the currents at a junction is zero"
+          ],
+          "sources": [
+            {
+              "paper": "9702/22",
+              "session": "February/March 2021",
+              "question": "6(a)"
+            },
+            {
+              "paper": "9702/22",
+              "session": "May/June 2018",
+              "question": "6(a)(i)"
+            },
+            {
+              "paper": "9702/22",
+              "session": "October/November 2019",
+              "question": "6(a)"
+            },
+            {
+              "paper": "9702/21",
+              "session": "May/June 2022",
+              "question": "6(a)"
+            },
+            {
+              "paper": "9702/21",
+              "session": "October/November 2021",
+              "question": "5(a)"
+            },
+            {
+              "paper": "9702/21",
+              "session": "May/June 2024",
+              "question": "6(a)"
+            }
+          ]
+        },
+        {
+          "id": "kirchhoffs-second-law",
+          "term": "Kirchhoff's second law",
+          "prompt": "State Kirchhoff's second law.",
+          "answer": "The sum of the e.m.f.s is equal to the sum of the potential differences around a closed loop.",
+          "alt": [
+            "the (algebraic) sum of the e.m.f.s and p.d.s is zero around a loop/closed circuit"
+          ],
+          "sources": [
+            {
+              "paper": "9702/22",
+              "session": "February/March 2018",
+              "question": "5(a)"
+            },
+            {
+              "paper": "9702/22",
+              "session": "May/June 2019",
+              "question": "5(a)"
+            },
+            {
+              "paper": "9702/21",
+              "session": "May/June 2021",
+              "question": "5(a)"
+            },
+            {
+              "paper": "9702/22",
+              "session": "May/June 2024",
+              "question": "5(a)"
+            },
+            {
+              "paper": "9702/22",
+              "session": "October/November 2016",
+              "question": "5(a)"
+            },
+            {
+              "paper": "9702/23",
+              "session": "October/November 2022",
+              "question": "5(a)"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "particle-physics",
+      "title": "Particle physics",
+      "items": [
+        {
+          "id": "fundamental-particle",
+          "term": "Fundamental particle",
+          "prompt": "State what is meant by fundamental particle.",
+          "answer": "A fundamental particle is a particle with no internal structure, which cannot be broken down into anything smaller.",
+          "notes": "Only one mark scheme found.",
+          "sources": [
+            {
+              "paper": "9702/21",
+              "session": "October/November 2022",
+              "question": "6(a)"
+            }
+          ]
+        },
+        {
+          "id": "isotopes",
+          "term": "Isotopes",
+          "prompt": "State what is meant by isotopes.",
+          "answer": "Isotopes are nuclei having the same number of protons with different numbers of neutrons.",
+          "alt": [
+            "different forms of the same element"
+          ],
+          "notes": "Only one mark scheme found (2015).",
+          "sources": [
+            {
+              "paper": "9702/43",
+              "session": "October/November 2015",
+              "question": "9(b)(i)"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "motion-in-a-circle",
+      "title": "Motion in a circle",
+      "items": [
+        {
+          "id": "radian",
+          "term": "Radian",
+          "prompt": "Define the radian.",
+          "answer": "The radian is the angle subtended at the centre of a circle by an arc equal in length to the radius.",
+          "alt": [
+            "angle subtended where arc length is equal to radius"
+          ],
+          "sources": [
+            {
+              "paper": "9702/42",
+              "session": "October/November 2017",
+              "question": "3(a)(i)"
+            },
+            {
+              "paper": "9702/42",
+              "session": "October/November 2023",
+              "question": "1(a)"
+            },
+            {
+              "paper": "9702/42",
+              "session": "May/June 2024",
+              "question": "1(a)"
+            },
+            {
+              "paper": "9702/42",
+              "session": "May/June 2014",
+              "question": "7(a)"
+            }
+          ]
+        },
+        {
+          "id": "centripetal-acceleration",
+          "term": "Centripetal acceleration",
+          "prompt": "State what is meant by centripetal acceleration.",
+          "answer": "Centripetal acceleration is acceleration perpendicular to the velocity.",
+          "notes": "Only one mark scheme found.",
+          "sources": [
+            {
+              "paper": "9702/42",
+              "session": "October/November 2021",
+              "question": "1(a)"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "gravitational-fields",
+      "title": "Gravitational fields",
+      "items": [
+        {
+          "id": "field-of-force",
+          "term": "Field of force",
+          "prompt": "State what is meant by a field of force.",
+          "answer": "A field of force is a region of space where a particle experiences a force.",
+          "sources": [
+            {
+              "paper": "9702/42",
+              "session": "October/November 2017",
+              "question": "9(a)"
+            },
+            {
+              "paper": "9702/41",
+              "session": "October/November 2020",
+              "question": "1(a)(i)"
+            },
+            {
+              "paper": "9702/41",
+              "session": "October/November 2016",
+              "question": "7(a)"
+            },
+            {
+              "paper": "9702/42",
+              "session": "October/November 2020",
+              "question": "5(a)(i)"
+            }
+          ]
+        },
+        {
+          "id": "gravitational-field-strength",
+          "term": "Gravitational field strength",
+          "prompt": "Define gravitational field strength.",
+          "answer": "Gravitational field strength is force per unit mass.",
+          "notes": "Also asked as 'Define gravitational field.' (w22/42 1(a), s23/41 1(a)(i)) with the same answer.",
+          "sources": [
+            {
+              "paper": "9702/42",
+              "session": "May/June 2017",
+              "question": "1(a)"
+            },
+            {
+              "paper": "9702/42",
+              "session": "October/November 2016",
+              "question": "1(a)"
+            },
+            {
+              "paper": "9702/41",
+              "session": "May/June 2021",
+              "question": "1(a)"
+            },
+            {
+              "paper": "9702/41",
+              "session": "October/November 2020",
+              "question": "1(a)(ii)"
+            },
+            {
+              "paper": "9702/42",
+              "session": "October/November 2022",
+              "question": "1(a)"
+            },
+            {
+              "paper": "9702/41",
+              "session": "May/June 2023",
+              "question": "1(a)(i)"
+            }
+          ]
+        },
+        {
+          "id": "gravitational-line-of-force",
+          "term": "Line of force (gravitational)",
+          "prompt": "State what is meant by a line of force in a gravitational field.",
+          "answer": "A line of force in a gravitational field shows the direction of the force on a small test mass.",
+          "alt": [
+            "direction of acceleration of a (small test) mass",
+            "path in which a (small test) mass will move"
+          ],
+          "sources": [
+            {
+              "paper": "9702/42",
+              "session": "February/March 2018",
+              "question": "1(a)(i)"
+            },
+            {
+              "paper": "9702/42",
+              "session": "May/June 2018",
+              "question": "1(a)(i)"
+            }
+          ]
+        },
+        {
+          "id": "gravitational-potential",
+          "term": "Gravitational potential at a point",
+          "prompt": "Define gravitational potential at a point.",
+          "answer": "Gravitational potential at a point is the work done per unit mass in bringing a small test mass from infinity to the point.",
+          "alt": [
+            "work done per unit mass moving mass from infinity (to the point)"
+          ],
+          "notes": "Must have work done per unit mass and the idea of moving a mass from infinity.",
+          "sources": [
+            {
+              "paper": "9702/42",
+              "session": "February/March 2017",
+              "question": "1(a)"
+            },
+            {
+              "paper": "9702/42",
+              "session": "February/March 2019",
+              "question": "1(a)(i)"
+            },
+            {
+              "paper": "9702/42",
+              "session": "May/June 2020",
+              "question": "1(a)"
+            },
+            {
+              "paper": "9702/41",
+              "session": "October/November 2021",
+              "question": "2(a)"
+            },
+            {
+              "paper": "9702/41",
+              "session": "May/June 2024",
+              "question": "1(a)"
+            },
+            {
+              "paper": "9702/41",
+              "session": "October/November 2018",
+              "question": "1(a)(i)"
+            }
+          ]
+        },
+        {
+          "id": "newtons-law-of-gravitation",
+          "term": "Newton's law of gravitation",
+          "prompt": "State Newton's law of gravitation.",
+          "answer": "The gravitational force between two point masses is directly proportional to the product of the masses and inversely proportional to the square of their separation.",
+          "notes": "Must refer to point masses.",
+          "sources": [
+            {
+              "paper": "9702/42",
+              "session": "October/November 2017",
+              "question": "1(a)"
+            },
+            {
+              "paper": "9702/41",
+              "session": "May/June 2018",
+              "question": "1(a)"
+            },
+            {
+              "paper": "9702/42",
+              "session": "February/March 2021",
+              "question": "1(a)"
+            },
+            {
+              "paper": "9702/41",
+              "session": "May/June 2022",
+              "question": "1(a)(i)"
+            },
+            {
+              "paper": "9702/42",
+              "session": "May/June 2023",
+              "question": "1(a)"
+            },
+            {
+              "paper": "9702/41",
+              "session": "October/November 2024",
+              "question": "1(a)"
+            }
+          ]
+        },
+        {
+          "id": "geostationary-orbit",
+          "term": "Geostationary orbit",
+          "prompt": "State the features of the orbit of a geostationary satellite.",
+          "answer": "A geostationary orbit is above the Equator, from west to east, with a period of 24 hours.",
+          "notes": "Asked as 'state three features' or 'two other features'. Others accepted: one particular orbital radius, circular orbit.",
+          "sources": [
+            {
+              "paper": "9702/42",
+              "session": "February/March 2019",
+              "question": "4(a)"
+            },
+            {
+              "paper": "9702/41",
+              "session": "October/November 2016",
+              "question": "1(b)(i)"
+            },
+            {
+              "paper": "9702/42",
+              "session": "October/November 2018",
+              "question": "5(c)(i)"
+            },
+            {
+              "paper": "9702/41",
+              "session": "October/November 2022",
+              "question": "1(c)(ii)"
+            },
+            {
+              "paper": "9702/42",
+              "session": "May/June 2013",
+              "question": "1(a)"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "temperature",
+      "title": "Temperature",
+      "items": [
+        {
+          "id": "thermal-equilibrium",
+          "term": "Thermal equilibrium",
+          "prompt": "State what is meant by two objects being in thermal equilibrium.",
+          "answer": "Two objects are in thermal equilibrium when there is no net transfer of thermal energy between them.",
+          "alt": [
+            "the bodies are at the same temperature"
+          ],
+          "sources": [
+            {
+              "paper": "9702/42",
+              "session": "May/June 2016",
+              "question": "3(a)"
+            },
+            {
+              "paper": "9702/43",
+              "session": "October/November 2015",
+              "question": "3(a)"
+            },
+            {
+              "paper": "9702/42",
+              "session": "May/June 2024",
+              "question": "2(a)"
+            }
+          ]
+        },
+        {
+          "id": "specific-heat-capacity",
+          "term": "Specific heat capacity",
+          "prompt": "Define specific heat capacity.",
+          "answer": "Specific heat capacity is the thermal energy required per unit mass per unit change in temperature.",
+          "alt": [
+            "thermal energy per unit mass to cause a temperature change",
+            "thermal energy per unit change in temperature"
+          ],
+          "sources": [
+            {
+              "paper": "9702/41",
+              "session": "October/November 2021",
+              "question": "3(a)"
+            },
+            {
+              "paper": "9702/42",
+              "session": "October/November 2022",
+              "question": "2(a)"
+            },
+            {
+              "paper": "9702/41",
+              "session": "October/November 2023",
+              "question": "2(a)"
+            },
+            {
+              "paper": "9702/41",
+              "session": "October/November 2024",
+              "question": "2(a)"
+            },
+            {
+              "paper": "9702/43",
+              "session": "October/November 2023",
+              "question": "2(a)"
+            }
+          ]
+        },
+        {
+          "id": "specific-latent-heat",
+          "term": "Specific latent heat",
+          "prompt": "State what is meant by specific latent heat.",
+          "answer": "Specific latent heat is the thermal energy per unit mass required to change the state of a substance at constant temperature.",
+          "sources": [
+            {
+              "paper": "9702/42",
+              "session": "October/November 2017",
+              "question": "2(a)"
+            },
+            {
+              "paper": "9702/41",
+              "session": "October/November 2019",
+              "question": "3(a)"
+            },
+            {
+              "paper": "9702/42",
+              "session": "October/November 2019",
+              "question": "3(a)"
+            },
+            {
+              "paper": "9702/42",
+              "session": "October/November 2024",
+              "question": "3(a)"
+            }
+          ]
+        },
+        {
+          "id": "specific-latent-heat-of-fusion",
+          "term": "Specific latent heat of fusion",
+          "prompt": "Define specific latent heat of fusion.",
+          "answer": "Specific latent heat of fusion is the thermal energy per unit mass required to change a substance between solid and liquid at constant temperature.",
+          "notes": "Only one mark scheme found.",
+          "sources": [
+            {
+              "paper": "9702/42",
+              "session": "October/November 2018",
+              "question": "3(a)"
+            }
+          ]
+        },
+        {
+          "id": "specific-latent-heat-of-vaporisation",
+          "term": "Specific latent heat of vaporisation",
+          "prompt": "Define specific latent heat of vaporisation.",
+          "answer": "Specific latent heat of vaporisation is the thermal energy per unit mass required to change a substance between liquid and gas at constant temperature.",
+          "notes": "Only one mark scheme found.",
+          "sources": [
+            {
+              "paper": "9702/42",
+              "session": "May/June 2022",
+              "question": "3(a)"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ideal-gases",
+      "title": "Ideal gases",
+      "items": [
+        {
+          "id": "ideal-gas",
+          "term": "Ideal gas",
+          "prompt": "State what is meant by an ideal gas.",
+          "answer": "An ideal gas is a gas that obeys pV proportional to T for all values of p, V and T, where T is the thermodynamic temperature.",
+          "alt": [
+            "a gas that obeys pV = constant x T",
+            "gas obeys pV/T = constant"
+          ],
+          "notes": "Must say thermodynamic (kelvin) temperature.",
+          "sources": [
+            {
+              "paper": "9702/42",
+              "session": "February/March 2023",
+              "question": "2(a)"
+            },
+            {
+              "paper": "9702/42",
+              "session": "May/June 2023",
+              "question": "2(a)(i)"
+            },
+            {
+              "paper": "9702/41",
+              "session": "May/June 2022",
+              "question": "3(a)(i)"
+            },
+            {
+              "paper": "9702/41",
+              "session": "May/June 2024",
+              "question": "3(a)(i)"
+            },
+            {
+              "paper": "9702/42",
+              "session": "October/November 2018",
+              "question": "2(a)"
+            },
+            {
+              "paper": "9702/42",
+              "session": "February/March 2019",
+              "question": "2(a)"
+            }
+          ]
+        },
+        {
+          "id": "avogadro-constant",
+          "term": "Avogadro constant",
+          "prompt": "State what is meant by the Avogadro constant.",
+          "answer": "The Avogadro constant is the number of particles per unit amount of substance.",
+          "alt": [
+            "the number of atoms in 12 g of carbon-12"
+          ],
+          "sources": [
+            {
+              "paper": "9702/41",
+              "session": "October/November 2024",
+              "question": "3(a)(i)"
+            },
+            {
+              "paper": "9702/42",
+              "session": "May/June 2016",
+              "question": "2(a)(i)"
+            },
+            {
+              "paper": "9702/41",
+              "session": "May/June 2014",
+              "question": "2(a)"
+            }
+          ]
+        },
+        {
+          "id": "mole",
+          "term": "Mole",
+          "prompt": "State what is meant by a mole.",
+          "answer": "A mole is the amount of substance that contains the same number of particles as there are atoms in 12 g of carbon-12.",
+          "notes": "Only one mark scheme found.",
+          "sources": [
+            {
+              "paper": "9702/42",
+              "session": "May/June 2016",
+              "question": "2(a)(ii)"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "thermodynamics",
+      "title": "Thermodynamics",
+      "items": [
+        {
+          "id": "internal-energy",
+          "term": "Internal energy",
+          "prompt": "State what is meant by the internal energy of a system.",
+          "answer": "The internal energy of a system is the sum of the potential energy and kinetic energy of its molecules, which are in random motion.",
+          "notes": "Must have both potential and kinetic energy and refer to random motion.",
+          "sources": [
+            {
+              "paper": "9702/42",
+              "session": "October/November 2016",
+              "question": "3(a)"
+            },
+            {
+              "paper": "9702/41",
+              "session": "May/June 2018",
+              "question": "3(a)(i)"
+            },
+            {
+              "paper": "9702/41",
+              "session": "May/June 2020",
+              "question": "2(a)"
+            },
+            {
+              "paper": "9702/42",
+              "session": "October/November 2020",
+              "question": "2(a)"
+            },
+            {
+              "paper": "9702/42",
+              "session": "October/November 2023",
+              "question": "3(a)"
+            },
+            {
+              "paper": "9702/42",
+              "session": "February/March 2024",
+              "question": "2(a)"
+            }
+          ]
+        },
+        {
+          "id": "first-law-of-thermodynamics",
+          "term": "First law of thermodynamics",
+          "prompt": "State the first law of thermodynamics.",
+          "answer": "The increase in internal energy of a system is equal to the work done on the system plus the energy transferred to the system by heating.",
+          "notes": "Only one mark scheme found. Symbols to identify: U increase in internal energy, q heating, W work done on system.",
+          "sources": [
+            {
+              "paper": "9702/42",
+              "session": "May/June 2023",
+              "question": "3(a)"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "oscillations",
+      "title": "Oscillations",
+      "items": [
+        {
+          "id": "simple-harmonic-motion",
+          "term": "Simple harmonic motion",
+          "prompt": "State what is meant by simple harmonic motion.",
+          "answer": "Simple harmonic motion is motion in which the acceleration is directly proportional to the displacement and is in the opposite direction to the displacement.",
+          "alt": [
+            "acceleration is always directed towards a fixed point"
+          ],
+          "sources": [
+            {
+              "paper": "9702/41",
+              "session": "May/June 2016",
+              "question": "3(a)"
+            },
+            {
+              "paper": "9702/41",
+              "session": "May/June 2021",
+              "question": "3(a)"
+            },
+            {
+              "paper": "9702/41",
+              "session": "October/November 2020",
+              "question": "3(a)"
+            },
+            {
+              "paper": "9702/42",
+              "session": "October/November 2020",
+              "question": "3(a)"
+            },
+            {
+              "paper": "9702/41",
+              "session": "October/November 2023",
+              "question": "4(a)"
+            },
+            {
+              "paper": "9702/41",
+              "session": "October/November 2024",
+              "question": "4(a)"
+            }
+          ]
+        },
+        {
+          "id": "angular-frequency",
+          "term": "Angular frequency",
+          "prompt": "State, by reference to simple harmonic motion, what is meant by angular frequency.",
+          "answer": "Angular frequency is 2 pi multiplied by the frequency, or 2 pi divided by the period.",
+          "alt": [
+            "2 pi f",
+            "2 pi / T"
+          ],
+          "sources": [
+            {
+              "paper": "9702/41",
+              "session": "October/November 2017",
+              "question": "2(a)"
+            },
+            {
+              "paper": "9702/42",
+              "session": "October/November 2017",
+              "question": "3(a)(ii)"
+            }
+          ]
+        },
+        {
+          "id": "natural-frequency",
+          "term": "Natural frequency",
+          "prompt": "Explain what is meant by the natural frequency of vibration of a system.",
+          "answer": "The natural frequency is the frequency at which a body vibrates when there is no resultant external resistive force or driving force acting on it.",
+          "alt": [
+            "frequency at which an object vibrates when free to do so"
+          ],
+          "sources": [
+            {
+              "paper": "9702/42",
+              "session": "February/March 2018",
+              "question": "4(a)"
+            },
+            {
+              "paper": "9702/41",
+              "session": "May/June 2015",
+              "question": "4(a)(ii)"
+            }
+          ]
+        },
+        {
+          "id": "damping",
+          "term": "Damping",
+          "prompt": "State what is meant by damping.",
+          "answer": "Damping is the loss of total energy of an oscillating system due to resistive forces.",
+          "notes": "The 2019 mark scheme accepted 'loss of energy'.",
+          "sources": [
+            {
+              "paper": "9702/42",
+              "session": "October/November 2019",
+              "question": "4(a)(i)"
+            },
+            {
+              "paper": "9702/41",
+              "session": "October/November 2022",
+              "question": "3(c)(i)"
+            }
+          ]
+        },
+        {
+          "id": "resonance",
+          "term": "Resonance",
+          "prompt": "State what is meant by resonance.",
+          "answer": "Resonance is when an object oscillates at maximum amplitude when the driving frequency equals its natural frequency.",
+          "sources": [
+            {
+              "paper": "9702/42",
+              "session": "May/June 2022",
+              "question": "4(a)"
+            },
+            {
+              "paper": "9702/41",
+              "session": "May/June 2024",
+              "question": "4(a)"
+            },
+            {
+              "paper": "9702/41",
+              "session": "May/June 2015",
+              "question": "4(a)(iii)"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "electric-fields",
+      "title": "Electric fields",
+      "items": [
+        {
+          "id": "electric-field",
+          "term": "Electric field",
+          "prompt": "State what is meant by an electric field.",
+          "answer": "An electric field is a region of space where a charge experiences an electric force.",
+          "alt": [
+            "region where a (stationary) charge experiences an (electric) force"
+          ],
+          "sources": [
+            {
+              "paper": "9702/42",
+              "session": "February/March 2019",
+              "question": "5(a)"
+            },
+            {
+              "paper": "9702/21",
+              "session": "October/November 2018",
+              "question": "5(a)"
+            },
+            {
+              "paper": "9702/21",
+              "session": "May/June 2015",
+              "question": "7(a)"
+            }
+          ]
+        },
+        {
+          "id": "electric-field-strength",
+          "term": "Electric field strength",
+          "prompt": "Define electric field strength.",
+          "answer": "Electric field strength is the force per unit positive charge.",
+          "notes": "Also asked as 'Define electric field.' (s23/41 1(a)(ii), s24/41 5(a)) with the same answer.",
+          "sources": [
+            {
+              "paper": "9702/22",
+              "session": "February/March 2019",
+              "question": "4(a)"
+            },
+            {
+              "paper": "9702/23",
+              "session": "May/June 2017",
+              "question": "3(a)"
+            },
+            {
+              "paper": "9702/21",
+              "session": "October/November 2016",
+              "question": "2(a)"
+            },
+            {
+              "paper": "9702/41",
+              "session": "May/June 2019",
+              "question": "5(a)"
+            },
+            {
+              "paper": "9702/42",
+              "session": "May/June 2020",
+              "question": "7(a)"
+            },
+            {
+              "paper": "9702/21",
+              "session": "October/November 2017",
+              "question": "6(a)"
+            },
+            {
+              "paper": "9702/41",
+              "session": "May/June 2023",
+              "question": "1(a)(ii)"
+            }
+          ]
+        },
+        {
+          "id": "electric-field-line",
+          "term": "Electric field line",
+          "prompt": "State what is meant by a field line (line of force) in an electric field.",
+          "answer": "A field line in an electric field is the path or direction in which a free positive charge will move.",
+          "notes": "Only one mark scheme found.",
+          "sources": [
+            {
+              "paper": "9702/22",
+              "session": "May/June 2019",
+              "question": "6(a)"
+            }
+          ]
+        },
+        {
+          "id": "electric-potential",
+          "term": "Electric potential at a point",
+          "prompt": "Define electric potential at a point.",
+          "answer": "Electric potential at a point is the work done per unit charge in moving a positive charge from infinity to the point.",
+          "alt": [
+            "work done per unit charge moving positive charge from infinity (to the point)"
+          ],
+          "notes": "Must say positive charge and from infinity.",
+          "sources": [
+            {
+              "paper": "9702/42",
+              "session": "February/March 2018",
+              "question": "7(a)"
+            },
+            {
+              "paper": "9702/42",
+              "session": "October/November 2019",
+              "question": "9(a)"
+            },
+            {
+              "paper": "9702/41",
+              "session": "October/November 2020",
+              "question": "5(a)"
+            },
+            {
+              "paper": "9702/42",
+              "session": "May/June 2024",
+              "question": "5(a)"
+            },
+            {
+              "paper": "9702/42",
+              "session": "October/November 2021",
+              "question": "6(a)"
+            },
+            {
+              "paper": "9702/41",
+              "session": "October/November 2023",
+              "question": "5(a)"
+            }
+          ]
+        },
+        {
+          "id": "coulombs-law",
+          "term": "Coulomb's law",
+          "prompt": "State Coulomb's law.",
+          "answer": "The electric force between two point charges is directly proportional to the product of the charges and inversely proportional to the square of their separation.",
+          "notes": "Must refer to point charges.",
+          "sources": [
+            {
+              "paper": "9702/42",
+              "session": "February/March 2023",
+              "question": "4(a)"
+            },
+            {
+              "paper": "9702/42",
+              "session": "May/June 2017",
+              "question": "6(a)"
+            },
+            {
+              "paper": "9702/41",
+              "session": "October/November 2017",
+              "question": "5(a)(i)"
+            },
+            {
+              "paper": "9702/41",
+              "session": "October/November 2015",
+              "question": "5(a)(i)"
+            },
+            {
+              "paper": "9702/42",
+              "session": "May/June 2022",
+              "question": "2(a)"
+            },
+            {
+              "paper": "9702/42",
+              "session": "October/November 2024",
+              "question": "6(a)"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "capacitance",
+      "title": "Capacitance",
+      "items": [
+        {
+          "id": "capacitance",
+          "term": "Capacitance",
+          "prompt": "Define the capacitance of a parallel plate capacitor.",
+          "answer": "Capacitance is the charge on one plate per unit potential difference between the plates.",
+          "alt": [
+            "charge / potential difference"
+          ],
+          "notes": "Must say charge on one plate and p.d. between the plates.",
+          "sources": [
+            {
+              "paper": "9702/42",
+              "session": "February/March 2016",
+              "question": "7(a)"
+            },
+            {
+              "paper": "9702/42",
+              "session": "May/June 2017",
+              "question": "7(b)"
+            },
+            {
+              "paper": "9702/42",
+              "session": "February/March 2019",
+              "question": "6(a)"
+            },
+            {
+              "paper": "9702/42",
+              "session": "May/June 2018",
+              "question": "6(a)"
+            },
+            {
+              "paper": "9702/41",
+              "session": "October/November 2020",
+              "question": "6(a)(i)"
+            },
+            {
+              "paper": "9702/42",
+              "session": "May/June 2022",
+              "question": "5(a)"
+            },
+            {
+              "paper": "9702/42",
+              "session": "October/November 2024",
+              "question": "7(a)"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "magnetic-fields",
+      "title": "Magnetic fields and electromagnetic induction",
+      "items": [
+        {
+          "id": "magnetic-field",
+          "term": "Magnetic field",
+          "prompt": "State what is meant by a magnetic field.",
+          "answer": "A magnetic field is a region of space where a force is exerted on a moving charge, a current-carrying conductor or a magnetic pole.",
+          "sources": [
+            {
+              "paper": "9702/42",
+              "session": "February/March 2017",
+              "question": "8(a)"
+            },
+            {
+              "paper": "9702/41",
+              "session": "May/June 2019",
+              "question": "8(a)(i)"
+            },
+            {
+              "paper": "9702/41",
+              "session": "May/June 2021",
+              "question": "9(a)"
+            },
+            {
+              "paper": "9702/41",
+              "session": "May/June 2023",
+              "question": "6(a)"
+            },
+            {
+              "paper": "9702/41",
+              "session": "October/November 2018",
+              "question": "8(a)"
+            },
+            {
+              "paper": "9702/42",
+              "session": "February/March 2020",
+              "question": "8(a)"
+            }
+          ]
+        },
+        {
+          "id": "magnetic-flux-density",
+          "term": "Magnetic flux density",
+          "prompt": "Define magnetic flux density.",
+          "answer": "Magnetic flux density is the force per unit current per unit length on a wire carrying current perpendicular to the magnetic field.",
+          "notes": "Three points: force per unit length, force per unit current, current perpendicular to the field. Any two scores 1 mark.",
+          "sources": [
+            {
+              "paper": "9702/42",
+              "session": "May/June 2021",
+              "question": "8(a)"
+            },
+            {
+              "paper": "9702/42",
+              "session": "October/November 2018",
+              "question": "8(a)"
+            },
+            {
+              "paper": "9702/42",
+              "session": "October/November 2022",
+              "question": "7(a)"
+            },
+            {
+              "paper": "9702/41",
+              "session": "October/November 2023",
+              "question": "6(a)"
+            },
+            {
+              "paper": "9702/41",
+              "session": "October/November 2024",
+              "question": "7(a)"
+            }
+          ]
+        },
+        {
+          "id": "tesla",
+          "term": "Tesla",
+          "prompt": "Define the tesla.",
+          "answer": "The tesla is one newton per ampere per metre, where the current is perpendicular to the magnetic field.",
+          "sources": [
+            {
+              "paper": "9702/41",
+              "session": "October/November 2021",
+              "question": "8(a)"
+            },
+            {
+              "paper": "9702/41",
+              "session": "May/June 2020",
+              "question": "8(a)"
+            }
+          ]
+        },
+        {
+          "id": "magnetic-flux",
+          "term": "Magnetic flux",
+          "prompt": "Define magnetic flux.",
+          "answer": "Magnetic flux is the product of the magnetic flux density and the area, where the area is perpendicular to the magnetic field.",
+          "alt": [
+            "flux density x area x sin(angle) where the angle is between the field direction and the plane of the area"
+          ],
+          "sources": [
+            {
+              "paper": "9702/41",
+              "session": "May/June 2022",
+              "question": "6(a)"
+            },
+            {
+              "paper": "9702/42",
+              "session": "May/June 2023",
+              "question": "6(a)(i)"
+            },
+            {
+              "paper": "9702/42",
+              "session": "February/March 2018",
+              "question": "10(a)(i)"
+            },
+            {
+              "paper": "9702/41",
+              "session": "October/November 2020",
+              "question": "9(a)"
+            }
+          ]
+        },
+        {
+          "id": "magnetic-flux-linkage",
+          "term": "Magnetic flux linkage",
+          "prompt": "Define magnetic flux linkage.",
+          "answer": "Magnetic flux linkage is the product of the magnetic flux density, the area perpendicular to the field and the number of turns.",
+          "sources": [
+            {
+              "paper": "9702/42",
+              "session": "February/March 2021",
+              "question": "9(a)"
+            },
+            {
+              "paper": "9702/42",
+              "session": "May/June 2018",
+              "question": "9(a)"
+            }
+          ]
+        },
+        {
+          "id": "faradays-law",
+          "term": "Faraday's law of electromagnetic induction",
+          "prompt": "State Faraday's law of electromagnetic induction.",
+          "answer": "The induced e.m.f. is directly proportional to the rate of change of magnetic flux linkage.",
+          "alt": [
+            "induced e.m.f. is proportional to the rate of cutting of magnetic flux"
+          ],
+          "notes": "Must say rate of change of flux linkage.",
+          "sources": [
+            {
+              "paper": "9702/42",
+              "session": "February/March 2018",
+              "question": "10(a)(ii)"
+            },
+            {
+              "paper": "9702/42",
+              "session": "May/June 2022",
+              "question": "7(a)"
+            },
+            {
+              "paper": "9702/42",
+              "session": "May/June 2024",
+              "question": "7(a)"
+            },
+            {
+              "paper": "9702/42",
+              "session": "October/November 2019",
+              "question": "11(a)"
+            },
+            {
+              "paper": "9702/41",
+              "session": "October/November 2018",
+              "question": "9(a)"
+            },
+            {
+              "paper": "9702/42",
+              "session": "May/June 2017",
+              "question": "3(b)(i)"
+            }
+          ]
+        },
+        {
+          "id": "lenzs-law",
+          "term": "Lenz's law",
+          "prompt": "State Lenz's law of electromagnetic induction.",
+          "answer": "The direction of the induced e.m.f. is such as to oppose the change that caused it.",
+          "sources": [
+            {
+              "paper": "9702/42",
+              "session": "February/March 2022",
+              "question": "6(c)(i)"
+            },
+            {
+              "paper": "9702/41",
+              "session": "May/June 2019",
+              "question": "8(b)(i)"
+            },
+            {
+              "paper": "9702/41",
+              "session": "May/June 2021",
+              "question": "10(a)"
+            },
+            {
+              "paper": "9702/42",
+              "session": "October/November 2022",
+              "question": "8(a)"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "alternating-currents",
+      "title": "Alternating currents",
+      "items": [
+        {
+          "id": "rms-value",
+          "term": "Root-mean-square (r.m.s.) value",
+          "prompt": "By reference to heating effect, explain what is meant by the root-mean-square (r.m.s.) value of an alternating current.",
+          "answer": "The r.m.s. value of an alternating current is the steady direct current that produces the same heating effect as the alternating current.",
+          "alt": [
+            "for an alternating voltage: the constant voltage that dissipates the same power as the mean power of the alternating voltage (w21/41 9(a))"
+          ],
+          "notes": "Only one mark scheme found for the current wording.",
+          "sources": [
+            {
+              "paper": "9702/42",
+              "session": "May/June 2021",
+              "question": "10(a)"
+            }
+          ]
+        },
+        {
+          "id": "frequency-of-alternating-current",
+          "term": "Frequency of an alternating current",
+          "prompt": "State what is meant by the frequency of an alternating current.",
+          "answer": "The frequency of an alternating current is the number of cycles per unit time.",
+          "notes": "Only one mark scheme found.",
+          "sources": [
+            {
+              "paper": "9702/42",
+              "session": "October/November 2024",
+              "question": "8(a)"
+            }
+          ]
+        },
+        {
+          "id": "rectification",
+          "term": "Rectification",
+          "prompt": "State what is meant by rectification.",
+          "answer": "Rectification is the conversion from a.c. to d.c.",
+          "sources": [
+            {
+              "paper": "9702/41",
+              "session": "May/June 2022",
+              "question": "5(a)(i)"
+            },
+            {
+              "paper": "9702/41",
+              "session": "October/November 2024",
+              "question": "6(a)(i)"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "quantum-physics",
+      "title": "Quantum physics",
+      "items": [
+        {
+          "id": "photon",
+          "term": "Photon",
+          "prompt": "State what is meant by a photon.",
+          "answer": "A photon is a packet or quantum of energy of electromagnetic radiation.",
+          "alt": [
+            "discrete amount of energy of electromagnetic radiation"
+          ],
+          "sources": [
+            {
+              "paper": "9702/42",
+              "session": "February/March 2017",
+              "question": "10(a)"
+            },
+            {
+              "paper": "9702/42",
+              "session": "February/March 2019",
+              "question": "11(a)"
+            },
+            {
+              "paper": "9702/41",
+              "session": "May/June 2018",
+              "question": "11(a)(i)"
+            },
+            {
+              "paper": "9702/41",
+              "session": "October/November 2017",
+              "question": "11(a)"
+            },
+            {
+              "paper": "9702/42",
+              "session": "May/June 2021",
+              "question": "12(a)"
+            },
+            {
+              "paper": "9702/41",
+              "session": "May/June 2022",
+              "question": "7(a)"
+            },
+            {
+              "paper": "9702/42",
+              "session": "October/November 2023",
+              "question": "8(a)"
+            },
+            {
+              "paper": "9702/41",
+              "session": "May/June 2024",
+              "question": "8(a)"
+            }
+          ]
+        },
+        {
+          "id": "photoelectric-effect",
+          "term": "Photoelectric effect",
+          "prompt": "State what is meant by the photoelectric effect.",
+          "answer": "The photoelectric effect is the emission of electrons from a surface when electromagnetic radiation is incident on it.",
+          "alt": [
+            "electromagnetic radiation/photons incident on a surface cause emission of electrons"
+          ],
+          "sources": [
+            {
+              "paper": "9702/41",
+              "session": "October/November 2016",
+              "question": "10(a)"
+            },
+            {
+              "paper": "9702/42",
+              "session": "October/November 2021",
+              "question": "9(a)(i)"
+            }
+          ]
+        },
+        {
+          "id": "work-function-energy",
+          "term": "Work function energy",
+          "prompt": "State what is meant by work function energy.",
+          "answer": "Work function energy is the minimum energy required to remove an electron from the surface of a metal.",
+          "alt": [
+            "energy to remove an electron with zero kinetic energy"
+          ],
+          "sources": [
+            {
+              "paper": "9702/42",
+              "session": "February/March 2020",
+              "question": "10(a)"
+            },
+            {
+              "paper": "9702/41",
+              "session": "October/November 2019",
+              "question": "11(a)"
+            },
+            {
+              "paper": "9702/41",
+              "session": "October/November 2022",
+              "question": "8(a)"
+            },
+            {
+              "paper": "9702/42",
+              "session": "October/November 2021",
+              "question": "9(a)(ii)"
+            }
+          ]
+        },
+        {
+          "id": "threshold-frequency",
+          "term": "Threshold frequency",
+          "prompt": "State what is meant by the threshold frequency.",
+          "answer": "The threshold frequency is the minimum frequency of electromagnetic radiation that causes emission of electrons from a surface.",
+          "notes": "Must say electromagnetic radiation or photon, not just light.",
+          "sources": [
+            {
+              "paper": "9702/42",
+              "session": "February/March 2016",
+              "question": "11(a)"
+            },
+            {
+              "paper": "9702/41",
+              "session": "October/November 2015",
+              "question": "7(a)"
+            },
+            {
+              "paper": "9702/41",
+              "session": "May/June 2013",
+              "question": "7(a)(i)"
+            }
+          ]
+        },
+        {
+          "id": "de-broglie-wavelength",
+          "term": "de Broglie wavelength",
+          "prompt": "State what is meant by the de Broglie wavelength.",
+          "answer": "The de Broglie wavelength is the wavelength associated with a moving particle.",
+          "alt": [
+            "a particle has a wavelength associated with it that depends on its momentum"
+          ],
+          "sources": [
+            {
+              "paper": "9702/41",
+              "session": "May/June 2023",
+              "question": "7(a)"
+            },
+            {
+              "paper": "9702/42",
+              "session": "May/June 2017",
+              "question": "11(b)(i)"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "nuclear-physics",
+      "title": "Nuclear physics",
+      "items": [
+        {
+          "id": "mass-defect",
+          "term": "Mass defect",
+          "prompt": "Define mass defect.",
+          "answer": "Mass defect is the difference between the mass of a nucleus and the total mass of its nucleons when they are infinitely separated.",
+          "sources": [
+            {
+              "paper": "9702/42",
+              "session": "May/June 2023",
+              "question": "9(a)"
+            },
+            {
+              "paper": "9702/42",
+              "session": "May/June 2020",
+              "question": "12(a)"
+            }
+          ]
+        },
+        {
+          "id": "binding-energy",
+          "term": "Binding energy of a nucleus",
+          "prompt": "State what is meant by the binding energy of a nucleus.",
+          "answer": "The binding energy of a nucleus is the energy required to separate the nucleons of the nucleus to infinity.",
+          "alt": [
+            "energy released when nucleons come together from infinity to form a nucleus"
+          ],
+          "sources": [
+            {
+              "paper": "9702/42",
+              "session": "February/March 2017",
+              "question": "12(a)"
+            },
+            {
+              "paper": "9702/42",
+              "session": "May/June 2019",
+              "question": "12(a)"
+            },
+            {
+              "paper": "9702/41",
+              "session": "May/June 2022",
+              "question": "8(a)(i)"
+            },
+            {
+              "paper": "9702/42",
+              "session": "February/March 2024",
+              "question": "8(a)"
+            },
+            {
+              "paper": "9702/42",
+              "session": "October/November 2020",
+              "question": "12(a)(i)"
+            },
+            {
+              "paper": "9702/42",
+              "session": "May/June 2024",
+              "question": "9(a)"
+            }
+          ]
+        },
+        {
+          "id": "radioactive-decay",
+          "term": "Radioactive decay",
+          "prompt": "State what is meant by radioactive decay.",
+          "answer": "Radioactive decay is the spontaneous emission of particles or radiation from an unstable nucleus.",
+          "sources": [
+            {
+              "paper": "9702/41",
+              "session": "May/June 2018",
+              "question": "13(a)"
+            },
+            {
+              "paper": "9702/42",
+              "session": "May/June 2022",
+              "question": "10(a)"
+            },
+            {
+              "paper": "9702/41",
+              "session": "October/November 2018",
+              "question": "12(a)"
+            },
+            {
+              "paper": "9702/41",
+              "session": "October/November 2020",
+              "question": "12(a)(i)"
+            }
+          ]
+        },
+        {
+          "id": "random-decay",
+          "term": "Random decay",
+          "prompt": "Explain what is meant by the decay being random.",
+          "answer": "Random decay means it cannot be predicted when a particular nucleus will decay.",
+          "alt": [
+            "there is a constant probability of decay of a nucleus"
+          ],
+          "sources": [
+            {
+              "paper": "9702/41",
+              "session": "May/June 2020",
+              "question": "12(a)(i)"
+            },
+            {
+              "paper": "9702/41",
+              "session": "October/November 2022",
+              "question": "10(a)(i)"
+            },
+            {
+              "paper": "9702/42",
+              "session": "October/November 2019",
+              "question": "12(a)(i)"
+            },
+            {
+              "paper": "9702/42",
+              "session": "October/November 2021",
+              "question": "12(a)(i)"
+            }
+          ]
+        },
+        {
+          "id": "spontaneous-decay",
+          "term": "Spontaneous decay",
+          "prompt": "Explain what is meant by the decay being spontaneous.",
+          "answer": "Spontaneous decay means the decay of a nucleus is not affected by external environmental factors.",
+          "sources": [
+            {
+              "paper": "9702/41",
+              "session": "May/June 2020",
+              "question": "12(a)(ii)"
+            },
+            {
+              "paper": "9702/41",
+              "session": "October/November 2022",
+              "question": "10(a)(ii)"
+            },
+            {
+              "paper": "9702/42",
+              "session": "October/November 2021",
+              "question": "12(a)(ii)"
+            }
+          ]
+        },
+        {
+          "id": "decay-constant",
+          "term": "Radioactive decay constant",
+          "prompt": "Define radioactive decay constant.",
+          "answer": "The decay constant is the probability of decay of a nucleus per unit time.",
+          "alt": [
+            "the fraction of the (number of undecayed) nuclei that will decay per unit time"
+          ],
+          "sources": [
+            {
+              "paper": "9702/42",
+              "session": "February/March 2018",
+              "question": "13(a)(i)"
+            },
+            {
+              "paper": "9702/41",
+              "session": "October/November 2021",
+              "question": "12(a)"
+            },
+            {
+              "paper": "9702/41",
+              "session": "October/November 2020",
+              "question": "12(a)(ii)"
+            },
+            {
+              "paper": "9702/42",
+              "session": "October/November 2019",
+              "question": "12(a)(ii)"
+            },
+            {
+              "paper": "9702/42",
+              "session": "October/November 2017",
+              "question": "12(a)(ii)"
+            }
+          ]
+        },
+        {
+          "id": "half-life",
+          "term": "Half-life",
+          "prompt": "Define half-life.",
+          "answer": "Half-life is the time for the activity of a sample to halve.",
+          "alt": [
+            "time for the number of atoms/nuclei to be reduced to one half"
+          ],
+          "sources": [
+            {
+              "paper": "9702/41",
+              "session": "May/June 2023",
+              "question": "9(a)"
+            },
+            {
+              "paper": "9702/41",
+              "session": "May/June 2024",
+              "question": "9(a)"
+            },
+            {
+              "paper": "9702/41",
+              "session": "October/November 2016",
+              "question": "12(a)(i)"
+            },
+            {
+              "paper": "9702/42",
+              "session": "May/June 2014",
+              "question": "9(a)"
+            }
+          ]
+        },
+        {
+          "id": "nuclear-fusion",
+          "term": "Nuclear fusion",
+          "prompt": "State what is meant by nuclear fusion.",
+          "answer": "Nuclear fusion is when two small nuclei join together to form one larger nucleus.",
+          "sources": [
+            {
+              "paper": "9702/41",
+              "session": "October/November 2023",
+              "question": "9(a)"
+            },
+            {
+              "paper": "9702/42",
+              "session": "October/November 2018",
+              "question": "12(a)"
+            },
+            {
+              "paper": "9702/41",
+              "session": "May/June 2013",
+              "question": "8(a)"
+            },
+            {
+              "paper": "9702/41",
+              "session": "October/November 2014",
+              "question": "9(a)"
+            }
+          ]
+        },
+        {
+          "id": "nuclear-fission",
+          "term": "Nuclear fission",
+          "prompt": "State what is meant by a nuclear fission reaction.",
+          "answer": "Nuclear fission is when a single large nucleus divides to form smaller nuclei.",
+          "notes": "Extra marking points seen: initiated by neutron bombardment; binding energy per nucleon increases.",
+          "sources": [
+            {
+              "paper": "9702/42",
+              "session": "October/November 2020",
+              "question": "12(a)(ii)"
+            },
+            {
+              "paper": "9702/42",
+              "session": "October/November 2018",
+              "question": "12(a)"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "medical-physics",
+      "title": "Medical physics",
+      "items": [
+        {
+          "id": "specific-acoustic-impedance",
+          "term": "Specific acoustic impedance",
+          "prompt": "Define specific acoustic impedance.",
+          "answer": "Specific acoustic impedance of a medium is the product of the density of the medium and the speed of ultrasound in the medium.",
+          "notes": "Must give both density and speed in the medium.",
+          "sources": [
+            {
+              "paper": "9702/42",
+              "session": "February/March 2018",
+              "question": "5(b)(i)"
+            },
+            {
+              "paper": "9702/41",
+              "session": "October/November 2018",
+              "question": "4(b)(i)"
+            },
+            {
+              "paper": "9702/42",
+              "session": "October/November 2019",
+              "question": "5(a)(i)"
+            },
+            {
+              "paper": "9702/41",
+              "session": "May/June 2020",
+              "question": "4(a)(i)"
+            },
+            {
+              "paper": "9702/42",
+              "session": "October/November 2021",
+              "question": "11(b)(i)"
+            },
+            {
+              "paper": "9702/42",
+              "session": "February/March 2024",
+              "question": "9(c)(i)"
+            }
+          ]
+        },
+        {
+          "id": "attenuation",
+          "term": "Attenuation of an ultrasound wave",
+          "prompt": "State what is meant by the attenuation of an ultrasound wave.",
+          "answer": "Attenuation is the reduction in power or intensity of the wave as it passes through the medium.",
+          "alt": [
+            "loss of intensity/amplitude/power (of the wave)"
+          ],
+          "sources": [
+            {
+              "paper": "9702/42",
+              "session": "October/November 2019",
+              "question": "5(c)(i)"
+            },
+            {
+              "paper": "9702/41",
+              "session": "May/June 2020",
+              "question": "4(b)(i)"
+            }
+          ]
+        },
+        {
+          "id": "tracer",
+          "term": "Tracer",
+          "prompt": "Explain what is meant by a tracer.",
+          "answer": "A tracer is a substance containing radioactive nuclei that is introduced into the body and absorbed by the tissue being studied.",
+          "sources": [
+            {
+              "paper": "9702/42",
+              "session": "February/March 2022",
+              "question": "11(a)"
+            },
+            {
+              "paper": "9702/42",
+              "session": "October/November 2023",
+              "question": "9(a)(i)"
+            }
+          ]
+        },
+        {
+          "id": "annihilation",
+          "term": "Annihilation",
+          "prompt": "Explain what is meant by annihilation.",
+          "answer": "Annihilation is a particle interacting with its antiparticle so that mass is converted into energy.",
+          "notes": "Only one mark scheme found.",
+          "sources": [
+            {
+              "paper": "9702/42",
+              "session": "February/March 2022",
+              "question": "11(b)(i)"
+            }
+          ]
+        },
+        {
+          "id": "xray-sharpness",
+          "term": "Sharpness of an X-ray image",
+          "prompt": "State, for an X-ray image, what is meant by sharpness.",
+          "answer": "Sharpness is the ease with which edges can be distinguished.",
+          "notes": "Only one mark scheme found.",
+          "sources": [
+            {
+              "paper": "9702/41",
+              "session": "October/November 2021",
+              "question": "11(a)(i)"
+            }
+          ]
+        },
+        {
+          "id": "xray-contrast",
+          "term": "Contrast of an X-ray image",
+          "prompt": "State what is meant by the contrast of an X-ray image.",
+          "answer": "Contrast is the difference in degrees of blackening between structures.",
+          "sources": [
+            {
+              "paper": "9702/41",
+              "session": "May/June 2018",
+              "question": "12(b)(i)"
+            },
+            {
+              "paper": "9702/41",
+              "session": "October/November 2021",
+              "question": "11(a)(ii)"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "astronomy-and-cosmology",
+      "title": "Astronomy and cosmology",
+      "items": [
+        {
+          "id": "luminosity",
+          "term": "Luminosity of a star",
+          "prompt": "State what is meant by the luminosity of a star.",
+          "answer": "The luminosity of a star is the total power of radiation emitted by the star.",
+          "sources": [
+            {
+              "paper": "9702/42",
+              "session": "February/March 2022",
+              "question": "12(a)"
+            },
+            {
+              "paper": "9702/41",
+              "session": "October/November 2022",
+              "question": "9(a)"
+            },
+            {
+              "paper": "9702/41",
+              "session": "May/June 2024",
+              "question": "10(a)(i)"
+            }
+          ]
+        },
+        {
+          "id": "standard-candle",
+          "term": "Standard candle",
+          "prompt": "State what is meant by a standard candle.",
+          "answer": "A standard candle is an astronomical object of known luminosity.",
+          "sources": [
+            {
+              "paper": "9702/42",
+              "session": "February/March 2023",
+              "question": "10(b)"
+            },
+            {
+              "paper": "9702/42",
+              "session": "October/November 2023",
+              "question": "10(b)(i)"
+            }
+          ]
+        },
+        {
+          "id": "redshift",
+          "term": "Redshift",
+          "prompt": "State what is meant by redshift.",
+          "answer": "Redshift is the apparent wavelength of light from a star being greater than the known value, due to the movement of the star away from the observer.",
+          "notes": "Only one mark scheme found.",
+          "sources": [
+            {
+              "paper": "9702/41",
+              "session": "May/June 2022",
+              "question": "10(c)(i)"
+            }
+          ]
+        },
+        {
+          "id": "hubbles-law",
+          "term": "Hubble's law",
+          "prompt": "State Hubble's law.",
+          "answer": "The speed of recession of a galaxy is directly proportional to its distance from the observer.",
+          "notes": "Identify the symbols: speed is the recession speed of the galaxy and distance is the distance of the galaxy from the observer.",
+          "sources": [
+            {
+              "paper": "9702/42",
+              "session": "May/June 2022",
+              "question": "9(a)(i)"
+            },
+            {
+              "paper": "9702/41",
+              "session": "May/June 2023",
+              "question": "10(a)"
+            }
+          ]
+        },
+        {
+          "id": "wiens-displacement-law",
+          "term": "Wien's displacement law",
+          "prompt": "State Wien's displacement law.",
+          "answer": "The wavelength of maximum intensity is inversely proportional to the thermodynamic temperature.",
+          "sources": [
+            {
+              "paper": "9702/41",
+              "session": "May/June 2022",
+              "question": "10(a)"
+            },
+            {
+              "paper": "9702/42",
+              "session": "October/November 2023",
+              "question": "10(a)"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

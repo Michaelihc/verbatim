@@ -1,0 +1,7 @@
+{
+  "packs": [
+    { "id": "9702-definitions", "file": "9702-definitions.json" },
+    { "id": "9618-definitions", "file": "9618-definitions.json" },
+    { "id": "9618-pseudocode", "file": "9618-pseudocode.json" }
+  ]
+}
