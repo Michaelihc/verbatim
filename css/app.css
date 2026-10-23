@@ -342,6 +342,26 @@ body[data-view='play'] .top:hover, body[data-view='play'] .top:focus-within { op
 .answer.nudge { animation: nudge 0.18s; }
 @keyframes nudge { 25% { transform: translateX(-3px); } 75% { transform: translateX(3px); } }
 
+/* Stacked layout: each character is a two-row cell, the text above and your typing below. */
+.sheet.stacked { line-height: 1.45; background: none; padding-bottom: 0; }
+.sheet.stacked .ch { display: inline-block; vertical-align: top; white-space: pre; padding-bottom: 1.45em; margin-bottom: 0.7em; }
+.sheet.stacked .ch.ok, .sheet.stacked .ch.bad, .sheet.stacked .ch.auto { color: var(--ink-3); background: none; text-decoration: none; opacity: 1; }
+.sheet.stacked .ch::after {
+  content: attr(data-t);
+  /* Positioned so a wrong key never changes the width of the letter above it. */
+  position: absolute;
+  left: 0; right: 0; top: 1.45em;
+  height: 1.45em;
+  border-bottom: 1.5px solid var(--rule);
+  color: var(--ink);
+}
+.sheet.stacked .ch.bad::after { color: var(--pen); background: var(--pen-soft); border-bottom-color: var(--pen); text-decoration: underline wavy var(--pen) 1px; text-underline-offset: 0.25em; }
+.sheet.stacked .ch.auto::after { color: var(--ink-2); }
+.sheet.stacked .ch.nl, .sheet.stacked .ch.nl.ok { font-size: inherit; padding-left: 0; color: var(--rule); }
+.sheet.stacked .ch.cur::before { top: auto; bottom: 0.2em; height: 1.05em; }
+.sheet.stacked.is-code .line { white-space: nowrap; }
+.sheet.stacked.is-code .ch { margin-bottom: 0.45em; }
+
 .paper-foot { display: flex; align-items: center; flex-wrap: wrap; gap: 0.5rem 1rem; margin-top: 1rem; font-size: 0.82rem; color: var(--ink-3); }
 .paper-foot .hint-key { margin-left: auto; }
 .paper-foot .btn { font-size: 0.82rem; padding: 0.25rem 0.7rem; }

@@ -11,6 +11,7 @@ export const DEFAULT_SETTINGS = {
   autoIndent: true,       // code packs: skip leading spaces after Enter
   sound: false,
   textSize: 'm',          // s | m | l
+  layout: 'overlay',      // overlay: type over the text | stacked: type on a line below it
   unlockAll: false,
   dailyGoal: 150,
   roundSize: 6,

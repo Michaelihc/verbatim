@@ -62,23 +62,29 @@ export function suggestedMode(packId, itemId) {
 
 // ---- Scoring --------------------------------------------------------------
 
-export function marksFor(acc, hints) {
-  if (acc >= 0.999 && hints === 0) return 3;
-  if (acc >= 0.95) return 2;
-  if (acc >= 0.85) return 1;
+// Marked like an exam answer: what counts is the finished text. Mistakes you fixed along the
+// way only stop the third tick if there were a lot of them.
+export function marksFor(answerAcc, keyAcc, hints) {
+  if (answerAcc >= 0.999 && hints === 0 && keyAcc >= 0.97) return 3;
+  if (answerAcc >= 0.98) return 2;
+  if (answerAcc >= 0.9) return 1;
   return 0;
 }
 
 /**
  * Apply a finished attempt to the learner's state and return what changed.
- * result: { packId, itemId, mode, chars, keystrokes, errors, ms, hints, revealed }
+ * result: { packId, itemId, mode, chars, keystrokes, errors, uncorrected, ms, hints, revealed }
+ * `errors` counts every wrong key; `uncorrected` counts the ones still wrong at the end.
  */
 export function applyResult(result, combo) {
   const { packId, itemId, mode, chars, ms, hints, revealed } = result;
   const acc = result.keystrokes ? Math.max(0, (result.keystrokes - result.errors) / result.keystrokes) : 0;
+  const uncorrected = result.uncorrected || 0;
+  const answerAcc = chars ? Math.max(0, 1 - uncorrected / chars) : 0;
+  const corrected = Math.max(0, result.errors - uncorrected);
   const minutes = Math.max(ms, 1) / 60000;
   const wpm = (chars / 5) / minutes;
-  const marks = marksFor(acc, hints);
+  const marks = marksFor(answerAcc, acc, hints);
   const s = ensureItem(packId, itemId);
   const firstClear = s.clears === 0;
   const before = s.box;
@@ -101,17 +107,21 @@ export function applyResult(result, combo) {
   s.last = Date.now();
 
   // XP
-  const nextCombo = acc >= 0.95 ? combo + 1 : 0;
+  const nextCombo = marks >= 2 ? combo + 1 : 0;
   const words = chars / 5;
   const parts = [];
   const base = words * 2 * cfg.mult;
   parts.push([`${Math.round(words)} words in ${cfg.label.toLowerCase()} mode`, base]);
-  const accMult = Math.pow(acc, 3);
+  // Wrong text left in the answer costs a lot; fixed mistakes cost half their share.
+  const answerMult = Math.pow(answerAcc, 3);
+  const fixMult = 1 - 0.5 * (1 - acc);
+  const accMult = answerMult * fixMult;
   const speedMult = 1 + Math.min(wpm, 100) / 200;
   const comboMult = 1 + Math.min(nextCombo, 10) * 0.05;
   const hintMult = Math.max(0.3, 1 - hints * 0.1);
   let xp = base * accMult * speedMult * comboMult * hintMult;
-  parts.push([`Accuracy ×${accMult.toFixed(2)}`, null]);
+  if (uncorrected) parts.push([`${uncorrected} wrong in the final answer ×${answerMult.toFixed(2)}`, null]);
+  if (corrected) parts.push([`${corrected} fixed mistake${corrected > 1 ? 's' : ''} ×${fixMult.toFixed(2)}`, null]);
   parts.push([`Speed ×${speedMult.toFixed(2)}`, null]);
   if (nextCombo > 1) parts.push([`Streak of ${nextCombo} ×${comboMult.toFixed(2)}`, null]);
   if (hints) parts.push([`${hints} hint${hints > 1 ? 's' : ''} ×${hintMult.toFixed(1)}`, null]);
@@ -136,7 +146,7 @@ export function applyResult(result, combo) {
   state.bestCombo = Math.max(state.bestCombo, nextCombo);
 
   return {
-    acc, wpm, marks, xp, parts, combo: nextCombo,
+    acc, answerAcc, corrected, uncorrected, wpm, marks, xp, parts, combo: nextCombo,
     stageBefore: before, stageAfter: s.box,
     levelBefore, levelAfter,
     dailyGoalHit: dailyBefore < state.settings.dailyGoal && state.days[today] >= state.settings.dailyGoal,

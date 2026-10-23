@@ -23,13 +23,14 @@ the mark scheme accepts and examiner notes where they matter.
   *Smart* mode picks the right one for each answer.
 - **Mastery stages.** Each answer moves from New to Copied, Gaps filled, Recalled, Secure and
   Mastered. Recalled answers come back for review after 1, 2, 4, 9 and then 21 days.
-- **Marks.** Each attempt gets up to three red-pen ticks: 3 for 100% accuracy with no hints,
-  2 for 95%, 1 for 85%.
+- **Marks.** Like an exam, marks go on the finished answer. Three red-pen ticks for a perfect
+  answer with no hints and few fixed mistakes, two for a correct answer (98%+), one for 90%+.
+  Mistakes you fix along the way only trim a little XP.
 - **XP and grades.** XP grows with answer length and mode (recall pays 2.5× copy), scaled by
   accuracy, speed and your run of clean answers. Levels climb a grade ladder from U to A*, then
   through the examiner ranks.
-- **Unlocks.** Units follow syllabus order. A unit opens once you've copied 60% of the one
-  before it at 95%+ accuracy, or switch on *Unlock all units* in settings.
+- **Unlocks.** Units follow syllabus order. A unit opens once you've correctly copied 60% of
+  the one before it, or switch on *Unlock all units* in settings.
 - **Streaks, daily goals and 20 achievements.**
 - **Works offline.** A service worker caches the app and every pack on first visit. Packs refresh
   in the background, and new app versions show a reload prompt.

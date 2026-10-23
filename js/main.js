@@ -238,7 +238,7 @@ function viewPack(packId) {
             <summary>
               <span class="unit-title">${esc(u.title)}</span>
               ${stageBar(pack, u.items)}
-              <span class="unit-count">${open ? `${p.learned}/${p.n}` : `Locked. Copy ${plural(need, 'more answer')} at 95%+ accuracy in “${esc(pack.units[i - 1].title)}”.`}</span>
+              <span class="unit-count">${open ? `${p.learned}/${p.n}` : `Locked. Copy ${plural(need, 'more answer')} correctly in “${esc(pack.units[i - 1].title)}”.`}</span>
               ${open ? `<a class="btn" href="#/play?pack=${encodeURIComponent(pack.id)}&unit=${encodeURIComponent(u.id)}" data-play>Practise</a>` : ''}
             </summary>
             <ul class="items">
@@ -399,13 +399,13 @@ function viewPlay(q) {
       </div>
       <dl class="result-stats">
         <div><dt>Speed</dt><dd>${Math.round(res.wpm)} <small>WPM</small></dd></div>
-        <div><dt>Accuracy</dt><dd>${pct(res.acc)}</dd></div>
+        <div><dt>Accuracy</dt><dd>${pct(res.acc)}${res.corrected ? ` <small>${res.corrected} fixed</small>` : ''}</dd></div>
         <div><dt>XP</dt><dd>+${res.xp}</dd></div>
         ${res.combo > 1 ? `<div><dt>Run</dt><dd>${res.combo}</dd></div>` : ''}
       </dl>
       ${res.stageAfter !== res.stageBefore
         ? `<p class="stage-move ${res.stageAfter > res.stageBefore ? 'up' : 'down'}">${esc(STAGES[res.stageBefore])} to ${esc(STAGES[res.stageAfter])}</p>`
-        : `<p class="stage-move">${res.marks >= 2 ? `Still “${esc(STAGES[res.stageAfter])}”.` : 'Aim for 95% accuracy to move this answer up a stage.'}${res.stageAfter >= MODES[entry.mode].cap && entry.mode !== 'recall' && res.marks >= 2 ? ` Try ${entry.mode === 'copy' ? 'gaps' : 'recall'} mode next.` : ''}</p>`}
+        : `<p class="stage-move">${res.marks >= 2 ? `Still “${esc(STAGES[res.stageAfter])}”.` : res.uncorrected ? 'Fix the red letters before the end to move this answer up a stage.' : 'Use fewer hints to move this answer up a stage.'}${res.stageAfter >= MODES[entry.mode].cap && entry.mode !== 'recall' && res.marks >= 2 ? ` Try ${entry.mode === 'copy' ? 'gaps' : 'recall'} mode next.` : ''}</p>`}
       <details class="xp-parts"><summary>How the XP was worked out</summary>
         <ul>${res.parts.map(([label, v]) => `<li>${esc(label)}${v != null ? ` <b>+${Math.round(v)}</b>` : ''}</li>`).join('')}</ul>
       </details>
@@ -616,6 +616,7 @@ function viewSettings() {
       <h2>Look</h2>
       ${choice('theme', 'Theme', [['system', 'Match device'], ['light', 'Light'], ['dark', 'Dark']])}
       ${choice('textSize', 'Text size', [['s', 'Small'], ['m', 'Medium'], ['l', 'Large']])}
+      ${choice('layout', 'Where you type', [['overlay', 'Over the text'], ['stacked', 'On a line below the text']])}
     </section>
     <section class="panel settings">
       <h2>Typing</h2>
@@ -629,7 +630,7 @@ function viewSettings() {
       <h2>Goals</h2>
       ${choice('dailyGoal', 'Daily XP goal', [[75, 'Light (75)'], [150, 'Regular (150)'], [300, 'Serious (300)'], [600, 'Exam season (600)']])}
       ${choice('roundSize', 'Answers per round', [[4, '4'], [6, '6'], [10, '10'], [15, '15']])}
-      ${toggle('unlockAll', 'Unlock all units', `Normally a unit opens once you’ve copied ${Math.round(UNLOCK_SHARE * 100)}% of the one before at 95%+ accuracy.`)}
+      ${toggle('unlockAll', 'Unlock all units', `Normally a unit opens once you’ve copied ${Math.round(UNLOCK_SHARE * 100)}% of the one before correctly.`)}
     </section>
     <section class="panel">
       <h2>About</h2>

@@ -78,7 +78,8 @@ export class Typer {
 
   render() {
     const sheet = document.createElement('div');
-    sheet.className = `sheet ${this.kind === 'code' ? 'is-code' : 'is-prose'}`;
+    this.stacked = this.settings.layout === 'stacked';
+    sheet.className = `sheet ${this.kind === 'code' ? 'is-code' : 'is-prose'}${this.stacked ? ' stacked' : ''}`;
     sheet.setAttribute('aria-hidden', 'true');
     this.spans = [];
     const mk = (ch, i) => {
@@ -107,7 +108,13 @@ export class Typer {
       // Keep words unbroken; spaces between them are the wrap points.
       let word = null;
       [...this.text].forEach((ch, i) => {
-        if (ch === ' ') { word = null; sheet.append(mk(ch, i)); return; }
+        if (ch === ' ') {
+          word = null;
+          sheet.append(mk(ch, i));
+          // Stacked cells are inline-blocks, which don't wrap on their own.
+          if (this.stacked) sheet.append(document.createElement('wbr'));
+          return;
+        }
         if (!word) { word = document.createElement('span'); word.className = 'w'; sheet.append(word); }
         word.append(mk(ch, i));
       });
@@ -135,6 +142,8 @@ export class Typer {
       s.classList.toggle('ok', !!t && t.ok);
       s.classList.toggle('bad', !!t && !t.ok);
       s.classList.toggle('auto', !!t && t.auto);
+      // Stacked layout: what was typed sits under the text, so show the learner's own key.
+      if (this.stacked) s.dataset.t = !t ? '' : t.c === '\n' ? '↵' : t.c === ' ' && !t.ok ? '·' : t.c;
       s.classList.toggle('cur', i === pos && !this.finished);
       s.classList.toggle('shown', this.revealed.has(i));
     }
@@ -324,14 +333,13 @@ export class Typer {
     this.finished = true;
     this.input.blur();
     this.input.disabled = true;
-    // Uncorrected mistakes count against accuracy a second time.
     const left = this.typed.filter(t => !t.ok).length;
     const auto = this.typed.filter(t => t.auto).length;
     this.paint();
     this.onDone({
       chars: this.text.length - auto,
       keystrokes: this.keystrokes,
-      errors: Math.min(this.keystrokes, this.errors + left),
+      errors: this.errors,
       uncorrected: left,
       ms: Math.max(this.elapsed(), 300),
       hints: this.hints,
