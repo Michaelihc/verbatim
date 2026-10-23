@@ -668,9 +668,11 @@ function registerSW() {
       });
     });
   }).catch(err => console.warn('Service worker registration failed', err));
+  // Reload only when an update replaces an existing worker, not when the first one takes control.
+  const hadController = !!navigator.serviceWorker.controller;
   let reloading = false;
   navigator.serviceWorker.addEventListener('controllerchange', () => {
-    if (!reloading) { reloading = true; location.reload(); }
+    if (hadController && !reloading) { reloading = true; location.reload(); }
   });
 }
 
