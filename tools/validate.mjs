@@ -26,7 +26,7 @@ for (const entry of index.packs) {
   if (packIds.has(pack.id)) err(`${where}: duplicate pack id ${pack.id}`);
   packIds.add(pack.id);
   for (const f of ['title', 'subject', 'syllabus', 'kind']) if (!pack[f]) err(`${where}: missing "${f}"`);
-  if (!['definition', 'code'].includes(pack.kind)) err(`${where}: kind must be "definition" or "code"`);
+  if (!['definition', 'equation', 'code'].includes(pack.kind)) err(`${where}: kind must be "definition", "equation" or "code"`);
   if (!Array.isArray(pack.units) || !pack.units.length) { err(`${where}: no units`); continue; }
 
   const unitIds = new Set();
@@ -46,7 +46,8 @@ for (const entry of index.packs) {
       for (const s of it.sources || []) if (!s.paper || !s.session) err(`${at}: source needs paper and session`);
       const a = it.answer || '';
       if (/[^\x20-\x7E\n]/.test(a)) err(`${at}: answer has non-ASCII characters: ${[...new Set(a.match(/[^\x20-\x7E\n]/g))].join(' ')}`);
-      if (pack.kind === 'definition' && a.includes('\n')) err(`${at}: definition answers must be one line`);
+      if (pack.kind !== 'code' && a.includes('\n')) err(`${at}: ${pack.kind} answers must be one line`);
+      if (pack.kind === 'equation' && (typeof it.formula !== 'string' || !it.formula.trim())) err(`${at}: equation items need a "formula"`);
       if (pack.kind === 'code') {
         a.split('\n').forEach((line, n) => {
           if (/\s$/.test(line)) err(`${at}: trailing space on line ${n + 1}`);

@@ -1,7 +1,7 @@
 # Verbatim
 
 Typing practice for Cambridge International AS & A Level answers that must be word-perfect:
-definitions and pseudocode, worded as the official mark schemes accept them.
+definitions, physics equations and pseudocode, worded as the official mark schemes accept them.
 
 **Play it:** https://michaelihc.github.io/verbatim/
 
@@ -10,31 +10,43 @@ definitions and pseudocode, worded as the official mark schemes accept them.
 | Pack | Syllabus |
 | --- | --- |
 | Physics definitions | 9702 |
+| Physics equations (word equations, with the symbol form) | 9702 |
 | Computer Science definitions | 9618 |
 | Computer Science pseudocode | 9618 |
 
-Each answer cites the mark scheme it came from (paper, session and question), plus other wordings
-the mark scheme accepts and examiner notes where they matter.
+Each definition cites the mark scheme it came from (paper, session and question), plus other
+wordings the mark scheme accepts and examiner notes where they matter. Each equation cites its
+syllabus topic and is tagged when it's printed on the data and formulae list.
 
 ## How it works
 
-- **Three modes.** *Copy* shows the whole answer. *Gaps* hides the key words. *Recall* hides
-  every word, so you type from memory (press <kbd>Tab</kbd> or tap *Show next word* for a hint).
-  *Smart* mode picks the right one for each answer.
-- **Mastery stages.** Each answer moves from New to Copied, Gaps filled, Recalled, Secure and
-  Mastered. Recalled answers come back for review after 1, 2, 4, 9 and then 21 days.
-- **Marks.** Like an exam, marks go on the finished answer. Three red-pen ticks for a perfect
-  answer with no hints and few fixed mistakes, two for a correct answer (98%+), one for 90%+.
-  Mistakes you fix along the way only trim a little XP.
-- **XP and grades.** XP grows with answer length and mode (recall pays 2.5× copy), scaled by
-  accuracy, speed and your run of clean answers. Levels climb a grade ladder from U to A*, then
-  through the examiner ranks.
-- **Unlocks.** Units follow syllabus order. A unit opens once you've correctly copied 60% of
-  the one before it, or switch on *Unlock all units* in settings.
-- **Streaks, daily goals and 20 achievements.**
+- **Jump straight in.** The home page is the chapter list: pick a subject, a pack and a chapter,
+  then *Train* or *Practice*. Or search for any term ("tesla", "flux", "stack") and start there.
+- **Train** shows the answer and you type it. **Practice** hides words (some, most, or all of
+  them) and you fill them in. The two are separate: you can train for as long as you like, and
+  switch modes at any time from the top of the screen.
+- **Endless laps.** A session goes round every answer in the chapter, then starts another lap with
+  the ones you slipped on first. It never ends until you leave.
+- **Ratings, not marks.** Each answer gets *Perfect*, *Great*, *Good* or *Keep going*, with XP that
+  counts up, a sound that climbs in pitch with your combo, and confetti for the best ones. Clean
+  answers roll straight into the next one.
+- **Combo.** Every Great or Perfect in a row adds ×0.1 to your XP multiplier, up to ×3. A rough
+  answer breaks it.
+- **Bonus drops.** Now and then an answer pays double, or (rarely) five times.
+- **Mastery and reviews.** Answers move from New to Trained, Gaps, Recalled, Secure and Mastered.
+  Answers recalled from memory come back for spaced review after 4, 9 and then 21 days.
+- **Levels, streaks, a daily goal and 25 achievements.**
 - **Works offline.** A service worker caches the app and every pack on first visit. Packs refresh
   in the background, and new app versions show a reload prompt.
-- **Your data stays in your browser** (localStorage). Export and import it from the Progress page.
+- **Your data stays in your browser** (localStorage). Export and import it from the Stats page.
+
+### Why it's built this way
+
+The reward loop borrows from research on what keeps people engaged, pointed at revision:
+immediate, graded feedback on every answer; a combo that makes the next answer feel worth more
+(and stings a little to lose); occasional unpredictable bonus rewards, which hold interest far
+longer than fixed ones; no forced stopping point between answers; and progress bars towards near
+goals (the lap, the daily goal, the next level), which make people speed up as they get close.
 
 Code packs auto-indent after <kbd>Enter</kbd> and use `<-` for the assignment arrow so it can be
 typed.
@@ -71,9 +83,10 @@ Pages. Stamping the version means every deploy reaches installed copies.
 ## Licence and sources
 
 The code is released under the [MIT licence](LICENSE). The fonts (Atkinson Hyperlegible,
-JetBrains Mono, Caveat) are under the SIL Open Font License.
+JetBrains Mono) are under the SIL Open Font License.
 
-Answer wording is quoted from Cambridge International mark schemes for non-commercial revision,
-with a citation on every item. Those mark schemes are © Cambridge University Press & Assessment.
+Definition wording is quoted from Cambridge International mark schemes for non-commercial
+revision, with a citation on every item. Equations follow the 9702 syllabus and data and
+formulae list. Those mark schemes are © Cambridge University Press & Assessment.
 This project is not affiliated with or endorsed by Cambridge. No mark-scheme documents are
 included in the repository.
