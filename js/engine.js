@@ -36,24 +36,8 @@ export function chooseMask(text, ratio, seed) {
   return hidden;
 }
 
-let audioCtx = null;
-function click(bad) {
-  try {
-    audioCtx ||= new AudioContext();
-    const o = audioCtx.createOscillator();
-    const g = audioCtx.createGain();
-    o.type = bad ? 'square' : 'triangle';
-    o.frequency.value = bad ? 140 : 900 + Math.random() * 200;
-    g.gain.setValueAtTime(bad ? 0.04 : 0.025, audioCtx.currentTime);
-    g.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + 0.05);
-    o.connect(g).connect(audioCtx.destination);
-    o.start();
-    o.stop(audioCtx.currentTime + 0.06);
-  } catch {}
-}
-
 export class Typer {
-  constructor(host, { text, kind, mask, settings, onProgress, onDone }) {
+  constructor(host, { text, kind, mask, settings, onProgress, onDone, onKey }) {
     this.host = host;
     this.text = text;
     this.kind = kind;
@@ -61,6 +45,7 @@ export class Typer {
     this.settings = settings;
     this.onProgress = onProgress || (() => {});
     this.onDone = onDone || (() => {});
+    this.onKeyResult = onKey || (() => {});
     this.typed = [];        // per position: { c, ok, auto }
     this.revealed = new Set();
     this.hints = 0;
@@ -144,6 +129,8 @@ export class Typer {
       s.classList.toggle('auto', !!t && t.auto);
       // Stacked layout: what was typed sits under the text, so show the learner's own key.
       if (this.stacked) s.dataset.t = !t ? '' : t.c === '\n' ? '↵' : t.c === ' ' && !t.ok ? '·' : t.c;
+      if (!t || !t.ok) s.classList.remove('just');
+      else if (t.fresh) { s.classList.add('just'); t.fresh = false; }
       s.classList.toggle('cur', i === pos && !this.finished);
       s.classList.toggle('shown', this.revealed.has(i));
     }
@@ -236,12 +223,12 @@ export class Typer {
     const ok = this.same(got, want);
     this.keystrokes++;
     if (!ok) this.errors++;
-    if (this.settings.sound) click(!ok);
+    this.onKeyResult(ok);
     if (!ok && this.settings.stopOnError) {
       this.flash();
       return;
     }
-    this.typed.push({ c: got, ok, auto: false });
+    this.typed.push({ c: got, ok, auto: false, fresh: ok });
     this.autoAdvance();
   }
 

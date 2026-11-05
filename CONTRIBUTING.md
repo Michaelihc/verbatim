@@ -48,8 +48,8 @@ All practice content lives in `packs/`. The app has no build step: add a JSON fi
 
 | Field | Required | Notes |
 | --- | --- | --- |
-| `kind` | yes | `definition` (single line) or `code` (multi-line, indentation matters). |
-| `units` | yes | Ordered. Each unit unlocks once enough of the previous unit is learned. |
+| `kind` | yes | `definition` or `equation` (single line), or `code` (multi-line, indentation matters). |
+| `units` | yes | Ordered as in the syllabus. Each unit is a chapter on the home page. |
 | `item.id` | yes | Unique within the pack and stable: progress is stored against it. Renaming resets progress. |
 | `item.term` | yes | Short name shown in lists and in recall mode. |
 | `item.prompt` | yes | The question as it would appear on a paper. |
@@ -57,9 +57,13 @@ All practice content lives in `packs/`. The app has no build step: add a JSON fi
 | `item.alt` | no | Other wordings the mark scheme accepts. Shown after the item, not typed. |
 | `item.sources` | yes | At least one mark-scheme reference so others can check the wording. |
 | `item.notes` | no | Examiner guidance worth knowing (e.g. "must say *per unit*"). |
+| `item.formula` | `equation` packs | The symbol form, shown next to the word equation. Display only, so Unicode is fine (`Eₖ = ½mv²`); `_rms` renders as a subscript. |
+| `item.given` | no | `true` if the equation is printed on the data and formulae list. |
 
 ### Answer text rules
 
+- `equation` answers are word equations: `x` for multiply, `/` for divide, and words for powers
+  (`speed squared`).
 - Plain ASCII where possible. Use `^` only when the mark scheme does (e.g. `m s^-2`); prefer words.
 - `code` packs: indent with 4 spaces, no tabs, no trailing spaces, `\n` line breaks. Use the
   Cambridge pseudocode guide conventions (`←` is written as `<-` so it can be typed).
@@ -67,7 +71,10 @@ All practice content lives in `packs/`. The app has no build step: add a JSON fi
 
 ### Sourcing
 
-Use the wording of the official Cambridge mark scheme (the accepted answer, with minimal framing
+Equations can cite the syllabus instead of a paper:
+`{ "paper": "9702 syllabus", "session": "2025-2027", "section": "Topic 20" }`.
+
+For definitions, use the wording of the official Cambridge mark scheme (the accepted answer, with minimal framing
 such as "X is ..." to make a full sentence). Cite the paper, session and question. Do not commit
 the mark-scheme PDFs themselves.
 

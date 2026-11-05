@@ -9,12 +9,13 @@ export const DEFAULT_SETTINGS = {
   ignorePunctuation: false,
   stopOnError: false,     // wrong keys are rejected instead of shown
   autoIndent: true,       // code packs: skip leading spaces after Enter
-  sound: false,
+  sound: true,            // chimes when an answer lands
+  keySound: false,        // a soft tick on every key
+  autoAdvance: true,      // clean answers roll straight into the next one
   textSize: 'm',          // s | m | l
   layout: 'overlay',      // overlay: type over the text | stacked: type on a line below it
-  unlockAll: false,
+  practiceLevel: 'gaps',  // gaps | more | recall
   dailyGoal: 150,
-  roundSize: 6,
 };
 
 function fresh() {
@@ -26,7 +27,7 @@ function fresh() {
     days: {},
     history: [],
     achievements: {},
-    totals: { chars: 0, keystrokes: 0, errors: 0, items: 0, ms: 0, hints: 0 },
+    totals: { chars: 0, keystrokes: 0, errors: 0, items: 0, ms: 0, hints: 0, perfects: 0, laps: 0, lucky: 0 },
     bestCombo: 0,
   };
 }

@@ -1,0 +1,1846 @@
+{
+  "id": "9702-equations",
+  "title": "Physics equations",
+  "subject": "Physics",
+  "syllabus": "Cambridge International AS & A Level Physics (9702)",
+  "kind": "equation",
+  "description": "Every key equation as a word equation, with its symbol form alongside.",
+  "units": [
+    {
+      "id": "kinematics",
+      "title": "Kinematics",
+      "items": [
+        {
+          "id": "speed",
+          "term": "Speed",
+          "prompt": "Write the word equation for speed.",
+          "answer": "speed = distance / time",
+          "formula": "v = d / t",
+          "sources": [
+            {
+              "paper": "9702 syllabus",
+              "session": "2025-2027",
+              "section": "Topic 2"
+            }
+          ]
+        },
+        {
+          "id": "velocity",
+          "term": "Velocity",
+          "prompt": "Write the word equation for velocity.",
+          "answer": "velocity = displacement / time",
+          "formula": "v = Δs / Δt",
+          "sources": [
+            {
+              "paper": "9702 syllabus",
+              "session": "2025-2027",
+              "section": "Topic 2"
+            }
+          ]
+        },
+        {
+          "id": "acceleration",
+          "term": "Acceleration",
+          "prompt": "Write the word equation for acceleration.",
+          "answer": "acceleration = change in velocity / time taken",
+          "formula": "a = Δv / Δt",
+          "sources": [
+            {
+              "paper": "9702 syllabus",
+              "session": "2025-2027",
+              "section": "Topic 2"
+            }
+          ]
+        },
+        {
+          "id": "suvat-v-u-at",
+          "term": "v = u + at",
+          "prompt": "Write the word equation for v = u + at.",
+          "answer": "final velocity = initial velocity + acceleration x time",
+          "formula": "v = u + at",
+          "sources": [
+            {
+              "paper": "9702 syllabus",
+              "session": "2025-2027",
+              "section": "Topic 2"
+            }
+          ]
+        },
+        {
+          "id": "suvat-s-ut",
+          "term": "s = ut + ½at²",
+          "prompt": "Write the word equation for s = ut + ½at².",
+          "answer": "displacement = initial velocity x time + 1/2 x acceleration x time squared",
+          "formula": "s = ut + ½at²",
+          "given": true,
+          "sources": [
+            {
+              "paper": "9702 syllabus",
+              "session": "2025-2027",
+              "section": "Topic 2"
+            },
+            {
+              "paper": "9702 data and formulae list",
+              "session": "2025-2027"
+            }
+          ]
+        },
+        {
+          "id": "suvat-v2",
+          "term": "v² = u² + 2as",
+          "prompt": "Write the word equation for v² = u² + 2as.",
+          "answer": "final velocity squared = initial velocity squared + 2 x acceleration x displacement",
+          "formula": "v² = u² + 2as",
+          "given": true,
+          "sources": [
+            {
+              "paper": "9702 syllabus",
+              "session": "2025-2027",
+              "section": "Topic 2"
+            },
+            {
+              "paper": "9702 data and formulae list",
+              "session": "2025-2027"
+            }
+          ]
+        },
+        {
+          "id": "suvat-average",
+          "term": "s = ½(u + v)t",
+          "prompt": "Write the word equation for s = ½(u + v)t.",
+          "answer": "displacement = 1/2 x (initial velocity + final velocity) x time",
+          "formula": "s = ½(u + v)t",
+          "sources": [
+            {
+              "paper": "9702 syllabus",
+              "session": "2025-2027",
+              "section": "Topic 2"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "dynamics",
+      "title": "Dynamics",
+      "items": [
+        {
+          "id": "newtons-second-law",
+          "term": "Force, mass and acceleration",
+          "prompt": "Write the word equation for force, mass and acceleration.",
+          "answer": "force = mass x acceleration",
+          "formula": "F = ma",
+          "sources": [
+            {
+              "paper": "9702 syllabus",
+              "session": "2025-2027",
+              "section": "Topic 3"
+            }
+          ]
+        },
+        {
+          "id": "weight",
+          "term": "Weight",
+          "prompt": "Write the word equation for weight.",
+          "answer": "weight = mass x gravitational field strength",
+          "formula": "W = mg",
+          "sources": [
+            {
+              "paper": "9702 syllabus",
+              "session": "2025-2027",
+              "section": "Topic 3"
+            }
+          ]
+        },
+        {
+          "id": "momentum",
+          "term": "Momentum",
+          "prompt": "Write the word equation for momentum.",
+          "answer": "momentum = mass x velocity",
+          "formula": "p = mv",
+          "sources": [
+            {
+              "paper": "9702 syllabus",
+              "session": "2025-2027",
+              "section": "Topic 3"
+            }
+          ]
+        },
+        {
+          "id": "force-and-momentum",
+          "term": "Force and momentum",
+          "prompt": "Write the word equation for force and momentum.",
+          "answer": "force = change in momentum / time taken",
+          "formula": "F = Δp / Δt",
+          "sources": [
+            {
+              "paper": "9702 syllabus",
+              "session": "2025-2027",
+              "section": "Topic 3"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "forces-density-pressure",
+      "title": "Forces, density and pressure",
+      "items": [
+        {
+          "id": "density",
+          "term": "Density",
+          "prompt": "Write the word equation for density.",
+          "answer": "density = mass / volume",
+          "formula": "ρ = m / V",
+          "sources": [
+            {
+              "paper": "9702 syllabus",
+              "session": "2025-2027",
+              "section": "Topic 4"
+            }
+          ]
+        },
+        {
+          "id": "pressure",
+          "term": "Pressure",
+          "prompt": "Write the word equation for pressure.",
+          "answer": "pressure = force / area",
+          "formula": "p = F / A",
+          "sources": [
+            {
+              "paper": "9702 syllabus",
+              "session": "2025-2027",
+              "section": "Topic 4"
+            }
+          ]
+        },
+        {
+          "id": "hydrostatic-pressure",
+          "term": "Hydrostatic pressure",
+          "prompt": "Write the word equation for hydrostatic pressure.",
+          "answer": "change in pressure = density x gravitational field strength x change in depth",
+          "formula": "Δp = ρgΔh",
+          "given": true,
+          "sources": [
+            {
+              "paper": "9702 syllabus",
+              "session": "2025-2027",
+              "section": "Topic 4"
+            },
+            {
+              "paper": "9702 data and formulae list",
+              "session": "2025-2027"
+            }
+          ]
+        },
+        {
+          "id": "upthrust",
+          "term": "Upthrust",
+          "prompt": "Write the word equation for upthrust.",
+          "answer": "upthrust = density of fluid x gravitational field strength x volume displaced",
+          "formula": "F = ρgV",
+          "given": true,
+          "sources": [
+            {
+              "paper": "9702 syllabus",
+              "session": "2025-2027",
+              "section": "Topic 4"
+            },
+            {
+              "paper": "9702 data and formulae list",
+              "session": "2025-2027"
+            }
+          ]
+        },
+        {
+          "id": "moment",
+          "term": "Moment of a force",
+          "prompt": "Write the word equation for moment of a force.",
+          "answer": "moment = force x perpendicular distance from the pivot",
+          "formula": "moment = Fd",
+          "sources": [
+            {
+              "paper": "9702 syllabus",
+              "session": "2025-2027",
+              "section": "Topic 4"
+            }
+          ]
+        },
+        {
+          "id": "torque-of-a-couple",
+          "term": "Torque of a couple",
+          "prompt": "Write the word equation for torque of a couple.",
+          "answer": "torque = one of the forces x perpendicular distance between the forces",
+          "formula": "T = Fd",
+          "sources": [
+            {
+              "paper": "9702 syllabus",
+              "session": "2025-2027",
+              "section": "Topic 4"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "work-energy-power",
+      "title": "Work, energy and power",
+      "items": [
+        {
+          "id": "work-done",
+          "term": "Work done",
+          "prompt": "Write the word equation for work done.",
+          "answer": "work done = force x displacement in the direction of the force",
+          "formula": "W = Fs",
+          "sources": [
+            {
+              "paper": "9702 syllabus",
+              "session": "2025-2027",
+              "section": "Topic 5"
+            }
+          ]
+        },
+        {
+          "id": "kinetic-energy",
+          "term": "Kinetic energy",
+          "prompt": "Write the word equation for kinetic energy.",
+          "answer": "kinetic energy = 1/2 x mass x speed squared",
+          "formula": "Eₖ = ½mv²",
+          "sources": [
+            {
+              "paper": "9702 syllabus",
+              "session": "2025-2027",
+              "section": "Topic 5"
+            }
+          ]
+        },
+        {
+          "id": "gravitational-potential-energy",
+          "term": "Gravitational potential energy",
+          "prompt": "Write the word equation for gravitational potential energy.",
+          "answer": "change in gravitational potential energy = mass x gravitational field strength x change in height",
+          "formula": "ΔEₚ = mgΔh",
+          "sources": [
+            {
+              "paper": "9702 syllabus",
+              "session": "2025-2027",
+              "section": "Topic 5"
+            }
+          ]
+        },
+        {
+          "id": "power",
+          "term": "Power",
+          "prompt": "Write the word equation for power.",
+          "answer": "power = work done / time taken",
+          "formula": "P = W / t",
+          "sources": [
+            {
+              "paper": "9702 syllabus",
+              "session": "2025-2027",
+              "section": "Topic 5"
+            }
+          ]
+        },
+        {
+          "id": "power-and-velocity",
+          "term": "Power and velocity",
+          "prompt": "Write the word equation for power and velocity.",
+          "answer": "power = force x velocity",
+          "formula": "P = Fv",
+          "sources": [
+            {
+              "paper": "9702 syllabus",
+              "session": "2025-2027",
+              "section": "Topic 5"
+            }
+          ]
+        },
+        {
+          "id": "efficiency",
+          "term": "Efficiency",
+          "prompt": "Write the word equation for efficiency.",
+          "answer": "efficiency = useful energy output / total energy input x 100%",
+          "formula": "efficiency = useful output / total input × 100%",
+          "sources": [
+            {
+              "paper": "9702 syllabus",
+              "session": "2025-2027",
+              "section": "Topic 5"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "deformation-of-solids",
+      "title": "Deformation of solids",
+      "items": [
+        {
+          "id": "stress",
+          "term": "Stress",
+          "prompt": "Write the word equation for stress.",
+          "answer": "stress = force / cross-sectional area",
+          "formula": "σ = F / A",
+          "sources": [
+            {
+              "paper": "9702 syllabus",
+              "session": "2025-2027",
+              "section": "Topic 6"
+            }
+          ]
+        },
+        {
+          "id": "strain",
+          "term": "Strain",
+          "prompt": "Write the word equation for strain.",
+          "answer": "strain = extension / original length",
+          "formula": "ε = x / L",
+          "sources": [
+            {
+              "paper": "9702 syllabus",
+              "session": "2025-2027",
+              "section": "Topic 6"
+            }
+          ]
+        },
+        {
+          "id": "young-modulus",
+          "term": "Young modulus",
+          "prompt": "Write the word equation for Young modulus.",
+          "answer": "Young modulus = stress / strain",
+          "formula": "E = σ / ε",
+          "sources": [
+            {
+              "paper": "9702 syllabus",
+              "session": "2025-2027",
+              "section": "Topic 6"
+            }
+          ]
+        },
+        {
+          "id": "hookes-law",
+          "term": "Hooke's law",
+          "prompt": "Write the word equation for Hooke's law.",
+          "answer": "force = spring constant x extension",
+          "formula": "F = kx",
+          "sources": [
+            {
+              "paper": "9702 syllabus",
+              "session": "2025-2027",
+              "section": "Topic 6"
+            }
+          ]
+        },
+        {
+          "id": "elastic-potential-energy",
+          "term": "Elastic potential energy",
+          "prompt": "Write the word equation for elastic potential energy.",
+          "answer": "elastic potential energy = 1/2 x force x extension",
+          "formula": "Eₚ = ½Fx = ½kx²",
+          "sources": [
+            {
+              "paper": "9702 syllabus",
+              "session": "2025-2027",
+              "section": "Topic 6"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "waves",
+      "title": "Waves",
+      "items": [
+        {
+          "id": "wave-speed",
+          "term": "Wave speed",
+          "prompt": "Write the word equation for wave speed.",
+          "answer": "wave speed = frequency x wavelength",
+          "formula": "v = fλ",
+          "sources": [
+            {
+              "paper": "9702 syllabus",
+              "session": "2025-2027",
+              "section": "Topic 7"
+            }
+          ]
+        },
+        {
+          "id": "frequency-and-period",
+          "term": "Frequency and period",
+          "prompt": "Write the word equation for frequency and period.",
+          "answer": "frequency = 1 / period",
+          "formula": "f = 1 / T",
+          "sources": [
+            {
+              "paper": "9702 syllabus",
+              "session": "2025-2027",
+              "section": "Topic 7"
+            }
+          ]
+        },
+        {
+          "id": "intensity",
+          "term": "Intensity",
+          "prompt": "Write the word equation for intensity.",
+          "answer": "intensity = power / area",
+          "formula": "I = P / A",
+          "sources": [
+            {
+              "paper": "9702 syllabus",
+              "session": "2025-2027",
+              "section": "Topic 7"
+            }
+          ]
+        },
+        {
+          "id": "intensity-and-amplitude",
+          "term": "Intensity and amplitude",
+          "prompt": "Write the word equation for intensity and amplitude.",
+          "answer": "intensity is proportional to amplitude squared",
+          "formula": "I ∝ A²",
+          "sources": [
+            {
+              "paper": "9702 syllabus",
+              "session": "2025-2027",
+              "section": "Topic 7"
+            }
+          ]
+        },
+        {
+          "id": "doppler-effect",
+          "term": "Doppler effect",
+          "prompt": "Write the word equation for Doppler effect.",
+          "answer": "observed frequency = source frequency x wave speed / (wave speed +- source speed)",
+          "formula": "fₒ = fₛv / (v ± vₛ)",
+          "given": true,
+          "sources": [
+            {
+              "paper": "9702 syllabus",
+              "session": "2025-2027",
+              "section": "Topic 7"
+            },
+            {
+              "paper": "9702 data and formulae list",
+              "session": "2025-2027"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "superposition",
+      "title": "Superposition",
+      "items": [
+        {
+          "id": "double-slit",
+          "term": "Double-slit interference",
+          "prompt": "Write the word equation for double-slit interference.",
+          "answer": "wavelength = slit separation x fringe separation / distance from slits to screen",
+          "formula": "λ = ax / D",
+          "sources": [
+            {
+              "paper": "9702 syllabus",
+              "session": "2025-2027",
+              "section": "Topic 8"
+            }
+          ]
+        },
+        {
+          "id": "diffraction-grating",
+          "term": "Diffraction grating",
+          "prompt": "Write the word equation for diffraction grating.",
+          "answer": "grating spacing x sin(angle) = order x wavelength",
+          "formula": "d sin θ = nλ",
+          "sources": [
+            {
+              "paper": "9702 syllabus",
+              "session": "2025-2027",
+              "section": "Topic 8"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "electricity",
+      "title": "Electricity",
+      "items": [
+        {
+          "id": "charge",
+          "term": "Charge",
+          "prompt": "Write the word equation for charge.",
+          "answer": "charge = current x time",
+          "formula": "Q = It",
+          "sources": [
+            {
+              "paper": "9702 syllabus",
+              "session": "2025-2027",
+              "section": "Topic 9"
+            }
+          ]
+        },
+        {
+          "id": "current-and-drift-velocity",
+          "term": "Current and drift velocity",
+          "prompt": "Write the word equation for current and drift velocity.",
+          "answer": "current = cross-sectional area x number density x drift velocity x charge",
+          "formula": "I = Anvq",
+          "given": true,
+          "sources": [
+            {
+              "paper": "9702 syllabus",
+              "session": "2025-2027",
+              "section": "Topic 9"
+            },
+            {
+              "paper": "9702 data and formulae list",
+              "session": "2025-2027"
+            }
+          ]
+        },
+        {
+          "id": "potential-difference",
+          "term": "Potential difference",
+          "prompt": "Write the word equation for potential difference.",
+          "answer": "potential difference = energy transferred / charge",
+          "formula": "V = W / Q",
+          "sources": [
+            {
+              "paper": "9702 syllabus",
+              "session": "2025-2027",
+              "section": "Topic 9"
+            }
+          ]
+        },
+        {
+          "id": "resistance",
+          "term": "Resistance",
+          "prompt": "Write the word equation for resistance.",
+          "answer": "resistance = potential difference / current",
+          "formula": "R = V / I",
+          "sources": [
+            {
+              "paper": "9702 syllabus",
+              "session": "2025-2027",
+              "section": "Topic 9"
+            }
+          ]
+        },
+        {
+          "id": "electrical-power",
+          "term": "Electrical power",
+          "prompt": "Write the word equation for electrical power.",
+          "answer": "power = potential difference x current",
+          "formula": "P = VI",
+          "sources": [
+            {
+              "paper": "9702 syllabus",
+              "session": "2025-2027",
+              "section": "Topic 9"
+            }
+          ]
+        },
+        {
+          "id": "power-i-squared-r",
+          "term": "Power from current and resistance",
+          "prompt": "Write the word equation for power from current and resistance.",
+          "answer": "power = current squared x resistance",
+          "formula": "P = I²R",
+          "sources": [
+            {
+              "paper": "9702 syllabus",
+              "session": "2025-2027",
+              "section": "Topic 9"
+            }
+          ]
+        },
+        {
+          "id": "power-v-squared-over-r",
+          "term": "Power from p.d. and resistance",
+          "prompt": "Write the word equation for power from p.d. and resistance.",
+          "answer": "power = potential difference squared / resistance",
+          "formula": "P = V² / R",
+          "sources": [
+            {
+              "paper": "9702 syllabus",
+              "session": "2025-2027",
+              "section": "Topic 9"
+            }
+          ]
+        },
+        {
+          "id": "resistivity",
+          "term": "Resistivity",
+          "prompt": "Write the word equation for resistivity.",
+          "answer": "resistance = resistivity x length / cross-sectional area",
+          "formula": "R = ρL / A",
+          "sources": [
+            {
+              "paper": "9702 syllabus",
+              "session": "2025-2027",
+              "section": "Topic 9"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "dc-circuits",
+      "title": "D.C. circuits",
+      "items": [
+        {
+          "id": "resistors-in-series",
+          "term": "Resistors in series",
+          "prompt": "Write the word equation for resistors in series.",
+          "answer": "total resistance = sum of the individual resistances",
+          "formula": "R = R₁ + R₂ + …",
+          "given": true,
+          "sources": [
+            {
+              "paper": "9702 syllabus",
+              "session": "2025-2027",
+              "section": "Topic 10"
+            },
+            {
+              "paper": "9702 data and formulae list",
+              "session": "2025-2027"
+            }
+          ]
+        },
+        {
+          "id": "resistors-in-parallel",
+          "term": "Resistors in parallel",
+          "prompt": "Write the word equation for resistors in parallel.",
+          "answer": "1 / total resistance = sum of 1 / each individual resistance",
+          "formula": "1/R = 1/R₁ + 1/R₂ + …",
+          "given": true,
+          "sources": [
+            {
+              "paper": "9702 syllabus",
+              "session": "2025-2027",
+              "section": "Topic 10"
+            },
+            {
+              "paper": "9702 data and formulae list",
+              "session": "2025-2027"
+            }
+          ]
+        },
+        {
+          "id": "emf-and-internal-resistance",
+          "term": "E.m.f. and internal resistance",
+          "prompt": "Write the word equation for e.m.f. and internal resistance.",
+          "answer": "e.m.f. = terminal potential difference + current x internal resistance",
+          "formula": "E = V + Ir",
+          "sources": [
+            {
+              "paper": "9702 syllabus",
+              "session": "2025-2027",
+              "section": "Topic 10"
+            }
+          ]
+        },
+        {
+          "id": "potential-divider",
+          "term": "Potential divider",
+          "prompt": "Write the word equation for potential divider.",
+          "answer": "output voltage = input voltage x R2 / (R1 + R2)",
+          "formula": "Vₒᵤₜ = Vᵢₙ × R₂ / (R₁ + R₂)",
+          "sources": [
+            {
+              "paper": "9702 syllabus",
+              "session": "2025-2027",
+              "section": "Topic 10"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "motion-in-a-circle",
+      "title": "Motion in a circle",
+      "items": [
+        {
+          "id": "angle-in-radians",
+          "term": "Angle in radians",
+          "prompt": "Write the word equation for angle in radians.",
+          "answer": "angle in radians = arc length / radius",
+          "formula": "θ = s / r",
+          "sources": [
+            {
+              "paper": "9702 syllabus",
+              "session": "2025-2027",
+              "section": "Topic 12"
+            }
+          ]
+        },
+        {
+          "id": "angular-speed",
+          "term": "Angular speed",
+          "prompt": "Write the word equation for angular speed.",
+          "answer": "angular speed = 2 x pi / period",
+          "formula": "ω = 2π / T",
+          "sources": [
+            {
+              "paper": "9702 syllabus",
+              "session": "2025-2027",
+              "section": "Topic 12"
+            }
+          ]
+        },
+        {
+          "id": "speed-and-angular-speed",
+          "term": "Speed and angular speed",
+          "prompt": "Write the word equation for speed and angular speed.",
+          "answer": "speed = angular speed x radius",
+          "formula": "v = ωr",
+          "sources": [
+            {
+              "paper": "9702 syllabus",
+              "session": "2025-2027",
+              "section": "Topic 12"
+            }
+          ]
+        },
+        {
+          "id": "centripetal-acceleration",
+          "term": "Centripetal acceleration",
+          "prompt": "Write the word equation for centripetal acceleration.",
+          "answer": "centripetal acceleration = speed squared / radius",
+          "formula": "a = v² / r = rω²",
+          "sources": [
+            {
+              "paper": "9702 syllabus",
+              "session": "2025-2027",
+              "section": "Topic 12"
+            }
+          ]
+        },
+        {
+          "id": "centripetal-force",
+          "term": "Centripetal force",
+          "prompt": "Write the word equation for centripetal force.",
+          "answer": "centripetal force = mass x speed squared / radius",
+          "formula": "F = mv² / r",
+          "sources": [
+            {
+              "paper": "9702 syllabus",
+              "session": "2025-2027",
+              "section": "Topic 12"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "gravitational-fields",
+      "title": "Gravitational fields",
+      "items": [
+        {
+          "id": "gravitational-field-strength",
+          "term": "Gravitational field strength",
+          "prompt": "Write the word equation for gravitational field strength.",
+          "answer": "gravitational field strength = force / mass",
+          "formula": "g = F / m",
+          "sources": [
+            {
+              "paper": "9702 syllabus",
+              "session": "2025-2027",
+              "section": "Topic 13"
+            }
+          ]
+        },
+        {
+          "id": "newtons-law-of-gravitation",
+          "term": "Newton's law of gravitation",
+          "prompt": "Write the word equation for Newton's law of gravitation.",
+          "answer": "gravitational force = G x mass 1 x mass 2 / distance squared",
+          "formula": "F = Gm₁m₂ / r²",
+          "sources": [
+            {
+              "paper": "9702 syllabus",
+              "session": "2025-2027",
+              "section": "Topic 13"
+            }
+          ]
+        },
+        {
+          "id": "field-strength-of-a-point-mass",
+          "term": "Field strength of a point mass",
+          "prompt": "Write the word equation for field strength of a point mass.",
+          "answer": "gravitational field strength = G x mass / distance squared",
+          "formula": "g = GM / r²",
+          "sources": [
+            {
+              "paper": "9702 syllabus",
+              "session": "2025-2027",
+              "section": "Topic 13"
+            }
+          ]
+        },
+        {
+          "id": "gravitational-potential",
+          "term": "Gravitational potential",
+          "prompt": "Write the word equation for gravitational potential.",
+          "answer": "gravitational potential = - G x mass / distance",
+          "formula": "φ = −GM / r",
+          "given": true,
+          "sources": [
+            {
+              "paper": "9702 syllabus",
+              "session": "2025-2027",
+              "section": "Topic 13"
+            },
+            {
+              "paper": "9702 data and formulae list",
+              "session": "2025-2027"
+            }
+          ]
+        },
+        {
+          "id": "gravitational-potential-energy-field",
+          "term": "Gravitational potential energy (field)",
+          "prompt": "Write the word equation for gravitational potential energy (field).",
+          "answer": "gravitational potential energy = - G x mass 1 x mass 2 / distance",
+          "formula": "Eₚ = −GMm / r",
+          "given": true,
+          "sources": [
+            {
+              "paper": "9702 syllabus",
+              "session": "2025-2027",
+              "section": "Topic 13"
+            },
+            {
+              "paper": "9702 data and formulae list",
+              "session": "2025-2027"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "temperature",
+      "title": "Temperature",
+      "items": [
+        {
+          "id": "specific-heat-capacity",
+          "term": "Specific heat capacity",
+          "prompt": "Write the word equation for specific heat capacity.",
+          "answer": "thermal energy = mass x specific heat capacity x change in temperature",
+          "formula": "E = mcΔθ",
+          "sources": [
+            {
+              "paper": "9702 syllabus",
+              "session": "2025-2027",
+              "section": "Topic 14"
+            }
+          ]
+        },
+        {
+          "id": "specific-latent-heat",
+          "term": "Specific latent heat",
+          "prompt": "Write the word equation for specific latent heat.",
+          "answer": "thermal energy = mass x specific latent heat",
+          "formula": "E = mL",
+          "sources": [
+            {
+              "paper": "9702 syllabus",
+              "session": "2025-2027",
+              "section": "Topic 14"
+            }
+          ]
+        },
+        {
+          "id": "kelvin-and-celsius",
+          "term": "Kelvin and Celsius",
+          "prompt": "Write the word equation for Kelvin and Celsius.",
+          "answer": "temperature in kelvin = temperature in degrees Celsius + 273.15",
+          "formula": "T/K = θ/°C + 273.15",
+          "sources": [
+            {
+              "paper": "9702 syllabus",
+              "session": "2025-2027",
+              "section": "Topic 14"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ideal-gases",
+      "title": "Ideal gases",
+      "items": [
+        {
+          "id": "ideal-gas-moles",
+          "term": "Ideal gas equation (moles)",
+          "prompt": "Write the word equation for ideal gas equation (moles).",
+          "answer": "pressure x volume = amount in moles x molar gas constant x thermodynamic temperature",
+          "formula": "pV = nRT",
+          "sources": [
+            {
+              "paper": "9702 syllabus",
+              "session": "2025-2027",
+              "section": "Topic 15"
+            }
+          ]
+        },
+        {
+          "id": "ideal-gas-molecules",
+          "term": "Ideal gas equation (molecules)",
+          "prompt": "Write the word equation for ideal gas equation (molecules).",
+          "answer": "pressure x volume = number of molecules x Boltzmann constant x thermodynamic temperature",
+          "formula": "pV = NkT",
+          "sources": [
+            {
+              "paper": "9702 syllabus",
+              "session": "2025-2027",
+              "section": "Topic 15"
+            }
+          ]
+        },
+        {
+          "id": "kinetic-theory-pressure",
+          "term": "Pressure from kinetic theory",
+          "prompt": "Write the word equation for pressure from kinetic theory.",
+          "answer": "pressure = 1/3 x number of molecules x mass of a molecule x mean square speed / volume",
+          "formula": "p = ⅓ (Nm / V) ⟨c²⟩",
+          "given": true,
+          "sources": [
+            {
+              "paper": "9702 syllabus",
+              "session": "2025-2027",
+              "section": "Topic 15"
+            },
+            {
+              "paper": "9702 data and formulae list",
+              "session": "2025-2027"
+            }
+          ]
+        },
+        {
+          "id": "mean-kinetic-energy",
+          "term": "Mean kinetic energy of a molecule",
+          "prompt": "Write the word equation for mean kinetic energy of a molecule.",
+          "answer": "mean kinetic energy of a molecule = 3/2 x Boltzmann constant x thermodynamic temperature",
+          "formula": "½m⟨c²⟩ = (3/2)kT",
+          "sources": [
+            {
+              "paper": "9702 syllabus",
+              "session": "2025-2027",
+              "section": "Topic 15"
+            }
+          ]
+        },
+        {
+          "id": "boltzmann-constant",
+          "term": "Boltzmann constant",
+          "prompt": "Write the word equation for boltzmann constant.",
+          "answer": "Boltzmann constant = molar gas constant / Avogadro constant",
+          "formula": "k = R / Nₐ",
+          "sources": [
+            {
+              "paper": "9702 syllabus",
+              "session": "2025-2027",
+              "section": "Topic 15"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "thermodynamics",
+      "title": "Thermodynamics",
+      "items": [
+        {
+          "id": "first-law-of-thermodynamics",
+          "term": "First law of thermodynamics",
+          "prompt": "Write the word equation for first law of thermodynamics.",
+          "answer": "increase in internal energy = heating of the system + work done on the system",
+          "formula": "ΔU = q + W",
+          "sources": [
+            {
+              "paper": "9702 syllabus",
+              "session": "2025-2027",
+              "section": "Topic 16"
+            }
+          ]
+        },
+        {
+          "id": "work-done-on-a-gas",
+          "term": "Work done on or by a gas",
+          "prompt": "Write the word equation for work done on or by a gas.",
+          "answer": "work done = pressure x change in volume",
+          "formula": "W = pΔV",
+          "given": true,
+          "sources": [
+            {
+              "paper": "9702 syllabus",
+              "session": "2025-2027",
+              "section": "Topic 16"
+            },
+            {
+              "paper": "9702 data and formulae list",
+              "session": "2025-2027"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "oscillations",
+      "title": "Oscillations",
+      "items": [
+        {
+          "id": "shm-acceleration",
+          "term": "Simple harmonic motion",
+          "prompt": "Write the word equation for simple harmonic motion.",
+          "answer": "acceleration = - angular frequency squared x displacement",
+          "formula": "a = −ω²x",
+          "given": true,
+          "sources": [
+            {
+              "paper": "9702 syllabus",
+              "session": "2025-2027",
+              "section": "Topic 17"
+            },
+            {
+              "paper": "9702 data and formulae list",
+              "session": "2025-2027"
+            }
+          ]
+        },
+        {
+          "id": "angular-frequency",
+          "term": "Angular frequency",
+          "prompt": "Write the word equation for angular frequency.",
+          "answer": "angular frequency = 2 x pi x frequency",
+          "formula": "ω = 2πf",
+          "sources": [
+            {
+              "paper": "9702 syllabus",
+              "session": "2025-2027",
+              "section": "Topic 17"
+            }
+          ]
+        },
+        {
+          "id": "shm-displacement",
+          "term": "Displacement in s.h.m.",
+          "prompt": "Write the word equation for displacement in s.h.m..",
+          "answer": "displacement = amplitude x sin(angular frequency x time)",
+          "formula": "x = x₀ sin ωt",
+          "sources": [
+            {
+              "paper": "9702 syllabus",
+              "session": "2025-2027",
+              "section": "Topic 17"
+            }
+          ]
+        },
+        {
+          "id": "shm-speed",
+          "term": "Speed in s.h.m.",
+          "prompt": "Write the word equation for speed in s.h.m..",
+          "answer": "speed = angular frequency x square root of (amplitude squared - displacement squared)",
+          "formula": "v = ±ω√(x₀² − x²)",
+          "given": true,
+          "sources": [
+            {
+              "paper": "9702 syllabus",
+              "session": "2025-2027",
+              "section": "Topic 17"
+            },
+            {
+              "paper": "9702 data and formulae list",
+              "session": "2025-2027"
+            }
+          ]
+        },
+        {
+          "id": "shm-energy",
+          "term": "Total energy in s.h.m.",
+          "prompt": "Write the word equation for total energy in s.h.m..",
+          "answer": "total energy = 1/2 x mass x angular frequency squared x amplitude squared",
+          "formula": "E = ½mω²x₀²",
+          "sources": [
+            {
+              "paper": "9702 syllabus",
+              "session": "2025-2027",
+              "section": "Topic 17"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "electric-fields",
+      "title": "Electric fields",
+      "items": [
+        {
+          "id": "electric-field-strength",
+          "term": "Electric field strength",
+          "prompt": "Write the word equation for electric field strength.",
+          "answer": "electric field strength = force / charge",
+          "formula": "E = F / q",
+          "sources": [
+            {
+              "paper": "9702 syllabus",
+              "session": "2025-2027",
+              "section": "Topic 18"
+            }
+          ]
+        },
+        {
+          "id": "uniform-electric-field",
+          "term": "Uniform electric field",
+          "prompt": "Write the word equation for uniform electric field.",
+          "answer": "electric field strength = potential difference / separation of the plates",
+          "formula": "E = ΔV / Δd",
+          "sources": [
+            {
+              "paper": "9702 syllabus",
+              "session": "2025-2027",
+              "section": "Topic 18"
+            }
+          ]
+        },
+        {
+          "id": "coulombs-law",
+          "term": "Coulomb's law",
+          "prompt": "Write the word equation for Coulomb's law.",
+          "answer": "electric force = charge 1 x charge 2 / (4 x pi x epsilon zero x distance squared)",
+          "formula": "F = Qq / (4πε₀r²)",
+          "sources": [
+            {
+              "paper": "9702 syllabus",
+              "session": "2025-2027",
+              "section": "Topic 18"
+            }
+          ]
+        },
+        {
+          "id": "field-strength-of-a-point-charge",
+          "term": "Field strength of a point charge",
+          "prompt": "Write the word equation for field strength of a point charge.",
+          "answer": "electric field strength = charge / (4 x pi x epsilon zero x distance squared)",
+          "formula": "E = Q / (4πε₀r²)",
+          "sources": [
+            {
+              "paper": "9702 syllabus",
+              "session": "2025-2027",
+              "section": "Topic 18"
+            }
+          ]
+        },
+        {
+          "id": "electric-potential",
+          "term": "Electric potential",
+          "prompt": "Write the word equation for electric potential.",
+          "answer": "electric potential = charge / (4 x pi x epsilon zero x distance)",
+          "formula": "V = Q / (4πε₀r)",
+          "given": true,
+          "sources": [
+            {
+              "paper": "9702 syllabus",
+              "session": "2025-2027",
+              "section": "Topic 18"
+            },
+            {
+              "paper": "9702 data and formulae list",
+              "session": "2025-2027"
+            }
+          ]
+        },
+        {
+          "id": "electric-potential-energy",
+          "term": "Electric potential energy",
+          "prompt": "Write the word equation for electric potential energy.",
+          "answer": "electric potential energy = charge 1 x charge 2 / (4 x pi x epsilon zero x distance)",
+          "formula": "Eₚ = Qq / (4πε₀r)",
+          "given": true,
+          "sources": [
+            {
+              "paper": "9702 syllabus",
+              "session": "2025-2027",
+              "section": "Topic 18"
+            },
+            {
+              "paper": "9702 data and formulae list",
+              "session": "2025-2027"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "capacitance",
+      "title": "Capacitance",
+      "items": [
+        {
+          "id": "capacitance",
+          "term": "Capacitance",
+          "prompt": "Write the word equation for capacitance.",
+          "answer": "capacitance = charge / potential difference",
+          "formula": "C = Q / V",
+          "sources": [
+            {
+              "paper": "9702 syllabus",
+              "session": "2025-2027",
+              "section": "Topic 19"
+            }
+          ]
+        },
+        {
+          "id": "energy-stored-in-a-capacitor",
+          "term": "Energy stored in a capacitor",
+          "prompt": "Write the word equation for energy stored in a capacitor.",
+          "answer": "energy stored = 1/2 x charge x potential difference",
+          "formula": "W = ½QV = ½CV²",
+          "sources": [
+            {
+              "paper": "9702 syllabus",
+              "session": "2025-2027",
+              "section": "Topic 19"
+            }
+          ]
+        },
+        {
+          "id": "capacitors-in-series",
+          "term": "Capacitors in series",
+          "prompt": "Write the word equation for capacitors in series.",
+          "answer": "1 / total capacitance = sum of 1 / each capacitance",
+          "formula": "1/C = 1/C₁ + 1/C₂ + …",
+          "given": true,
+          "sources": [
+            {
+              "paper": "9702 syllabus",
+              "session": "2025-2027",
+              "section": "Topic 19"
+            },
+            {
+              "paper": "9702 data and formulae list",
+              "session": "2025-2027"
+            }
+          ]
+        },
+        {
+          "id": "capacitors-in-parallel",
+          "term": "Capacitors in parallel",
+          "prompt": "Write the word equation for capacitors in parallel.",
+          "answer": "total capacitance = sum of the individual capacitances",
+          "formula": "C = C₁ + C₂ + …",
+          "given": true,
+          "sources": [
+            {
+              "paper": "9702 syllabus",
+              "session": "2025-2027",
+              "section": "Topic 19"
+            },
+            {
+              "paper": "9702 data and formulae list",
+              "session": "2025-2027"
+            }
+          ]
+        },
+        {
+          "id": "time-constant",
+          "term": "Time constant",
+          "prompt": "Write the word equation for time constant.",
+          "answer": "time constant = resistance x capacitance",
+          "formula": "τ = RC",
+          "sources": [
+            {
+              "paper": "9702 syllabus",
+              "session": "2025-2027",
+              "section": "Topic 19"
+            }
+          ]
+        },
+        {
+          "id": "capacitor-discharge",
+          "term": "Capacitor discharge",
+          "prompt": "Write the word equation for capacitor discharge.",
+          "answer": "quantity = initial quantity x e to the power (- time / time constant)",
+          "formula": "x = x₀ e^(−t/RC)",
+          "given": true,
+          "sources": [
+            {
+              "paper": "9702 syllabus",
+              "session": "2025-2027",
+              "section": "Topic 19"
+            },
+            {
+              "paper": "9702 data and formulae list",
+              "session": "2025-2027"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "magnetic-fields",
+      "title": "Magnetic fields and electromagnetic induction",
+      "items": [
+        {
+          "id": "force-on-a-wire",
+          "term": "Force on a current-carrying wire",
+          "prompt": "Write the word equation for force on a current-carrying wire.",
+          "answer": "force = flux density x current x length x sin(angle)",
+          "formula": "F = BIL sin θ",
+          "sources": [
+            {
+              "paper": "9702 syllabus",
+              "session": "2025-2027",
+              "section": "Topic 20"
+            }
+          ]
+        },
+        {
+          "id": "force-on-a-moving-charge",
+          "term": "Force on a moving charge",
+          "prompt": "Write the word equation for force on a moving charge.",
+          "answer": "force = flux density x charge x speed x sin(angle)",
+          "formula": "F = BQv sin θ",
+          "sources": [
+            {
+              "paper": "9702 syllabus",
+              "session": "2025-2027",
+              "section": "Topic 20"
+            }
+          ]
+        },
+        {
+          "id": "hall-voltage",
+          "term": "Hall voltage",
+          "prompt": "Write the word equation for Hall voltage.",
+          "answer": "Hall voltage = flux density x current / (number density x thickness x charge)",
+          "formula": "V_H = BI / (ntq)",
+          "given": true,
+          "sources": [
+            {
+              "paper": "9702 syllabus",
+              "session": "2025-2027",
+              "section": "Topic 20"
+            },
+            {
+              "paper": "9702 data and formulae list",
+              "session": "2025-2027"
+            }
+          ]
+        },
+        {
+          "id": "velocity-selector",
+          "term": "Velocity selection",
+          "prompt": "Write the word equation for velocity selection.",
+          "answer": "speed = electric field strength / magnetic flux density",
+          "formula": "v = E / B",
+          "sources": [
+            {
+              "paper": "9702 syllabus",
+              "session": "2025-2027",
+              "section": "Topic 20"
+            }
+          ]
+        },
+        {
+          "id": "magnetic-flux",
+          "term": "Magnetic flux",
+          "prompt": "Write the word equation for magnetic flux.",
+          "answer": "magnetic flux = flux density x area perpendicular to the field",
+          "formula": "Φ = BA",
+          "sources": [
+            {
+              "paper": "9702 syllabus",
+              "session": "2025-2027",
+              "section": "Topic 20"
+            }
+          ]
+        },
+        {
+          "id": "magnetic-flux-linkage",
+          "term": "Magnetic flux linkage",
+          "prompt": "Write the word equation for magnetic flux linkage.",
+          "answer": "flux linkage = number of turns x magnetic flux",
+          "formula": "NΦ",
+          "sources": [
+            {
+              "paper": "9702 syllabus",
+              "session": "2025-2027",
+              "section": "Topic 20"
+            }
+          ]
+        },
+        {
+          "id": "faradays-law",
+          "term": "Faraday's and Lenz's laws",
+          "prompt": "Write the word equation for Faraday's and Lenz's laws.",
+          "answer": "induced e.m.f. = - rate of change of magnetic flux linkage",
+          "formula": "E = −d(NΦ) / dt",
+          "sources": [
+            {
+              "paper": "9702 syllabus",
+              "session": "2025-2027",
+              "section": "Topic 20"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "alternating-currents",
+      "title": "Alternating currents",
+      "items": [
+        {
+          "id": "rms-current",
+          "term": "R.m.s. current",
+          "prompt": "Write the word equation for r.m.s. current.",
+          "answer": "r.m.s. current = peak current / square root of 2",
+          "formula": "I_rms = I₀ / √2",
+          "sources": [
+            {
+              "paper": "9702 syllabus",
+              "session": "2025-2027",
+              "section": "Topic 21"
+            }
+          ]
+        },
+        {
+          "id": "rms-voltage",
+          "term": "R.m.s. voltage",
+          "prompt": "Write the word equation for r.m.s. voltage.",
+          "answer": "r.m.s. voltage = peak voltage / square root of 2",
+          "formula": "V_rms = V₀ / √2",
+          "sources": [
+            {
+              "paper": "9702 syllabus",
+              "session": "2025-2027",
+              "section": "Topic 21"
+            }
+          ]
+        },
+        {
+          "id": "mean-power",
+          "term": "Mean power in a resistor",
+          "prompt": "Write the word equation for mean power in a resistor.",
+          "answer": "mean power = 1/2 x peak power",
+          "formula": "⟨P⟩ = ½P₀",
+          "sources": [
+            {
+              "paper": "9702 syllabus",
+              "session": "2025-2027",
+              "section": "Topic 21"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "quantum-physics",
+      "title": "Quantum physics",
+      "items": [
+        {
+          "id": "photon-energy",
+          "term": "Photon energy",
+          "prompt": "Write the word equation for photon energy.",
+          "answer": "photon energy = Planck constant x frequency",
+          "formula": "E = hf",
+          "sources": [
+            {
+              "paper": "9702 syllabus",
+              "session": "2025-2027",
+              "section": "Topic 22"
+            }
+          ]
+        },
+        {
+          "id": "photon-energy-wavelength",
+          "term": "Photon energy and wavelength",
+          "prompt": "Write the word equation for photon energy and wavelength.",
+          "answer": "photon energy = Planck constant x speed of light / wavelength",
+          "formula": "E = hc / λ",
+          "sources": [
+            {
+              "paper": "9702 syllabus",
+              "session": "2025-2027",
+              "section": "Topic 22"
+            }
+          ]
+        },
+        {
+          "id": "photon-momentum",
+          "term": "Photon momentum",
+          "prompt": "Write the word equation for photon momentum.",
+          "answer": "photon momentum = photon energy / speed of light",
+          "formula": "p = E / c",
+          "sources": [
+            {
+              "paper": "9702 syllabus",
+              "session": "2025-2027",
+              "section": "Topic 22"
+            }
+          ]
+        },
+        {
+          "id": "photoelectric-equation",
+          "term": "Photoelectric equation",
+          "prompt": "Write the word equation for photoelectric equation.",
+          "answer": "photon energy = work function + maximum kinetic energy of the photoelectron",
+          "formula": "hf = Φ + ½mv²ₘₐₓ",
+          "sources": [
+            {
+              "paper": "9702 syllabus",
+              "session": "2025-2027",
+              "section": "Topic 22"
+            }
+          ]
+        },
+        {
+          "id": "de-broglie-wavelength",
+          "term": "de Broglie wavelength",
+          "prompt": "Write the word equation for de Broglie wavelength.",
+          "answer": "de Broglie wavelength = Planck constant / momentum",
+          "formula": "λ = h / p",
+          "sources": [
+            {
+              "paper": "9702 syllabus",
+              "session": "2025-2027",
+              "section": "Topic 22"
+            }
+          ]
+        },
+        {
+          "id": "energy-level-transition",
+          "term": "Energy level transition",
+          "prompt": "Write the word equation for energy level transition.",
+          "answer": "photon energy = higher energy level - lower energy level",
+          "formula": "hf = E₁ − E₂",
+          "sources": [
+            {
+              "paper": "9702 syllabus",
+              "session": "2025-2027",
+              "section": "Topic 22"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "nuclear-physics",
+      "title": "Nuclear physics",
+      "items": [
+        {
+          "id": "mass-energy",
+          "term": "Mass-energy equivalence",
+          "prompt": "Write the word equation for mass-energy equivalence.",
+          "answer": "energy = mass x speed of light squared",
+          "formula": "E = mc²",
+          "sources": [
+            {
+              "paper": "9702 syllabus",
+              "session": "2025-2027",
+              "section": "Topic 23"
+            }
+          ]
+        },
+        {
+          "id": "activity",
+          "term": "Activity",
+          "prompt": "Write the word equation for activity.",
+          "answer": "activity = decay constant x number of undecayed nuclei",
+          "formula": "A = λN",
+          "sources": [
+            {
+              "paper": "9702 syllabus",
+              "session": "2025-2027",
+              "section": "Topic 23"
+            }
+          ]
+        },
+        {
+          "id": "decay-constant-and-half-life",
+          "term": "Decay constant and half-life",
+          "prompt": "Write the word equation for decay constant and half-life.",
+          "answer": "decay constant = 0.693 / half-life",
+          "formula": "λ = 0.693 / t½",
+          "given": true,
+          "sources": [
+            {
+              "paper": "9702 syllabus",
+              "session": "2025-2027",
+              "section": "Topic 23"
+            },
+            {
+              "paper": "9702 data and formulae list",
+              "session": "2025-2027"
+            }
+          ]
+        },
+        {
+          "id": "radioactive-decay",
+          "term": "Radioactive decay",
+          "prompt": "Write the word equation for radioactive decay.",
+          "answer": "quantity remaining = initial quantity x e to the power (- decay constant x time)",
+          "formula": "x = x₀ e^(−λt)",
+          "given": true,
+          "sources": [
+            {
+              "paper": "9702 syllabus",
+              "session": "2025-2027",
+              "section": "Topic 23"
+            },
+            {
+              "paper": "9702 data and formulae list",
+              "session": "2025-2027"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "medical-physics",
+      "title": "Medical physics",
+      "items": [
+        {
+          "id": "specific-acoustic-impedance",
+          "term": "Specific acoustic impedance",
+          "prompt": "Write the word equation for specific acoustic impedance.",
+          "answer": "specific acoustic impedance = density x speed of sound",
+          "formula": "Z = ρc",
+          "sources": [
+            {
+              "paper": "9702 syllabus",
+              "session": "2025-2027",
+              "section": "Topic 24"
+            }
+          ]
+        },
+        {
+          "id": "intensity-reflection-coefficient",
+          "term": "Intensity reflection coefficient",
+          "prompt": "Write the word equation for intensity reflection coefficient.",
+          "answer": "intensity reflection coefficient = (Z2 - Z1) squared / (Z2 + Z1) squared",
+          "formula": "I_R / I₀ = (Z₂ − Z₁)² / (Z₂ + Z₁)²",
+          "given": true,
+          "sources": [
+            {
+              "paper": "9702 syllabus",
+              "session": "2025-2027",
+              "section": "Topic 24"
+            },
+            {
+              "paper": "9702 data and formulae list",
+              "session": "2025-2027"
+            }
+          ]
+        },
+        {
+          "id": "attenuation",
+          "term": "Attenuation",
+          "prompt": "Write the word equation for attenuation.",
+          "answer": "transmitted intensity = initial intensity x e to the power (- attenuation coefficient x thickness)",
+          "formula": "I = I₀ e^(−μx)",
+          "given": true,
+          "sources": [
+            {
+              "paper": "9702 syllabus",
+              "session": "2025-2027",
+              "section": "Topic 24"
+            },
+            {
+              "paper": "9702 data and formulae list",
+              "session": "2025-2027"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "astronomy-and-cosmology",
+      "title": "Astronomy and cosmology",
+      "items": [
+        {
+          "id": "radiant-flux-intensity",
+          "term": "Radiant flux intensity",
+          "prompt": "Write the word equation for radiant flux intensity.",
+          "answer": "radiant flux intensity = luminosity / (4 x pi x distance squared)",
+          "formula": "F = L / (4πd²)",
+          "sources": [
+            {
+              "paper": "9702 syllabus",
+              "session": "2025-2027",
+              "section": "Topic 25"
+            }
+          ]
+        },
+        {
+          "id": "stefan-boltzmann-law",
+          "term": "Stefan-Boltzmann law",
+          "prompt": "Write the word equation for Stefan-Boltzmann law.",
+          "answer": "luminosity = 4 x pi x Stefan-Boltzmann constant x radius squared x temperature to the power 4",
+          "formula": "L = 4πσr²T⁴",
+          "given": true,
+          "sources": [
+            {
+              "paper": "9702 syllabus",
+              "session": "2025-2027",
+              "section": "Topic 25"
+            },
+            {
+              "paper": "9702 data and formulae list",
+              "session": "2025-2027"
+            }
+          ]
+        },
+        {
+          "id": "wiens-displacement-law",
+          "term": "Wien's displacement law",
+          "prompt": "Write the word equation for Wien's displacement law.",
+          "answer": "peak wavelength is inversely proportional to thermodynamic temperature",
+          "formula": "λₘₐₓ ∝ 1 / T",
+          "sources": [
+            {
+              "paper": "9702 syllabus",
+              "session": "2025-2027",
+              "section": "Topic 25"
+            }
+          ]
+        },
+        {
+          "id": "redshift",
+          "term": "Redshift",
+          "prompt": "Write the word equation for redshift.",
+          "answer": "change in wavelength / wavelength = recession speed / speed of light",
+          "formula": "Δλ / λ ≈ Δf / f ≈ v / c",
+          "given": true,
+          "sources": [
+            {
+              "paper": "9702 syllabus",
+              "session": "2025-2027",
+              "section": "Topic 25"
+            },
+            {
+              "paper": "9702 data and formulae list",
+              "session": "2025-2027"
+            }
+          ]
+        },
+        {
+          "id": "hubbles-law",
+          "term": "Hubble's law",
+          "prompt": "Write the word equation for Hubble's law.",
+          "answer": "recession speed = Hubble constant x distance",
+          "formula": "v = H₀d",
+          "sources": [
+            {
+              "paper": "9702 syllabus",
+              "session": "2025-2027",
+              "section": "Topic 25"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
