@@ -57,6 +57,7 @@ All practice content lives in `packs/`. The app has no build step: add a JSON fi
 | `item.alt` | no | Other wordings the mark scheme accepts. Shown after the item, not typed. |
 | `item.sources` | yes | At least one mark-scheme reference so others can check the wording. |
 | `item.notes` | no | Examiner guidance worth knowing (e.g. "must say *per unit*"). |
+| `item.type` | no | `explain` for an explain or state question; leave it out for a definition. A chapter lists the two groups separately. |
 | `item.marks` | no | The phrases that earn marks, from the mark scheme. A list of marks; each mark is a list of one or more phrases from the answer that together earn it, e.g. `[["work done per unit mass"], ["bringing a small test mass from infinity"]]`. They light up as the learner types them. |
 | `item.formula` | `equation` packs | The symbol form, shown next to the word equation. Display only, so Unicode is fine (`Eₖ = ½mv²`); `_rms` renders as a subscript. |
 | `item.given` | no | `true` if the equation is printed on the data and formulae list. |

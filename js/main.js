@@ -87,8 +87,22 @@ function dueItems() {
 // Each chapter gets its own colour, so the shelf reads at a glance.
 const hueOf = (pack, unit) => (pack.units.indexOf(unit) * 47 + (pack.kind === 'equation' ? 190 : pack.kind === 'code' ? 120 : 255)) % 360;
 
-const playHref = (pack, unit, mode, item) =>
-  `#/play?pack=${enc(pack.id)}&unit=${enc(unit === '*' ? '*' : unit.id)}&mode=${mode}${item ? `&item=${enc(item.id)}` : ''}`;
+const playHref = (pack, unit, mode, item, type) =>
+  `#/play?pack=${enc(pack.id)}&unit=${enc(unit === '*' ? '*' : unit.id)}&mode=${mode}${item ? `&item=${enc(item.id)}` : ''}${type ? `&type=${type}` : ''}`;
+
+// Items are definitions unless marked as explain questions; a chapter shows them in two groups.
+const isExplain = it => it.type === 'explain';
+function groupsOf(pack, items) {
+  const groups = [
+    { type: 'definition', label: kindOf(pack).many, items: items.filter(it => !isExplain(it)) },
+    { type: 'explain', label: 'Explain', items: items.filter(isExplain) },
+  ];
+  return groups.filter(g => g.items.length);
+}
+function countLabel(pack, items) {
+  const one = kindOf(pack).one.toLowerCase().replace('pseudocode', 'answer');
+  return groupsOf(pack, items).map(g => g.type === 'explain' ? `${g.items.length} explain` : plural(g.items.length, one)).join(', ');
+}
 
 function ring(frac, size = 36, stroke = 4) {
   const r = (size - stroke) / 2;
@@ -258,7 +272,7 @@ function viewHome() {
           return `<li class="chap" style="--h:${hueOf(pack, u)}">
             <a class="chap-top" href="#/c/${enc(pack.id)}/${enc(u.id)}">
               <span class="chap-title">${esc(u.title)}</span>
-              <span class="chap-meta">${plural(p.n, kindOf(pack).one.toLowerCase().replace('pseudocode', 'answer'))}${p.mastered ? `, ${p.mastered} mastered` : p.started ? `, ${p.started} started` : ''}</span>
+              <span class="chap-meta">${countLabel(pack, u.items)}${p.mastered ? `, ${p.mastered} mastered` : p.started ? `, ${p.started} started` : ''}</span>
             </a>
             <span class="chap-bar" title="${pct(p.share)} mastered"><i style="width:${pct(p.share)}"></i></span>
             <div class="chap-actions">
@@ -328,14 +342,20 @@ function viewChapter(packId, unitId) {
     <a class="back" href="#/">← All chapters</a>
     <header class="chap-head" style="--h:${hueOf(pack, unit)}">
       <h1>${esc(unit.title)}</h1>
-      <p class="muted">${esc(pack.title)}. ${plural(p.n, kindOf(pack).one.toLowerCase().replace('pseudocode', 'answer'))}, ${p.started} started, ${p.mastered} mastered.</p>
+      <p class="muted">${esc(pack.title)}. ${countLabel(pack, unit.items)}. ${p.started} started, ${p.mastered} mastered.</p>
       <div class="row big-actions">
         <a class="btn big train" href="${playHref(pack, unit, 'train')}">${ICON.play} Train</a>
         <a class="btn big practice" href="${playHref(pack, unit, 'practice')}">${ICON.pen} Practice</a>
       </div>
     </header>
+    ${groupsOf(pack, unit.items).map((g, _, all) => `
+    ${all.length > 1 ? `<div class="group-head">
+      <h2>${esc(g.label)}</h2>
+      <a class="btn small train" href="${playHref(pack, unit, 'train', null, g.type)}">${ICON.play} Train</a>
+      <a class="btn small practice" href="${playHref(pack, unit, 'practice', null, g.type)}">${ICON.pen} Practice</a>
+    </div>` : ''}
     <ol class="terms">
-      ${unit.items.map(it => {
+      ${g.items.map(it => {
         const b = stageOf(pack.id, it.id);
         const s = itemState(pack.id, it.id);
         return `<li>
@@ -351,7 +371,7 @@ function viewChapter(packId, unitId) {
           </a>
         </li>`;
       }).join('')}
-    </ol>`;
+    </ol>`).join('')}`;
 }
 
 // ---- play -------------------------------------------------------------------
@@ -372,7 +392,10 @@ function buildSession(q) {
   let unit = pack.units.find(u => u.id === q.get('unit'));
   if (!unit && q.get('item')) unit = findItem(packs, pack.id, q.get('item'))?.unit;
   if (!unit) return null;
-  return { title: unit.title, sub: pack.title, pack, unit, unitId: unit.id, items: unit.items.map(item => ({ pack, unit, item })) };
+  const type = ['definition', 'explain'].includes(q.get('type')) ? q.get('type') : null;
+  const items = unit.items.filter(it => !type || (type === 'explain') === isExplain(it));
+  const sub = type === 'explain' ? `${pack.title}, explain questions` : type ? `${pack.title}, ${kindOf(pack).noun} only` : pack.title;
+  return { title: unit.title, sub, pack, unit, unitId: unit.id, items: items.map(item => ({ pack, unit, item })) };
 }
 
 const keyOf = e => `${e.pack.id}/${e.item.id}`;
@@ -492,7 +515,7 @@ function viewPlay(q) {
       <div class="card-progress"><i></i></div>
       <header class="card-head">
         <div class="tags">
-          <span class="tag">${esc(kindOf(pack).one)}</span>
+          <span class="tag">${esc(isExplain(item) ? 'Explain' : kindOf(pack).one)}</span>
           <span class="tag stage-tag s${stageNo}">${esc(STAGES[stageNo])}</span>
           ${S.review || S.shuffle ? `<span class="tag">${esc(entry.unit.title)}</span>` : ''}
           ${item.given ? '<span class="tag given" title="Printed on the 9702 data and formulae list">On the formulae sheet</span>' : ''}
