@@ -163,8 +163,15 @@ function buildLaptop(screenTex) {
   placeKeys();
   laptop.add(keys);
 
-  const pad = new THREE.Mesh(new THREE.ShapeGeometry(roundedRect(1.25, 0.66, 0.06)), shellDark);
-  pad.rotation.x = -Math.PI / 2; pad.position.set(0, top + 0.002, D / 2 - 0.5);
+  // Trackpad: a darker rim around a smoother, glassier surface so it reads at any angle.
+  const padRim = new THREE.Mesh(new THREE.ShapeGeometry(roundedRect(1.46, 0.76, 0.08)),
+    new THREE.MeshStandardMaterial({ color: 0x9ea7c4, roughness: 0.5, metalness: 0.3 }));
+  padRim.rotation.x = -Math.PI / 2; padRim.position.set(0, top + 0.002, D / 2 - 0.47);
+  laptop.add(padRim);
+  const pad = new THREE.Mesh(new THREE.ShapeGeometry(roundedRect(1.41, 0.71, 0.065)),
+    new THREE.MeshStandardMaterial({ color: 0xd3d9ec, roughness: 0.22, metalness: 0.15 }));
+  pad.rotation.x = -Math.PI / 2; pad.position.set(0, top + 0.004, D / 2 - 0.47);
+  pad.receiveShadow = true;
   laptop.add(pad);
 
   // Lid, hinged at the back edge and leaning back a little.
