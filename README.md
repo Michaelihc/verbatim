@@ -30,6 +30,8 @@ syllabus topic and is tagged when it's printed on the data and formulae list.
 - **Ratings, not marks.** Each answer gets *Perfect*, *Great*, *Good* or *Keep going*, with XP that
   counts up, a sound that climbs in pitch with your combo, and confetti for the best ones. Clean
   answers roll straight into the next one.
+- **Explain questions.** Some chapters add explain questions (Capacitance so far), listed in
+  their own group so each chapter's list stays short.
 - **Mark points.** In physics and computer science definitions, the phrases the mark scheme
   gives marks for are underlined, and each one lights up with a +1 as you type it correctly.
   Points you miss are flagged when you finish. Taken from the cited mark schemes; where a

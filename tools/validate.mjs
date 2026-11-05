@@ -57,6 +57,7 @@ for (const entry of index.packs) {
           if (lead % 4) warn(`${at}: indentation on line ${n + 1} is not a multiple of 4`);
         });
       }
+      if (it.type !== undefined && !['definition', 'explain'].includes(it.type)) err(`${at}: type must be "definition" or "explain"`);
       if (it.marks !== undefined) {
         if (!Array.isArray(it.marks) || !it.marks.length) err(`${at}: "marks" must be a non-empty list of marks`);
         else for (const p of resolveMarks(a, it.marks, pack.kind).problems) err(`${at}: ${p}`);

@@ -3169,15 +3169,22 @@
               "per unit potential difference"
             ],
             [
-              "on one plate",
+              "on one plate"
+            ],
+            [
               "between the plates"
             ]
           ],
           "alt": [
             "charge / potential difference"
           ],
-          "notes": "Must say charge on one plate and p.d. between the plates.",
+          "notes": "Worth 3 marks in s18/41 7(a): charge / potential difference, charge on one plate, p.d. between the plates. Often 2 marks, with the last two points together.",
           "sources": [
+            {
+              "paper": "9702/41",
+              "session": "May/June 2018",
+              "question": "7(a)"
+            },
             {
               "paper": "9702/42",
               "session": "February/March 2016",
@@ -3212,6 +3219,70 @@
               "paper": "9702/42",
               "session": "October/November 2024",
               "question": "7(a)"
+            }
+          ]
+        },
+        {
+          "id": "capacitor-stores-energy-not-charge",
+          "type": "explain",
+          "term": "Why a capacitor stores energy, not charge",
+          "prompt": "Explain why a capacitor is said to store energy but not charge.",
+          "answer": "The plates carry equal and opposite charges, so there is no resultant charge. The positive and negative charges are separated, so energy is stored.",
+          "marks": [
+            [
+              "equal and opposite charges",
+              "no resultant charge"
+            ],
+            [
+              "positive and negative charges are separated",
+              "energy is stored"
+            ]
+          ],
+          "sources": [
+            {
+              "paper": "9702/42",
+              "session": "May/June 2017",
+              "question": "7(a)"
+            }
+          ]
+        },
+        {
+          "id": "uses-of-capacitors",
+          "type": "explain",
+          "term": "Uses of capacitors",
+          "prompt": "State uses of capacitors in electrical circuits.",
+          "answer": "Capacitors are used to store electrical energy, for smoothing (reducing the ripple on direct voltages), to block d.c., in timing circuits, for tuning and in oscillator circuits.",
+          "marks": [
+            [
+              "store electrical energy"
+            ],
+            [
+              "smoothing"
+            ],
+            [
+              "block d.c."
+            ],
+            [
+              "timing circuits"
+            ],
+            [
+              "tuning"
+            ],
+            [
+              "oscillator circuits"
+            ]
+          ],
+          "notes": "Asked for any two uses (s19/41 6(a), 2 marks) or any three (w20/41 6(a)(ii), 3 marks).",
+          "sources": [
+            {
+              "paper": "9702/41",
+              "session": "May/June 2019",
+              "question": "6(a)"
+            },
+            {
+              "paper": "9702/41",
+              "session": "October/November 2020",
+              "question": "6(a)(ii)"
             }
           ]
         }
