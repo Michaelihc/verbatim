@@ -940,4 +940,10 @@ main > h1 { padding-top: 1rem; }
 .lap-marks { font-size: 1rem; color: var(--ink-2); margin: 0.2rem 0 0; }
 .lap-marks b { color: var(--biro); font-size: 1.3rem; }
 
-}
+/* Level dividers in the All view */
+.lvl-divider { display: flex; align-items: center; gap: 0.5rem; padding: 0.9rem 0 0.4rem; border-top: 2px solid var(--ink); font-size: 0.95rem; }
+.lvl-divider:first-child { border-top: 0; padding-top: 0.5rem; }
+.lvl-divider .lvl { margin-right: 0; font-size: 0.78rem; }
+.lvl-divider small { color: var(--ink-2); }
+.chapters.grid .lvl-divider { grid-column: 1 / -1; padding-bottom: 0; }
+.chapters.list .lvl-divider + .chap { border-top: 0; }

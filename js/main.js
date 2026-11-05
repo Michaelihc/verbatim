@@ -287,9 +287,17 @@ function viewHome() {
         <p class="bar-key"><span class="key-item"><span class="key prac"></span>Practice<span class="key-more">: one lap fills it, and it fades each day you skip the chapter</span></span><span class="key-item"><span class="key mast"></span>Mastery<span class="key-more">: rises as answers move from Trained to Mastered</span></span></p>
       </div>
       <ol class="chapters ${view}">
-        ${units.map(({ u, n }) => {
+        ${units.map(({ u, n }, i) => {
           const p = unitProgress(pack, u);
-          return `<li class="chap">
+          // In the All view, mark where each level starts.
+          const lv = levelOf(u);
+          let divider = '';
+          if (level === 'all' && hasLevels && (i === 0 || levelOf(units[i - 1].u) !== lv)) {
+            let j = i;
+            while (j + 1 < units.length && levelOf(units[j + 1].u) === lv) j++;
+            divider = `<li class="lvl-divider"><span class="lvl lvl-${lv}">${lv}</span><b>${lv === 'AS' ? 'AS Level' : 'A2 (A Level)'}</b><small>chapters ${n}–${units[j].n}</small></li>`;
+          }
+          return `${divider}<li class="chap">
             <span class="chap-num">${n}</span>
             <a class="chap-top" href="#/c/${enc(pack.id)}/${enc(u.id)}">
               <span class="chap-title">${esc(shortTitle(u))}</span>
