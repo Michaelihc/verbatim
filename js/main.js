@@ -371,7 +371,15 @@ function viewHome() {
     else if (e.key === 'Enter' && cont && document.activeElement === document.body) { e.preventDefault(); go(cont.href); }
   };
   document.addEventListener('keydown', onKey);
-  cleanup = () => document.removeEventListener('keydown', onKey);
+
+  // Swap the drawing for the draggable 3D laptop on wide screens (three.js is loaded only then).
+  let unmountLaptop = null, gone = false;
+  const art = main.querySelector('.hero-art-wrap');
+  if (art && matchMedia('(min-width: 761px)').matches) {
+    import('./laptop3d.js').then(m => m.mountLaptop(art)).then(off => { if (gone) off(); else unmountLaptop = off; })
+      .catch(err => console.warn('3D laptop unavailable', err));
+  }
+  cleanup = () => { gone = true; unmountLaptop?.(); document.removeEventListener('keydown', onKey); };
 }
 
 // After an equation, show its symbol form next to the words just typed.

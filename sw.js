@@ -18,6 +18,8 @@ const SHELL = [
   'js/engine.js',
   'js/fx.js',
   'js/dash.js',
+  'js/laptop3d.js',
+  'js/vendor/three.module.min.js',
   'fonts/atkinson-400.woff2',
   'fonts/atkinson-700.woff2',
   'fonts/jetbrains-400.woff2',
