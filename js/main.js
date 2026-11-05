@@ -41,6 +41,8 @@ const ICON = {
   mute: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9.5h3.5L12 5.5v13l-4.5-4H4z" fill="currentColor"/><path d="M16 9.5l5 5M21 9.5l-5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>',
   shuffle: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 7h3.5c4.5 0 6.5 10 11 10H21M3 17h3.5c1.6 0 2.8-1.3 3.8-3M14 10c1-1.7 2.2-3 3.8-3H21M18.5 4.5 21 7l-2.5 2.5M18.5 14.5 21 17l-2.5 2.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>',
   replay: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12a8 8 0 1 0 2.4-5.7M4 4v4.5h4.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+  list: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 6h12M8 12h12M8 18h12M4 6h.01M4 12h.01M4 18h.01" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg>',
+  grid: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h7v7H4zM13 4h7v7h-7zM4 13h7v7H4zM13 13h7v7h-7z" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/></svg>',
   bolt: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z" fill="currentColor"/></svg>',
 };
 
@@ -93,6 +95,9 @@ const playHref = (pack, unit, mode, item, type) =>
 
 // Items are definitions unless marked as explain questions; a chapter shows them in two groups.
 const isExplain = it => it.type === 'explain';
+// AS or A2: packs label units; older CS units say "A Level:" in the title instead.
+const levelOf = u => u.level || (/^A Level:/.test(u.title) ? 'A2' : 'AS');
+const shortTitle = u => u.title.replace(/^A Level:\s*/, '');
 function groupsOf(pack, items) {
   const groups = [
     { type: 'definition', label: kindOf(pack).many, items: items.filter(it => !isExplain(it)) },
@@ -228,8 +233,7 @@ function viewHome() {
 
   main.innerHTML = `
     <section class="hero">
-      <h1>Type it until you know it.</h1>
-      <p class="lede">Train with the answer in front of you. Practise with words hidden. Every answer is worded the way the mark scheme accepts it.</p>
+      <h1>Practise typing and recalling definitions at the same time.</h1>
       <div class="search" role="search">
         ${ICON.search}
         <input id="q" type="search" placeholder="Find a term, like tesla or flux" autocomplete="off" spellcheck="false" aria-label="Search topics and terms">
@@ -246,11 +250,6 @@ function viewHome() {
           <span class="qc-icon">${ICON.replay}</span>
           <span class="qc-text"><small>Spaced review</small><b>${plural(due, 'answer')} due</b></span>
         </a>` : ''}
-        <a class="quick-card stat" href="#/progress">
-          ${ring(today / goal, 44, 5)}
-          <span class="qc-text"><small>Today</small><b>${fmt(today)} / ${fmt(goal)} XP</b></span>
-          <span class="qc-streak ${st.today ? 'lit' : ''}">${ICON.flame}${st.count}</span>
-        </a>
       </div>
     </section>
     <section class="shelf" id="shelf"></section>
@@ -262,7 +261,11 @@ function viewHome() {
   function renderShelf() {
     const pack = packs.find(p => p.id === packId);
     if (!pack) { shelf.innerHTML = ''; return; }
-    state.ui = { subject, pack: packId };
+    const level = ['AS', 'A2'].includes(state.ui?.level) ? state.ui.level : 'all';
+    const view = state.ui?.view === 'grid' ? 'grid' : 'list';
+    state.ui = { ...state.ui, subject, pack: packId, level, view };
+    const units = pack.units.map((u, i) => ({ u, n: i + 1 })).filter(({ u }) => level === 'all' || levelOf(u) === level);
+    const hasLevels = pack.units.some(u => levelOf(u) === 'A2') && pack.units.some(u => levelOf(u) === 'AS');
     shelf.innerHTML = `
       <div class="tabs" role="tablist" aria-label="Subject">
         ${subjects.map(s => `<button role="tab" class="tab" data-subject="${esc(s)}" aria-selected="${s === subject}">${esc(s)}</button>`).join('')}
@@ -271,19 +274,26 @@ function viewHome() {
         <div class="chips" role="tablist" aria-label="Pack">
           ${packIn(subject).map(p => `<button role="tab" class="chip-btn" data-pack="${esc(p.id)}" aria-selected="${p.id === packId}">${esc(kindOf(p).many)}<span>${p.itemCount}</span></button>`).join('')}
         </div>
-        <div class="row">
-          <a class="btn small" href="${playHref(pack, '*', 'train')}">${ICON.shuffle} Shuffle all</a>
+        <div class="shelf-tools">
+          ${hasLevels ? `<div class="toggle" role="radiogroup" aria-label="Level">
+            ${[['all', 'All'], ['AS', 'AS'], ['A2', 'A2']].map(([k, l]) => `<button type="button" role="radio" data-level="${k}" aria-checked="${level === k}">${l}</button>`).join('')}
+          </div>` : ''}
+          <div class="toggle" role="radiogroup" aria-label="View">
+            <button type="button" role="radio" data-view="list" aria-checked="${view === 'list'}" title="List">${ICON.list}<span class="sr">List</span></button>
+            <button type="button" role="radio" data-view="grid" aria-checked="${view === 'grid'}" title="Grid">${ICON.grid}<span class="sr">Grid</span></button>
+          </div>
+          <a class="btn small train" href="${playHref(pack, '*', 'train')}${level !== 'all' ? `&level=${level}` : ''}">${ICON.shuffle} Start random</a>
         </div>
-        <p class="shelf-desc">${esc(pack.description || '')}</p>
-        <p class="bar-key"><span class="key prac"></span>Practice: one lap fills it, and it fades each day you skip the chapter <span class="key mast"></span>Mastery: rises as answers move from Trained to Mastered</p>
+        <p class="bar-key"><span class="key-item"><span class="key prac"></span>Practice<span class="key-more">: one lap fills it, and it fades each day you skip the chapter</span></span><span class="key-item"><span class="key mast"></span>Mastery<span class="key-more">: rises as answers move from Trained to Mastered</span></span></p>
       </div>
-      <ol class="chapters">
-        ${pack.units.map(u => {
+      <ol class="chapters ${view}">
+        ${units.map(({ u, n }) => {
           const p = unitProgress(pack, u);
-          return `<li class="chap" style="--h:${hueOf(pack, u)}">
+          return `<li class="chap">
+            <span class="chap-num">${n}</span>
             <a class="chap-top" href="#/c/${enc(pack.id)}/${enc(u.id)}">
-              <span class="chap-title">${esc(u.title)}</span>
-              <span class="chap-meta">${countLabel(pack, u.items)}${p.mastered ? `, ${p.mastered} mastered` : p.started ? `, ${p.started} started` : ''}</span>
+              <span class="chap-title">${esc(shortTitle(u))}</span>
+              <span class="chap-meta">${hasLevels ? `<span class="lvl lvl-${levelOf(u)}">${levelOf(u)}</span>` : ''}${countLabel(pack, u.items)}${p.mastered ? `, ${p.mastered} mastered` : p.started ? `, ${p.started} started` : ''}</span>
             </a>
             ${bars(pack, u, p)}
             <div class="chap-actions">
@@ -300,6 +310,14 @@ function viewHome() {
     }));
     shelf.querySelectorAll('[data-pack]').forEach(b => b.addEventListener('click', () => {
       packId = b.dataset.pack;
+      renderShelf(); save();
+    }));
+    shelf.querySelectorAll('[data-level]').forEach(b => b.addEventListener('click', () => {
+      state.ui = { ...state.ui, level: b.dataset.level };
+      renderShelf(); save();
+    }));
+    shelf.querySelectorAll('[data-view]').forEach(b => b.addEventListener('click', () => {
+      state.ui = { ...state.ui, view: b.dataset.view };
       renderShelf(); save();
     }));
   }
@@ -341,6 +359,14 @@ function viewHome() {
   document.addEventListener('keydown', onKey);
   cleanup = () => document.removeEventListener('keydown', onKey);
 }
+
+// After an equation, show its symbol form next to the words just typed.
+const symbolsBlock = it => it.formula && it.formula !== it.term ? `
+      <div class="symbols">
+        <span class="symbols-label">In symbols</span>
+        <p class="symbols-eq"><span>${formula(it.formula)}</span></p>
+        <p class="symbols-words">${esc(it.answer)}</p>
+      </div>` : '';
 
 // ---- chapter ----------------------------------------------------------------
 
@@ -399,9 +425,10 @@ function buildSession(q) {
   const pack = packs.find(p => p.id === q.get('pack'));
   if (!pack) return null;
   if (q.get('unit') === '*') {
+    const level = ['AS', 'A2'].includes(q.get('level')) ? q.get('level') : null;
     return {
-      title: `All ${kindOf(pack).noun}`, sub: pack.title, pack, unitId: '*', shuffle: true,
-      items: pack.units.flatMap(unit => unit.items.map(item => ({ pack, unit, item }))),
+      title: `Random ${level ? `${level} ` : ''}${kindOf(pack).noun}`, sub: pack.title, pack, unitId: '*', shuffle: true,
+      items: pack.units.filter(unit => !level || levelOf(unit) === level).flatMap(unit => unit.items.map(item => ({ pack, unit, item }))),
     };
   }
   let unit = pack.units.find(u => u.id === q.get('unit'));
@@ -583,12 +610,16 @@ function viewPlay(q) {
     S.xp += res.xp;
     S.lapXp += res.xp;
     S.lapResults.set(keyOf(entry), res.rating);
+    if (r.points?.total) S.lapPts = [(S.lapPts?.[0] || 0) + r.points.earned, (S.lapPts?.[1] || 0) + r.points.total];
     pushHistory({ t: Date.now(), p: entry.pack.id, i: entry.item.id, m: mode, wpm: Math.round(res.wpm), acc: +res.acc.toFixed(3), xp: res.xp, r: res.rating });
     const earned = checkAchievements({ mode, level: mode === 'practice' ? level : null, rating: res.rating, rank: res.rank, hints: r.hints, chars: r.chars, wpm: res.wpm });
     save();
 
     const it = entry.item;
     const auto = state.settings.autoAdvance && res.rank >= 3;
+    // Give the symbol form time to land before moving on.
+    const hasSymbols = it.formula && it.formula !== it.term;
+    const autoMs = (res.rating === 'perfect' ? 1300 : 1700) + (hasSymbols ? 1500 : 0);
     const extra = (it.alt?.length || it.notes || it.sources?.length) ? `
       <details class="more"><summary>Mark scheme notes</summary>
         ${it.alt?.length ? `<p><b>Also accepted:</b> ${it.alt.map(esc).join('; ')}</p>` : ''}
@@ -602,6 +633,7 @@ function viewPlay(q) {
         <span class="verdict-word">${esc(RATINGS[res.rating].label)}${res.rating === 'perfect' ? '!' : ''}</span>
         <span class="verdict-xp">+<b>0</b> XP</span>
       </div>
+      ${symbolsBlock(it)}
       <div class="chips-row">
         ${res.combo >= 2 ? `<span class="pill combo-pill">${ICON.flame} ${res.combo} in a row, ×${res.comboMult.toFixed(1)}</span>` : ''}
         ${res.bonus ? `<span class="pill bonus ${res.bonus.kind}">${ICON.bolt} ${esc(res.bonus.label)}</span>` : ''}
@@ -619,7 +651,7 @@ function viewPlay(q) {
         <button class="btn primary" id="next" type="button">Next <kbd>Enter</kbd></button>
         <button class="btn" id="retry" type="button">${ICON.replay} Again <kbd>R</kbd></button>
       </div>
-      ${auto ? `<div class="auto" style="--t:${res.rating === 'perfect' ? 1300 : 1700}ms"><i></i></div>` : ''}`;
+      ${auto ? `<div class="auto" style="--t:${autoMs}ms"><i></i></div>` : ''}`;
     card.append(result);
     card.classList.add('done', `r-${res.rating}`);
     result.querySelector('#next').addEventListener('click', next);
@@ -627,7 +659,7 @@ function viewPlay(q) {
     result.querySelector('#next').focus({ preventScroll: true });
     result.addEventListener('pointerdown', clearAuto);
     result.querySelector('.more')?.addEventListener('toggle', clearAuto);
-    if (auto) autoTimer = setTimeout(next, res.rating === 'perfect' ? 1300 : 1700);
+    if (auto) autoTimer = setTimeout(next, autoMs);
     const rect = result.getBoundingClientRect();
     if (rect.bottom > innerHeight) result.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
 
@@ -681,6 +713,7 @@ function viewPlay(q) {
     card.innerHTML = `
       <h2>${clean === n ? 'Clean sweep' : clean >= n * 0.7 ? 'Strong lap' : 'Lap done'}</h2>
       <p class="muted">${S.review ? 'Every due answer reviewed.' : `Lap ${S.lap} of ${esc(S.title)} is done.`}</p>
+      ${S.lapPts?.[1] ? `<p class="lap-marks"><b>${S.lapPts[0]}</b> of ${S.lapPts[1]} mark points scored</p>` : ''}
       <p class="lap-xp">+<b>${fmt(S.lapXp)}</b> XP</p>
       <ul class="lap-counts">
         ${Object.entries(counts).filter(([, c]) => c).map(([k, c]) => `<li class="r-${k}"><b>${c}</b>${esc(RATINGS[k].label)}</li>`).join('')}
@@ -712,7 +745,7 @@ function viewPlay(q) {
     let order = [...weak, ...shuffled(rest)];
     if (order.length > 1 && order[0] === prevLast) order.push(order.shift());
     S.order = order;
-    S.lap++; S.pos = 0; S.lapXp = 0; S.lapResults = new Map();
+    S.lap++; S.pos = 0; S.lapXp = 0; S.lapResults = new Map(); S.lapPts = null;
     show();
   }
 

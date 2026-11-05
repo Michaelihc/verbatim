@@ -21,7 +21,8 @@ syllabus topic and is tagged when it's printed on the data and formulae list.
 ## How it works
 
 - **Jump straight in.** The home page is the chapter list: pick a subject, a pack and a chapter,
-  then *Train* or *Practice*. Or search for any term ("tesla", "flux", "stack") and start there.
+  then *Train* or *Practice*. Filter by AS or A2, switch between a list and a grid, start a
+  random mix of the pack, or search for any term ("tesla", "flux", "stack") and start there.
 - **Train** shows the answer and you type it. **Practice** hides words (some, most, or all of
   them) and you fill them in. The two are separate: you can train for as long as you like, and
   switch modes at any time from the top of the screen.
@@ -30,9 +31,10 @@ syllabus topic and is tagged when it's printed on the data and formulae list.
 - **Ratings, not marks.** Each answer gets *Perfect*, *Great*, *Good* or *Keep going*, with XP that
   counts up, a sound that climbs in pitch with your combo, and confetti for the best ones. Clean
   answers roll straight into the next one.
-- **Explain questions.** Most physics chapters also have explain and state questions taken from
-  past papers (50 so far, with the exam's own wording and mark-scheme points). They're listed in
-  their own group, and each group can be trained on its own, so chapter lists stay short.
+- **Explain questions.** Most physics and computer science chapters also have explain and state
+  questions taken from past papers (105 so far, with the exam's own wording and mark-scheme
+  points). They're listed in their own group, and each group can be trained on its own, so
+  chapter lists stay short.
 - **Mark points.** In physics and computer science definitions, the phrases the mark scheme
   gives marks for are underlined, and each one lights up with a +1 as you type it correctly.
   Points you miss are flagged when you finish. Taken from the cited mark schemes; where a

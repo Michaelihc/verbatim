@@ -13,6 +13,7 @@ export const DEFAULT_SETTINGS = {
   keySound: false,        // a soft tick on every key
   autoAdvance: true,      // clean answers roll straight into the next one
   markPoints: true,       // highlight the phrases that earn marks
+  homeLayout: 'type',     // front page: type | set | plan
   textSize: 'm',          // s | m | l
   layout: 'overlay',      // overlay: type over the text | stacked: type on a line below it
   practiceLevel: 'gaps',  // gaps | more | recall

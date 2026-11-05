@@ -440,6 +440,144 @@
               "question": "4(b)(i)"
             }
           ]
+        },
+        {
+          "id": "ascii-and-unicode-compared",
+          "type": "explain",
+          "term": "ASCII and Unicode compared",
+          "prompt": "Give one similarity and two differences between the ASCII and Unicode character sets.",
+          "answer": "Both character sets represent each character using a unique code. Unicode can use up to 32 bits per character whereas ASCII uses 7 or 8 bits, so Unicode can represent a wider range of characters, and Unicode represents many different languages whereas ASCII is only for one language.",
+          "marks": [
+            [
+              "represent each character using a unique code"
+            ],
+            [
+              "up to 32 bits per character whereas ASCII uses 7 or 8 bits"
+            ],
+            [
+              "many different languages whereas ASCII is only for one language"
+            ]
+          ],
+          "notes": "One mark for a similarity and two for differences. Other similarities accepted: both can use 8 bits; ASCII is a subset of Unicode.",
+          "sources": [
+            {
+              "paper": "9618/11",
+              "session": "October/November 2022",
+              "question": "1(c)"
+            },
+            {
+              "paper": "9608/12",
+              "session": "May/June 2018",
+              "question": "4(b)(ii)"
+            }
+          ]
+        },
+        {
+          "id": "increasing-sampling-resolution",
+          "type": "explain",
+          "term": "Increasing the sampling resolution",
+          "prompt": "Explain the effect of increasing the sampling resolution on the sound file.",
+          "answer": "Increasing the sampling resolution increases the number of bits per sample, so the file size increases. The sound file is more accurate, because the digital waveform is closer to the original analogue waveform, and there are smaller quantisation errors.",
+          "marks": [
+            [
+              "increases the number of bits per sample"
+            ],
+            [
+              "file size increases"
+            ],
+            [
+              "more accurate"
+            ],
+            [
+              "smaller quantisation errors"
+            ]
+          ],
+          "notes": "Any two points scored.",
+          "sources": [
+            {
+              "paper": "9618/11",
+              "session": "October/November 2022",
+              "question": "1(d)(ii)"
+            },
+            {
+              "paper": "9608/12",
+              "session": "May/June 2018",
+              "question": "5(b)"
+            }
+          ]
+        },
+        {
+          "id": "increasing-sampling-rate",
+          "type": "explain",
+          "term": "Increasing the sampling rate",
+          "prompt": "Explain the effect of increasing the sampling rate on the accuracy of the sound recording.",
+          "answer": "Increasing the sampling rate means there are smaller time gaps between the samples, so more detail is stored. This improves the accuracy of the sound file, because the digital waveform more closely resembles the analogue waveform, and quantisation errors are reduced.",
+          "marks": [
+            [
+              "smaller time gaps between the samples"
+            ],
+            [
+              "more detail is stored"
+            ],
+            [
+              "improves the accuracy"
+            ],
+            [
+              "digital waveform more closely resembles the analogue waveform"
+            ],
+            [
+              "quantisation errors are reduced"
+            ]
+          ],
+          "notes": "Any two points scored.",
+          "sources": [
+            {
+              "paper": "9618/12",
+              "session": "October/November 2022",
+              "question": "6(b)(i)"
+            },
+            {
+              "paper": "9618/11",
+              "session": "October/November 2021",
+              "question": "7(a)(i)"
+            },
+            {
+              "paper": "9618/13",
+              "session": "October/November 2021",
+              "question": "7(a)(i)"
+            }
+          ]
+        },
+        {
+          "id": "word-in-a-character-set",
+          "type": "explain",
+          "term": "Representing a word with a character set",
+          "prompt": "Explain how a word is represented by a character set.",
+          "answer": "Each character has its own unique binary code. Each character in the word is replaced by its code, and the codes are stored in sequence, in the same order as the characters in the word.",
+          "marks": [
+            [
+              "unique binary code"
+            ],
+            [
+              "replaced by its code"
+            ],
+            [
+              "stored in sequence"
+            ]
+          ],
+          "notes": "Two marks on each paper.",
+          "sources": [
+            {
+              "paper": "9618/13",
+              "session": "May/June 2024",
+              "question": "1(d)(ii)"
+            },
+            {
+              "paper": "9618/12",
+              "session": "May/June 2021",
+              "question": "6(b)"
+            }
+          ]
         }
       ]
     },
@@ -1049,6 +1187,124 @@
               "question": "3(b)"
             }
           ]
+        },
+        {
+          "id": "lan-benefits",
+          "type": "explain",
+          "term": "Benefits of a LAN",
+          "prompt": "Give two benefits of connecting computers to a LAN.",
+          "answer": "A LAN allows the sharing of files and data, and communication between the devices. It allows the sharing of resources such as hardware and software, and it allows central management, for example of backups and security.",
+          "marks": [
+            [
+              "sharing of files and data"
+            ],
+            [
+              "sharing of resources such as hardware and software"
+            ],
+            [
+              "central management"
+            ]
+          ],
+          "notes": "Any two points scored.",
+          "sources": [
+            {
+              "paper": "9618/12",
+              "session": "May/June 2023",
+              "question": "1(a)"
+            }
+          ]
+        },
+        {
+          "id": "mesh-and-bus-topology",
+          "type": "explain",
+          "term": "Mesh topology compared with bus",
+          "prompt": "Give two advantages of using a mesh topology instead of a bus topology.",
+          "answer": "If one line goes down there are more routes available. Security is improved because data is not sent over one main line, there are fewer collisions, and new nodes can be added without interrupting the other nodes.",
+          "marks": [
+            [
+              "more routes available"
+            ],
+            [
+              "not sent over one main line"
+            ],
+            [
+              "fewer collisions"
+            ],
+            [
+              "added without interrupting the other nodes"
+            ]
+          ],
+          "notes": "Any two points scored.",
+          "sources": [
+            {
+              "paper": "9618/13",
+              "session": "May/June 2023",
+              "question": "2(b)(ii)"
+            }
+          ]
+        },
+        {
+          "id": "real-time-and-on-demand-streaming",
+          "type": "explain",
+          "term": "Real-time and on-demand bit streaming",
+          "prompt": "Give two differences between real-time and on-demand bit streaming.",
+          "answer": "Real-time streaming is direct from the source, whereas on-demand streaming is pre-recorded to be viewed later. Real-time streams cannot be re-watched, whereas on-demand streams can be paused and re-watched. Real-time streams play continually, whereas on-demand streaming downloads sections and cannot play until the next section is downloaded.",
+          "marks": [
+            [
+              "direct from the source",
+              "pre-recorded to be viewed later"
+            ],
+            [
+              "cannot be re-watched",
+              "paused and re-watched"
+            ],
+            [
+              "play continually",
+              "cannot play until the next section is downloaded"
+            ]
+          ],
+          "notes": "Any two points scored.",
+          "sources": [
+            {
+              "paper": "9618/11",
+              "session": "May/June 2024",
+              "question": "2(e)(ii)"
+            }
+          ]
+        },
+        {
+          "id": "fibre-optic-and-copper",
+          "type": "explain",
+          "term": "Fibre-optic compared with copper cable",
+          "prompt": "Give three benefits of fibre-optic cable over copper cable.",
+          "answer": "Fibre-optic cable has less interference in the signal, and the signal does not degrade as fast, so it needs less signal boosting. It is more secure because it is more difficult to hack, and it has a greater bandwidth, so faster transmission speeds are possible.",
+          "marks": [
+            [
+              "less interference"
+            ],
+            [
+              "does not degrade as fast"
+            ],
+            [
+              "more difficult to hack"
+            ],
+            [
+              "greater bandwidth"
+            ]
+          ],
+          "notes": "Any three points scored (two on 9608/11).",
+          "sources": [
+            {
+              "paper": "9608/12",
+              "session": "October/November 2018",
+              "question": "2(c)(i)"
+            },
+            {
+              "paper": "9608/11",
+              "session": "October/November 2019",
+              "question": "4(c)(i)"
+            }
+          ]
         }
       ]
     },
@@ -1315,6 +1571,154 @@
               "paper": "9618/13",
               "session": "May/June 2023",
               "question": "3(a)"
+            }
+          ]
+        },
+        {
+          "id": "feedback-in-control-systems",
+          "type": "explain",
+          "term": "Feedback in a control system",
+          "prompt": "Explain the importance of feedback in a control system.",
+          "answer": "Feedback ensures that the system operates within set criteria, by enabling the system output to affect subsequent system input, so conditions can be adjusted automatically.",
+          "marks": [
+            [
+              "operates within set criteria"
+            ],
+            [
+              "output to affect subsequent system input"
+            ],
+            [
+              "adjusted automatically"
+            ]
+          ],
+          "sources": [
+            {
+              "paper": "9618/13",
+              "session": "October/November 2022",
+              "question": "10(a)"
+            },
+            {
+              "paper": "9618/11",
+              "session": "October/November 2023",
+              "question": "9(a)"
+            },
+            {
+              "paper": "9618/13",
+              "session": "May/June 2024",
+              "question": "7(c)"
+            },
+            {
+              "paper": "9608/31",
+              "session": "May/June 2019",
+              "question": "6(a)"
+            }
+          ]
+        },
+        {
+          "id": "dram-and-sram",
+          "type": "explain",
+          "term": "DRAM and SRAM compared",
+          "prompt": "Identify two differences between DRAM and Static RAM (SRAM).",
+          "answer": "DRAM requires constant refreshing, but SRAM does not need to be refreshed. DRAM generally has a greater capacity per chip than SRAM, DRAM is less expensive than SRAM, and DRAM has slower access times than SRAM.",
+          "marks": [
+            [
+              "DRAM requires constant refreshing"
+            ],
+            [
+              "greater capacity per chip"
+            ],
+            [
+              "less expensive"
+            ],
+            [
+              "slower access times"
+            ]
+          ],
+          "notes": "Any two points scored.",
+          "sources": [
+            {
+              "paper": "9618/13",
+              "session": "October/November 2024",
+              "question": "2(a)"
+            },
+            {
+              "paper": "9608/12",
+              "session": "May/June 2019",
+              "question": "4(c)"
+            }
+          ]
+        },
+        {
+          "id": "eeprom-benefits",
+          "type": "explain",
+          "term": "Why EEPROM is used",
+          "prompt": "Explain the benefits of using EEPROM instead of other types of Read Only Memory (ROM) in a device.",
+          "answer": "EEPROM can be erased and rewritten many times, so the firmware can be updated, for example to add new features. A particular byte can be erased without erasing the whole contents first, and the contents can be changed without removing the chip from the device, so the user does not need technical expertise.",
+          "marks": [
+            [
+              "erased and rewritten many times"
+            ],
+            [
+              "add new features"
+            ],
+            [
+              "without erasing the whole contents first"
+            ],
+            [
+              "without removing the chip from the device"
+            ],
+            [
+              "does not need technical expertise"
+            ]
+          ],
+          "notes": "Any three points scored.",
+          "sources": [
+            {
+              "paper": "9618/12",
+              "session": "May/June 2024",
+              "question": "2(c)"
+            },
+            {
+              "paper": "9618/13",
+              "session": "October/November 2023",
+              "question": "7(b)"
+            },
+            {
+              "paper": "9618/11",
+              "session": "October/November 2022",
+              "question": "9(b)"
+            }
+          ]
+        },
+        {
+          "id": "embedded-system-drawbacks",
+          "type": "explain",
+          "term": "Drawbacks of embedded systems",
+          "prompt": "Describe the drawbacks of embedded systems.",
+          "answer": "It is difficult for the user to update the firmware. Errors cannot be fixed easily, because repairing the device is a specialist task, and the functionality cannot easily be changed or adapted for another task. Faulty or outdated devices are often thrown away rather than repaired, leading to e-waste.",
+          "marks": [
+            [
+              "difficult for the user to update the firmware"
+            ],
+            [
+              "Errors cannot be fixed easily"
+            ],
+            [
+              "functionality cannot easily be changed"
+            ],
+            [
+              "thrown away rather than repaired"
+            ],
+            [
+              "e-waste"
+            ]
+          ],
+          "notes": "Any three points scored.",
+          "sources": [
+            {
+              "paper": "9618/12",
+              "session": "October/November 2024",
+              "question": "2(a)"
             }
           ]
         }
@@ -1795,6 +2199,128 @@
               "paper": "9608/12",
               "session": "October/November 2017",
               "question": "4(c)(i)"
+            }
+          ]
+        },
+        {
+          "id": "cache-memory-and-performance",
+          "type": "explain",
+          "term": "Cache memory and performance",
+          "prompt": "Explain the reasons why increasing the amount of cache memory can improve the performance of a CPU.",
+          "answer": "Cache is fast access memory close to the CPU that stores frequently used instructions and data. More cache means more instructions and data can be transferred faster, with less swapping between RAM and cache, which prevents the CPU idling while waiting for data.",
+          "marks": [
+            [
+              "fast access memory"
+            ],
+            [
+              "stores frequently used instructions and data"
+            ],
+            [
+              "more instructions and data can be transferred faster"
+            ],
+            [
+              "less swapping between RAM and cache"
+            ],
+            [
+              "prevents the CPU idling"
+            ]
+          ],
+          "notes": "Any two points scored.",
+          "sources": [
+            {
+              "paper": "9618/11",
+              "session": "October/November 2022",
+              "question": "7(d)"
+            },
+            {
+              "paper": "9618/13",
+              "session": "May/June 2025",
+              "question": "2(b)"
+            }
+          ]
+        },
+        {
+          "id": "handling-an-interrupt",
+          "type": "explain",
+          "term": "How an interrupt is handled",
+          "prompt": "Explain how an interrupt is detected and handled in the Fetch-Execute (F-E) cycle.",
+          "answer": "At the start or end of each F-E cycle the processor checks whether an interrupt flag is set. It identifies the source of the interrupt and checks its priority. If the priority is higher than the current process, the contents of the registers are saved on the stack and the Interrupt Service Routine (ISR) is called. When the ISR has finished, the register contents are restored and the processor continues with the next F-E cycle.",
+          "marks": [
+            [
+              "start or end of each F-E cycle"
+            ],
+            [
+              "interrupt flag is set"
+            ],
+            [
+              "identifies the source of the interrupt"
+            ],
+            [
+              "checks its priority"
+            ],
+            [
+              "registers are saved on the stack"
+            ],
+            [
+              "Interrupt Service Routine (ISR) is called"
+            ],
+            [
+              "register contents are restored"
+            ],
+            [
+              "continues with the next F-E cycle"
+            ]
+          ],
+          "notes": "Any four points scored (five on the 9608 papers).",
+          "sources": [
+            {
+              "paper": "9618/12",
+              "session": "May/June 2025",
+              "question": "1(c)"
+            },
+            {
+              "paper": "9608/13",
+              "session": "May/June 2019",
+              "question": "4(c)(ii)"
+            },
+            {
+              "paper": "9608/12",
+              "session": "October/November 2018",
+              "question": "4(b)(ii)"
+            }
+          ]
+        },
+        {
+          "id": "special-and-general-purpose-registers",
+          "type": "explain",
+          "term": "Special and general purpose registers",
+          "prompt": "Identify two differences between special purpose registers and general purpose registers.",
+          "answer": "Special purpose registers have a specific role, whereas general purpose registers can be used for any purpose defined by the programmer. Special purpose registers hold the status of the program's execution, whereas general purpose registers hold temporary data during operations. General purpose registers can be used by most instructions, whereas special purpose registers can only be used by certain instructions.",
+          "marks": [
+            [
+              "specific role",
+              "any purpose defined by the programmer"
+            ],
+            [
+              "status of the program's execution",
+              "temporary data during operations"
+            ],
+            [
+              "used by most instructions",
+              "only be used by certain instructions"
+            ]
+          ],
+          "notes": "Any two points scored.",
+          "sources": [
+            {
+              "paper": "9618/13",
+              "session": "October/November 2023",
+              "question": "9(a)(ii)"
+            },
+            {
+              "paper": "9618/11",
+              "session": "October/November 2024",
+              "question": "8(b)"
             }
           ]
         }
@@ -2332,6 +2858,155 @@
               "question": "4(d)"
             }
           ]
+        },
+        {
+          "id": "dll-benefits",
+          "type": "explain",
+          "term": "Benefits of DLL files",
+          "prompt": "State two benefits to a programmer of using Dynamic Link Library (DLL) files.",
+          "answer": "The memory requirement of the program is reduced, because the DLL is loaded only once, when it is required. The executable file is smaller, because it does not contain all the library routines. The DLL is maintained separately from the program, and there is no need to recompile the main program when changes are made to the DLL. A single DLL file can be made available to several programs.",
+          "marks": [
+            [
+              "memory requirement of the program is reduced"
+            ],
+            [
+              "executable file is smaller"
+            ],
+            [
+              "maintained separately from the program"
+            ],
+            [
+              "no need to recompile the main program"
+            ],
+            [
+              "available to several programs"
+            ]
+          ],
+          "notes": "Any two points scored.",
+          "sources": [
+            {
+              "paper": "9618/11",
+              "session": "October/November 2022",
+              "question": "7(a)"
+            },
+            {
+              "paper": "9618/12",
+              "session": "May/June 2023",
+              "question": "7(a)(ii)"
+            }
+          ]
+        },
+        {
+          "id": "program-library-benefits",
+          "type": "explain",
+          "term": "Benefits of program libraries",
+          "prompt": "Describe the benefits to a programmer of using program libraries.",
+          "answer": "Using program libraries saves programming and testing time, because the code does not have to be written from scratch. The code has already been tested, so it is more robust and likely to work. The programmer does not need to maintain the library, the routines can perform complex tasks the programmer may be unable to code, and they make the code easier to read.",
+          "marks": [
+            [
+              "saves programming and testing time"
+            ],
+            [
+              "already been tested"
+            ],
+            [
+              "does not need to maintain the library"
+            ],
+            [
+              "complex tasks the programmer may be unable to code"
+            ],
+            [
+              "easier to read"
+            ]
+          ],
+          "notes": "Any two points scored.",
+          "sources": [
+            {
+              "paper": "9618/12",
+              "session": "May/June 2024",
+              "question": "8(c)"
+            },
+            {
+              "paper": "9618/11",
+              "session": "October/November 2024",
+              "question": "4(c)"
+            },
+            {
+              "paper": "9608/12",
+              "session": "May/June 2019",
+              "question": "2(b)"
+            }
+          ]
+        },
+        {
+          "id": "partially-compiled-languages",
+          "type": "explain",
+          "term": "Partially compiled, partially interpreted",
+          "prompt": "Explain why high-level language programs might be partially compiled and partially interpreted.",
+          "answer": "Partially compiled programs can be used on different platforms, because they are interpreted when they are run, and the code is optimised for the CPU, because the machine code is generated at run time.",
+          "marks": [
+            [
+              "used on different platforms"
+            ],
+            [
+              "optimised for the CPU"
+            ]
+          ],
+          "sources": [
+            {
+              "paper": "9618/12",
+              "session": "October/November 2022",
+              "question": "1(b)(ii)"
+            },
+            {
+              "paper": "9618/11",
+              "session": "October/November 2023",
+              "question": "6(b)"
+            }
+          ]
+        },
+        {
+          "id": "file-management-tasks",
+          "type": "explain",
+          "term": "File management by the OS",
+          "prompt": "Describe the file management tasks carried out by an OS.",
+          "answer": "The OS divides secondary storage into file allocation units and allocates space to particular files. It maintains directory structures, specifies the logical method of file storage, such as FAT or NTFS, and provides file naming conventions. It controls access to files by implementing access rights, and specifies the tasks that can be performed on a file, such as open, close, delete, copy and move.",
+          "marks": [
+            [
+              "file allocation units"
+            ],
+            [
+              "allocates space to particular files"
+            ],
+            [
+              "maintains directory structures"
+            ],
+            [
+              "logical method of file storage"
+            ],
+            [
+              "file naming conventions"
+            ],
+            [
+              "implementing access rights"
+            ],
+            [
+              "tasks that can be performed on a file"
+            ]
+          ],
+          "notes": "Any two points scored (three on 9608/12).",
+          "sources": [
+            {
+              "paper": "9618/11",
+              "session": "October/November 2024",
+              "question": "4(a)(i)"
+            },
+            {
+              "paper": "9608/12",
+              "session": "May/June 2018",
+              "question": "1(a)(i)"
+            }
+          ]
         }
       ]
     },
@@ -2679,6 +3354,112 @@
               "question": "6(b)"
             }
           ]
+        },
+        {
+          "id": "security-and-integrity",
+          "type": "explain",
+          "term": "Data security and data integrity",
+          "prompt": "Explain the difference between data security and data integrity.",
+          "answer": "Data security is protecting data from loss or corruption, whereas data integrity is ensuring the consistency and accuracy of the data.",
+          "marks": [
+            [
+              "protecting data from loss or corruption"
+            ],
+            [
+              "consistency and accuracy of the data"
+            ]
+          ],
+          "sources": [
+            {
+              "paper": "9618/11",
+              "session": "October/November 2021",
+              "question": "2(a)"
+            },
+            {
+              "paper": "9618/13",
+              "session": "October/November 2021",
+              "question": "2(a)"
+            },
+            {
+              "paper": "9608/12",
+              "session": "May/June 2019",
+              "question": "5(b)(i)"
+            }
+          ]
+        },
+        {
+          "id": "security-and-privacy",
+          "type": "explain",
+          "term": "Data security and data privacy",
+          "prompt": "Describe the difference between the security and privacy of data.",
+          "answer": "Security protects data against loss or damage, whether accidental or malicious, whereas privacy protects data against unauthorised access, keeping it confidential.",
+          "marks": [
+            [
+              "protects data against loss"
+            ],
+            [
+              "protects data against unauthorised access"
+            ]
+          ],
+          "sources": [
+            {
+              "paper": "9618/12",
+              "session": "May/June 2021",
+              "question": "8(a)"
+            },
+            {
+              "paper": "9608/13",
+              "session": "May/June 2019",
+              "question": "2(a)"
+            },
+            {
+              "paper": "9608/12",
+              "session": "October/November 2017",
+              "question": "3(a)(i)"
+            }
+          ]
+        },
+        {
+          "id": "spyware-and-viruses",
+          "type": "explain",
+          "term": "Spyware and viruses compared",
+          "prompt": "Give two similarities and one difference between spyware and a virus.",
+          "answer": "Both are malicious software, and both are installed and run without the user's knowledge, in the background. A virus replicates itself, whereas spyware does not replicate itself. A virus can damage data, whereas spyware only records data and sends it to a third party.",
+          "marks": [
+            [
+              "malicious software"
+            ],
+            [
+              "without the user's knowledge"
+            ],
+            [
+              "in the background"
+            ],
+            [
+              "virus replicates itself",
+              "spyware does not replicate itself"
+            ],
+            [
+              "virus can damage data",
+              "spyware only records data"
+            ],
+            [
+              "sends it to a third party"
+            ]
+          ],
+          "notes": "Two similarities and one difference scored.",
+          "sources": [
+            {
+              "paper": "9618/11",
+              "session": "October/November 2021",
+              "question": "2(c)"
+            },
+            {
+              "paper": "9618/13",
+              "session": "October/November 2021",
+              "question": "2(c)"
+            }
+          ]
         }
       ]
     },
@@ -2936,6 +3717,149 @@
               "paper": "9618/12",
               "session": "October/November 2025",
               "question": "2(b)"
+            }
+          ]
+        },
+        {
+          "id": "professional-ethical-body",
+          "type": "explain",
+          "term": "Joining a professional ethical body",
+          "prompt": "Explain why it is important for a programmer to join a professional ethical body.",
+          "answer": "The programmer has ethical guidelines to follow, so clients know the standards being applied and the programmer does not have to decide what is ethical. Clients know the programmer is reputable, as membership gives recognition of their skills and there may be an entry requirement. The body provides help and support, such as legal advice, and runs training courses to keep the programmer's skills up to date.",
+          "marks": [
+            [
+              "ethical guidelines to follow"
+            ],
+            [
+              "clients know the standards being applied"
+            ],
+            [
+              "does not have to decide what is ethical"
+            ],
+            [
+              "Clients know the programmer is reputable"
+            ],
+            [
+              "recognition of their skills"
+            ],
+            [
+              "entry requirement"
+            ],
+            [
+              "help and support"
+            ],
+            [
+              "legal advice"
+            ],
+            [
+              "training courses"
+            ],
+            [
+              "skills up to date"
+            ]
+          ],
+          "notes": "Any three or four points scored, depending on the paper.",
+          "sources": [
+            {
+              "paper": "9618/13",
+              "session": "October/November 2023",
+              "question": "6(b)"
+            },
+            {
+              "paper": "9618/13",
+              "session": "October/November 2024",
+              "question": "5(b)"
+            },
+            {
+              "paper": "9618/11",
+              "session": "October/November 2021",
+              "question": "4(a)"
+            },
+            {
+              "paper": "9618/13",
+              "session": "October/November 2021",
+              "question": "4(a)"
+            }
+          ]
+        },
+        {
+          "id": "commercial-licence-benefits",
+          "type": "explain",
+          "term": "Benefits of a commercial licence",
+          "prompt": "Explain how a programmer benefits from distributing a program under a commercial licence.",
+          "answer": "A fee can be charged for the program. The program is copyrighted, which prevents illegal changes to the program because the source code is protected, and prevents illegal copies of the program being made.",
+          "marks": [
+            [
+              "fee can be charged"
+            ],
+            [
+              "program is copyrighted"
+            ],
+            [
+              "prevents illegal changes"
+            ],
+            [
+              "prevents illegal copies"
+            ]
+          ],
+          "notes": "Any two points scored.",
+          "sources": [
+            {
+              "paper": "9618/13",
+              "session": "October/November 2022",
+              "question": "8(a)(ii)"
+            },
+            {
+              "paper": "9618/11",
+              "session": "October/November 2024",
+              "question": "7(b)"
+            },
+            {
+              "paper": "9608/13",
+              "session": "May/June 2020",
+              "question": "4(c)(i)"
+            },
+            {
+              "paper": "9608/12",
+              "session": "October/November 2019",
+              "question": "5(c)(i)"
+            }
+          ]
+        },
+        {
+          "id": "shareware-benefits",
+          "type": "explain",
+          "term": "Benefits of a shareware licence",
+          "prompt": "State two benefits to a programmer of distributing a program using a shareware licence.",
+          "answer": "Users can trial the program and may give the programmer feedback, and more people might try it because the trial is free. Bugs can be found and corrected on a wide range of computer systems. Users who find the trial useful will buy the program, so the programmer gets income, and the program is copyrighted, protecting the programmer's intellectual property.",
+          "marks": [
+            [
+              "give the programmer feedback"
+            ],
+            [
+              "trial is free"
+            ],
+            [
+              "Bugs can be found and corrected"
+            ],
+            [
+              "programmer gets income"
+            ],
+            [
+              "protecting the programmer's intellectual property"
+            ]
+          ],
+          "notes": "Any two points scored.",
+          "sources": [
+            {
+              "paper": "9618/13",
+              "session": "October/November 2023",
+              "question": "6(a)"
+            },
+            {
+              "paper": "9618/11",
+              "session": "October/November 2024",
+              "question": "7(a)"
             }
           ]
         }
@@ -3371,6 +4295,100 @@
               "question": "7(c)"
             }
           ]
+        },
+        {
+          "id": "relational-database-benefits",
+          "type": "explain",
+          "term": "Relational database or file-based approach",
+          "prompt": "Explain the benefits of using a relational database instead of a file-based approach.",
+          "answer": "There is reduced data redundancy, because each item of data is stored only once in linked tables. Data integrity is improved, because changes in one table automatically update in another, and linked data cannot be entered differently in two tables. Program-data independence means changes to the data do not require programs to be rewritten. Complex queries are easier to run, and different views can be provided so users only see specific parts of the database.",
+          "marks": [
+            [
+              "reduced data redundancy"
+            ],
+            [
+              "stored only once"
+            ],
+            [
+              "Data integrity is improved"
+            ],
+            [
+              "changes in one table automatically update in another"
+            ],
+            [
+              "cannot be entered differently in two tables"
+            ],
+            [
+              "Program-data independence"
+            ],
+            [
+              "do not require programs to be rewritten"
+            ],
+            [
+              "Complex queries are easier to run"
+            ],
+            [
+              "different views can be provided"
+            ]
+          ],
+          "notes": "Any three points scored (four on 9618/13, two on 9608/11).",
+          "sources": [
+            {
+              "paper": "9618/12",
+              "session": "October/November 2024",
+              "question": "6(a)"
+            },
+            {
+              "paper": "9618/13",
+              "session": "May/June 2023",
+              "question": "4(a)"
+            },
+            {
+              "paper": "9618/11",
+              "session": "October/November 2023",
+              "question": "3(b)"
+            },
+            {
+              "paper": "9608/11",
+              "session": "May/June 2020",
+              "question": "7(a)"
+            }
+          ]
+        },
+        {
+          "id": "referential-integrity-importance",
+          "type": "explain",
+          "term": "Why referential integrity matters",
+          "prompt": "Explain the reasons why referential integrity is important in a database.",
+          "answer": "Referential integrity makes sure data is consistent and up to date. It ensures that every foreign key has a corresponding primary key, prevents records being added, deleted or modified incorrectly, makes sure a change in one place is reflected in all related records, and makes sure queries return accurate and complete results.",
+          "marks": [
+            [
+              "data is consistent"
+            ],
+            [
+              "up to date"
+            ],
+            [
+              "every foreign key has a corresponding primary key"
+            ],
+            [
+              "prevents records being added, deleted or modified incorrectly"
+            ],
+            [
+              "reflected in all related records"
+            ],
+            [
+              "queries return accurate and complete results"
+            ]
+          ],
+          "notes": "Any three points scored.",
+          "sources": [
+            {
+              "paper": "9618/12",
+              "session": "May/June 2023",
+              "question": "2(b)"
+            }
+          ]
         }
       ]
     },
@@ -3560,6 +4578,31 @@
               "paper": "9618/22",
               "session": "May/June 2021",
               "question": "3(c)"
+            }
+          ]
+        },
+        {
+          "id": "queue-for-print-jobs",
+          "type": "explain",
+          "term": "Why print jobs use a queue",
+          "prompt": "Explain the reasons why a queue ADT works better than a stack ADT in organising print jobs.",
+          "answer": "Print jobs are expected to be printed in the order they are received. Because a queue is first in first out, the first job sent to the printer is the first job printed. If the print jobs were on a stack, the first job received would not be printed until all the other jobs had been printed.",
+          "marks": [
+            [
+              "in the order they are received"
+            ],
+            [
+              "first job sent to the printer is the first job printed"
+            ],
+            [
+              "not be printed until all the other jobs had been printed"
+            ]
+          ],
+          "sources": [
+            {
+              "paper": "9618/32",
+              "session": "May/June 2023",
+              "question": "11(b)"
             }
           ]
         }
@@ -4044,6 +5087,149 @@
               "question": "7(a)"
             }
           ]
+        },
+        {
+          "id": "why-normalise-floating-point",
+          "type": "explain",
+          "term": "Why floating-point numbers are normalised",
+          "prompt": "Explain the reason why binary numbers are stored in normalised form.",
+          "answer": "Normalisation stores the maximum range of numbers in the minimum number of bits. It minimises the number of leading zeros or ones, which maximises the number of significant bits and so the precision of the number, enabling very large and very small numbers to be stored accurately. It also avoids a number having multiple representations.",
+          "marks": [
+            [
+              "maximum range of numbers in the minimum number of bits"
+            ],
+            [
+              "minimises the number of leading zeros or ones"
+            ],
+            [
+              "maximises the number of significant bits"
+            ],
+            [
+              "very large and very small numbers to be stored accurately"
+            ],
+            [
+              "avoids a number having multiple representations"
+            ]
+          ],
+          "notes": "Any three points scored.",
+          "sources": [
+            {
+              "paper": "9618/31",
+              "session": "October/November 2021",
+              "question": "1(b)"
+            },
+            {
+              "paper": "9618/32",
+              "session": "October/November 2021",
+              "question": "1(b)"
+            }
+          ]
+        },
+        {
+          "id": "mantissa-and-exponent-bits",
+          "type": "explain",
+          "term": "Mantissa and exponent trade-off",
+          "prompt": "Describe the effect of changing the allocation of bits used for the mantissa and for the exponent in a floating-point number with a fixed total number of bits.",
+          "answer": "Increasing the number of bits in the mantissa increases the precision of the number represented, but leaves fewer bits for the exponent, which reduces the range of numbers that can be represented. So when the range increases the precision decreases, and when the range decreases the precision increases.",
+          "marks": [
+            [
+              "mantissa increases the precision"
+            ],
+            [
+              "reduces the range of numbers"
+            ],
+            [
+              "when the range increases the precision decreases"
+            ]
+          ],
+          "notes": "Any two points scored (three on 9608/31).",
+          "sources": [
+            {
+              "paper": "9618/32",
+              "session": "May/June 2024",
+              "question": "1(a)"
+            },
+            {
+              "paper": "9608/31",
+              "session": "May/June 2019",
+              "question": "1(d)"
+            }
+          ]
+        },
+        {
+          "id": "serial-and-sequential-files",
+          "type": "explain",
+          "term": "Serial and sequential files compared",
+          "prompt": "Compare sequential and serial methods of file organisation.",
+          "answer": "In both serial and sequential files the records are stored one after the other and need to be accessed one after the other. Serial files are stored in chronological order, and new records are appended to the end of the file. Sequential files store the records in order, sorted by a key field, and new records are inserted in the correct position.",
+          "marks": [
+            [
+              "stored one after the other"
+            ],
+            [
+              "accessed one after the other"
+            ],
+            [
+              "chronological order"
+            ],
+            [
+              "appended to the end of the file"
+            ],
+            [
+              "store the records in order"
+            ],
+            [
+              "sorted by a key field"
+            ],
+            [
+              "inserted in the correct position"
+            ]
+          ],
+          "notes": "Any four points scored.",
+          "sources": [
+            {
+              "paper": "9618/31",
+              "session": "October/November 2021",
+              "question": "5(a)"
+            },
+            {
+              "paper": "9618/32",
+              "session": "October/November 2021",
+              "question": "5(a)"
+            }
+          ]
+        },
+        {
+          "id": "hash-collision-resolution",
+          "type": "explain",
+          "term": "Dealing with hash collisions",
+          "prompt": "Outline two methods of overcoming the problem of a hashing algorithm identifying the same storage location for more than one record.",
+          "answer": "The record can be stored in the next free space after the location identified by the hashing algorithm, searching the following spaces in a linear fashion. Alternatively, an overflow area is set up and the record is stored in the next free space in the overflow area.",
+          "marks": [
+            [
+              "next free space after the location identified by the hashing algorithm"
+            ],
+            [
+              "overflow area is set up and the record is stored in the next free space"
+            ]
+          ],
+          "sources": [
+            {
+              "paper": "9618/31",
+              "session": "October/November 2024",
+              "question": "5(b)"
+            },
+            {
+              "paper": "9618/33",
+              "session": "October/November 2024",
+              "question": "5(b)"
+            },
+            {
+              "paper": "9618/32",
+              "session": "October/November 2023",
+              "question": "3(b)"
+            }
+          ]
         }
       ]
     },
@@ -4331,6 +5517,126 @@
               "question": "2(c)"
             }
           ]
+        },
+        {
+          "id": "why-protocols-are-essential",
+          "type": "explain",
+          "term": "Why protocols are essential",
+          "prompt": "Explain why protocols are essential for communication between computers.",
+          "answer": "Protocols provide a standard set of rules for transmitting and receiving data. This enables communication between devices from different manufacturers and on different platforms, and makes communication independent of the software and hardware used.",
+          "marks": [
+            [
+              "standard set of rules"
+            ],
+            [
+              "different manufacturers and on different platforms"
+            ],
+            [
+              "independent of the software and hardware"
+            ]
+          ],
+          "notes": "Any two points scored.",
+          "sources": [
+            {
+              "paper": "9618/32",
+              "session": "May/June 2024",
+              "question": "2(a)"
+            },
+            {
+              "paper": "9618/32",
+              "session": "October/November 2022",
+              "question": "3(a)"
+            },
+            {
+              "paper": "9608/31",
+              "session": "October/November 2019",
+              "question": "3(a)"
+            }
+          ]
+        },
+        {
+          "id": "circuit-and-packet-switching",
+          "type": "explain",
+          "term": "Circuit and packet switching compared",
+          "prompt": "Give four differences between circuit switching and packet switching.",
+          "answer": "Circuit switching uses a dedicated path, which must be established before data transfer begins, whereas packet switching does not need one. In packet switching the data is split into packets, whereas in circuit switching the message remains intact. In circuit switching all the data follows the same path, whereas packets can take different routes. Data in circuit switching arrives in the order it was sent, whereas packets can arrive out of order. Circuit switching uses the whole bandwidth of the channel, whereas packet switching can share bandwidth.",
+          "marks": [
+            [
+              "must be established before data transfer begins"
+            ],
+            [
+              "split into packets",
+              "message remains intact"
+            ],
+            [
+              "all the data follows the same path",
+              "packets can take different routes"
+            ],
+            [
+              "arrives in the order it was sent",
+              "arrive out of order"
+            ],
+            [
+              "whole bandwidth of the channel",
+              "share bandwidth"
+            ]
+          ],
+          "notes": "Any four points scored.",
+          "sources": [
+            {
+              "paper": "9618/32",
+              "session": "May/June 2023",
+              "question": "7(b)"
+            }
+          ]
+        },
+        {
+          "id": "tcp-ip-layer-interaction",
+          "type": "explain",
+          "term": "How the TCP/IP layers interact",
+          "prompt": "Describe how the layers of the TCP/IP protocol stack interact with each other.",
+          "answer": "Each layer can only accept input from the next higher or the next lower layer, through an interface between adjacent layers. Headers are added to the data as it passes through the layers. User interaction takes place at the Application layer, at the top of the stack, and direct access to the hardware takes place at the Link layer, at the bottom. A message being sent passes from the Application layer down to the Link layer, and a message being received passes up from the Link layer to the Application layer.",
+          "marks": [
+            [
+              "next higher or the next lower layer"
+            ],
+            [
+              "interface between adjacent layers"
+            ],
+            [
+              "Headers are added"
+            ],
+            [
+              "User interaction takes place at the Application layer"
+            ],
+            [
+              "direct access to the hardware takes place at the Link layer"
+            ],
+            [
+              "passes from the Application layer down to the Link layer"
+            ],
+            [
+              "passes up from the Link layer to the Application layer"
+            ]
+          ],
+          "notes": "Any four points scored.",
+          "sources": [
+            {
+              "paper": "9618/31",
+              "session": "October/November 2024",
+              "question": "4"
+            },
+            {
+              "paper": "9618/33",
+              "session": "October/November 2024",
+              "question": "4"
+            },
+            {
+              "paper": "9618/32",
+              "session": "May/June 2025",
+              "question": "3(b)"
+            }
+          ]
         }
       ]
     },
@@ -4585,6 +5891,110 @@
               "paper": "9618/32",
               "session": "October/November 2022",
               "question": "8(b)"
+            }
+          ]
+        },
+        {
+          "id": "virtual-machine-benefits-limitations",
+          "type": "explain",
+          "term": "Benefits and limitations of virtual machines",
+          "prompt": "Outline two benefits and two limitations of a virtual machine.",
+          "answer": "A virtual machine can run applications that are not compatible with the host computer, and it protects the host, because a crash in the guest operating system has no effect outside the virtual machine. It also saves cost, as several virtual machines can run on the same hardware. However, the performance of the guest operating system is worse than on its own compatible machine, a virtual machine can be complex and expensive to set up and maintain, and some hardware cannot be emulated.",
+          "marks": [
+            [
+              "not compatible with the host computer"
+            ],
+            [
+              "no effect outside the virtual machine"
+            ],
+            [
+              "several virtual machines can run on the same hardware"
+            ],
+            [
+              "performance of the guest operating system is worse"
+            ],
+            [
+              "complex and expensive to set up and maintain"
+            ],
+            [
+              "some hardware cannot be emulated"
+            ]
+          ],
+          "notes": "Two benefits and two limitations scored.",
+          "sources": [
+            {
+              "paper": "9618/32",
+              "session": "May/June 2024",
+              "question": "9(a)"
+            }
+          ]
+        },
+        {
+          "id": "host-and-guest-os",
+          "type": "explain",
+          "term": "Host and guest operating systems",
+          "prompt": "Explain the roles of the host operating system and the guest operating system as used in a computer system running a virtual machine.",
+          "answer": "The host operating system is the normal operating system of the host computer. It controls all the physical resources of the computer, provides a user interface to operate the virtual machine software, and runs the virtual machine software. The guest operating system runs within the virtual machine and controls the virtual hardware during the emulation, accessing the actual hardware through the virtual machine and the host operating system.",
+          "marks": [
+            [
+              "normal operating system of the host computer"
+            ],
+            [
+              "controls all the physical resources"
+            ],
+            [
+              "user interface to operate the virtual machine software"
+            ],
+            [
+              "runs the virtual machine software"
+            ],
+            [
+              "runs within the virtual machine"
+            ],
+            [
+              "controls the virtual hardware during the emulation"
+            ]
+          ],
+          "notes": "Up to two points for each operating system, three marks in total.",
+          "sources": [
+            {
+              "paper": "9618/32",
+              "session": "May/June 2024",
+              "question": "9(b)"
+            }
+          ]
+        },
+        {
+          "id": "pipelining-and-interrupts",
+          "type": "explain",
+          "term": "Pipelining and interrupts",
+          "prompt": "Explain how pipelining affects interrupt handling for RISC processors.",
+          "answer": "Pipelining adds complexity, because there could be several instructions still in the pipeline when the interrupt is received. All the instructions currently in the pipeline are usually discarded except the one at the write back stage, and the interrupt handler routine is applied to that remaining instruction. Once the interrupt has been serviced, the processor restarts with the next instruction in the sequence.",
+          "marks": [
+            [
+              "several instructions still in the pipeline"
+            ],
+            [
+              "discarded except the one at the write back stage"
+            ],
+            [
+              "interrupt handler routine is applied to that remaining instruction"
+            ],
+            [
+              "restarts with the next instruction in the sequence"
+            ]
+          ],
+          "notes": "Any three points scored.",
+          "sources": [
+            {
+              "paper": "9618/31",
+              "session": "May/June 2024",
+              "question": "11(c)"
+            },
+            {
+              "paper": "9618/33",
+              "session": "May/June 2024",
+              "question": "11(c)"
             }
           ]
         }
@@ -4872,6 +6282,205 @@
               "question": "8(a)"
             }
           ]
+        },
+        {
+          "id": "paging-and-segmentation",
+          "type": "explain",
+          "term": "Paging and segmentation",
+          "prompt": "State one difference between paging and segmentation in the way memory is divided.",
+          "answer": "Paging divides the memory into fixed size blocks, whereas segmentation divides the memory into variable sized blocks.",
+          "marks": [
+            [
+              "fixed size blocks",
+              "variable sized blocks"
+            ]
+          ],
+          "notes": "Also accepted: the OS divides memory into pages but the compiler calculates the segment size; access times for paging are faster.",
+          "sources": [
+            {
+              "paper": "9618/31",
+              "session": "October/November 2022",
+              "question": "8(b)"
+            },
+            {
+              "paper": "9618/33",
+              "session": "October/November 2022",
+              "question": "8(b)"
+            }
+          ]
+        },
+        {
+          "id": "need-for-scheduling",
+          "type": "explain",
+          "term": "Why process scheduling is needed",
+          "prompt": "Explain the need for scheduling in process management.",
+          "answer": "Scheduling allows more than one program to appear to run at the same time, enabling multitasking. It allows high priority jobs to be completed first and keeps the CPU busy all the time, so that all processes execute efficiently with reduced waiting times, and every process has fair access to the CPU so that none is starved.",
+          "marks": [
+            [
+              "appear to run at the same time"
+            ],
+            [
+              "high priority jobs to be completed first"
+            ],
+            [
+              "keeps the CPU busy"
+            ],
+            [
+              "reduced waiting times"
+            ],
+            [
+              "fair access to the CPU"
+            ]
+          ],
+          "notes": "Any three points scored.",
+          "sources": [
+            {
+              "paper": "9618/32",
+              "session": "October/November 2022",
+              "question": "9(a)"
+            },
+            {
+              "paper": "9618/33",
+              "session": "May/June 2025",
+              "question": "6(a)"
+            },
+            {
+              "paper": "9608/31",
+              "session": "October/November 2019",
+              "question": "6(b)"
+            },
+            {
+              "paper": "9608/31",
+              "session": "October/November 2018",
+              "question": "5(c)"
+            }
+          ]
+        },
+        {
+          "id": "round-robin-scheduling",
+          "type": "explain",
+          "term": "Round robin scheduling",
+          "prompt": "Explain the function of the round robin scheduling routine and give a benefit of this routine.",
+          "answer": "Processes are queued as they arrive. Round robin is a pre-emptive routine in which each process is given an equal, fixed time slice. When a time slice ends, the state of the process is saved so it can continue from where it left off, and the next process runs for its time slice. A benefit is that starvation does not occur, because every process gets a time slice in each cycle.",
+          "marks": [
+            [
+              "queued as they arrive"
+            ],
+            [
+              "pre-emptive"
+            ],
+            [
+              "equal, fixed time slice"
+            ],
+            [
+              "state of the process is saved"
+            ],
+            [
+              "next process runs for its time slice"
+            ],
+            [
+              "starvation does not occur"
+            ]
+          ],
+          "notes": "Three points for the function and one for a benefit. Another benefit accepted: reduced average response time.",
+          "sources": [
+            {
+              "paper": "9618/33",
+              "session": "May/June 2025",
+              "question": "6(b)"
+            },
+            {
+              "paper": "9618/32",
+              "session": "October/November 2022",
+              "question": "9(b)"
+            }
+          ]
+        },
+        {
+          "id": "why-rpn-is-used",
+          "type": "explain",
+          "term": "Why Reverse Polish Notation is used",
+          "prompt": "Explain why Reverse Polish Notation (RPN) is used to carry out the evaluation of expressions.",
+          "answer": "RPN provides an unambiguous way of representing an expression, which can be evaluated reading from left to right, without the need for brackets or rules of precedence.",
+          "marks": [
+            [
+              "unambiguous"
+            ],
+            [
+              "reading from left to right"
+            ],
+            [
+              "without the need for brackets"
+            ],
+            [
+              "rules of precedence"
+            ]
+          ],
+          "notes": "Any two points scored.",
+          "sources": [
+            {
+              "paper": "9618/31",
+              "session": "May/June 2021",
+              "question": "4(a)(i)"
+            },
+            {
+              "paper": "9618/32",
+              "session": "May/June 2021",
+              "question": "4(a)(i)"
+            },
+            {
+              "paper": "9618/33",
+              "session": "May/June 2021",
+              "question": "4(a)(i)"
+            }
+          ]
+        },
+        {
+          "id": "evaluating-rpn-with-a-stack",
+          "type": "explain",
+          "term": "Evaluating RPN with a stack",
+          "prompt": "Explain how a stack can be used to evaluate an expression in Reverse Polish Notation (RPN).",
+          "answer": "The expression is read from left to right. Each value is pushed onto the stack until an operator is reached. The last two values are then popped from the stack, the operator is applied to them, and the result is pushed back onto the stack. This repeats until the whole expression has been evaluated and a single value, the answer, remains.",
+          "marks": [
+            [
+              "read from left to right"
+            ],
+            [
+              "pushed onto the stack until an operator is reached"
+            ],
+            [
+              "last two values are then popped"
+            ],
+            [
+              "result is pushed back onto the stack"
+            ],
+            [
+              "repeats until the whole expression has been evaluated"
+            ]
+          ],
+          "notes": "Any three points scored (four on 9608/32).",
+          "sources": [
+            {
+              "paper": "9618/31",
+              "session": "October/November 2023",
+              "question": "9(b)"
+            },
+            {
+              "paper": "9618/33",
+              "session": "October/November 2023",
+              "question": "9(b)"
+            },
+            {
+              "paper": "9618/32",
+              "session": "October/November 2023",
+              "question": "6(b)"
+            },
+            {
+              "paper": "9608/32",
+              "session": "May/June 2019",
+              "question": "4(a)"
+            }
+          ]
         }
       ]
     },
@@ -5097,6 +6706,164 @@
               "question": "5(a)"
             }
           ]
+        },
+        {
+          "id": "symmetric-and-asymmetric-encryption",
+          "type": "explain",
+          "term": "Symmetric and asymmetric encryption",
+          "prompt": "State two differences between symmetric and asymmetric encryption.",
+          "answer": "Symmetric encryption uses a single key, whereas asymmetric encryption uses a pair of keys. The single symmetric key is used by everyone, whereas only one of the asymmetric keys, the public key, is available to everyone and the private key must be kept secret.",
+          "marks": [
+            [
+              "single key, whereas asymmetric encryption uses a pair of keys"
+            ],
+            [
+              "used by everyone",
+              "private key must be kept secret"
+            ]
+          ],
+          "sources": [
+            {
+              "paper": "9618/32",
+              "session": "October/November 2022",
+              "question": "6(a)"
+            }
+          ]
+        },
+        {
+          "id": "acquiring-a-digital-certificate",
+          "type": "explain",
+          "term": "Acquiring a digital certificate",
+          "prompt": "Explain the process by which an organisation may acquire its digital certificate.",
+          "answer": "The organisation requests a certificate from a Certificate Authority (CA) and may send its public key to the CA. It gathers the information the CA requires, including proof of its identity. The CA verifies the organisation's identity, then generates and issues the certificate, which includes the organisation's public key.",
+          "marks": [
+            [
+              "requests a certificate from a Certificate Authority (CA)"
+            ],
+            [
+              "send its public key to the CA"
+            ],
+            [
+              "proof of its identity"
+            ],
+            [
+              "CA verifies the organisation's identity"
+            ],
+            [
+              "generates and issues the certificate"
+            ]
+          ],
+          "notes": "Any four points scored.",
+          "sources": [
+            {
+              "paper": "9618/32",
+              "session": "October/November 2022",
+              "question": "6(b)"
+            }
+          ]
+        },
+        {
+          "id": "digital-signature-authentication",
+          "type": "explain",
+          "term": "How a digital signature authenticates a document",
+          "prompt": "Explain how a digital signature is used to authenticate a digital document during transmission over a network.",
+          "answer": "The sender hashes the document to produce a digest, and encrypts the digest to create the digital signature. The document and the signature are sent to the receiver. The receiver decrypts the signature to reproduce the digest, and uses the same hashing algorithm on the received document to produce a second digest. The receiver compares the two digests, and if they are the same the document is authentic and has not been changed.",
+          "marks": [
+            [
+              "sender hashes the document"
+            ],
+            [
+              "produce a digest"
+            ],
+            [
+              "encrypts the digest to create the digital signature"
+            ],
+            [
+              "document and the signature are sent to the receiver"
+            ],
+            [
+              "decrypts the signature to reproduce the digest"
+            ],
+            [
+              "same hashing algorithm"
+            ],
+            [
+              "compares the two digests"
+            ],
+            [
+              "if they are the same the document is authentic"
+            ]
+          ],
+          "notes": "Any five points scored.",
+          "sources": [
+            {
+              "paper": "9618/13",
+              "session": "May/June 2023",
+              "question": "6(a)"
+            },
+            {
+              "paper": "9618/11",
+              "session": "May/June 2025",
+              "question": "7(b)"
+            }
+          ]
+        },
+        {
+          "id": "starting-a-tls-session",
+          "type": "explain",
+          "term": "Starting an SSL/TLS session",
+          "prompt": "Explain how SSL/TLS is used when client-server communication is initiated.",
+          "answer": "An SSL/TLS connection is initiated by an application, which becomes the client, and the application that receives the connection becomes the server. Every new session begins with a handshake. The client requests the digital certificate from the server, verifies the certificate and obtains the server's public key. The encryption algorithms are agreed and the symmetric session keys are generated, so a secure session is established.",
+          "marks": [
+            [
+              "initiated by an application"
+            ],
+            [
+              "which becomes the client"
+            ],
+            [
+              "receives the connection becomes the server"
+            ],
+            [
+              "begins with a handshake"
+            ],
+            [
+              "requests the digital certificate from the server"
+            ],
+            [
+              "verifies the certificate"
+            ],
+            [
+              "obtains the server's public key"
+            ],
+            [
+              "encryption algorithms are agreed"
+            ],
+            [
+              "session keys are generated"
+            ],
+            [
+              "secure session is established"
+            ]
+          ],
+          "notes": "Any four points scored.",
+          "sources": [
+            {
+              "paper": "9618/31",
+              "session": "October/November 2021",
+              "question": "8(b)"
+            },
+            {
+              "paper": "9618/32",
+              "session": "October/November 2021",
+              "question": "8(b)"
+            },
+            {
+              "paper": "9618/33",
+              "session": "May/June 2025",
+              "question": "7"
+            }
+          ]
         }
       ]
     },
@@ -5318,6 +7085,115 @@
               "question": "10(a)"
             }
           ]
+        },
+        {
+          "id": "neural-networks-and-machine-learning",
+          "type": "explain",
+          "term": "How neural networks enable machine learning",
+          "prompt": "Explain how artificial neural networks enable machine learning.",
+          "answer": "Artificial neural networks are intended to replicate the way the human brain works. Weights are assigned to each connection between nodes. Data is input at the input layer and analysed at each hidden layer, where characteristics are extracted, and the output layer provides the results. The training process is repeated many times to achieve optimum outputs, with back propagation of errors used to correct errors, so decisions can be made without being specifically programmed.",
+          "marks": [
+            [
+              "replicate the way the human brain works"
+            ],
+            [
+              "Weights are assigned to each connection"
+            ],
+            [
+              "input at the input layer"
+            ],
+            [
+              "analysed at each hidden layer"
+            ],
+            [
+              "output layer provides the results"
+            ],
+            [
+              "repeated many times"
+            ],
+            [
+              "back propagation of errors"
+            ],
+            [
+              "without being specifically programmed"
+            ]
+          ],
+          "notes": "Any four points scored.",
+          "sources": [
+            {
+              "paper": "9618/31",
+              "session": "October/November 2021",
+              "question": "9(a)(ii)"
+            },
+            {
+              "paper": "9618/32",
+              "session": "October/November 2021",
+              "question": "9(a)(ii)"
+            }
+          ]
+        },
+        {
+          "id": "reasons-for-deep-learning",
+          "type": "explain",
+          "term": "Reasons for using deep learning",
+          "prompt": "Outline the reasons for using deep learning.",
+          "answer": "Deep learning makes good use of unstructured data and outperforms other methods when the data size is large. It processes data with a nonlinear approach, is effective at identifying hidden patterns that are too complex for humans to see, and can give a more accurate outcome with more hidden layers.",
+          "marks": [
+            [
+              "unstructured data"
+            ],
+            [
+              "data size is large"
+            ],
+            [
+              "nonlinear approach"
+            ],
+            [
+              "identifying hidden patterns"
+            ],
+            [
+              "more accurate outcome with more hidden layers"
+            ]
+          ],
+          "notes": "Any two points scored.",
+          "sources": [
+            {
+              "paper": "9618/31",
+              "session": "October/November 2022",
+              "question": "9(b)"
+            },
+            {
+              "paper": "9618/33",
+              "session": "October/November 2022",
+              "question": "9(b)"
+            }
+          ]
+        },
+        {
+          "id": "a-star-and-dijkstra-difference",
+          "type": "explain",
+          "term": "A* compared with Dijkstra's algorithm",
+          "prompt": "Outline the difference between the A* and Dijkstra's algorithms.",
+          "answer": "A* tries to find a better path by using a heuristic function, which gives priority to nodes that are expected to be better than others, whereas Dijkstra's algorithm just explores all possible routes.",
+          "marks": [
+            [
+              "heuristic function"
+            ],
+            [
+              "priority to nodes that are expected to be better"
+            ],
+            [
+              "Dijkstra's algorithm just explores all possible routes"
+            ]
+          ],
+          "notes": "Any two points scored.",
+          "sources": [
+            {
+              "paper": "9618/33",
+              "session": "May/June 2025",
+              "question": "10(b)"
+            }
+          ]
         }
       ]
     },
@@ -5384,6 +7260,113 @@
               "paper": "9618/31",
               "session": "October/November 2022",
               "question": "12(b)(ii)"
+            }
+          ]
+        },
+        {
+          "id": "sorting-performance-factors",
+          "type": "explain",
+          "term": "What affects sorting performance",
+          "prompt": "State two factors that may affect the performance of a sorting algorithm.",
+          "answer": "The performance depends on the initial order of the data, the number of data items to be sorted and the efficiency of the sorting algorithm.",
+          "marks": [
+            [
+              "initial order of the data"
+            ],
+            [
+              "number of data items to be sorted"
+            ],
+            [
+              "efficiency of the sorting algorithm"
+            ]
+          ],
+          "notes": "Any two points scored.",
+          "sources": [
+            {
+              "paper": "9618/31",
+              "session": "May/June 2021",
+              "question": "8(a)"
+            },
+            {
+              "paper": "9618/32",
+              "session": "May/June 2021",
+              "question": "8(a)"
+            },
+            {
+              "paper": "9618/33",
+              "session": "May/June 2021",
+              "question": "8(a)"
+            },
+            {
+              "paper": "9618/33",
+              "session": "May/June 2025",
+              "question": "12(c)"
+            }
+          ]
+        },
+        {
+          "id": "stack-for-recursion",
+          "type": "explain",
+          "term": "Why a stack is used for recursion",
+          "prompt": "Explain the reasons why a stack is a suitable Abstract Data Type (ADT) to implement recursion.",
+          "answer": "A stack is a LIFO data structure. Each recursive call is pushed onto the stack and is then popped as the function ends, which enables backtracking or unwinding in the required order.",
+          "marks": [
+            [
+              "LIFO"
+            ],
+            [
+              "Each recursive call is pushed onto the stack"
+            ],
+            [
+              "popped as the function ends"
+            ],
+            [
+              "backtracking or unwinding"
+            ]
+          ],
+          "notes": "Any three points scored.",
+          "sources": [
+            {
+              "paper": "9618/31",
+              "session": "October/November 2021",
+              "question": "10(b)"
+            },
+            {
+              "paper": "9618/32",
+              "session": "October/November 2021",
+              "question": "10(b)"
+            }
+          ]
+        },
+        {
+          "id": "compiling-recursive-code",
+          "type": "explain",
+          "term": "Compiling recursive code",
+          "prompt": "Explain how a compiler makes use of a stack when translating recursive programming code.",
+          "answer": "The compiler must produce object code that pushes the return addresses and the values of local variables onto a stack with each recursive call, to set up winding, and then pops the return addresses and values of local variables off the stack after the base case is reached, to implement unwinding.",
+          "marks": [
+            [
+              "produce object code"
+            ],
+            [
+              "pushes the return addresses and the values of local variables onto a stack"
+            ],
+            [
+              "with each recursive call"
+            ],
+            [
+              "pops the return addresses and values of local variables off the stack"
+            ],
+            [
+              "after the base case is reached"
+            ]
+          ],
+          "notes": "One mark for producing object code, then any three points.",
+          "sources": [
+            {
+              "paper": "9618/32",
+              "session": "October/November 2023",
+              "question": "9(c)"
             }
           ]
         }
@@ -5676,6 +7659,72 @@
               "paper": "9618/31",
               "session": "May/June 2021",
               "question": "9(b)"
+            }
+          ]
+        },
+        {
+          "id": "causes-of-exceptions",
+          "type": "explain",
+          "term": "Causes of exceptions",
+          "prompt": "State two possible causes of an exception.",
+          "answer": "An exception can be caused by programming errors, user errors, hardware failure or run-time errors.",
+          "marks": [
+            [
+              "programming errors"
+            ],
+            [
+              "user errors"
+            ],
+            [
+              "hardware failure"
+            ],
+            [
+              "run-time errors"
+            ]
+          ],
+          "notes": "Any two points scored.",
+          "sources": [
+            {
+              "paper": "9618/31",
+              "session": "October/November 2023",
+              "question": "8(c)"
+            },
+            {
+              "paper": "9618/33",
+              "session": "October/November 2023",
+              "question": "8(c)"
+            }
+          ]
+        },
+        {
+          "id": "objects-and-classes",
+          "type": "explain",
+          "term": "Objects and classes compared",
+          "prompt": "Give three differences between an object and a class.",
+          "answer": "A class is a template that is defined once, from which many objects are created as instances. No memory is allocated when a class is defined, but each object is allocated memory when it is created. A class cannot be manipulated because it is not in memory, whereas an object can be manipulated. A class can use inheritance but an object cannot.",
+          "marks": [
+            [
+              "template that is defined once",
+              "many objects are created"
+            ],
+            [
+              "No memory is allocated when a class is defined",
+              "each object is allocated memory"
+            ],
+            [
+              "class cannot be manipulated",
+              "object can be manipulated"
+            ],
+            [
+              "class can use inheritance but an object cannot"
+            ]
+          ],
+          "notes": "Any three points scored.",
+          "sources": [
+            {
+              "paper": "9618/32",
+              "session": "October/November 2024",
+              "question": "10(b)"
             }
           ]
         }

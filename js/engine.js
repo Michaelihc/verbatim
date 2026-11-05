@@ -149,7 +149,9 @@ export class Typer {
     }
     this.paintPoints(pos);
     const cur = this.spans[pos];
-    if (cur) {
+    // Follow the cursor only once typing has started, so a card lower on the page doesn't
+    // yank the page down when it loads.
+    if (cur && this.keystrokes) {
       const r = cur.getBoundingClientRect();
       if (r.bottom > window.innerHeight - 40 || r.top < 80) cur.scrollIntoView({ block: 'center', behavior: 'smooth' });
     }
