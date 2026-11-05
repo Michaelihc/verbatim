@@ -42,6 +42,9 @@ syllabus topic and is tagged when it's printed on the data and formulae list.
 - **Bonus drops.** Now and then an answer pays double, or (rarely) five times.
 - **Mastery and reviews.** Answers move from New to Trained, Gaps, Recalled, Secure and Mastered.
   Answers recalled from memory come back for spaced review after 4, 9 and then 21 days.
+- **Two bars per chapter.** *Practice* (yellow) fills as you finish answers in the chapter, so
+  one full lap fills it, and it drains by a seventh for each day you don't practise that chapter.
+  *Mastery* (blue) grows as answers move up from Trained to Mastered and doesn't fade.
 - **Levels, streaks, a daily goal and 25 achievements.**
 - **Works offline.** A service worker caches the app and every pack on first visit. Packs refresh
   in the background, and new app versions show a reload prompt.

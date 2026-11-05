@@ -311,8 +311,20 @@ main:focus { outline: none; }
 .chap-top:hover .chap-title { background: linear-gradient(transparent 55%, var(--mark) 55%, var(--mark) 92%, transparent 92%); }
 .chap-meta { font-size: 0.85rem; color: var(--ink-2); }
 /* Mastery is drawn as a highlighter stroke across the chapter. */
-.chap-bar { display: block; height: 10px; border-radius: 2px; background: var(--card-2); overflow: hidden; }
-.chap-bar i { display: block; height: 100%; background: var(--hl); }
+.chap-bars { display: grid; gap: 4px; }
+.bar { display: block; height: 7px; border-radius: 2px; background: var(--card-2); overflow: hidden; }
+.bar i { display: block; height: 100%; }
+.bar.prac i { background: var(--hl); }
+.bar.mast i { background: var(--biro); }
+.bar-key { flex-basis: 100%; margin: 0; display: flex; flex-wrap: wrap; align-items: center; gap: 0.2rem 0.5rem; font-size: 0.82rem; color: var(--ink-2); }
+.bar-key .key { display: inline-block; width: 1.4rem; height: 7px; border-radius: 2px; }
+.bar-key .key.mast { margin-left: 0.9rem; }
+.key.prac { background: var(--hl); } .key.mast { background: var(--biro); }
+.head-bars { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 0.8rem 2rem; margin-top: 1rem; max-width: 720px; }
+.head-bars > div { display: grid; gap: 0.3rem; }
+.head-bars span:first-child { font-weight: 700; font-size: 0.92rem; }
+.head-bars .bar { height: 10px; }
+.head-bars small { color: var(--ink-2); font-size: 0.8rem; line-height: 1.35; }
 .chap-actions { display: flex; gap: 0.45rem; }
 .chap-actions .btn { padding: 0.35rem 0.8rem; font-size: 0.9rem; box-shadow: 0 2px 0 var(--ink); border-width: 1.5px; }
 .chap-actions .btn.train { box-shadow: 0 2px 0 #0c1445; }
@@ -718,7 +730,8 @@ main > h1 { padding-top: 1rem; }
   .tab { font-size: 1.05rem; font-stretch: 100%; }
   .chap { grid-template-columns: 2rem minmax(0, 1fr); padding: 0.75rem 0; }
   .chap::before { font-size: 1.15rem; }
-  .chap-bar { grid-column: 2; height: 7px; }
+  .chap-bars { grid-column: 2; }
+  .bar-key .key.mast { margin-left: 0; }
   .chap-actions { grid-column: 2; }
   .chap-actions .btn { flex: 1; }
   .res { flex-wrap: wrap; }

@@ -3,7 +3,7 @@ import { loadPacks, findItem } from './packs.js';
 import { Typer, chooseMask } from './engine.js';
 import {
   levelFromXp, titleFor, STAGES, MODES, LEVELS, RATINGS, maskRatio, stageOf, isDue, applyResult,
-  unitProgress, streak, ACHIEVEMENTS, checkAchievements, comboMult,
+  unitProgress, streak, ACHIEVEMENTS, checkAchievements, comboMult, practiceLevel, creditPractice, PRACTICE_DECAY,
 } from './game.js';
 import { sfx, confetti, floatText, countUp } from './fx.js';
 
@@ -111,6 +111,15 @@ function ring(frac, size = 36, stroke = 4) {
     <circle cx="${size / 2}" cy="${size / 2}" r="${r}" class="ring-bg" stroke-width="${stroke}"/>
     <circle cx="${size / 2}" cy="${size / 2}" r="${r}" class="ring-fg" stroke-width="${stroke}" stroke-dasharray="${c.toFixed(2)}" stroke-dashoffset="${(c * (1 - Math.min(1, frac))).toFixed(2)}"/>
   </svg>`;
+}
+
+// Two bars per chapter: recent practice (fades daily) and long-term mastery.
+function bars(pack, unit, p = unitProgress(pack, unit)) {
+  const pr = practiceLevel(pack.id, unit.id);
+  return `<span class="chap-bars">
+    <span class="bar prac" title="Practice ${pct(pr)}: one lap fills it, and it fades each day you don’t practise"><i style="width:${pct(pr)}"></i></span>
+    <span class="bar mast" title="Mastery ${pct(p.share)}"><i style="width:${pct(p.share)}"></i></span>
+  </span>`;
 }
 
 const pips = b => `<span class="pips" title="${esc(STAGES[b])}">${[1, 2, 3, 4, 5].map(n => `<i class="${n <= b ? 'on' : ''}"></i>`).join('')}</span>`;
@@ -265,6 +274,7 @@ function viewHome() {
           <a class="btn small" href="${playHref(pack, '*', 'train')}">${ICON.shuffle} Shuffle all</a>
         </div>
         <p class="shelf-desc">${esc(pack.description || '')}</p>
+        <p class="bar-key"><span class="key prac"></span>Practice: one lap fills it, and it fades each day you skip the chapter <span class="key mast"></span>Mastery: rises as answers move from Trained to Mastered</p>
       </div>
       <ol class="chapters">
         ${pack.units.map(u => {
@@ -274,7 +284,7 @@ function viewHome() {
               <span class="chap-title">${esc(u.title)}</span>
               <span class="chap-meta">${countLabel(pack, u.items)}${p.mastered ? `, ${p.mastered} mastered` : p.started ? `, ${p.started} started` : ''}</span>
             </a>
-            <span class="chap-bar" title="${pct(p.share)} mastered"><i style="width:${pct(p.share)}"></i></span>
+            ${bars(pack, u, p)}
             <div class="chap-actions">
               <a class="btn train" href="${playHref(pack, u, 'train')}">${ICON.play} Train</a>
               <a class="btn practice" href="${playHref(pack, u, 'practice')}">${ICON.pen} Practice</a>
@@ -343,6 +353,10 @@ function viewChapter(packId, unitId) {
     <header class="chap-head" style="--h:${hueOf(pack, unit)}">
       <h1>${esc(unit.title)}</h1>
       <p class="muted">${esc(pack.title)}. ${countLabel(pack, unit.items)}. ${p.started} started, ${p.mastered} mastered.</p>
+      <div class="head-bars">
+        <div><span>Practice <b>${pct(practiceLevel(pack.id, unit.id))}</b></span><span class="bar prac"><i style="width:${pct(practiceLevel(pack.id, unit.id))}"></i></span><small>A full lap fills it. It drops by ${Math.round(PRACTICE_DECAY * 100)}% for each day you don’t practise this chapter.</small></div>
+        <div><span>Mastery <b>${pct(p.share)}</b></span><span class="bar mast"><i style="width:${pct(p.share)}"></i></span><small>Grows as answers go from Trained to Gaps, Recalled, Secure and Mastered.</small></div>
+      </div>
       <div class="row big-actions">
         <a class="btn big train" href="${playHref(pack, unit, 'train')}">${ICON.play} Train</a>
         <a class="btn big practice" href="${playHref(pack, unit, 'practice')}">${ICON.pen} Practice</a>
@@ -561,6 +575,7 @@ function viewPlay(q) {
     phase = 'result';
     const mode = S.mode;
     const res = applyResult({ ...r, packId: entry.pack.id, itemId: entry.item.id, mode, level }, S.combo);
+    creditPractice(entry.pack, entry.unit, entry.item.id);
     const comboBroke = S.combo >= 3 && res.combo === 0;
     const xpBefore = S.xp;
     S.combo = res.combo;
