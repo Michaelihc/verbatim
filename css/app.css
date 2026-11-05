@@ -211,15 +211,50 @@ main:focus { outline: none; }
 
 /* ---- home ---------------------------------------------------------------- */
 
-.hero { padding: 2rem 0 0.5rem; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 330px); gap: 1.5rem 3rem; align-items: start; }
-.hero h1 { font-family: var(--sans); font-weight: 700; font-stretch: normal; letter-spacing: -0.02em; line-height: 1.08; font-size: clamp(2.3rem, 1.3rem + 3.2vw, 3.9rem); max-width: 18ch; margin-bottom: 0.4rem; text-wrap: balance; }
+.hero {
+  padding: 1.75rem 0 0.25rem;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 340px;
+  grid-template-areas: "copy art" "search quick";
+  column-gap: 2.5rem;
+  row-gap: 1.6rem;
+}
+.hero-copy { grid-area: copy; align-self: center; }
+.hero-art-wrap { grid-area: art; align-self: end; }
+.hero-search { grid-area: search; min-width: 0; }
+.hero .quick { grid-area: quick; margin: 0; display: grid; gap: 0.6rem; align-content: start; }
+.hero h1 { font-family: var(--sans); font-weight: 700; font-stretch: normal; letter-spacing: -0.02em; line-height: 1.08; font-size: clamp(2.3rem, 1.3rem + 3vw, 3.7rem); max-width: 18ch; margin-bottom: 0.45rem; text-wrap: balance; }
 .lede { color: var(--on-desk-2); font-size: 1.15rem; line-height: 1.45; max-width: 60ch; margin: 0; }
-.hero .search { margin-top: 1.4rem; }
-.hero-side { display: grid; gap: 0.9rem; justify-items: stretch; }
-.hero-art { width: 100%; height: auto; display: block; filter: drop-shadow(0 18px 24px #061060aa); }
-.hero-side .quick { margin-top: 0; display: grid; gap: 0.6rem; }
-.hero-side .quick:empty { display: none; }
-.hero-side .quick-card.go { flex: none; }
+/* The search box and the Continue card share a row and a height. */
+.hero .search { margin-top: 0; max-width: none; height: 3.6rem; }
+.hero .search input { padding: 0; }
+.hero .quick-card { height: 3.6rem; padding: 0 0.9rem; }
+.hero .quick-card .qc-icon { width: 2.2rem; height: 2.2rem; }
+.hero .quick-card.go { flex: none; }
+.hero .results { max-width: none; }
+/* Hero laptop (SVG). Colours follow the theme tokens. */
+.hero-art { width: 100%; height: auto; display: block; overflow: visible; }
+.hero-art .lap-floor { fill: #050a3a; opacity: 0.35; filter: blur(6px); }
+.hero-art .lap-deck { fill: var(--card); }
+.hero-art .lap-edge { fill: var(--card-2); }
+.hero-art .lap-hinge { stroke: #0c1445; stroke-width: 3; stroke-linecap: round; }
+.hero-art .lap-lid { fill: #0c1445; stroke: var(--on-desk-3); stroke-width: 0.8; }
+.hero-art .lap-cam { fill: #2c3570; }
+.hero-art .lap-card { fill: #ffffff; }
+.hero-art .key { fill: var(--card-2); stroke: var(--rule); stroke-width: 0.5; }
+.hero-art .key-hot { fill: var(--hl); stroke: #0c1445; stroke-width: 0.8; }
+.hero-art .lap-pad { fill: var(--card-2); stroke: var(--rule); stroke-width: 0.5; }
+.hero-art text { font-family: var(--sans); }
+.hero-art .t-tag { font-size: 10px; font-weight: 700; letter-spacing: 0.08em; fill: #4b5588; }
+.hero-art .t-pts { font-size: 10px; font-weight: 700; fill: #2a3fd8; }
+.hero-art .t-term { font: 850 25px var(--display); font-stretch: 115%; fill: #0c1445; }
+.hero-art .t-ans { font-size: 16px; fill: #9198c0; }
+.hero-art .t-ans.done, .hero-art .t-ans .done { fill: #0c1445; }
+.hero-art .t-hl { fill: #ffe83d; }
+.hero-art .t-pt { fill: #2a3fd8; }
+.hero-art .t-caret { fill: #2a3fd8; }
+.hero-art .t-plus-bg { fill: #2a3fd8; }
+.hero-art .t-plus { font-size: 11px; font-weight: 700; fill: #ffffff; }
 
 .search {
   display: flex; align-items: center; gap: 0.6rem;
@@ -784,10 +819,11 @@ main > h1 { padding-top: 1rem; }
   .chapters.grid .chap-actions { flex-direction: column; }
   .shelf-tools { margin-left: 0; }
   .bar-key .key-more { display: none; }
-  .hero { grid-template-columns: 1fr; gap: 1.1rem; }
+  .hero { grid-template-columns: minmax(0, 1fr); grid-template-areas: "copy" "search" "quick"; row-gap: 1rem; }
   .hero h1 { font-size: 2rem; }
   .hero .lede { font-size: 1rem; }
-  .hero-art { display: none; }
+  .hero-art-wrap { display: none; }
+  .hero .quick:empty { display: none; }
   .chapters.grid .chap { grid-template-columns: minmax(0, 1fr); padding: 0.7rem; }
   .chapters.grid .chap-num { font-size: 0.85rem; padding-top: 0; }
   .chapters.grid .chap-title { font-size: 0.92rem; }
