@@ -233,13 +233,19 @@ function viewHome() {
 
   main.innerHTML = `
     <section class="hero">
-      <h1>Practise typing and recalling definitions at the same time.</h1>
-      <div class="search" role="search">
-        ${ICON.search}
-        <input id="q" type="search" placeholder="Find a term, like tesla or flux" autocomplete="off" spellcheck="false" aria-label="Search topics and terms">
-        <kbd>/</kbd>
+      <div class="hero-copy">
+        <h1>Practise typing and recalling definitions at the same time.</h1>
+        <p class="lede">Every answer is worded the way Cambridge mark schemes accept it.</p>
       </div>
-      <div class="results" id="results" hidden></div>
+      <div class="hero-art-wrap">${HERO_ART}</div>
+      <div class="hero-search">
+        <div class="search" role="search">
+          ${ICON.search}
+          <input id="q" type="search" placeholder="Find a term, like tesla or flux" autocomplete="off" spellcheck="false" aria-label="Search topics and terms">
+          <kbd>/</kbd>
+        </div>
+        <div class="results" id="results" hidden></div>
+      </div>
       <div class="quick">
         ${cont ? `<a class="quick-card go" href="${cont.href}" id="continue">
           <span class="qc-icon">${ICON.play}</span>
@@ -287,9 +293,17 @@ function viewHome() {
         <p class="bar-key"><span class="key-item"><span class="key prac"></span>Practice<span class="key-more">: one lap fills it, and it fades each day you skip the chapter</span></span><span class="key-item"><span class="key mast"></span>Mastery<span class="key-more">: rises as answers move from Trained to Mastered</span></span></p>
       </div>
       <ol class="chapters ${view}">
-        ${units.map(({ u, n }) => {
+        ${units.map(({ u, n }, i) => {
           const p = unitProgress(pack, u);
-          return `<li class="chap">
+          // In the All view, mark where each level starts.
+          const lv = levelOf(u);
+          let divider = '';
+          if (level === 'all' && hasLevels && (i === 0 || levelOf(units[i - 1].u) !== lv)) {
+            let j = i;
+            while (j + 1 < units.length && levelOf(units[j + 1].u) === lv) j++;
+            divider = `<li class="lvl-divider"><span class="lvl lvl-${lv}">${lv}</span><b>${lv === 'AS' ? 'AS Level' : 'A2 (A Level)'}</b><small>chapters ${n}–${units[j].n}</small></li>`;
+          }
+          return `${divider}<li class="chap">
             <span class="chap-num">${n}</span>
             <a class="chap-top" href="#/c/${enc(pack.id)}/${enc(u.id)}">
               <span class="chap-title">${esc(shortTitle(u))}</span>
@@ -357,7 +371,15 @@ function viewHome() {
     else if (e.key === 'Enter' && cont && document.activeElement === document.body) { e.preventDefault(); go(cont.href); }
   };
   document.addEventListener('keydown', onKey);
-  cleanup = () => document.removeEventListener('keydown', onKey);
+
+  // Swap the drawing for the draggable 3D laptop on wide screens (three.js is loaded only then).
+  let unmountLaptop = null, gone = false;
+  const art = main.querySelector('.hero-art-wrap');
+  if (art && matchMedia('(min-width: 761px)').matches) {
+    import('./laptop3d.js').then(m => m.mountLaptop(art)).then(off => { if (gone) off(); else unmountLaptop = off; })
+      .catch(err => console.warn('3D laptop unavailable', err));
+  }
+  cleanup = () => { gone = true; unmountLaptop?.(); document.removeEventListener('keydown', onKey); };
 }
 
 // After an equation, show its symbol form next to the words just typed.
@@ -367,6 +389,56 @@ const symbolsBlock = it => it.formula && it.formula !== it.term ? `
         <p class="symbols-eq"><span>${formula(it.formula)}</span></p>
         <p class="symbols-words">${esc(it.answer)}</p>
       </div>` : '';
+
+// Hero illustration: a laptop seen from the side. The screen and the keyboard are two panels
+// that share the hinge edge; their contents are drawn flat and mapped onto each panel.
+const HERO_ART = (() => {
+  const H1 = [62, 184], H2 = [336, 172];          // hinge, left to right (a gentle side angle)
+  const up = [8, -162];                            // hinge to top of the screen
+  const depth = [-26, 58];                         // hinge to front of the keyboard
+  const W = 274, SH = 162, KD = 58;                // panel sizes in their own flat units
+  const ux = [(H2[0] - H1[0]) / W, (H2[1] - H1[1]) / W];
+  const T1 = [H1[0] + up[0], H1[1] + up[1]];
+  const mScreen = `matrix(${ux[0]} ${ux[1]} ${-up[0] / SH} ${-up[1] / SH} ${T1[0]} ${T1[1]})`;
+  const mDeck = `matrix(${ux[0]} ${ux[1]} ${depth[0] / KD} ${depth[1] / KD} ${H1[0]} ${H1[1]})`;
+  const F1 = [H1[0] + depth[0], H1[1] + depth[1]], F2 = [H2[0] + depth[0], H2[1] + depth[1]];
+  const pt = p => p.join(',');
+  // Keyboard: four rows plus a space bar, drawn in the deck's flat space.
+  const rows = [13, 12, 11, 10];
+  let keys = '';
+  rows.forEach((n, r) => {
+    const x0 = 16 + r * 4, w = (W - 32 - r * 8 - (n - 1) * 2.6) / n;
+    for (let k = 0; k < n; k++) {
+      const hot = r === 1 && k === 4; // the "e" key area: the next letter on screen
+      keys += `<rect x="${(x0 + k * (w + 2.6)).toFixed(1)}" y="${6 + r * 7.6}" width="${w.toFixed(1)}" height="5.8" rx="1.2" class="${hot ? 'key-hot' : 'key'}"/>`;
+    }
+  });
+  keys += `<rect x="80" y="${6 + 4 * 7.6}" width="114" height="5.8" rx="1.2" class="key"/>`;
+  return `<svg class="hero-art" viewBox="0 0 400 270" role="img" aria-label="A laptop with the definition of the tesla being typed, its mark points highlighted">
+  <ellipse cx="196" cy="252" rx="165" ry="12" class="lap-floor"/>
+  <polygon points="${pt(F1)} ${pt(F2)} ${F2[0]},${F2[1] + 6} ${F1[0]},${F1[1] + 6}" class="lap-edge"/>
+  <polygon points="${pt(H1)} ${pt(H2)} ${pt(F2)} ${pt(F1)}" class="lap-deck"/>
+  <g transform="${mDeck}">${keys}<rect x="100" y="44" width="74" height="11" rx="2" class="lap-pad"/></g>
+  <g transform="${mScreen}">
+    <rect x="-7" y="-8" width="${W + 14}" height="${SH + 12}" rx="9" class="lap-lid"/>
+    <circle cx="${W / 2}" cy="-3.5" r="1.4" class="lap-cam"/>
+    <rect x="2" y="2" width="${W - 4}" height="${SH - 6}" rx="3" class="lap-card"/>
+    <text x="20" y="27" class="t-tag">DEFINITION</text>
+    <text x="${W - 20}" y="27" text-anchor="end" class="t-pts">1/2 marks</text>
+    <text x="20" y="54" class="t-term">Tesla</text>
+    <rect x="18" y="67" width="175" height="20" rx="2" class="t-hl"/>
+    <rect x="18" y="85" width="175" height="2.4" class="t-pt"/>
+    <text x="22" y="82" class="t-ans done">one newton per ampere</text>
+    <text x="22" y="108" textLength="96" lengthAdjust="spacingAndGlyphs" class="t-ans done">per metre, wh</text>
+    <rect x="119.5" y="94" width="2" height="18" class="t-caret"/>
+    <text x="123" y="108" class="t-ans">ere the</text>
+    <text x="22" y="132" class="t-ans">current is perpendicular</text>
+    <rect x="200" y="68" width="26" height="17" rx="3" class="t-plus-bg"/>
+    <text x="213" y="80.5" text-anchor="middle" class="t-plus">+1</text>
+  </g>
+  <line x1="${H1[0]}" y1="${H1[1]}" x2="${H2[0]}" y2="${H2[1]}" class="lap-hinge"/>
+</svg>`;
+})();
 
 // ---- chapter ----------------------------------------------------------------
 
