@@ -30,6 +30,11 @@ export async function loadPacks() {
         for (const it of u.items) {
           it.answer = normalise(it.answer, pack.kind);
           it.unitId = u.id;
+          if (it.marks) {
+            const r = resolveMarks(it.answer, it.marks, pack.kind);
+            if (r.problems.length) console.warn(`Pack ${entry.file} ${it.id}:`, r.problems.join('; '));
+            it.points = r.points;
+          }
         }
       }
       pack.units = pack.units.filter(u => u.items.length);
@@ -42,6 +47,34 @@ export async function loadPacks() {
   }));
   cache = loaded.filter(Boolean);
   return cache;
+}
+
+/**
+ * Find where each mark's phrases sit in the answer.
+ * `marks` is a list of marks; each mark is a list of phrases that together earn it, in answer order.
+ * Returns { points: [{ ranges: [[start, end], ...], end, text }], problems: [...] }.
+ */
+export function resolveMarks(answer, marks, kind = 'definition') {
+  const points = [];
+  const problems = [];
+  const taken = [];
+  marks.forEach((phrases, m) => {
+    if (!Array.isArray(phrases) || !phrases.length) { problems.push(`mark ${m + 1} has no phrases`); return; }
+    const ranges = [];
+    let from = 0;
+    for (const raw of phrases) {
+      const ph = normalise(String(raw), kind);
+      // The first occurrence after the previous phrase that no other mark has already claimed.
+      let at = answer.indexOf(ph, from);
+      while (at >= 0 && taken.some(([s, e]) => at < e && at + ph.length > s)) at = answer.indexOf(ph, at + 1);
+      if (at < 0) { problems.push(`mark ${m + 1}: "${ph}" is not in the answer`); return; }
+      ranges.push([at, at + ph.length]);
+      from = at + ph.length;
+    }
+    taken.push(...ranges);
+    points.push({ ranges, end: Math.max(...ranges.map(r => r[1])), text: phrases.join(' ... ') });
+  });
+  return { points, problems };
 }
 
 // Make answers typable: straight quotes, ASCII arrows, no tabs or stray whitespace.

@@ -459,6 +459,34 @@ body[data-view='play'] main { padding-top: 1rem; }
 .sheet .ch.nl.ok { color: var(--ink-3); }
 /* When the answer lands, the highlighter colour says how it went. */
 .card.r-perfect .sheet .ch.ok { color: var(--marked-good-ink, var(--ink)); background-image: linear-gradient(transparent 22%, var(--mark-good) 22%, var(--mark-good) 88%, transparent 88%); transition: background-image 0.3s; }
+/* Mark points: phrases the mark scheme gives marks for. Underlined in biro before you type
+   them (train mode), underlined solidly with a +1 tag once you've typed them right. */
+.sheet .ch.pt-key:not(.ok):not(.bad) { text-decoration: underline dotted var(--biro) 2px; text-underline-offset: 0.32em; }
+/* Drawn as a background layer under the highlighter so it runs unbroken across letters. */
+.sheet .ch.pt {
+  background-image: linear-gradient(var(--biro), var(--biro)), linear-gradient(transparent 22%, var(--mark) 22%, var(--mark) 88%, transparent 88%);
+  background-size: 100% 3px, 100% 100%;
+  background-position: 0 100%, 0 0;
+  background-repeat: no-repeat;
+}
+.card.r-perfect .sheet .ch.pt { background-image: linear-gradient(var(--biro), var(--biro)), linear-gradient(transparent 22%, var(--mark-good) 22%, var(--mark-good) 88%, transparent 88%); }
+.sheet .ch.pt-miss:not(.pt) { text-decoration: underline dashed var(--bad) 2px; text-underline-offset: 0.32em; }
+.pt-tag {
+  position: absolute; left: 100%; top: -0.15em; z-index: 2;
+  transform: translate(-30%, -55%);
+  font: 700 0.5em/1 var(--sans); font-style: normal;
+  color: #fff; background: var(--biro);
+  padding: 0.18em 0.32em; border-radius: 3px;
+  pointer-events: none; white-space: nowrap;
+  text-decoration: none;
+  animation: tag-pop 0.35s cubic-bezier(0.2, 1.7, 0.4, 1);
+}
+:root[data-theme='dark'] .pt-tag { color: #0f1660; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme='light']) .pt-tag { color: #0f1660; } }
+@keyframes tag-pop { from { opacity: 0; transform: translate(-30%, -20%) scale(0.4); } }
+.sheet.stacked .pt-tag { top: 0; }
+.sheet.stacked .ch.pt::after { border-bottom: 3px solid var(--biro); }
+
 /* Hidden letters keep their width so the line layout doesn't shift. */
 .sheet .ch.m:not(.ok):not(.bad):not(.shown) { color: transparent; background: linear-gradient(to top, var(--ink-3) 2px, transparent 2px) no-repeat 0 -0.15em; }
 .sheet .ch.m.cur:not(.ok):not(.bad):not(.shown) { background: linear-gradient(to top, var(--biro) 3px, transparent 3px) no-repeat 0 -0.15em; }
@@ -546,11 +574,15 @@ body[data-view='play'] main { padding-top: 1rem; }
 @keyframes glow { to { box-shadow: 0 2px 0 #0c1445, 0 0 22px 4px #ff7a1a99; } }
 .pill.pb { background: var(--mark-orange); }
 .pill.up { background: var(--mark-good); }
+.pill.marks { background: var(--card-2); color: var(--biro); }
+.pill.marks.full { background: var(--biro); color: var(--card); }
 .pill.down, .pill.lost { background: var(--mark-bad); }
 .rstats { display: flex; flex-wrap: wrap; gap: 0.3rem 1.25rem; color: var(--ink-2); font-size: 0.95rem; margin-bottom: 0.6rem; }
 .rstats b { color: var(--ink); font-variant-numeric: tabular-nums; }
 .rstats .bad b { color: var(--bad); }
 .tip { border-left: 3px solid var(--bad); padding: 0.1rem 0 0.1rem 0.8rem; font-size: 0.92rem; color: var(--ink-2); }
+.tip.missed { border-left-color: var(--biro); }
+.tip.missed q { color: var(--ink); font-weight: 700; }
 .more { font-size: 0.9rem; color: var(--ink-2); margin-bottom: 0.4rem; }
 .more summary { cursor: pointer; font-weight: 700; }
 .more p { margin: 0.4rem 0 0; }
