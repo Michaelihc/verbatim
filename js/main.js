@@ -815,6 +815,12 @@ function viewPlay(q) {
         <span class="verdict-word">${esc(RATINGS[res.rating].label)}${res.rating === 'perfect' ? '!' : ''}</span>
         <span class="verdict-xp">+<b>0</b> XP</span>
       </div>
+      ${it.formula && it.formula !== it.term ? `
+      <div class="symbols">
+        <span class="symbols-label">In symbols</span>
+        <p class="symbols-eq"><span>${formula(it.formula)}</span></p>
+        <p class="symbols-words">${esc(it.answer)}</p>
+      </div>` : ''}
       <div class="chips-row">
         ${res.combo >= 2 ? `<span class="pill combo-pill">${ICON.flame} ${res.combo} in a row, ×${res.comboMult.toFixed(1)}</span>` : ''}
         ${res.bonus ? `<span class="pill bonus ${res.bonus.kind}">${ICON.bolt} ${esc(res.bonus.label)}</span>` : ''}
