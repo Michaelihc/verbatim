@@ -201,6 +201,40 @@ export function unitProgress(pack, unit) {
   return { n, started, mastered, share: n ? stageSum / (n * 5) : 0 };
 }
 
+// ---- Practice bar ---------------------------------------------------------
+//
+// Separate from mastery: it shows how recently a chapter has been worked on. Each answer
+// finished in the chapter adds its share (once per answer per day), so one full lap fills
+// it. It drains by PRACTICE_DECAY of the bar for every day the chapter isn't practised.
+
+export const PRACTICE_DECAY = 1 / 7;
+
+function daysBetween(fromKey, toKey) {
+  const [a, b] = [fromKey, toKey].map(k => { const [y, m, d] = k.split('-').map(Number); return Date.UTC(y, m - 1, d); });
+  return Math.max(0, Math.round((b - a) / DAY));
+}
+
+export function practiceLevel(packId, unitId) {
+  const c = state.chapters?.[`${packId}/${unitId}`];
+  if (!c) return 0;
+  return Math.max(0, c.level - daysBetween(c.day, dayKey()) * PRACTICE_DECAY);
+}
+
+/** Credit one finished answer to its chapter's practice bar. */
+export function creditPractice(pack, unit, itemId) {
+  state.chapters ||= {};
+  const key = `${pack.id}/${unit.id}`;
+  const today = dayKey();
+  const current = practiceLevel(pack.id, unit.id);
+  const c = state.chapters[key] ||= { level: 0, day: today, items: {} };
+  if (c.day !== today) c.items = {};
+  c.level = current;
+  c.day = today;
+  if (c.items[itemId]) return;
+  c.items[itemId] = 1;
+  c.level = Math.min(1, c.level + 1 / Math.max(1, unit.items.length));
+}
+
 // ---- Streaks --------------------------------------------------------------
 
 export function streak() {

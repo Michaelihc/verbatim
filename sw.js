@@ -17,6 +17,7 @@ const SHELL = [
   'js/packs.js',
   'js/engine.js',
   'js/fx.js',
+  'js/dash.js',
   'fonts/atkinson-400.woff2',
   'fonts/atkinson-700.woff2',
   'fonts/jetbrains-400.woff2',

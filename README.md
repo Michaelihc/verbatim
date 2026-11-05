@@ -30,8 +30,9 @@ syllabus topic and is tagged when it's printed on the data and formulae list.
 - **Ratings, not marks.** Each answer gets *Perfect*, *Great*, *Good* or *Keep going*, with XP that
   counts up, a sound that climbs in pitch with your combo, and confetti for the best ones. Clean
   answers roll straight into the next one.
-- **Explain questions.** Some chapters add explain questions (Capacitance so far), listed in
-  their own group so each chapter's list stays short.
+- **Explain questions.** Most physics chapters also have explain and state questions taken from
+  past papers (50 so far, with the exam's own wording and mark-scheme points). They're listed in
+  their own group, and each group can be trained on its own, so chapter lists stay short.
 - **Mark points.** In physics and computer science definitions, the phrases the mark scheme
   gives marks for are underlined, and each one lights up with a +1 as you type it correctly.
   Points you miss are flagged when you finish. Taken from the cited mark schemes; where a
@@ -41,6 +42,13 @@ syllabus topic and is tagged when it's printed on the data and formulae list.
 - **Bonus drops.** Now and then an answer pays double, or (rarely) five times.
 - **Mastery and reviews.** Answers move from New to Trained, Gaps, Recalled, Secure and Mastered.
   Answers recalled from memory come back for spaced review after 4, 9 and then 21 days.
+- **Two bars per chapter.** *Practice* (yellow) fills as you finish answers in the chapter, so
+  one full lap fills it, and it drains by a seventh for each day you don't practise that chapter.
+  *Mastery* (blue) grows as answers move up from Trained to Mastered and doesn't fade.
+- **Stats dashboard.** Filter by time range and subject, then see headline numbers against the
+  previous period, daily XP against your goal, speed and accuracy trends, how your answers
+  split across mastery stages and ratings, the most-examined answers you haven't mastered yet,
+  and every chapter's practice, mastery and exam frequency. Every chart has a table view.
 - **Levels, streaks, a daily goal and 25 achievements.**
 - **Works offline.** A service worker caches the app and every pack on first visit. Packs refresh
   in the background, and new app versions show a reload prompt.

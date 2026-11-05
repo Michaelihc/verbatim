@@ -28,6 +28,7 @@ function fresh() {
     days: {},
     history: [],
     achievements: {},
+    chapters: {},           // practice bar per chapter: { level, day, items }
     totals: { chars: 0, keystrokes: 0, errors: 0, items: 0, ms: 0, hints: 0, perfects: 0, laps: 0, lucky: 0 },
     bestCombo: 0,
   };
