@@ -12,6 +12,7 @@ const ROWS = ['1234567890-=', 'qwertyuiop[]', "asdfghjkl;'", 'zxcvbnm,./'];
 const W = 3.2, D = 2.2, T = 0.11;       // base: width, depth, thickness
 const LH = 2.06, LT = 0.06;             // lid: height, thickness
 const REST = { yaw: -0.42, pitch: 0.12 };
+const CAM_DIST = Math.hypot(2.0, 6.9), CAM_ELEV = Math.atan2(2.0, 6.9);
 
 function roundedRect(w, h, r) {
   const s = new THREE.Shape(), x = -w / 2, y = -h / 2;
@@ -41,8 +42,8 @@ function makeScreen() {
   tex.colorSpace = THREE.SRGBColorSpace;
   tex.anisotropy = 8;
 
-  const pad = 92, cardX = 64, cardY = 56, cardW = cv.width - 128, cardH = cv.height - 112;
-  const ansFont = '700 58px Atkinson, system-ui, sans-serif', lineH = 84, ansTop = 340;
+  const pad = 92, cardX = 64, cardY = 112, cardW = cv.width - 128, cardH = cv.height - 112 - 48;
+  const ansFont = '700 58px Atkinson, system-ui, sans-serif', lineH = 84, ansTop = cardY + 284;
   const markRanges = MARKS.map(m => { const a = ANSWER.indexOf(m); return [a, a + m.length]; });
 
   // Word-wrap once: each line is [start, end) into ANSWER.
@@ -65,9 +66,20 @@ function makeScreen() {
 
   const xAt = (line, i) => cardX + pad + ctx.measureText(ANSWER.slice(line[0], i)).width;
 
-  function draw(typed, popAt) {
+  function draw(typed, popAt, wpm) {
     if (!lines) layout();
     ctx.fillStyle = '#2a3fd8'; ctx.fillRect(0, 0, cv.width, cv.height);
+    // Top bar: the chapter on the left, live typing speed on the right.
+    ctx.textBaseline = 'alphabetic'; ctx.textAlign = 'left';
+    ctx.font = '700 32px Atkinson, system-ui, sans-serif'; ctx.fillStyle = '#aab6ff';
+    ctx.fillText('Train · Magnetic fields', cardX + 6, 76);
+    ctx.textAlign = 'right';
+    ctx.font = '700 30px Atkinson, system-ui, sans-serif'; ctx.fillStyle = '#aab6ff';
+    ctx.fillText('wpm', cardX + cardW - 6, 76);
+    const unitW = ctx.measureText('wpm').width;
+    ctx.font = '850 68px Anybody, system-ui, sans-serif'; ctx.fillStyle = '#ffe83d';
+    ctx.fillText(wpm ? String(wpm) : '–', cardX + cardW - 18 - unitW, 84);
+    ctx.textAlign = 'left';
     ctx.fillStyle = '#ffffff'; ctx.beginPath(); ctx.roundRect(cardX, cardY, cardW, cardH, 26); ctx.fill();
 
     const got = markRanges.filter(([, b]) => typed >= b).length;
@@ -182,6 +194,11 @@ function buildLaptop(screenTex) {
   lid.position.set(0, LH / 2, -LT / 2 - 0.02);
   lid.castShadow = true;
   hinge.add(lid);
+  // Brand mark on the back of the lid: the yellow tile from the app icon.
+  const logo = new THREE.Mesh(new THREE.ShapeGeometry(roundedRect(0.36, 0.36, 0.08)),
+    new THREE.MeshBasicMaterial({ color: 0xffe83d, toneMapped: false }));
+  logo.rotation.y = Math.PI; logo.position.set(0, LH / 2 + 0.05, -LT - 0.045);
+  hinge.add(logo);
   const face = new THREE.Mesh(new THREE.ShapeGeometry(roundedRect(W - 0.02, LH - 0.02, 0.13)), bezel);
   face.position.set(0, LH / 2, 0.002);
   hinge.add(face);
@@ -211,9 +228,12 @@ export async function mountLaptop(wrap) {
   renderer.shadowMap.type = THREE.PCFSoftShadowMap;
   const cv = renderer.domElement;
   cv.className = 'hero-3d';
-  cv.tabIndex = 0;
-  cv.setAttribute('role', 'img');
-  cv.setAttribute('aria-label', 'A 3D laptop typing the definition of the tesla. Drag, or use the arrow keys, to turn it.');
+  cv.setAttribute('aria-hidden', 'true');
+  // The canvas bleeds well past its slot (and ignores the pointer) so the laptop is never clipped
+  // at any angle; the slot itself takes the drags and key presses.
+  wrap.tabIndex = 0;
+  wrap.setAttribute('role', 'img');
+  wrap.setAttribute('aria-label', 'A 3D laptop typing the definition of the tesla. Drag, or use the arrow keys, to turn it.');
 
   const scene = new THREE.Scene();
   const camera = new THREE.PerspectiveCamera(26, 1.4, 0.1, 50);
@@ -231,6 +251,9 @@ export async function mountLaptop(wrap) {
   const rim = new THREE.DirectionalLight(0xb8c4ff, 1.1);
   rim.position.set(4, 3, -4);
   scene.add(rim);
+  const back = new THREE.DirectionalLight(0xffffff, 2.1);
+  back.position.set(-2, 4, -6);
+  scene.add(back);
 
   const ground = new THREE.Mesh(new THREE.PlaneGeometry(14, 14), new THREE.ShadowMaterial({ opacity: 0.26, color: 0x050a3a }));
   ground.rotation.x = -Math.PI / 2; ground.receiveShadow = true;
@@ -244,8 +267,8 @@ export async function mountLaptop(wrap) {
   scene.add(pivot);
 
   // ---- typing loop
-  let typed = reduced ? ANSWER.length : 0, nextAt = 0, hold = 0, pop = null;
-  screen.draw(typed, null);
+  let typed = reduced ? ANSWER.length : 0, nextAt = 0, hold = 0, pop = null, startAt = 0, wpm = reduced ? 68 : 0;
+  screen.draw(typed, null, wpm);
   const keyIndex = ch => model.slots.findIndex(s => s.ch === ch.toLowerCase());
   function stepTyping(now, dt) {
     if (reduced) return false;
@@ -253,16 +276,19 @@ export async function mountLaptop(wrap) {
     if (pop) { pop[1] += dt / 0.9; dirty = true; if (pop[1] >= 1) pop = null; }
     if (typed >= ANSWER.length) {
       hold += dt;
-      if (hold > 3) { typed = 0; hold = 0; nextAt = now + 0.6; dirty = true; }
+      if (hold > 3) { typed = 0; hold = 0; wpm = 0; nextAt = now + 0.6; dirty = true; }
     } else if (now >= nextAt) {
+      if (typed === 0) startAt = now;
       const ch = ANSWER[typed++];
+      // Words per minute the usual way: five characters to a word.
+      if (typed >= 8) wpm = Math.round((typed / 5) / ((now - startAt) / 60));
       const k = keyIndex(ch);
       if (k >= 0) model.press[k] = 1;
       if (screen.markEnds.includes(typed)) pop = [typed, 0];
-      nextAt = now + (ch === ' ' ? 0.11 : 0.06) + Math.random() * 0.07 + (/[,.]/.test(ch) ? 0.25 : 0);
+      nextAt = now + (ch === ' ' ? 0.16 : 0.12) + Math.random() * 0.08 + (/[,.]/.test(ch) ? 0.3 : 0);
       dirty = true;
     }
-    if (dirty) screen.draw(typed, pop);
+    if (dirty) screen.draw(typed, pop, wpm);
     let pressed = false;
     for (let i = 0; i < model.press.length; i++) if (model.press[i] > 0) { model.press[i] = Math.max(0, model.press[i] - dt * 5); pressed = true; }
     if (pressed) model.placeKeys();
@@ -271,27 +297,28 @@ export async function mountLaptop(wrap) {
 
   // ---- drag to turn, with a little inertia; it drifts back to rest when left alone
   let yaw = REST.yaw, pitch = REST.pitch, vYaw = 0, vPitch = 0, dragging = false, lastX = 0, lastY = 0, idle = 0, moved = true;
-  const clampPitch = p => Math.min(0.75, Math.max(-0.1, p));
-  const onDown = e => { dragging = true; lastX = e.clientX; lastY = e.clientY; vYaw = vPitch = 0; cv.setPointerCapture(e.pointerId); cv.classList.add('grabbing'); };
+  const clampPitch = p => Math.min(REST.pitch + 0.85, Math.max(REST.pitch - 0.22, p));
+  const onDown = e => { dragging = true; lastX = e.clientX; lastY = e.clientY; vYaw = vPitch = 0; wrap.setPointerCapture(e.pointerId); wrap.classList.add('grabbing'); };
   const onMove = e => {
     if (!dragging) return;
     const dx = e.clientX - lastX, dy = e.clientY - lastY; lastX = e.clientX; lastY = e.clientY;
     vYaw = dx * 0.011; vPitch = dy * 0.007;
     yaw += vYaw; pitch = clampPitch(pitch + vPitch); idle = 0; moved = true;
   };
-  const onUp = () => { dragging = false; cv.classList.remove('grabbing'); };
+  const onUp = () => { dragging = false; wrap.classList.remove('grabbing'); };
   const onKey = e => {
     const step = { ArrowLeft: [-0.25, 0], ArrowRight: [0.25, 0], ArrowUp: [0, -0.12], ArrowDown: [0, 0.12] }[e.key];
     if (!step) return;
     e.preventDefault(); e.stopPropagation();
     yaw += step[0]; pitch = clampPitch(pitch + step[1]); idle = 0; moved = true;
   };
-  cv.addEventListener('pointerdown', onDown);
-  cv.addEventListener('pointermove', onMove);
-  cv.addEventListener('pointerup', onUp);
-  cv.addEventListener('pointercancel', onUp);
-  cv.addEventListener('keydown', onKey);
-  cv.addEventListener('dblclick', () => { yaw = REST.yaw; pitch = REST.pitch; moved = true; });
+  const onDbl = () => { yaw = REST.yaw; pitch = REST.pitch; moved = true; kick(); };
+  wrap.addEventListener('pointerdown', onDown);
+  wrap.addEventListener('pointermove', onMove);
+  wrap.addEventListener('pointerup', onUp);
+  wrap.addEventListener('pointercancel', onUp);
+  wrap.addEventListener('keydown', onKey);
+  wrap.addEventListener('dblclick', onDbl);
 
   function stepPose(dt) {
     if (dragging) return true;
@@ -315,9 +342,15 @@ export async function mountLaptop(wrap) {
   // ---- size, visibility, loop
   const resize = () => {
     const w = wrap.clientWidth || 340, h = Math.round(w * 0.8);
-    renderer.setSize(w, h, false);
-    cv.style.width = w + 'px'; cv.style.height = h + 'px';
-    camera.aspect = w / h; camera.updateProjectionMatrix();
+    wrap.style.height = h + 'px';
+    // Bleed on every side; the slot keeps the original framing via a view offset.
+    const bl = Math.round(w * 0.45), br = Math.round(w * 0.45), bt = Math.round(h * 0.45), bb = Math.round(h * 0.35);
+    const cw = w + bl + br, ch = h + bt + bb;
+    renderer.setSize(cw, ch, false);
+    Object.assign(cv.style, { width: cw + 'px', height: ch + 'px', left: -bl + 'px', top: -bt + 'px' });
+    camera.aspect = w / h;
+    camera.setViewOffset(w, h, -bl, -bt, cw, ch);
+    camera.updateProjectionMatrix();
     moved = true;
   };
   const ro = new ResizeObserver(resize);
@@ -333,12 +366,16 @@ export async function mountLaptop(wrap) {
     const now = performance.now() / 1000, dt = Math.min(0.05, now - last); last = now;
     const typing = stepTyping(now, dt);
     const posing = stepPose(dt);
-    pivot.rotation.set(pitch, yaw, 0, 'YXZ');
+    // Left/right spins the laptop on the desk; up/down orbits the camera, so the shadow stays put.
+    pivot.rotation.y = yaw;
+    const elev = CAM_ELEV + (pitch - REST.pitch);
+    camera.position.set(0, 0.8 + CAM_DIST * Math.sin(elev), CAM_DIST * Math.cos(elev));
+    camera.lookAt(0, 0.8, 0);
     renderer.render(scene, camera);
     if (typing || posing || dragging || moved) { moved = false; raf = requestAnimationFrame(frame); }
   }
   function kick() { if (!raf) { last = performance.now() / 1000; raf = requestAnimationFrame(frame); } }
-  ['pointerdown', 'pointermove', 'keydown'].forEach(t => cv.addEventListener(t, kick));
+  ['pointerdown', 'pointermove', 'keydown'].forEach(t => wrap.addEventListener(t, kick));
   const onVis = () => { if (!document.hidden) kick(); };
   document.addEventListener('visibilitychange', onVis);
 
@@ -350,6 +387,8 @@ export async function mountLaptop(wrap) {
     cancelAnimationFrame(raf); raf = 0;
     ro.disconnect(); io.disconnect();
     document.removeEventListener('visibilitychange', onVis);
+    [['pointerdown', onDown], ['pointermove', onMove], ['pointerup', onUp], ['pointercancel', onUp], ['keydown', onKey], ['dblclick', onDbl], ['pointerdown', kick], ['pointermove', kick], ['keydown', kick]]
+      .forEach(([t, f]) => wrap.removeEventListener(t, f));
     scene.traverse(o => { o.geometry?.dispose(); if (o.material && o.material.map) o.material.map.dispose(); o.material?.dispose?.(); });
     model.dispose();
     renderer.dispose();
