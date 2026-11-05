@@ -15,6 +15,14 @@
           "term": "Scalar and vector quantities",
           "prompt": "State what is meant by a scalar quantity and by a vector quantity.",
           "answer": "A scalar quantity has magnitude only, whereas a vector quantity has magnitude and direction.",
+          "marks": [
+            [
+              "scalar quantity has magnitude only"
+            ],
+            [
+              "vector quantity has magnitude and direction"
+            ]
+          ],
           "sources": [
             {
               "paper": "9702/21",
@@ -33,6 +41,11 @@
           "term": "Vector quantity",
           "prompt": "State what is meant by a vector quantity.",
           "answer": "A vector quantity is a quantity with magnitude and direction.",
+          "marks": [
+            [
+              "magnitude and direction"
+            ]
+          ],
           "sources": [
             {
               "paper": "9702/22",
@@ -51,6 +64,11 @@
           "term": "Precision",
           "prompt": "State what is meant by precision.",
           "answer": "Precision is determined by the range in the measurements, so precise measurements have a small range.",
+          "marks": [
+            [
+              "determined by the range in the measurements"
+            ]
+          ],
           "alt": [
             "precise results are close together / have little scatter"
           ],
@@ -83,6 +101,11 @@
           "term": "Accuracy",
           "prompt": "Explain the difference between accuracy and precision. (accuracy)",
           "answer": "Accuracy is the closeness of the measured value to the true value.",
+          "marks": [
+            [
+              "closeness of the measured value to the true value"
+            ]
+          ],
           "alt": [
             "the (average of the) measurements is close to the true value"
           ],
@@ -109,6 +132,12 @@
           "term": "Systematic error",
           "prompt": "Describe the effect of systematic errors when using a micrometer screw gauge to take readings for the diameter of a wire.",
           "answer": "A systematic error makes the reading larger or smaller than the true reading by a constant amount.",
+          "marks": [
+            [
+              "larger or smaller than the true reading",
+              "by a constant amount"
+            ]
+          ],
           "notes": "Only one mark scheme found. Wording from the micrometer question.",
           "sources": [
             {
@@ -123,6 +152,11 @@
           "term": "Random error",
           "prompt": "Describe the effect of random errors when using a micrometer screw gauge to take readings for the diameter of a wire.",
           "answer": "A random error causes scatter in the readings about the true reading.",
+          "marks": [
+            [
+              "scatter in the readings about the true reading"
+            ]
+          ],
           "notes": "Only one mark scheme found. Wording from the micrometer question.",
           "sources": [
             {
@@ -143,6 +177,11 @@
           "term": "Displacement",
           "prompt": "Define displacement.",
           "answer": "Displacement is the distance in a specified direction from a point.",
+          "marks": [
+            [
+              "distance in a specified direction"
+            ]
+          ],
           "alt": [
             "distance from a (reference) point in a given direction",
             "distance (from the point) in a straight line in a given direction"
@@ -175,6 +214,11 @@
           "term": "Speed",
           "prompt": "Define speed.",
           "answer": "Speed is distance divided by time.",
+          "marks": [
+            [
+              "distance divided by time"
+            ]
+          ],
           "notes": "Only one mark scheme found (2015, asked together with velocity).",
           "sources": [
             {
@@ -189,6 +233,11 @@
           "term": "Velocity",
           "prompt": "Define velocity.",
           "answer": "Velocity is the rate of change of displacement.",
+          "marks": [
+            [
+              "rate of change of displacement"
+            ]
+          ],
           "alt": [
             "change in displacement / time (taken)"
           ],
@@ -230,6 +279,11 @@
           "term": "Acceleration",
           "prompt": "Define acceleration.",
           "answer": "Acceleration is the rate of change of velocity.",
+          "marks": [
+            [
+              "rate of change of velocity"
+            ]
+          ],
           "alt": [
             "change in velocity / time (taken)"
           ],
@@ -272,6 +326,11 @@
           "term": "Mass",
           "prompt": "State what is meant by the mass of a body.",
           "answer": "Mass is the property of a body that resists changes in motion.",
+          "marks": [
+            [
+              "property of a body that resists changes in motion"
+            ]
+          ],
           "alt": [
             "mass is the quantity of matter in a body"
           ],
@@ -289,6 +348,12 @@
           "term": "Newton's first law of motion",
           "prompt": "State Newton's first law of motion.",
           "answer": "A body continues at rest or at constant velocity unless acted on by a resultant force.",
+          "marks": [
+            [
+              "continues at rest or at constant velocity",
+              "unless acted on by a resultant force"
+            ]
+          ],
           "alt": [
             "a body/mass/object continues (at rest or) at constant/uniform velocity unless acted on by a resultant force"
           ],
@@ -315,6 +380,11 @@
           "term": "Newton's second law of motion",
           "prompt": "State Newton's second law of motion.",
           "answer": "The resultant force is proportional to the rate of change of momentum.",
+          "marks": [
+            [
+              "resultant force is proportional to the rate of change of momentum"
+            ]
+          ],
           "alt": [
             "(resultant) force is equal to the rate of change of momentum"
           ],
@@ -352,6 +422,16 @@
           "term": "Newton's third law of motion",
           "prompt": "State Newton's third law of motion.",
           "answer": "The force on body A by body B is equal in magnitude and opposite in direction to the force on body B by body A.",
+          "marks": [
+            [
+              "force on body A by body B",
+              "equal in magnitude"
+            ],
+            [
+              "opposite in direction",
+              "force on body B by body A"
+            ]
+          ],
           "notes": "s21/22 2(b) and s18/23 3(d) ask how the law applies to a collision, with the same two points.",
           "sources": [
             {
@@ -376,6 +456,11 @@
           "term": "Force",
           "prompt": "Define force.",
           "answer": "Force is the rate of change of momentum.",
+          "marks": [
+            [
+              "rate of change of momentum"
+            ]
+          ],
           "sources": [
             {
               "paper": "9702/22",
@@ -404,6 +489,11 @@
           "term": "Linear momentum",
           "prompt": "Define linear momentum.",
           "answer": "Momentum is the product of mass and velocity.",
+          "marks": [
+            [
+              "product of mass and velocity"
+            ]
+          ],
           "alt": [
             "mass x velocity"
           ],
@@ -435,6 +525,14 @@
           "term": "Principle of conservation of momentum",
           "prompt": "State the principle of conservation of momentum.",
           "answer": "The total momentum of a system of bodies is constant provided no resultant external force acts on the system.",
+          "marks": [
+            [
+              "total momentum of a system of bodies is constant"
+            ],
+            [
+              "no resultant external force"
+            ]
+          ],
           "alt": [
             "total momentum before = total momentum after for an isolated system / no (resultant) external force"
           ],
@@ -477,6 +575,11 @@
           "term": "Elastic collision",
           "prompt": "State what is meant by an elastic collision.",
           "answer": "In an elastic collision there is no loss of kinetic energy.",
+          "marks": [
+            [
+              "no loss of kinetic energy"
+            ]
+          ],
           "alt": [
             "the total kinetic energy before the collision is equal to the total kinetic energy after the collision"
           ],
@@ -504,6 +607,11 @@
           "term": "Density",
           "prompt": "Define density.",
           "answer": "Density is mass per unit volume.",
+          "marks": [
+            [
+              "mass per unit volume"
+            ]
+          ],
           "alt": [
             "mass / volume"
           ],
@@ -535,6 +643,11 @@
           "term": "Pressure",
           "prompt": "Define pressure.",
           "answer": "Pressure is force per unit area normal to the force.",
+          "marks": [
+            [
+              "force per unit area"
+            ]
+          ],
           "alt": [
             "force / area (normal to the force)"
           ],
@@ -556,6 +669,11 @@
           "term": "Centre of gravity",
           "prompt": "State what is meant by the centre of gravity of an object.",
           "answer": "The centre of gravity is the point where all the weight of the object is taken to act.",
+          "marks": [
+            [
+              "point where all the weight of the object is taken to act"
+            ]
+          ],
           "alt": [
             "the point where (all) the weight (of the body) seems to act"
           ],
@@ -597,6 +715,14 @@
           "term": "Moment of a force",
           "prompt": "Define the moment of a force about a point.",
           "answer": "The moment of a force about a point is the force multiplied by the perpendicular distance of the line of action of the force from the point.",
+          "marks": [
+            [
+              "force multiplied by the perpendicular distance"
+            ],
+            [
+              "line of action of the force from the point"
+            ]
+          ],
           "alt": [
             "product of the force and the perpendicular distance to/from a point/pivot"
           ],
@@ -628,6 +754,14 @@
           "term": "Torque of a couple",
           "prompt": "Define the torque of a couple.",
           "answer": "The torque of a couple is one of the forces multiplied by the perpendicular distance between the forces.",
+          "marks": [
+            [
+              "one of the forces multiplied by"
+            ],
+            [
+              "perpendicular distance between the forces"
+            ]
+          ],
           "notes": "Only asked in the 2013 papers within the range searched.",
           "sources": [
             {
@@ -647,6 +781,14 @@
           "term": "Principle of moments",
           "prompt": "State the principle of moments.",
           "answer": "For a body in rotational equilibrium, the sum of the clockwise moments about a point equals the sum of the anticlockwise moments about the same point.",
+          "marks": [
+            [
+              "body in rotational equilibrium"
+            ],
+            [
+              "sum of the clockwise moments about a point equals the sum of the anticlockwise moments about the same point"
+            ]
+          ],
           "sources": [
             {
               "paper": "9702/23",
@@ -681,6 +823,11 @@
           "term": "Work done",
           "prompt": "State what is meant by work done.",
           "answer": "Work done is force multiplied by displacement in the direction of the force.",
+          "marks": [
+            [
+              "force multiplied by displacement in the direction of the force"
+            ]
+          ],
           "alt": [
             "force x distance moved in the direction of the force"
           ],
@@ -722,6 +869,11 @@
           "term": "Kinetic energy",
           "prompt": "State what is meant by kinetic energy.",
           "answer": "Kinetic energy is the energy of a mass due to its motion.",
+          "marks": [
+            [
+              "energy of a mass due to its motion"
+            ]
+          ],
           "alt": [
             "energy (of a mass/body) due to motion/speed/velocity"
           ],
@@ -748,6 +900,11 @@
           "term": "Gravitational potential energy",
           "prompt": "State what is meant by gravitational potential energy.",
           "answer": "Gravitational potential energy is the energy of a mass due to its position in a gravitational field.",
+          "marks": [
+            [
+              "energy of a mass due to its position in a gravitational field"
+            ]
+          ],
           "sources": [
             {
               "paper": "9702/21",
@@ -771,6 +928,11 @@
           "term": "Elastic potential energy",
           "prompt": "State what is meant by elastic potential energy.",
           "answer": "Elastic potential energy is the energy stored in a body due to its extension or compression.",
+          "marks": [
+            [
+              "energy stored in a body due to its extension or compression"
+            ]
+          ],
           "alt": [
             "the energy stored in a body due to extension / compression / change in shape"
           ],
@@ -792,6 +954,11 @@
           "term": "Power",
           "prompt": "Define power.",
           "answer": "Power is work done per unit time.",
+          "marks": [
+            [
+              "work done per unit time"
+            ]
+          ],
           "alt": [
             "work (done) / time (taken)",
             "energy (transferred) / time (taken)"
@@ -835,6 +1002,11 @@
           "term": "Stress",
           "prompt": "Define stress.",
           "answer": "Stress is force per unit cross-sectional area.",
+          "marks": [
+            [
+              "force per unit cross-sectional area"
+            ]
+          ],
           "alt": [
             "force / (cross-sectional) area"
           ],
@@ -861,6 +1033,11 @@
           "term": "Strain",
           "prompt": "Define strain.",
           "answer": "Strain is extension per unit original length.",
+          "marks": [
+            [
+              "extension per unit original length"
+            ]
+          ],
           "alt": [
             "extension / original length"
           ],
@@ -897,6 +1074,11 @@
           "term": "Young modulus",
           "prompt": "Define the Young modulus.",
           "answer": "The Young modulus is stress divided by strain.",
+          "marks": [
+            [
+              "stress divided by strain"
+            ]
+          ],
           "alt": [
             "stress per unit strain"
           ],
@@ -928,6 +1110,11 @@
           "term": "Hooke's law",
           "prompt": "State Hooke's law.",
           "answer": "The extension is proportional to the applied force, provided the limit of proportionality is not exceeded.",
+          "marks": [
+            [
+              "extension is proportional to the applied force"
+            ]
+          ],
           "alt": [
             "force/load is proportional to extension/compression (provided proportionality limit is not exceeded)"
           ],
@@ -954,6 +1141,14 @@
           "term": "Elastic extension",
           "prompt": "Explain what is meant by a wire being extended elastically.",
           "answer": "A wire that is extended elastically returns to its original length when the load is removed.",
+          "marks": [
+            [
+              "returns to its original length"
+            ],
+            [
+              "when the load is removed"
+            ]
+          ],
           "notes": "Only one mark scheme found (2013). Mark scheme says original length, not shape.",
           "sources": [
             {
@@ -974,6 +1169,12 @@
           "term": "Displacement (of a wave)",
           "prompt": "For a progressive wave, state what is meant by displacement.",
           "answer": "Displacement is the distance of a particle or point on the wave from its equilibrium position.",
+          "marks": [
+            [
+              "distance",
+              "from its equilibrium position"
+            ]
+          ],
           "alt": [
             "distance from the equilibrium / undisturbed position"
           ],
@@ -995,6 +1196,11 @@
           "term": "Amplitude",
           "prompt": "For a progressive wave, state what is meant by amplitude.",
           "answer": "Amplitude is the maximum displacement of a particle or point on the wave.",
+          "marks": [
+            [
+              "maximum displacement"
+            ]
+          ],
           "alt": [
             "the maximum distance (of particle/point on wave) from the equilibrium position"
           ],
@@ -1026,6 +1232,11 @@
           "term": "Period",
           "prompt": "For a progressive wave, state what is meant by its period.",
           "answer": "The period is the time for one oscillation.",
+          "marks": [
+            [
+              "time for one oscillation"
+            ]
+          ],
           "alt": [
             "time for one vibration / one cycle",
             "time between adjacent wavefronts passing the same point"
@@ -1048,6 +1259,11 @@
           "term": "Frequency",
           "prompt": "For a progressive wave, state what is meant by the frequency.",
           "answer": "The frequency is the number of oscillations per unit time.",
+          "marks": [
+            [
+              "number of oscillations per unit time"
+            ]
+          ],
           "alt": [
             "the number of wavefronts / crests passing a fixed point per unit time"
           ],
@@ -1080,6 +1296,11 @@
           "term": "Wavelength",
           "prompt": "For a progressive wave, state what is meant by wavelength.",
           "answer": "The wavelength is the distance moved by the wavefront during one oscillation of the source.",
+          "marks": [
+            [
+              "distance moved by the wavefront during one oscillation"
+            ]
+          ],
           "alt": [
             "minimum distance between two wavefronts",
             "distance between two adjacent wavefronts"
@@ -1117,6 +1338,12 @@
           "term": "Transverse wave",
           "prompt": "By reference to the direction of propagation of energy, state what is meant by a transverse wave.",
           "answer": "In a transverse wave the oscillations of the particles are perpendicular to the direction of propagation of energy.",
+          "marks": [
+            [
+              "oscillations",
+              "perpendicular to the direction of propagation of energy"
+            ]
+          ],
           "alt": [
             "vibrations/oscillations (of the particles/wave) are perpendicular to the direction of energy propagation"
           ],
@@ -1148,6 +1375,12 @@
           "term": "Longitudinal wave",
           "prompt": "By reference to the direction of propagation of energy, state what is meant by a longitudinal wave.",
           "answer": "In a longitudinal wave the oscillations of the particles are parallel to the direction of propagation of energy.",
+          "marks": [
+            [
+              "oscillations",
+              "parallel to the direction of propagation of energy"
+            ]
+          ],
           "alt": [
             "vibrations/oscillations (of the particles/wave) are parallel to the direction of energy propagation"
           ],
@@ -1184,6 +1417,12 @@
           "term": "Polarisation",
           "prompt": "State the meaning of polarisation.",
           "answer": "Polarisation is when the oscillations are in a single direction, perpendicular to the direction of propagation of the wave.",
+          "marks": [
+            [
+              "oscillations are in a single direction",
+              "perpendicular to the direction of propagation"
+            ]
+          ],
           "alt": [
             "oscillations are in a single plane, which contains the direction of propagation (of the wave)"
           ],
@@ -1201,6 +1440,15 @@
           "term": "Doppler effect",
           "prompt": "State what is meant by the Doppler effect.",
           "answer": "The Doppler effect is the change in the observed frequency when the source moves relative to the observer.",
+          "marks": [
+            [
+              "observed frequency"
+            ],
+            [
+              "change in the",
+              "when the source moves relative to the observer"
+            ]
+          ],
           "notes": "Must refer to the change in observed/apparent frequency.",
           "sources": [
             {
@@ -1226,6 +1474,14 @@
           "term": "Principle of superposition",
           "prompt": "State the principle of superposition.",
           "answer": "When two or more waves meet at a point, the resultant displacement is the sum of the individual displacements.",
+          "marks": [
+            [
+              "two or more waves meet at a point"
+            ],
+            [
+              "resultant displacement is the sum of the individual displacements"
+            ]
+          ],
           "alt": [
             "waves meet/overlap (at a point); (resultant) displacement is the sum of the individual displacements"
           ],
@@ -1267,6 +1523,14 @@
           "term": "Diffraction",
           "prompt": "State what is meant by the diffraction of a wave.",
           "answer": "Diffraction is the spreading of a wave into the geometrical shadow as it passes through an aperture or by an edge.",
+          "marks": [
+            [
+              "spreading of a wave into the geometrical shadow"
+            ],
+            [
+              "passes through an aperture or by an edge"
+            ]
+          ],
           "alt": [
             "wave passes through an aperture or by an edge and spreads"
           ],
@@ -1298,6 +1562,11 @@
           "term": "Interference",
           "prompt": "State what is meant by interference.",
           "answer": "Interference is the sum of the displacements of overlapping waves.",
+          "marks": [
+            [
+              "sum of the displacements of overlapping waves"
+            ]
+          ],
           "alt": [
             "when two (or more) waves superpose/meet/overlap the resultant displacement is the sum of the displacement of each wave"
           ],
@@ -1319,6 +1588,11 @@
           "term": "Coherence",
           "prompt": "State what is meant by coherent waves.",
           "answer": "Coherent waves have a constant phase difference between them.",
+          "marks": [
+            [
+              "constant phase difference"
+            ]
+          ],
           "sources": [
             {
               "paper": "9702/22",
@@ -1357,6 +1631,11 @@
           "term": "Node",
           "prompt": "State what is meant by a node of a stationary wave.",
           "answer": "A node is a position of zero amplitude.",
+          "marks": [
+            [
+              "zero amplitude"
+            ]
+          ],
           "sources": [
             {
               "paper": "9702/22",
@@ -1375,6 +1654,11 @@
           "term": "Antinode",
           "prompt": "State what is meant by an antinode of a stationary wave.",
           "answer": "An antinode is a position of maximum amplitude.",
+          "marks": [
+            [
+              "maximum amplitude"
+            ]
+          ],
           "sources": [
             {
               "paper": "9702/22",
@@ -1399,6 +1683,11 @@
           "term": "Electric current",
           "prompt": "State what is meant by an electric current.",
           "answer": "Electric current is the flow of charge carriers.",
+          "marks": [
+            [
+              "flow of charge carriers"
+            ]
+          ],
           "alt": [
             "movement of charge carriers"
           ],
@@ -1420,6 +1709,11 @@
           "term": "Coulomb",
           "prompt": "Define the coulomb.",
           "answer": "The coulomb is the ampere second.",
+          "marks": [
+            [
+              "ampere second"
+            ]
+          ],
           "sources": [
             {
               "paper": "9702/21",
@@ -1443,6 +1737,11 @@
           "term": "Quantisation of charge",
           "prompt": "State what is meant by quantisation of charge.",
           "answer": "Charge exists only in discrete amounts, which are integral multiples of the elementary charge.",
+          "marks": [
+            [
+              "exists only in discrete amounts"
+            ]
+          ],
           "alt": [
             "charge exists in discrete and equal quantities"
           ],
@@ -1470,6 +1769,11 @@
           "term": "Potential difference",
           "prompt": "Define potential difference.",
           "answer": "Potential difference is the energy transferred from electrical to other forms per unit charge.",
+          "marks": [
+            [
+              "energy transferred from electrical to other forms per unit charge"
+            ]
+          ],
           "alt": [
             "work done / charge"
           ],
@@ -1512,6 +1816,11 @@
           "term": "Volt",
           "prompt": "Define the volt.",
           "answer": "The volt is the joule per coulomb.",
+          "marks": [
+            [
+              "joule per coulomb"
+            ]
+          ],
           "sources": [
             {
               "paper": "9702/21",
@@ -1535,6 +1844,14 @@
           "term": "Electromotive force (e.m.f.)",
           "prompt": "Define the electromotive force (e.m.f.) of a source.",
           "answer": "The e.m.f. of a source is the energy transferred from other forms to electrical energy per unit charge driven around a complete circuit.",
+          "marks": [
+            [
+              "energy transferred from other forms to electrical energy"
+            ],
+            [
+              "per unit charge"
+            ]
+          ],
           "alt": [
             "energy per unit charge"
           ],
@@ -1556,6 +1873,11 @@
           "term": "Resistance",
           "prompt": "Define resistance.",
           "answer": "Resistance is potential difference per unit current.",
+          "marks": [
+            [
+              "potential difference per unit current"
+            ]
+          ],
           "alt": [
             "potential difference / current"
           ],
@@ -1577,6 +1899,11 @@
           "term": "Ohm",
           "prompt": "Define the ohm.",
           "answer": "The ohm is the volt per ampere.",
+          "marks": [
+            [
+              "volt per ampere"
+            ]
+          ],
           "sources": [
             {
               "paper": "9702/21",
@@ -1615,6 +1942,14 @@
           "term": "Ohm's law",
           "prompt": "State Ohm's law.",
           "answer": "The current through a conductor is directly proportional to the potential difference across the conductor, provided that the temperature remains constant.",
+          "marks": [
+            [
+              "current through a conductor is directly proportional to the potential difference"
+            ],
+            [
+              "temperature remains constant"
+            ]
+          ],
           "sources": [
             {
               "paper": "9702/21",
@@ -1639,6 +1974,11 @@
           "term": "Kirchhoff's first law",
           "prompt": "State Kirchhoff's first law.",
           "answer": "The sum of the currents into a junction is equal to the sum of the currents out of the junction.",
+          "marks": [
+            [
+              "sum of the currents into a junction is equal to the sum of the currents out of the junction"
+            ]
+          ],
           "alt": [
             "the (algebraic) sum of the currents at a junction is zero"
           ],
@@ -1680,6 +2020,14 @@
           "term": "Kirchhoff's second law",
           "prompt": "State Kirchhoff's second law.",
           "answer": "The sum of the e.m.f.s is equal to the sum of the potential differences around a closed loop.",
+          "marks": [
+            [
+              "sum of the e.m.f.s is equal to the sum of the potential differences"
+            ],
+            [
+              "around a closed loop"
+            ]
+          ],
           "alt": [
             "the (algebraic) sum of the e.m.f.s and p.d.s is zero around a loop/closed circuit"
           ],
@@ -1727,6 +2075,11 @@
           "term": "Fundamental particle",
           "prompt": "State what is meant by fundamental particle.",
           "answer": "A fundamental particle is a particle with no internal structure, which cannot be broken down into anything smaller.",
+          "marks": [
+            [
+              "particle with no internal structure"
+            ]
+          ],
           "notes": "Only one mark scheme found.",
           "sources": [
             {
@@ -1741,6 +2094,14 @@
           "term": "Isotopes",
           "prompt": "State what is meant by isotopes.",
           "answer": "Isotopes are nuclei having the same number of protons with different numbers of neutrons.",
+          "marks": [
+            [
+              "same number of protons"
+            ],
+            [
+              "different numbers of neutrons"
+            ]
+          ],
           "alt": [
             "different forms of the same element"
           ],
@@ -1764,6 +2125,15 @@
           "term": "Radian",
           "prompt": "Define the radian.",
           "answer": "The radian is the angle subtended at the centre of a circle by an arc equal in length to the radius.",
+          "marks": [
+            [
+              "angle subtended",
+              "arc equal in length to the radius"
+            ],
+            [
+              "at the centre of a circle"
+            ]
+          ],
           "alt": [
             "angle subtended where arc length is equal to radius"
           ],
@@ -1795,6 +2165,11 @@
           "term": "Centripetal acceleration",
           "prompt": "State what is meant by centripetal acceleration.",
           "answer": "Centripetal acceleration is acceleration perpendicular to the velocity.",
+          "marks": [
+            [
+              "acceleration perpendicular to the velocity"
+            ]
+          ],
           "notes": "Only one mark scheme found.",
           "sources": [
             {
@@ -1815,6 +2190,14 @@
           "term": "Field of force",
           "prompt": "State what is meant by a field of force.",
           "answer": "A field of force is a region of space where a particle experiences a force.",
+          "marks": [
+            [
+              "region of space"
+            ],
+            [
+              "where a particle experiences a force"
+            ]
+          ],
           "sources": [
             {
               "paper": "9702/42",
@@ -1843,6 +2226,11 @@
           "term": "Gravitational field strength",
           "prompt": "Define gravitational field strength.",
           "answer": "Gravitational field strength is force per unit mass.",
+          "marks": [
+            [
+              "force per unit mass"
+            ]
+          ],
           "notes": "Also asked as 'Define gravitational field.' (w22/42 1(a), s23/41 1(a)(i)) with the same answer.",
           "sources": [
             {
@@ -1882,6 +2270,11 @@
           "term": "Line of force (gravitational)",
           "prompt": "State what is meant by a line of force in a gravitational field.",
           "answer": "A line of force in a gravitational field shows the direction of the force on a small test mass.",
+          "marks": [
+            [
+              "direction of the force on a small test mass"
+            ]
+          ],
           "alt": [
             "direction of acceleration of a (small test) mass",
             "path in which a (small test) mass will move"
@@ -1904,6 +2297,14 @@
           "term": "Gravitational potential at a point",
           "prompt": "Define gravitational potential at a point.",
           "answer": "Gravitational potential at a point is the work done per unit mass in bringing a small test mass from infinity to the point.",
+          "marks": [
+            [
+              "work done per unit mass"
+            ],
+            [
+              "bringing a small test mass from infinity"
+            ]
+          ],
           "alt": [
             "work done per unit mass moving mass from infinity (to the point)"
           ],
@@ -1946,6 +2347,15 @@
           "term": "Newton's law of gravitation",
           "prompt": "State Newton's law of gravitation.",
           "answer": "The gravitational force between two point masses is directly proportional to the product of the masses and inversely proportional to the square of their separation.",
+          "marks": [
+            [
+              "proportional to the product of the masses",
+              "inversely proportional to the square of their separation"
+            ],
+            [
+              "between two point masses"
+            ]
+          ],
           "notes": "Must refer to point masses.",
           "sources": [
             {
@@ -1985,6 +2395,17 @@
           "term": "Geostationary orbit",
           "prompt": "State the features of the orbit of a geostationary satellite.",
           "answer": "A geostationary orbit is above the Equator, from west to east, with a period of 24 hours.",
+          "marks": [
+            [
+              "above the Equator"
+            ],
+            [
+              "from west to east"
+            ],
+            [
+              "period of 24 hours"
+            ]
+          ],
           "notes": "Asked as 'state three features' or 'two other features'. Others accepted: one particular orbital radius, circular orbit.",
           "sources": [
             {
@@ -2025,6 +2446,11 @@
           "term": "Thermal equilibrium",
           "prompt": "State what is meant by two objects being in thermal equilibrium.",
           "answer": "Two objects are in thermal equilibrium when there is no net transfer of thermal energy between them.",
+          "marks": [
+            [
+              "no net transfer of thermal energy"
+            ]
+          ],
           "alt": [
             "the bodies are at the same temperature"
           ],
@@ -2051,6 +2477,14 @@
           "term": "Specific heat capacity",
           "prompt": "Define specific heat capacity.",
           "answer": "Specific heat capacity is the thermal energy required per unit mass per unit change in temperature.",
+          "marks": [
+            [
+              "thermal energy required per unit mass"
+            ],
+            [
+              "per unit change in temperature"
+            ]
+          ],
           "alt": [
             "thermal energy per unit mass to cause a temperature change",
             "thermal energy per unit change in temperature"
@@ -2088,6 +2522,14 @@
           "term": "Specific latent heat",
           "prompt": "State what is meant by specific latent heat.",
           "answer": "Specific latent heat is the thermal energy per unit mass required to change the state of a substance at constant temperature.",
+          "marks": [
+            [
+              "thermal energy per unit mass"
+            ],
+            [
+              "change the state of a substance at constant temperature"
+            ]
+          ],
           "sources": [
             {
               "paper": "9702/42",
@@ -2116,6 +2558,14 @@
           "term": "Specific latent heat of fusion",
           "prompt": "Define specific latent heat of fusion.",
           "answer": "Specific latent heat of fusion is the thermal energy per unit mass required to change a substance between solid and liquid at constant temperature.",
+          "marks": [
+            [
+              "thermal energy per unit mass"
+            ],
+            [
+              "change a substance between solid and liquid at constant temperature"
+            ]
+          ],
           "notes": "Only one mark scheme found.",
           "sources": [
             {
@@ -2130,6 +2580,14 @@
           "term": "Specific latent heat of vaporisation",
           "prompt": "Define specific latent heat of vaporisation.",
           "answer": "Specific latent heat of vaporisation is the thermal energy per unit mass required to change a substance between liquid and gas at constant temperature.",
+          "marks": [
+            [
+              "thermal energy per unit mass"
+            ],
+            [
+              "change a substance between liquid and gas at constant temperature"
+            ]
+          ],
           "notes": "Only one mark scheme found.",
           "sources": [
             {
@@ -2150,6 +2608,14 @@
           "term": "Ideal gas",
           "prompt": "State what is meant by an ideal gas.",
           "answer": "An ideal gas is a gas that obeys pV proportional to T for all values of p, V and T, where T is the thermodynamic temperature.",
+          "marks": [
+            [
+              "obeys pV proportional to T"
+            ],
+            [
+              "T is the thermodynamic temperature"
+            ]
+          ],
           "alt": [
             "a gas that obeys pV = constant x T",
             "gas obeys pV/T = constant"
@@ -2193,6 +2659,11 @@
           "term": "Avogadro constant",
           "prompt": "State what is meant by the Avogadro constant.",
           "answer": "The Avogadro constant is the number of particles per unit amount of substance.",
+          "marks": [
+            [
+              "number of particles per unit amount of substance"
+            ]
+          ],
           "alt": [
             "the number of atoms in 12 g of carbon-12"
           ],
@@ -2219,6 +2690,14 @@
           "term": "Mole",
           "prompt": "State what is meant by a mole.",
           "answer": "A mole is the amount of substance that contains the same number of particles as there are atoms in 12 g of carbon-12.",
+          "marks": [
+            [
+              "amount of substance"
+            ],
+            [
+              "same number of particles as there are atoms in 12 g of carbon-12"
+            ]
+          ],
           "notes": "Only one mark scheme found.",
           "sources": [
             {
@@ -2239,6 +2718,14 @@
           "term": "Internal energy",
           "prompt": "State what is meant by the internal energy of a system.",
           "answer": "The internal energy of a system is the sum of the potential energy and kinetic energy of its molecules, which are in random motion.",
+          "marks": [
+            [
+              "sum of the potential energy and kinetic energy of its molecules"
+            ],
+            [
+              "random motion"
+            ]
+          ],
           "notes": "Must have both potential and kinetic energy and refer to random motion.",
           "sources": [
             {
@@ -2278,6 +2765,15 @@
           "term": "First law of thermodynamics",
           "prompt": "State the first law of thermodynamics.",
           "answer": "The increase in internal energy of a system is equal to the work done on the system plus the energy transferred to the system by heating.",
+          "marks": [
+            [
+              "increase in internal energy",
+              "work done on the system"
+            ],
+            [
+              "energy transferred to the system by heating"
+            ]
+          ],
           "notes": "Only one mark scheme found. Symbols to identify: U increase in internal energy, q heating, W work done on system.",
           "sources": [
             {
@@ -2298,6 +2794,14 @@
           "term": "Simple harmonic motion",
           "prompt": "State what is meant by simple harmonic motion.",
           "answer": "Simple harmonic motion is motion in which the acceleration is directly proportional to the displacement and is in the opposite direction to the displacement.",
+          "marks": [
+            [
+              "acceleration is directly proportional to the displacement"
+            ],
+            [
+              "opposite direction to the displacement"
+            ]
+          ],
           "alt": [
             "acceleration is always directed towards a fixed point"
           ],
@@ -2339,6 +2843,11 @@
           "term": "Angular frequency",
           "prompt": "State, by reference to simple harmonic motion, what is meant by angular frequency.",
           "answer": "Angular frequency is 2 pi multiplied by the frequency, or 2 pi divided by the period.",
+          "marks": [
+            [
+              "2 pi multiplied by the frequency"
+            ]
+          ],
           "alt": [
             "2 pi f",
             "2 pi / T"
@@ -2361,6 +2870,12 @@
           "term": "Natural frequency",
           "prompt": "Explain what is meant by the natural frequency of vibration of a system.",
           "answer": "The natural frequency is the frequency at which a body vibrates when there is no resultant external resistive force or driving force acting on it.",
+          "marks": [
+            [
+              "frequency at which a body vibrates",
+              "no resultant external resistive force or driving force"
+            ]
+          ],
           "alt": [
             "frequency at which an object vibrates when free to do so"
           ],
@@ -2382,6 +2897,14 @@
           "term": "Damping",
           "prompt": "State what is meant by damping.",
           "answer": "Damping is the loss of total energy of an oscillating system due to resistive forces.",
+          "marks": [
+            [
+              "loss of total energy"
+            ],
+            [
+              "due to resistive forces"
+            ]
+          ],
           "notes": "The 2019 mark scheme accepted 'loss of energy'.",
           "sources": [
             {
@@ -2401,6 +2924,14 @@
           "term": "Resonance",
           "prompt": "State what is meant by resonance.",
           "answer": "Resonance is when an object oscillates at maximum amplitude when the driving frequency equals its natural frequency.",
+          "marks": [
+            [
+              "oscillates at maximum amplitude"
+            ],
+            [
+              "driving frequency equals its natural frequency"
+            ]
+          ],
           "sources": [
             {
               "paper": "9702/42",
@@ -2430,6 +2961,11 @@
           "term": "Electric field",
           "prompt": "State what is meant by an electric field.",
           "answer": "An electric field is a region of space where a charge experiences an electric force.",
+          "marks": [
+            [
+              "region of space where a charge experiences an electric force"
+            ]
+          ],
           "alt": [
             "region where a (stationary) charge experiences an (electric) force"
           ],
@@ -2456,6 +2992,11 @@
           "term": "Electric field strength",
           "prompt": "Define electric field strength.",
           "answer": "Electric field strength is the force per unit positive charge.",
+          "marks": [
+            [
+              "force per unit positive charge"
+            ]
+          ],
           "notes": "Also asked as 'Define electric field.' (s23/41 1(a)(ii), s24/41 5(a)) with the same answer.",
           "sources": [
             {
@@ -2500,6 +3041,11 @@
           "term": "Electric field line",
           "prompt": "State what is meant by a field line (line of force) in an electric field.",
           "answer": "A field line in an electric field is the path or direction in which a free positive charge will move.",
+          "marks": [
+            [
+              "path or direction in which a free positive charge will move"
+            ]
+          ],
           "notes": "Only one mark scheme found.",
           "sources": [
             {
@@ -2514,6 +3060,14 @@
           "term": "Electric potential at a point",
           "prompt": "Define electric potential at a point.",
           "answer": "Electric potential at a point is the work done per unit charge in moving a positive charge from infinity to the point.",
+          "marks": [
+            [
+              "work done per unit charge"
+            ],
+            [
+              "moving a positive charge from infinity"
+            ]
+          ],
           "alt": [
             "work done per unit charge moving positive charge from infinity (to the point)"
           ],
@@ -2556,6 +3110,14 @@
           "term": "Coulomb's law",
           "prompt": "State Coulomb's law.",
           "answer": "The electric force between two point charges is directly proportional to the product of the charges and inversely proportional to the square of their separation.",
+          "marks": [
+            [
+              "directly proportional to the product of the charges"
+            ],
+            [
+              "inversely proportional to the square of their separation"
+            ]
+          ],
           "notes": "Must refer to point charges.",
           "sources": [
             {
@@ -2601,6 +3163,16 @@
           "term": "Capacitance",
           "prompt": "Define the capacitance of a parallel plate capacitor.",
           "answer": "Capacitance is the charge on one plate per unit potential difference between the plates.",
+          "marks": [
+            [
+              "charge",
+              "per unit potential difference"
+            ],
+            [
+              "on one plate",
+              "between the plates"
+            ]
+          ],
           "alt": [
             "charge / potential difference"
           ],
@@ -2654,6 +3226,14 @@
           "term": "Magnetic field",
           "prompt": "State what is meant by a magnetic field.",
           "answer": "A magnetic field is a region of space where a force is exerted on a moving charge, a current-carrying conductor or a magnetic pole.",
+          "marks": [
+            [
+              "region of space where a force is exerted"
+            ],
+            [
+              "moving charge, a current-carrying conductor or a magnetic pole"
+            ]
+          ],
           "sources": [
             {
               "paper": "9702/42",
@@ -2692,6 +3272,15 @@
           "term": "Magnetic flux density",
           "prompt": "Define magnetic flux density.",
           "answer": "Magnetic flux density is the force per unit current per unit length on a wire carrying current perpendicular to the magnetic field.",
+          "marks": [
+            [
+              "force per unit current",
+              "per unit length"
+            ],
+            [
+              "current perpendicular to the magnetic field"
+            ]
+          ],
           "notes": "Three points: force per unit length, force per unit current, current perpendicular to the field. Any two scores 1 mark.",
           "sources": [
             {
@@ -2726,6 +3315,14 @@
           "term": "Tesla",
           "prompt": "Define the tesla.",
           "answer": "The tesla is one newton per ampere per metre, where the current is perpendicular to the magnetic field.",
+          "marks": [
+            [
+              "newton per ampere per metre"
+            ],
+            [
+              "current is perpendicular to the magnetic field"
+            ]
+          ],
           "sources": [
             {
               "paper": "9702/41",
@@ -2744,6 +3341,14 @@
           "term": "Magnetic flux",
           "prompt": "Define magnetic flux.",
           "answer": "Magnetic flux is the product of the magnetic flux density and the area, where the area is perpendicular to the magnetic field.",
+          "marks": [
+            [
+              "product of the magnetic flux density and the area"
+            ],
+            [
+              "area is perpendicular to the magnetic field"
+            ]
+          ],
           "alt": [
             "flux density x area x sin(angle) where the angle is between the field direction and the plane of the area"
           ],
@@ -2775,6 +3380,15 @@
           "term": "Magnetic flux linkage",
           "prompt": "Define magnetic flux linkage.",
           "answer": "Magnetic flux linkage is the product of the magnetic flux density, the area perpendicular to the field and the number of turns.",
+          "marks": [
+            [
+              "product of the magnetic flux density",
+              "number of turns"
+            ],
+            [
+              "area perpendicular to the field"
+            ]
+          ],
           "sources": [
             {
               "paper": "9702/42",
@@ -2793,6 +3407,14 @@
           "term": "Faraday's law of electromagnetic induction",
           "prompt": "State Faraday's law of electromagnetic induction.",
           "answer": "The induced e.m.f. is directly proportional to the rate of change of magnetic flux linkage.",
+          "marks": [
+            [
+              "induced e.m.f. is directly proportional to the rate"
+            ],
+            [
+              "of change of magnetic flux linkage"
+            ]
+          ],
           "alt": [
             "induced e.m.f. is proportional to the rate of cutting of magnetic flux"
           ],
@@ -2835,6 +3457,14 @@
           "term": "Lenz's law",
           "prompt": "State Lenz's law of electromagnetic induction.",
           "answer": "The direction of the induced e.m.f. is such as to oppose the change that caused it.",
+          "marks": [
+            [
+              "direction of the induced e.m.f."
+            ],
+            [
+              "oppose the change that caused it"
+            ]
+          ],
           "sources": [
             {
               "paper": "9702/42",
@@ -2869,6 +3499,14 @@
           "term": "Root-mean-square (r.m.s.) value",
           "prompt": "By reference to heating effect, explain what is meant by the root-mean-square (r.m.s.) value of an alternating current.",
           "answer": "The r.m.s. value of an alternating current is the steady direct current that produces the same heating effect as the alternating current.",
+          "marks": [
+            [
+              "steady direct current"
+            ],
+            [
+              "same heating effect"
+            ]
+          ],
           "alt": [
             "for an alternating voltage: the constant voltage that dissipates the same power as the mean power of the alternating voltage (w21/41 9(a))"
           ],
@@ -2886,6 +3524,11 @@
           "term": "Frequency of an alternating current",
           "prompt": "State what is meant by the frequency of an alternating current.",
           "answer": "The frequency of an alternating current is the number of cycles per unit time.",
+          "marks": [
+            [
+              "number of cycles per unit time"
+            ]
+          ],
           "notes": "Only one mark scheme found.",
           "sources": [
             {
@@ -2900,6 +3543,11 @@
           "term": "Rectification",
           "prompt": "State what is meant by rectification.",
           "answer": "Rectification is the conversion from a.c. to d.c.",
+          "marks": [
+            [
+              "conversion from a.c. to d.c."
+            ]
+          ],
           "sources": [
             {
               "paper": "9702/41",
@@ -2924,6 +3572,14 @@
           "term": "Photon",
           "prompt": "State what is meant by a photon.",
           "answer": "A photon is a packet or quantum of energy of electromagnetic radiation.",
+          "marks": [
+            [
+              "packet or quantum of energy"
+            ],
+            [
+              "electromagnetic radiation"
+            ]
+          ],
           "alt": [
             "discrete amount of energy of electromagnetic radiation"
           ],
@@ -2975,6 +3631,14 @@
           "term": "Photoelectric effect",
           "prompt": "State what is meant by the photoelectric effect.",
           "answer": "The photoelectric effect is the emission of electrons from a surface when electromagnetic radiation is incident on it.",
+          "marks": [
+            [
+              "emission of electrons"
+            ],
+            [
+              "electromagnetic radiation is incident"
+            ]
+          ],
           "alt": [
             "electromagnetic radiation/photons incident on a surface cause emission of electrons"
           ],
@@ -2996,6 +3660,14 @@
           "term": "Work function energy",
           "prompt": "State what is meant by work function energy.",
           "answer": "Work function energy is the minimum energy required to remove an electron from the surface of a metal.",
+          "marks": [
+            [
+              "energy required to remove an electron"
+            ],
+            [
+              "from the surface"
+            ]
+          ],
           "alt": [
             "energy to remove an electron with zero kinetic energy"
           ],
@@ -3027,6 +3699,14 @@
           "term": "Threshold frequency",
           "prompt": "State what is meant by the threshold frequency.",
           "answer": "The threshold frequency is the minimum frequency of electromagnetic radiation that causes emission of electrons from a surface.",
+          "marks": [
+            [
+              "minimum frequency of electromagnetic radiation"
+            ],
+            [
+              "emission of electrons from a surface"
+            ]
+          ],
           "notes": "Must say electromagnetic radiation or photon, not just light.",
           "sources": [
             {
@@ -3051,6 +3731,11 @@
           "term": "de Broglie wavelength",
           "prompt": "State what is meant by the de Broglie wavelength.",
           "answer": "The de Broglie wavelength is the wavelength associated with a moving particle.",
+          "marks": [
+            [
+              "wavelength associated with a moving particle"
+            ]
+          ],
           "alt": [
             "a particle has a wavelength associated with it that depends on its momentum"
           ],
@@ -3078,6 +3763,14 @@
           "term": "Mass defect",
           "prompt": "Define mass defect.",
           "answer": "Mass defect is the difference between the mass of a nucleus and the total mass of its nucleons when they are infinitely separated.",
+          "marks": [
+            [
+              "difference between the mass of a nucleus and the total mass of its nucleons"
+            ],
+            [
+              "infinitely separated"
+            ]
+          ],
           "sources": [
             {
               "paper": "9702/42",
@@ -3096,6 +3789,14 @@
           "term": "Binding energy of a nucleus",
           "prompt": "State what is meant by the binding energy of a nucleus.",
           "answer": "The binding energy of a nucleus is the energy required to separate the nucleons of the nucleus to infinity.",
+          "marks": [
+            [
+              "energy required to separate the nucleons"
+            ],
+            [
+              "to infinity"
+            ]
+          ],
           "alt": [
             "energy released when nucleons come together from infinity to form a nucleus"
           ],
@@ -3137,6 +3838,14 @@
           "term": "Radioactive decay",
           "prompt": "State what is meant by radioactive decay.",
           "answer": "Radioactive decay is the spontaneous emission of particles or radiation from an unstable nucleus.",
+          "marks": [
+            [
+              "spontaneous emission of particles or radiation"
+            ],
+            [
+              "from an unstable nucleus"
+            ]
+          ],
           "sources": [
             {
               "paper": "9702/41",
@@ -3165,6 +3874,11 @@
           "term": "Random decay",
           "prompt": "Explain what is meant by the decay being random.",
           "answer": "Random decay means it cannot be predicted when a particular nucleus will decay.",
+          "marks": [
+            [
+              "cannot be predicted when a particular nucleus will decay"
+            ]
+          ],
           "alt": [
             "there is a constant probability of decay of a nucleus"
           ],
@@ -3196,6 +3910,11 @@
           "term": "Spontaneous decay",
           "prompt": "Explain what is meant by the decay being spontaneous.",
           "answer": "Spontaneous decay means the decay of a nucleus is not affected by external environmental factors.",
+          "marks": [
+            [
+              "not affected by external environmental factors"
+            ]
+          ],
           "sources": [
             {
               "paper": "9702/41",
@@ -3219,6 +3938,14 @@
           "term": "Radioactive decay constant",
           "prompt": "Define radioactive decay constant.",
           "answer": "The decay constant is the probability of decay of a nucleus per unit time.",
+          "marks": [
+            [
+              "probability of decay of a nucleus"
+            ],
+            [
+              "per unit time"
+            ]
+          ],
           "alt": [
             "the fraction of the (number of undecayed) nuclei that will decay per unit time"
           ],
@@ -3255,6 +3982,11 @@
           "term": "Half-life",
           "prompt": "Define half-life.",
           "answer": "Half-life is the time for the activity of a sample to halve.",
+          "marks": [
+            [
+              "time for the activity of a sample to halve"
+            ]
+          ],
           "alt": [
             "time for the number of atoms/nuclei to be reduced to one half"
           ],
@@ -3286,6 +4018,14 @@
           "term": "Nuclear fusion",
           "prompt": "State what is meant by nuclear fusion.",
           "answer": "Nuclear fusion is when two small nuclei join together to form one larger nucleus.",
+          "marks": [
+            [
+              "two small nuclei join together"
+            ],
+            [
+              "form one larger nucleus"
+            ]
+          ],
           "sources": [
             {
               "paper": "9702/41",
@@ -3314,6 +4054,11 @@
           "term": "Nuclear fission",
           "prompt": "State what is meant by a nuclear fission reaction.",
           "answer": "Nuclear fission is when a single large nucleus divides to form smaller nuclei.",
+          "marks": [
+            [
+              "single large nucleus divides to form smaller nuclei"
+            ]
+          ],
           "notes": "Extra marking points seen: initiated by neutron bombardment; binding energy per nucleon increases.",
           "sources": [
             {
@@ -3339,6 +4084,14 @@
           "term": "Specific acoustic impedance",
           "prompt": "Define specific acoustic impedance.",
           "answer": "Specific acoustic impedance of a medium is the product of the density of the medium and the speed of ultrasound in the medium.",
+          "marks": [
+            [
+              "product of the density of the medium and the speed"
+            ],
+            [
+              "of ultrasound in the medium"
+            ]
+          ],
           "notes": "Must give both density and speed in the medium.",
           "sources": [
             {
@@ -3378,6 +4131,14 @@
           "term": "Attenuation of an ultrasound wave",
           "prompt": "State what is meant by the attenuation of an ultrasound wave.",
           "answer": "Attenuation is the reduction in power or intensity of the wave as it passes through the medium.",
+          "marks": [
+            [
+              "reduction in power or intensity"
+            ],
+            [
+              "as it passes through the medium"
+            ]
+          ],
           "alt": [
             "loss of intensity/amplitude/power (of the wave)"
           ],
@@ -3399,6 +4160,12 @@
           "term": "Tracer",
           "prompt": "Explain what is meant by a tracer.",
           "answer": "A tracer is a substance containing radioactive nuclei that is introduced into the body and absorbed by the tissue being studied.",
+          "marks": [
+            [
+              "substance containing radioactive nuclei",
+              "introduced into the body"
+            ]
+          ],
           "sources": [
             {
               "paper": "9702/42",
@@ -3417,6 +4184,12 @@
           "term": "Annihilation",
           "prompt": "Explain what is meant by annihilation.",
           "answer": "Annihilation is a particle interacting with its antiparticle so that mass is converted into energy.",
+          "marks": [
+            [
+              "particle interacting with its antiparticle",
+              "mass is converted into energy"
+            ]
+          ],
           "notes": "Only one mark scheme found.",
           "sources": [
             {
@@ -3431,6 +4204,11 @@
           "term": "Sharpness of an X-ray image",
           "prompt": "State, for an X-ray image, what is meant by sharpness.",
           "answer": "Sharpness is the ease with which edges can be distinguished.",
+          "marks": [
+            [
+              "ease with which edges can be distinguished"
+            ]
+          ],
           "notes": "Only one mark scheme found.",
           "sources": [
             {
@@ -3445,6 +4223,14 @@
           "term": "Contrast of an X-ray image",
           "prompt": "State what is meant by the contrast of an X-ray image.",
           "answer": "Contrast is the difference in degrees of blackening between structures.",
+          "marks": [
+            [
+              "difference in degrees of blackening"
+            ],
+            [
+              "between structures"
+            ]
+          ],
           "sources": [
             {
               "paper": "9702/41",
@@ -3469,6 +4255,11 @@
           "term": "Luminosity of a star",
           "prompt": "State what is meant by the luminosity of a star.",
           "answer": "The luminosity of a star is the total power of radiation emitted by the star.",
+          "marks": [
+            [
+              "total power of radiation emitted"
+            ]
+          ],
           "sources": [
             {
               "paper": "9702/42",
@@ -3492,6 +4283,11 @@
           "term": "Standard candle",
           "prompt": "State what is meant by a standard candle.",
           "answer": "A standard candle is an astronomical object of known luminosity.",
+          "marks": [
+            [
+              "object of known luminosity"
+            ]
+          ],
           "sources": [
             {
               "paper": "9702/42",
@@ -3510,6 +4306,15 @@
           "term": "Redshift",
           "prompt": "State what is meant by redshift.",
           "answer": "Redshift is the apparent wavelength of light from a star being greater than the known value, due to the movement of the star away from the observer.",
+          "marks": [
+            [
+              "apparent wavelength",
+              "greater than the known value"
+            ],
+            [
+              "movement of the star away from the observer"
+            ]
+          ],
           "notes": "Only one mark scheme found.",
           "sources": [
             {
@@ -3524,6 +4329,15 @@
           "term": "Hubble's law",
           "prompt": "State Hubble's law.",
           "answer": "The speed of recession of a galaxy is directly proportional to its distance from the observer.",
+          "marks": [
+            [
+              "is directly proportional to its distance"
+            ],
+            [
+              "speed of recession of a galaxy",
+              "from the observer"
+            ]
+          ],
           "notes": "Identify the symbols: speed is the recession speed of the galaxy and distance is the distance of the galaxy from the observer.",
           "sources": [
             {
@@ -3543,6 +4357,11 @@
           "term": "Wien's displacement law",
           "prompt": "State Wien's displacement law.",
           "answer": "The wavelength of maximum intensity is inversely proportional to the thermodynamic temperature.",
+          "marks": [
+            [
+              "wavelength of maximum intensity is inversely proportional to the thermodynamic temperature"
+            ]
+          ],
           "sources": [
             {
               "paper": "9702/41",

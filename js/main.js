@@ -520,6 +520,9 @@ function viewPlay(q) {
         if (!ok) sfx.miss();
         else if (state.settings.keySound) sfx.key();
       },
+      points: state.settings.markPoints ? item.points : null,
+      showKeys: S.mode === 'train',
+      onPoint: n => { if (sound()) sfx.mark(n); },
       onProgress: s => {
         live.innerHTML = s.pos ? `<span><b>${Math.round(s.wpm)}</b> wpm</span><span><b>${pct(s.acc)}</b> right</span>` : '';
         bar.style.width = pct(s.pos / s.total);
@@ -564,11 +567,13 @@ function viewPlay(q) {
         ${res.combo >= 2 ? `<span class="pill combo-pill">${ICON.flame} ${res.combo} in a row, ×${res.comboMult.toFixed(1)}</span>` : ''}
         ${res.bonus ? `<span class="pill bonus ${res.bonus.kind}">${ICON.bolt} ${esc(res.bonus.label)}</span>` : ''}
         ${res.bestWpm ? `<span class="pill pb">New best: ${res.bestWpm} WPM</span>` : ''}
+        ${r.points?.total ? `<span class="pill marks ${r.points.earned === r.points.total ? 'full' : ''}">${r.points.earned}/${r.points.total} ${r.points.total === 1 ? 'mark' : 'marks'}</span>` : ''}
         ${res.stageAfter > res.stageBefore ? `<span class="pill up">↑ ${esc(STAGES[res.stageAfter])}</span>` : ''}
         ${res.stageAfter < res.stageBefore ? `<span class="pill down">↓ ${esc(STAGES[res.stageAfter])}</span>` : ''}
         ${comboBroke ? `<span class="pill lost">Combo lost</span>` : ''}
       </div>
       <p class="rstats"><span><b>${Math.round(res.wpm)}</b> WPM</span><span><b>${pct(res.acc)}</b> keys right</span>${res.corrected ? `<span><b>${res.corrected}</b> fixed</span>` : ''}${res.uncorrected ? `<span class="bad"><b>${res.uncorrected}</b> left wrong</span>` : ''}${r.hints ? `<span><b>${r.hints}</b> ${r.hints === 1 ? 'hint' : 'hints'}</span>` : ''}</p>
+      ${r.points?.missed?.length ? `<p class="tip missed">Missed ${r.points.missed.length === 1 ? 'mark' : 'marks'}: ${r.points.missed.map(m => `<q>${esc(m)}</q>`).join(', ')}</p>` : ''}
       ${res.uncorrected ? '<p class="tip">Red letters show what the answer should say. Press <kbd>R</kbd> to nail it.</p>' : ''}
       ${extra}
       <div class="result-actions">
@@ -863,6 +868,7 @@ function viewSettings() {
     <section class="panel settings">
       <h2>Typing</h2>
       ${choice('practiceLevel', 'Practice mode hides', Object.entries(LEVELS).map(([k, l]) => [k, l.label]))}
+      ${toggle('markPoints', 'Show mark points', 'The phrases that earn marks in the mark scheme are underlined, and light up with +1 as you type each one correctly. Physics definitions for now.')}
       ${toggle('stopOnError', 'Stop on mistakes', 'A wrong key is rejected, so you must type the right one before moving on.')}
       ${toggle('ignoreCase', 'Ignore capital letters', 'Accept “a” for “A”. Pseudocode keywords should still be in capitals in the exam.')}
       ${toggle('ignorePunctuation', 'Skip punctuation', 'Commas, full stops and brackets are typed for you.')}

@@ -37,7 +37,7 @@ export function chooseMask(text, ratio, seed) {
 }
 
 export class Typer {
-  constructor(host, { text, kind, mask, settings, onProgress, onDone, onKey }) {
+  constructor(host, { text, kind, mask, settings, onProgress, onDone, onKey, points, showKeys, onPoint }) {
     this.host = host;
     this.text = text;
     this.kind = kind;
@@ -46,6 +46,12 @@ export class Typer {
     this.onProgress = onProgress || (() => {});
     this.onDone = onDone || (() => {});
     this.onKeyResult = onKey || (() => {});
+    // Mark points: phrases that earn a mark. Each lights up once all its phrases are typed right.
+    this.points = points || [];
+    this.showKeys = !!showKeys;
+    this.onPoint = onPoint || (() => {});
+    this.earned = this.points.map(() => false);
+    this.everEarned = this.points.map(() => false);
     this.typed = [];        // per position: { c, ok, auto }
     this.revealed = new Set();
     this.hints = 0;
@@ -114,6 +120,13 @@ export class Typer {
     input.setAttribute('spellcheck', 'false');
     input.setAttribute('enterkeyhint', this.kind === 'code' ? 'enter' : 'done');
 
+    for (const p of this.points) {
+      for (const [a, b] of p.ranges) for (let i = a; i < b; i++) {
+        this.spans[i]?.classList.add('pt-in');
+        if (this.showKeys) this.spans[i]?.classList.add('pt-key');
+      }
+    }
+
     this.host.replaceChildren(sheet, input);
     this.sheet = sheet;
     this.input = input;
@@ -134,12 +147,43 @@ export class Typer {
       s.classList.toggle('cur', i === pos && !this.finished);
       s.classList.toggle('shown', this.revealed.has(i));
     }
+    this.paintPoints(pos);
     const cur = this.spans[pos];
     if (cur) {
       const r = cur.getBoundingClientRect();
       if (r.bottom > window.innerHeight - 40 || r.top < 80) cur.scrollIntoView({ block: 'center', behavior: 'smooth' });
     }
     this.onProgress(this.stats());
+  }
+
+  /** A mark is earned when every phrase it needs is typed correctly without hints. */
+  pointEarned(p, pos) {
+    return p.ranges.every(([a, b]) => {
+      if (b > pos) return false;
+      for (let i = a; i < b; i++) if (!this.typed[i]?.ok || this.revealed.has(i)) return false;
+      return true;
+    });
+  }
+
+  paintPoints(pos) {
+    this.points.forEach((p, k) => {
+      const got = this.pointEarned(p, pos);
+      if (got === this.earned[k]) return;
+      this.earned[k] = got;
+      for (const [a, b] of p.ranges) for (let i = a; i < b; i++) this.spans[i]?.classList.toggle('pt', got);
+      const last = this.spans[p.end - 1];
+      last?.querySelector('.pt-tag')?.remove();
+      if (got && last) {
+        const tag = document.createElement('i');
+        tag.className = 'pt-tag';
+        tag.textContent = '+1';
+        last.append(tag);
+      }
+      if (got && !this.everEarned[k]) {
+        this.everEarned[k] = true;
+        this.onPoint(this.earned.filter(Boolean).length, this.points.length);
+      }
+    });
   }
 
   // ---- input --------------------------------------------------------------
@@ -323,6 +367,11 @@ export class Typer {
     const left = this.typed.filter(t => !t.ok).length;
     const auto = this.typed.filter(t => t.auto).length;
     this.paint();
+    // Flag the marks that weren't scored.
+    this.points.forEach((p, k) => {
+      if (this.earned[k]) return;
+      for (const [a, b] of p.ranges) for (let i = a; i < b; i++) this.spans[i]?.classList.add('pt-miss');
+    });
     this.onDone({
       chars: this.text.length - auto,
       keystrokes: this.keystrokes,
@@ -331,6 +380,11 @@ export class Typer {
       ms: Math.max(this.elapsed(), 300),
       hints: this.hints,
       revealed: this.revealed.size,
+      points: {
+        earned: this.earned.filter(Boolean).length,
+        total: this.points.length,
+        missed: this.points.filter((p, k) => !this.earned[k]).map(p => p.ranges.map(([a, b]) => this.text.slice(a, b)).join(' ... ')),
+      },
     });
   }
 

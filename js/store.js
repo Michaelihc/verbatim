@@ -12,6 +12,7 @@ export const DEFAULT_SETTINGS = {
   sound: true,            // chimes when an answer lands
   keySound: false,        // a soft tick on every key
   autoAdvance: true,      // clean answers roll straight into the next one
+  markPoints: true,       // highlight the phrases that earn marks
   textSize: 'm',          // s | m | l
   layout: 'overlay',      // overlay: type over the text | stacked: type on a line below it
   practiceLevel: 'gaps',  // gaps | more | recall

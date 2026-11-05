@@ -52,6 +52,12 @@ export const sfx = {
     const notes = big ? [0, 4, 7, 12, 16, 19, 24, 28] : [0, 7, 12, 19];
     notes.forEach((n, i) => tone(semis(1046, n), { at: 0.25 + i * 0.045, dur: 0.12, type: 'sine', gain: 0.03 }));
   },
+  /** A quick two-note "ding" for each mark scored, a step higher for each one in the answer. */
+  mark(n = 1) {
+    const root = semis(784, (n - 1) * 3); // G5 upwards
+    tone(root, { dur: 0.09, type: 'triangle', gain: 0.04 });
+    tone(semis(root, 7), { at: 0.06, dur: 0.16, type: 'sine', gain: 0.035 });
+  },
   comboLost() { tone(330, { dur: 0.25, type: 'sine', gain: 0.035, to: 160 }); },
   fanfare() {
     [[0, 0], [4, 0.1], [7, 0.2], [12, 0.3], [7, 0.42], [12, 0.52]].forEach(([n, at]) => tone(semis(523, n), { at, dur: 0.28, type: 'triangle', gain: 0.05 }));

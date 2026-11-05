@@ -5,6 +5,7 @@
 import { readFileSync, readdirSync, statSync, existsSync } from 'node:fs';
 import { join, relative, sep } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { resolveMarks } from '../js/packs.js';
 
 const root = join(fileURLToPath(import.meta.url), '..', '..');
 const errors = [];
@@ -55,6 +56,10 @@ for (const entry of index.packs) {
           const lead = line.match(/^ */)[0].length;
           if (lead % 4) warn(`${at}: indentation on line ${n + 1} is not a multiple of 4`);
         });
+      }
+      if (it.marks !== undefined) {
+        if (!Array.isArray(it.marks) || !it.marks.length) err(`${at}: "marks" must be a non-empty list of marks`);
+        else for (const p of resolveMarks(a, it.marks, pack.kind).problems) err(`${at}: ${p}`);
       }
       if (a.length > 800) warn(`${at}: answer is ${a.length} characters; consider splitting`);
     }
