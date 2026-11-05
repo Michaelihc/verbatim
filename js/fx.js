@@ -60,7 +60,8 @@ export const sfx = {
 
 // ---- confetti ---------------------------------------------------------------
 
-const COLORS = ['#7c5cff', '#ff4fa3', '#ffb020', '#22c55e', '#38bdf8', '#ff7a1a'];
+// Highlighter colours, plus white and biro blue.
+const COLORS = ['#ffe83d', '#7cf2a2', '#ff8fc8', '#ffc773', '#ffffff', '#2a3fd8'];
 let canvas = null;
 let parts = [];
 let raf = 0;

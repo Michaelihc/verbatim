@@ -195,7 +195,7 @@ function viewHome() {
   const cont = lastUnit ? {
     href: playHref(lastPack, lastUnit, last.mode === 'practice' ? 'practice' : 'train'),
     title: lastUnit === '*' ? `All ${kindOf(lastPack).noun}` : lastUnit.title,
-    sub: `${MODES[last.mode]?.label || 'Train'} · ${lastPack.title}`,
+    sub: `${MODES[last.mode]?.label || 'Train'}, ${lastPack.title}`,
   } : null;
   const due = dueItems().length;
   const today = state.days[dayKey()] || 0;
@@ -204,18 +204,18 @@ function viewHome() {
 
   main.innerHTML = `
     <section class="hero">
-      <h1>${state.totals.items ? 'Ready for another run?' : 'Learn it word for word.'}</h1>
-      <p class="lede">Pick a chapter and start typing. <b>Train</b> shows you the answer. <b>Practice</b> hides words so you recall them.</p>
+      <h1>Type it until you know it.</h1>
+      <p class="lede">Train with the answer in front of you. Practise with words hidden. Every answer is worded the way the mark scheme accepts it.</p>
       <div class="search" role="search">
         ${ICON.search}
-        <input id="q" type="search" placeholder="Jump to anything: tesla, flux, stack…" autocomplete="off" spellcheck="false" aria-label="Search topics and terms">
+        <input id="q" type="search" placeholder="Find a term, like tesla or flux" autocomplete="off" spellcheck="false" aria-label="Search topics and terms">
         <kbd>/</kbd>
       </div>
       <div class="results" id="results" hidden></div>
       <div class="quick">
         ${cont ? `<a class="quick-card go" href="${cont.href}" id="continue">
           <span class="qc-icon">${ICON.play}</span>
-          <span class="qc-text"><small>Continue · ${esc(cont.sub)}</small><b>${esc(cont.title)}</b></span>
+          <span class="qc-text"><small>Continue: ${esc(cont.sub)}</small><b>${esc(cont.title)}</b></span>
           <kbd>Enter</kbd>
         </a>` : ''}
         ${due ? `<a class="quick-card due" href="#/play?review=1">
@@ -243,22 +243,22 @@ function viewHome() {
       <div class="tabs" role="tablist" aria-label="Subject">
         ${subjects.map(s => `<button role="tab" class="tab" data-subject="${esc(s)}" aria-selected="${s === subject}">${esc(s)}</button>`).join('')}
       </div>
-      <div class="chips" role="tablist" aria-label="Pack">
-        ${packIn(subject).map(p => `<button role="tab" class="chip-btn" data-pack="${esc(p.id)}" aria-selected="${p.id === packId}">${esc(kindOf(p).many)}<span>${p.itemCount}</span></button>`).join('')}
-      </div>
       <div class="shelf-head">
-        <p>${esc(pack.description || '')}</p>
+        <div class="chips" role="tablist" aria-label="Pack">
+          ${packIn(subject).map(p => `<button role="tab" class="chip-btn" data-pack="${esc(p.id)}" aria-selected="${p.id === packId}">${esc(kindOf(p).many)}<span>${p.itemCount}</span></button>`).join('')}
+        </div>
         <div class="row">
           <a class="btn small" href="${playHref(pack, '*', 'train')}">${ICON.shuffle} Shuffle all</a>
         </div>
+        <p class="shelf-desc">${esc(pack.description || '')}</p>
       </div>
-      <ul class="chapters">
+      <ol class="chapters">
         ${pack.units.map(u => {
           const p = unitProgress(pack, u);
           return `<li class="chap" style="--h:${hueOf(pack, u)}">
             <a class="chap-top" href="#/c/${enc(pack.id)}/${enc(u.id)}">
               <span class="chap-title">${esc(u.title)}</span>
-              <span class="chap-meta">${plural(p.n, kindOf(pack).one.toLowerCase().replace('pseudocode', 'answer'))}${p.mastered ? ` · ${p.mastered} mastered` : p.started ? ` · ${p.started} started` : ''}</span>
+              <span class="chap-meta">${plural(p.n, kindOf(pack).one.toLowerCase().replace('pseudocode', 'answer'))}${p.mastered ? `, ${p.mastered} mastered` : p.started ? `, ${p.started} started` : ''}</span>
             </a>
             <span class="chap-bar" title="${pct(p.share)} mastered"><i style="width:${pct(p.share)}"></i></span>
             <div class="chap-actions">
@@ -267,7 +267,7 @@ function viewHome() {
             </div>
           </li>`;
         }).join('')}
-      </ul>`;
+      </ol>`;
     shelf.querySelectorAll('[data-subject]').forEach(b => b.addEventListener('click', () => {
       subject = b.dataset.subject;
       packId = packIn(subject)[0]?.id;
@@ -291,12 +291,12 @@ function viewHome() {
     if (results.hidden) return;
     results.innerHTML = (chapters.length || items.length) ? `
       ${chapters.map(({ pack, unit }) => `<div class="res res-chap" style="--h:${hueOf(pack, unit)}">
-        <a class="res-main" href="#/c/${enc(pack.id)}/${enc(unit.id)}"><b>${esc(unit.title)}</b><small>Chapter · ${esc(pack.title)} · ${unit.items.length}</small></a>
+        <a class="res-main" href="#/c/${enc(pack.id)}/${enc(unit.id)}"><b>${esc(unit.title)}</b><small>Chapter in ${esc(pack.title)}</small></a>
         <a class="btn small train" href="${playHref(pack, unit, 'train')}">${ICON.play} Train</a>
         <a class="btn small practice" href="${playHref(pack, unit, 'practice')}">${ICON.pen} Practice</a>
       </div>`).join('')}
       ${items.map(({ pack, unit, item }) => `<div class="res" style="--h:${hueOf(pack, unit)}">
-        <a class="res-main" href="${playHref(pack, unit, 'train', item)}"><b>${esc(item.term)}</b><small>${esc(kindOf(pack).one)} · ${esc(unit.title)}</small></a>
+        <a class="res-main" href="${playHref(pack, unit, 'train', item)}"><b>${esc(item.term)}</b><small>${esc(unit.title)}</small></a>
         ${item.formula && item.formula !== item.term ? `<span class="res-formula">${formula(item.formula)}</span>` : ''}
         <a class="btn small train" href="${playHref(pack, unit, 'train', item)}">${ICON.play} Train</a>
         <a class="btn small practice" href="${playHref(pack, unit, 'practice', item)}">${ICON.pen} Practice</a>
@@ -327,9 +327,8 @@ function viewChapter(packId, unitId) {
   main.innerHTML = `
     <a class="back" href="#/">← All chapters</a>
     <header class="chap-head" style="--h:${hueOf(pack, unit)}">
-      <p class="eyebrow">${esc(pack.title)}</p>
       <h1>${esc(unit.title)}</h1>
-      <p class="muted">${plural(p.n, kindOf(pack).one.toLowerCase().replace('pseudocode', 'answer'))} · ${p.started} started · ${p.mastered} mastered</p>
+      <p class="muted">${esc(pack.title)}. ${plural(p.n, kindOf(pack).one.toLowerCase().replace('pseudocode', 'answer'))}, ${p.started} started, ${p.mastered} mastered.</p>
       <div class="row big-actions">
         <a class="btn big train" href="${playHref(pack, unit, 'train')}">${ICON.play} Train</a>
         <a class="btn big practice" href="${playHref(pack, unit, 'practice')}">${ICON.pen} Practice</a>
@@ -472,7 +471,7 @@ function viewPlay(q) {
           return `<i class="${i === S.pos && phase !== 'lap' ? 'now' : ''} ${r && i < done ? `r-${r}` : ''}"></i>`;
         }).join('')}</span>`
       : `<span class="lap-bar"><i style="width:${pct(done / n)}"></i></span>`;
-    lapEl.innerHTML = `<span class="lap-label">${S.review ? 'Review' : `Lap ${S.lap}`} · ${Math.min(done, n)}/${n}</span>${dots}`;
+    lapEl.innerHTML = `<span class="lap-label">${S.review ? 'Review' : `Lap ${S.lap}`}</span><span class="lap-count">${Math.min(done, n)}/${n}</span>${dots}`;
   }
 
   function clearAuto() { clearTimeout(autoTimer); autoTimer = 0; card?.querySelector('.auto')?.remove(); }
@@ -522,7 +521,7 @@ function viewPlay(q) {
         else if (state.settings.keySound) sfx.key();
       },
       onProgress: s => {
-        live.innerHTML = s.pos ? `<b>${Math.round(s.wpm)}</b> wpm · <b>${pct(s.acc)}</b>` : '';
+        live.innerHTML = s.pos ? `<span><b>${Math.round(s.wpm)}</b> wpm</span><span><b>${pct(s.acc)}</b> right</span>` : '';
         bar.style.width = pct(s.pos / s.total);
       },
       onDone: r => finish(entry, r, level),
@@ -562,9 +561,9 @@ function viewPlay(q) {
         <span class="verdict-xp">+<b>0</b> XP</span>
       </div>
       <div class="chips-row">
-        ${res.combo >= 2 ? `<span class="pill combo-pill">${ICON.flame} ${res.combo} in a row · ×${res.comboMult.toFixed(1)}</span>` : ''}
+        ${res.combo >= 2 ? `<span class="pill combo-pill">${ICON.flame} ${res.combo} in a row, ×${res.comboMult.toFixed(1)}</span>` : ''}
         ${res.bonus ? `<span class="pill bonus ${res.bonus.kind}">${ICON.bolt} ${esc(res.bonus.label)}</span>` : ''}
-        ${res.bestWpm ? `<span class="pill pb">New best · ${res.bestWpm} WPM</span>` : ''}
+        ${res.bestWpm ? `<span class="pill pb">New best: ${res.bestWpm} WPM</span>` : ''}
         ${res.stageAfter > res.stageBefore ? `<span class="pill up">↑ ${esc(STAGES[res.stageAfter])}</span>` : ''}
         ${res.stageAfter < res.stageBefore ? `<span class="pill down">↓ ${esc(STAGES[res.stageAfter])}</span>` : ''}
         ${comboBroke ? `<span class="pill lost">Combo lost</span>` : ''}
@@ -636,8 +635,8 @@ function viewPlay(q) {
     card = document.createElement('article');
     card.className = 'card lap-card';
     card.innerHTML = `
-      <p class="eyebrow">${S.review ? 'Review' : `Lap ${S.lap}`} complete</p>
-      <h2>${clean === n ? 'Clean sweep!' : clean >= n * 0.7 ? 'Strong lap.' : 'Lap done. Go again?'}</h2>
+      <h2>${clean === n ? 'Clean sweep' : clean >= n * 0.7 ? 'Strong lap' : 'Lap done'}</h2>
+      <p class="muted">${S.review ? 'Every due answer reviewed.' : `Lap ${S.lap} of ${esc(S.title)} is done.`}</p>
       <p class="lap-xp">+<b>${fmt(S.lapXp)}</b> XP</p>
       <ul class="lap-counts">
         ${Object.entries(counts).filter(([, c]) => c).map(([k, c]) => `<li class="r-${k}"><b>${c}</b>${esc(RATINGS[k].label)}</li>`).join('')}
@@ -766,8 +765,8 @@ function viewProgress() {
     <header class="prog-head">
       <div class="lvl-badge"><span>Lv</span><b>${lv.level}</b></div>
       <div>
-        <p class="eyebrow">${esc(titleFor(lv.level))}</p>
         <h1>${fmt(state.xp)} XP</h1>
+        <p class="rank">${esc(titleFor(lv.level))}</p>
         <div class="xpbar"><i style="width:${pct(lv.into / lv.span)}"></i></div>
         <p class="muted">${fmt(lv.toNext)} XP to level ${lv.level + 1}</p>
       </div>

@@ -21,6 +21,7 @@ const SHELL = [
   'fonts/atkinson-700.woff2',
   'fonts/jetbrains-400.woff2',
   'fonts/jetbrains-700.woff2',
+  'fonts/anybody.woff2',
   'icons/icon.svg',
   'icons/icon-192.png',
   'icons/icon-512.png',

@@ -83,7 +83,7 @@ Pages. Stamping the version means every deploy reaches installed copies.
 ## Licence and sources
 
 The code is released under the [MIT licence](LICENSE). The fonts (Atkinson Hyperlegible,
-JetBrains Mono) are under the SIL Open Font License.
+JetBrains Mono, Anybody) are under the SIL Open Font License.
 
 Definition wording is quoted from Cambridge International mark schemes for non-commercial
 revision, with a citation on every item. Equations follow the 9702 syllabus and data and
