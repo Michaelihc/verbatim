@@ -214,9 +214,9 @@ main:focus { outline: none; }
 .hero {
   padding: 1.75rem 0 0.25rem;
   display: grid;
-  grid-template-columns: minmax(0, 1fr) 340px;
+  grid-template-columns: minmax(0, 1fr) 360px;
   grid-template-areas: "copy art" "search quick";
-  column-gap: 2.5rem;
+  column-gap: 1rem;
   row-gap: 1.6rem;
 }
 .hero-copy { grid-area: copy; align-self: center; }
@@ -234,11 +234,9 @@ main:focus { outline: none; }
 .hero .results { max-width: none; }
 /* Hero laptop: the 3D canvas (js/laptop3d.js) replaces the SVG on wide screens. */
 .hero-art-wrap { position: relative; }
-.hero-3d { display: block; cursor: grab; touch-action: none; border-radius: 12px; margin-bottom: -0.6rem; }
+.hero-3d { display: block; cursor: grab; touch-action: none; border-radius: 12px; }
 .hero-3d.grabbing { cursor: grabbing; }
 .hero-3d:focus-visible { outline: 2px solid var(--hl); outline-offset: 4px; }
-.hero-3d-hint { position: absolute; right: 0; bottom: 0; margin: 0; font-size: 0.78rem; font-weight: 700; color: var(--on-desk-3); pointer-events: none; transition: opacity 0.4s; }
-.hero-art-wrap.touched .hero-3d-hint { opacity: 0; }
 /* Hero laptop (SVG). Colours follow the theme tokens. */
 .hero-art { width: 100%; height: auto; display: block; overflow: visible; }
 .hero-art .lap-floor { fill: #050a3a; opacity: 0.35; filter: blur(6px); }
@@ -409,7 +407,7 @@ main:focus { outline: none; }
 .group-head h2 { font: 850 1.35rem/1 var(--display); font-stretch: 115%; margin: 0 0.4rem 0 0; color: var(--on-desk); }
 .group-head .btn { border-color: #0c1445; }
 .terms + .group-head { margin-top: 1.8rem; }
-.terms { list-style: none; margin: 0; padding: 0.3rem 1.6rem; columns: 2 22rem; column-gap: 2.5rem; }
+.terms { list-style: none; margin: 0; padding: 0.3rem 1.6rem; columns: 2 22rem; column-gap: 1rem; }
 .terms li { break-inside: avoid; border-bottom: 1px solid var(--rule); }
 .term { display: flex; align-items: center; gap: 0.75rem; padding: 0.6rem 0; color: var(--ink); text-decoration: none; }
 .term:hover .term-name { background: linear-gradient(transparent 55%, var(--mark) 55%, var(--mark) 92%, transparent 92%); }

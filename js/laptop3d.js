@@ -217,8 +217,8 @@ export async function mountLaptop(wrap) {
 
   const scene = new THREE.Scene();
   const camera = new THREE.PerspectiveCamera(26, 1.4, 0.1, 50);
-  camera.position.set(0, 2.9, 7.4);
-  camera.lookAt(0, 0.86, 0);
+  camera.position.set(0, 2.8, 6.9);
+  camera.lookAt(0, 0.8, 0);
 
   scene.add(new THREE.HemisphereLight(0xffffff, 0x3348e0, 1.5));
   const sun = new THREE.DirectionalLight(0xffffff, 2.6);
@@ -272,7 +272,7 @@ export async function mountLaptop(wrap) {
   // ---- drag to turn, with a little inertia; it drifts back to rest when left alone
   let yaw = REST.yaw, pitch = REST.pitch, vYaw = 0, vPitch = 0, dragging = false, lastX = 0, lastY = 0, idle = 0, moved = true;
   const clampPitch = p => Math.min(0.75, Math.max(-0.1, p));
-  const onDown = e => { dragging = true; lastX = e.clientX; lastY = e.clientY; vYaw = vPitch = 0; cv.setPointerCapture(e.pointerId); cv.classList.add('grabbing'); wrap.classList.add('touched'); };
+  const onDown = e => { dragging = true; lastX = e.clientX; lastY = e.clientY; vYaw = vPitch = 0; cv.setPointerCapture(e.pointerId); cv.classList.add('grabbing'); };
   const onMove = e => {
     if (!dragging) return;
     const dx = e.clientX - lastX, dy = e.clientY - lastY; lastX = e.clientX; lastY = e.clientY;
@@ -284,7 +284,7 @@ export async function mountLaptop(wrap) {
     const step = { ArrowLeft: [-0.25, 0], ArrowRight: [0.25, 0], ArrowUp: [0, -0.12], ArrowDown: [0, 0.12] }[e.key];
     if (!step) return;
     e.preventDefault(); e.stopPropagation();
-    yaw += step[0]; pitch = clampPitch(pitch + step[1]); idle = 0; moved = true; wrap.classList.add('touched');
+    yaw += step[0]; pitch = clampPitch(pitch + step[1]); idle = 0; moved = true;
   };
   cv.addEventListener('pointerdown', onDown);
   cv.addEventListener('pointermove', onMove);
@@ -314,7 +314,7 @@ export async function mountLaptop(wrap) {
 
   // ---- size, visibility, loop
   const resize = () => {
-    const w = wrap.clientWidth || 340, h = Math.round(w * 0.72);
+    const w = wrap.clientWidth || 340, h = Math.round(w * 0.8);
     renderer.setSize(w, h, false);
     cv.style.width = w + 'px'; cv.style.height = h + 'px';
     camera.aspect = w / h; camera.updateProjectionMatrix();
@@ -343,9 +343,6 @@ export async function mountLaptop(wrap) {
   document.addEventListener('visibilitychange', onVis);
 
   wrap.replaceChildren(cv);
-  const hint = document.createElement('p');
-  hint.className = 'hero-3d-hint'; hint.textContent = 'Drag to turn';
-  wrap.append(hint);
   wrap.classList.add('is-3d');
   kick();
 
