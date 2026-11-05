@@ -9,6 +9,7 @@
     {
       "id": "basics",
       "title": "Basics: declarations, selection and iteration",
+      "level": "AS",
       "items": [
         {
           "id": "guide-declarations-constants",
@@ -141,6 +142,7 @@
     {
       "id": "strings-and-arrays",
       "title": "Strings, arrays and records",
+      "level": "AS",
       "items": [
         {
           "id": "guide-array-declare-fill",
@@ -258,6 +260,7 @@
     {
       "id": "procedures-and-functions",
       "title": "Procedures and functions",
+      "level": "AS",
       "items": [
         {
           "id": "guide-procedures",
@@ -390,6 +393,7 @@
     {
       "id": "searching-and-sorting",
       "title": "Searching and sorting",
+      "level": "A2",
       "items": [
         {
           "id": "linear-search-customer",
@@ -508,6 +512,7 @@
     {
       "id": "files",
       "title": "File handling",
+      "level": "AS",
       "items": [
         {
           "id": "guide-text-file-copy",
@@ -626,6 +631,7 @@
     {
       "id": "abstract-data-types",
       "title": "Abstract data types",
+      "level": "A2",
       "items": [
         {
           "id": "stack-declare-initialise",
@@ -786,6 +792,7 @@
     {
       "id": "recursion",
       "title": "Recursion",
+      "level": "A2",
       "items": [
         {
           "id": "recursive-tree-search",
@@ -820,6 +827,7 @@
     {
       "id": "oop",
       "title": "Object-oriented programming",
+      "level": "A2",
       "items": [
         {
           "id": "guide-property-method",
@@ -882,6 +890,7 @@
     {
       "id": "exam-model-answers",
       "title": "Exam model answers",
+      "level": "AS",
       "items": [
         {
           "id": "check-info-function",

@@ -290,9 +290,8 @@ main:focus { outline: none; }
 .shelf-desc { flex-basis: 100%; margin: 0; color: var(--ink-2); font-size: 0.95rem; }
 .shelf-head .row { margin-left: auto; }
 
-.chapters { list-style: none; margin: 0; padding: 0; counter-reset: ch; }
+.chapters { list-style: none; margin: 0; padding: 0; }
 .chap {
-  counter-increment: ch;
   display: grid;
   grid-template-columns: 2.6rem minmax(0, 1fr) 7rem auto;
   align-items: center;
@@ -300,12 +299,31 @@ main:focus { outline: none; }
   padding: 0.7rem 0;
   border-top: 1px solid var(--rule);
 }
-.chap::before {
-  content: counter(ch);
+.chap-num {
   font: 800 1.4rem/1 var(--display); font-stretch: 140%;
   color: var(--ink-3);
   font-variant-numeric: tabular-nums;
 }
+.lvl { display: inline-block; font-size: 0.7rem; font-weight: 700; padding: 0 0.35rem; margin-right: 0.45rem; border-radius: 3px; vertical-align: 0.08em; }
+.lvl-AS { background: var(--card-2); color: var(--ink-2); box-shadow: inset 0 0 0 1px var(--rule); }
+.lvl-A2 { background: var(--ink); color: var(--card); }
+
+/* Grid view: compact tiles, several per row. */
+.chapters.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); gap: 0.6rem; padding-top: 0.8rem; border-top: 1px solid var(--rule); }
+.chapters.grid .chap { grid-template-columns: auto minmax(0, 1fr); grid-template-rows: auto 1fr auto auto; align-items: start; gap: 0.5rem 0.6rem; padding: 0.8rem; border: 1.5px solid var(--rule); border-radius: 6px; border-top-width: 1.5px; }
+.chapters.grid .chap:hover { border-color: var(--ink-3); }
+.chapters.grid .chap-num { font-size: 1.05rem; padding-top: 0.15rem; }
+.chapters.grid .chap-title { font-size: 0.98rem; }
+.chapters.grid .chap-bars, .chapters.grid .chap-actions { grid-column: 1 / -1; }
+.chapters.grid .chap-actions .btn { flex: 1; padding: 0.3rem 0.5rem; font-size: 0.85rem; }
+
+.shelf-tools { display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem; margin-left: auto; }
+.toggle { display: inline-flex; border: 1.5px solid var(--rule); border-radius: 7px; padding: 2px; gap: 2px; }
+.toggle button { font: inherit; font-size: 0.85rem; font-weight: 700; display: inline-flex; align-items: center; gap: 0.3rem; border: 0; background: none; color: var(--ink-2); padding: 0.22rem 0.6rem; border-radius: 5px; cursor: pointer; }
+.toggle button svg { width: 1rem; height: 1rem; }
+.toggle button:hover { color: var(--ink); }
+.toggle button[aria-checked='true'] { background: var(--ink); color: var(--card); }
+.sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 .chap-top { display: grid; gap: 0.05rem; text-decoration: none; color: var(--ink); min-width: 0; }
 .chap-title { font-weight: 700; font-size: 1.05rem; line-height: 1.3; }
 .chap-top:hover .chap-title { background: linear-gradient(transparent 55%, var(--mark) 55%, var(--mark) 92%, transparent 92%); }
@@ -753,8 +771,11 @@ main > h1 { padding-top: 1rem; }
   .shelf-head .row { margin-left: 0; }
   .tabs { gap: 1.1rem; }
   .tab { font-size: 1.05rem; font-stretch: 100%; }
-  .chap { grid-template-columns: 2rem minmax(0, 1fr); padding: 0.75rem 0; }
-  .chap::before { font-size: 1.15rem; }
+  .chapters.list .chap { grid-template-columns: 2rem minmax(0, 1fr); padding: 0.75rem 0; }
+  .chapters.list .chap-num { font-size: 1.15rem; }
+  .chapters.grid { grid-template-columns: 1fr 1fr; }
+  .chapters.grid .chap-actions { flex-direction: column; }
+  .shelf-tools { margin-left: 0; }
   .chap-bars { grid-column: 2; }
   .bar-key .key.mast { margin-left: 0; }
   .chap-actions { grid-column: 2; }
@@ -911,67 +932,7 @@ main > h1 { padding-top: 1rem; }
   .viz-card { padding: 0.9rem 1rem; }
 }
 
-/* ---- front page variants -------------------------------------------------- */
-
-.hero-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 1rem 2rem; flex-wrap: wrap; }
-.variant-switch { display: grid; gap: 0.35rem; justify-items: end; }
-.variant-switch > span { font-size: 0.8rem; font-weight: 700; color: var(--on-desk-2); }
-#variant { margin-top: 1.25rem; }
-.variant { max-width: 900px; }
-.v-empty { background: var(--card); color: var(--ink-2); border-radius: 6px; padding: 1.2rem 1.4rem; box-shadow: var(--shadow-card); margin: 0; }
-
-/* A. Type now */
-.v-type-meta { display: flex; flex-wrap: wrap; align-items: center; gap: 0.4rem 0.9rem; margin-bottom: 0.6rem; font-size: 0.9rem; }
-.v-type-meta .why { font-weight: 700; color: var(--on-desk); }
-.v-type-meta .why::before { content: ''; display: inline-block; width: 0.55rem; height: 0.55rem; border-radius: 2px; background: var(--hl); margin-right: 0.45rem; vertical-align: 0.05em; }
-.v-type-meta .how { display: inline-flex; align-items: center; gap: 0.3rem; color: var(--on-desk-2); }
-.v-type-meta .how svg { width: 0.9rem; height: 0.9rem; }
-.v-type-meta .tally { margin-left: auto; color: var(--on-desk-2); font-variant-numeric: tabular-nums; }
-.home-card .card-foot .live span + span { margin-left: 1rem; }
-.result.compact { margin-top: 0.8rem; padding-top: 0.8rem; }
-.result.compact .verdict-word { font-size: clamp(1.8rem, 1.4rem + 1.8vw, 2.6rem); }
-
-/* B. Exam set */
-.v-set, .v-plan { background: var(--card); color: var(--ink); border-radius: 6px; box-shadow: var(--shadow-card); padding: 1.3rem 1.5rem 1.4rem; }
-.v-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 1rem; margin-bottom: 0.8rem; }
-.v-head h2 { font: 850 1.6rem/1.1 var(--display); font-stretch: 115%; letter-spacing: -0.015em; margin: 0 0 0.35rem; }
-.v-head p { margin: 0; color: var(--ink-2); max-width: 60ch; }
-.v-ring { position: relative; display: grid; place-items: center; flex: none; }
-.v-ring span { position: absolute; font-size: 0.8rem; color: var(--ink-2); font-variant-numeric: tabular-nums; }
-.v-ring b { color: var(--ink); font-size: 1rem; }
-.v-ring .ring-bg { stroke: var(--card-2); }
-.v-ring .ring-fg { stroke: var(--biro); }
-.set-list { list-style: none; margin: 0 0 1rem; padding: 0; counter-reset: q; columns: 2 20rem; column-gap: 2rem; }
-.set-list li { counter-increment: q; break-inside: avoid; border-bottom: 1px solid var(--rule); }
-.set-list a { display: flex; align-items: center; gap: 0.7rem; padding: 0.55rem 0; color: var(--ink); text-decoration: none; }
-.set-list a::before { content: counter(q); font: 800 1rem/1 var(--display); font-stretch: 130%; color: var(--ink-3); min-width: 1.6rem; }
-.set-list .q-main { display: grid; flex: 1; min-width: 0; }
-.set-list .q-main b { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.set-list .q-main small { color: var(--ink-2); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.set-list a:hover .q-main b { background: linear-gradient(transparent 55%, var(--mark) 55%, var(--mark) 92%, transparent 92%); }
-.set-list .q-marks { font-size: 0.78rem; font-weight: 700; color: var(--biro); white-space: nowrap; }
-.v-actions .btn.big { font-size: 1rem; }
-
-/* C. Today's plan */
-.plan-steps { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.6rem; }
-.plan-steps li { display: grid; grid-template-columns: 2.4rem minmax(0, 1fr) auto; align-items: center; gap: 0.9rem; padding: 0.8rem 0.9rem; border-radius: 6px; background: var(--card-2); }
-.plan-steps li.is-empty { opacity: 0.6; }
-.step-n { display: grid; place-items: center; width: 2.2rem; height: 2.2rem; border-radius: 6px; background: var(--card); font: 850 1.1rem/1 var(--display); color: var(--ink-2); box-shadow: inset 0 0 0 1.5px var(--rule); }
-.plan-steps li.complete .step-n { background: var(--mark-good); color: #0c1445; box-shadow: none; }
-.step-main b { font-size: 1.02rem; }
-.step-main p { margin: 0.1rem 0 0.4rem; font-size: 0.9rem; color: var(--ink-2); }
-.step-main small { font-size: 0.8rem; color: var(--ink-2); font-variant-numeric: tabular-nums; }
-.step-bar { display: block; height: 6px; border-radius: 2px; background: var(--card); overflow: hidden; margin-bottom: 0.25rem; max-width: 22rem; }
-.step-bar i { display: block; height: 100%; background: var(--biro); }
-
 .lap-marks { font-size: 1rem; color: var(--ink-2); margin: 0.2rem 0 0; }
 .lap-marks b { color: var(--biro); font-size: 1.3rem; }
 
-@media (max-width: 760px) {
-  .variant-switch { justify-items: start; }
-  .v-set, .v-plan { padding: 1rem 1rem 1.1rem; }
-  .v-head h2 { font-size: 1.35rem; }
-  .plan-steps li { grid-template-columns: 2.2rem minmax(0, 1fr); }
-  .plan-steps li .btn { grid-column: 2; justify-self: start; }
-  .v-type-meta .tally { margin-left: 0; }
 }

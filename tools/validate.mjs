@@ -35,6 +35,7 @@ for (const entry of index.packs) {
   for (const unit of pack.units) {
     if (!unit.id || !unit.title) err(`${where}: unit without id/title`);
     if (unitIds.has(unit.id)) err(`${where}: duplicate unit id ${unit.id}`);
+    if (unit.level !== undefined && !['AS', 'A2'].includes(unit.level)) err(`${where}: unit ${unit.id} level must be "AS" or "A2"`);
     unitIds.add(unit.id);
     for (const it of unit.items || []) {
       const at = `${where} ${it.id || '(no id)'}`;

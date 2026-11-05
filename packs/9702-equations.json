@@ -9,6 +9,7 @@
     {
       "id": "kinematics",
       "title": "Kinematics",
+      "level": "AS",
       "items": [
         {
           "id": "speed",
@@ -123,6 +124,7 @@
     {
       "id": "dynamics",
       "title": "Dynamics",
+      "level": "AS",
       "items": [
         {
           "id": "newtons-second-law",
@@ -185,6 +187,7 @@
     {
       "id": "forces-density-pressure",
       "title": "Forces, density and pressure",
+      "level": "AS",
       "items": [
         {
           "id": "density",
@@ -285,6 +288,7 @@
     {
       "id": "work-energy-power",
       "title": "Work, energy and power",
+      "level": "AS",
       "items": [
         {
           "id": "work-done",
@@ -375,6 +379,7 @@
     {
       "id": "deformation-of-solids",
       "title": "Deformation of solids",
+      "level": "AS",
       "items": [
         {
           "id": "stress",
@@ -451,6 +456,7 @@
     {
       "id": "waves",
       "title": "Waves",
+      "level": "AS",
       "items": [
         {
           "id": "wave-speed",
@@ -532,6 +538,7 @@
     {
       "id": "superposition",
       "title": "Superposition",
+      "level": "AS",
       "items": [
         {
           "id": "double-slit",
@@ -566,6 +573,7 @@
     {
       "id": "electricity",
       "title": "Electricity",
+      "level": "AS",
       "items": [
         {
           "id": "charge",
@@ -689,6 +697,7 @@
     {
       "id": "dc-circuits",
       "title": "D.C. circuits",
+      "level": "AS",
       "items": [
         {
           "id": "resistors-in-series",
@@ -761,6 +770,7 @@
     {
       "id": "motion-in-a-circle",
       "title": "Motion in a circle",
+      "level": "A2",
       "items": [
         {
           "id": "angle-in-radians",
@@ -837,6 +847,7 @@
     {
       "id": "gravitational-fields",
       "title": "Gravitational fields",
+      "level": "A2",
       "items": [
         {
           "id": "gravitational-field-strength",
@@ -923,6 +934,7 @@
     {
       "id": "temperature",
       "title": "Temperature",
+      "level": "A2",
       "items": [
         {
           "id": "specific-heat-capacity",
@@ -971,6 +983,7 @@
     {
       "id": "ideal-gases",
       "title": "Ideal gases",
+      "level": "A2",
       "items": [
         {
           "id": "ideal-gas-moles",
@@ -1052,6 +1065,7 @@
     {
       "id": "thermodynamics",
       "title": "Thermodynamics",
+      "level": "A2",
       "items": [
         {
           "id": "first-law-of-thermodynamics",
@@ -1091,6 +1105,7 @@
     {
       "id": "oscillations",
       "title": "Oscillations",
+      "level": "A2",
       "items": [
         {
           "id": "shm-acceleration",
@@ -1177,6 +1192,7 @@
     {
       "id": "electric-fields",
       "title": "Electric fields",
+      "level": "A2",
       "items": [
         {
           "id": "electric-field-strength",
@@ -1277,6 +1293,7 @@
     {
       "id": "capacitance",
       "title": "Capacitance",
+      "level": "A2",
       "items": [
         {
           "id": "capacitance",
@@ -1382,6 +1399,7 @@
     {
       "id": "magnetic-fields",
       "title": "Magnetic fields and electromagnetic induction",
+      "level": "A2",
       "items": [
         {
           "id": "force-on-a-wire",
@@ -1491,6 +1509,7 @@
     {
       "id": "alternating-currents",
       "title": "Alternating currents",
+      "level": "A2",
       "items": [
         {
           "id": "rms-current",
@@ -1539,6 +1558,7 @@
     {
       "id": "quantum-physics",
       "title": "Quantum physics",
+      "level": "A2",
       "items": [
         {
           "id": "photon-energy",
@@ -1629,6 +1649,7 @@
     {
       "id": "nuclear-physics",
       "title": "Nuclear physics",
+      "level": "A2",
       "items": [
         {
           "id": "mass-energy",
@@ -1701,6 +1722,7 @@
     {
       "id": "medical-physics",
       "title": "Medical physics",
+      "level": "A2",
       "items": [
         {
           "id": "specific-acoustic-impedance",
@@ -1759,6 +1781,7 @@
     {
       "id": "astronomy-and-cosmology",
       "title": "Astronomy and cosmology",
+      "level": "A2",
       "items": [
         {
           "id": "radiant-flux-intensity",

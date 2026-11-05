@@ -9,6 +9,7 @@
     {
       "id": "physical-quantities-and-units",
       "title": "Physical quantities and units",
+      "level": "AS",
       "items": [
         {
           "id": "scalar-and-vector-quantities",
@@ -222,6 +223,7 @@
     {
       "id": "kinematics",
       "title": "Kinematics",
+      "level": "AS",
       "items": [
         {
           "id": "displacement",
@@ -371,6 +373,7 @@
     {
       "id": "dynamics",
       "title": "Dynamics",
+      "level": "AS",
       "items": [
         {
           "id": "mass",
@@ -674,6 +677,7 @@
     {
       "id": "forces-density-pressure",
       "title": "Forces, density and pressure",
+      "level": "AS",
       "items": [
         {
           "id": "density",
@@ -941,6 +945,7 @@
     {
       "id": "work-energy-power",
       "title": "Work, energy and power",
+      "level": "AS",
       "items": [
         {
           "id": "work-done",
@@ -1120,6 +1125,7 @@
     {
       "id": "deformation-of-solids",
       "title": "Deformation of solids",
+      "level": "AS",
       "items": [
         {
           "id": "stress",
@@ -1287,6 +1293,7 @@
     {
       "id": "waves",
       "title": "Waves",
+      "level": "AS",
       "items": [
         {
           "id": "wave-displacement",
@@ -1631,6 +1638,7 @@
     {
       "id": "superposition",
       "title": "Superposition",
+      "level": "AS",
       "items": [
         {
           "id": "principle-of-superposition",
@@ -1955,6 +1963,7 @@
     {
       "id": "electricity",
       "title": "Electricity",
+      "level": "AS",
       "items": [
         {
           "id": "electric-current",
@@ -2246,6 +2255,7 @@
     {
       "id": "dc-circuits",
       "title": "D.C. circuits",
+      "level": "AS",
       "items": [
         {
           "id": "kirchhoffs-first-law",
@@ -2371,6 +2381,7 @@
     {
       "id": "particle-physics",
       "title": "Particle physics",
+      "level": "AS",
       "items": [
         {
           "id": "fundamental-particle",
@@ -2532,6 +2543,7 @@
     {
       "id": "motion-in-a-circle",
       "title": "Motion in a circle",
+      "level": "A2",
       "items": [
         {
           "id": "radian",
@@ -2597,6 +2609,7 @@
     {
       "id": "gravitational-fields",
       "title": "Gravitational fields",
+      "level": "A2",
       "items": [
         {
           "id": "field-of-force",
@@ -2943,6 +2956,7 @@
     {
       "id": "temperature",
       "title": "Temperature",
+      "level": "A2",
       "items": [
         {
           "id": "thermal-equilibrium",
@@ -3124,6 +3138,7 @@
     {
       "id": "ideal-gases",
       "title": "Ideal gases",
+      "level": "A2",
       "items": [
         {
           "id": "ideal-gas",
@@ -3325,6 +3340,7 @@
     {
       "id": "thermodynamics",
       "title": "Thermodynamics",
+      "level": "A2",
       "items": [
         {
           "id": "internal-energy",
@@ -3448,6 +3464,7 @@
     {
       "id": "oscillations",
       "title": "Oscillations",
+      "level": "A2",
       "items": [
         {
           "id": "simple-harmonic-motion",
@@ -3615,6 +3632,7 @@
     {
       "id": "electric-fields",
       "title": "Electric fields",
+      "level": "A2",
       "items": [
         {
           "id": "electric-field",
@@ -3887,6 +3905,7 @@
     {
       "id": "capacitance",
       "title": "Capacitance",
+      "level": "A2",
       "items": [
         {
           "id": "capacitance",
@@ -4021,6 +4040,7 @@
     {
       "id": "magnetic-fields",
       "title": "Magnetic fields and electromagnetic induction",
+      "level": "A2",
       "items": [
         {
           "id": "magnetic-field",
@@ -4364,6 +4384,7 @@
     {
       "id": "alternating-currents",
       "title": "Alternating currents",
+      "level": "A2",
       "items": [
         {
           "id": "rms-value",
@@ -4437,6 +4458,7 @@
     {
       "id": "quantum-physics",
       "title": "Quantum physics",
+      "level": "A2",
       "items": [
         {
           "id": "photon",
@@ -4755,6 +4777,7 @@
     {
       "id": "nuclear-physics",
       "title": "Nuclear physics",
+      "level": "A2",
       "items": [
         {
           "id": "mass-defect",
@@ -5076,6 +5099,7 @@
     {
       "id": "medical-physics",
       "title": "Medical physics",
+      "level": "A2",
       "items": [
         {
           "id": "specific-acoustic-impedance",
@@ -5468,6 +5492,7 @@
     {
       "id": "astronomy-and-cosmology",
       "title": "Astronomy and cosmology",
+      "level": "A2",
       "items": [
         {
           "id": "luminosity",
