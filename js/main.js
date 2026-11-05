@@ -233,13 +233,18 @@ function viewHome() {
 
   main.innerHTML = `
     <section class="hero">
+      <div class="hero-main">
       <h1>Practise typing and recalling definitions at the same time.</h1>
+      <p class="lede">Every answer is worded the way Cambridge mark schemes accept it.</p>
       <div class="search" role="search">
         ${ICON.search}
         <input id="q" type="search" placeholder="Find a term, like tesla or flux" autocomplete="off" spellcheck="false" aria-label="Search topics and terms">
         <kbd>/</kbd>
       </div>
       <div class="results" id="results" hidden></div>
+      </div>
+      <div class="hero-side">
+        ${HERO_ART}
       <div class="quick">
         ${cont ? `<a class="quick-card go" href="${cont.href}" id="continue">
           <span class="qc-icon">${ICON.play}</span>
@@ -250,6 +255,7 @@ function viewHome() {
           <span class="qc-icon">${ICON.replay}</span>
           <span class="qc-text"><small>Spaced review</small><b>${plural(due, 'answer')} due</b></span>
         </a>` : ''}
+      </div>
       </div>
     </section>
     <section class="shelf" id="shelf"></section>
@@ -375,6 +381,34 @@ const symbolsBlock = it => it.formula && it.formula !== it.term ? `
         <p class="symbols-eq"><span>${formula(it.formula)}</span></p>
         <p class="symbols-words">${esc(it.answer)}</p>
       </div>` : '';
+
+// Hero illustration: a stack of the app's index cards, one being typed and highlighted.
+const HERO_ART = `<svg class="hero-art" viewBox="0 0 360 240" role="img" aria-label="An index card with a definition being typed, highlighted and marked">
+  <g transform="rotate(-6 180 120)"><rect x="54" y="38" width="260" height="168" rx="8" fill="var(--card)" opacity="0.35"/></g>
+  <g transform="rotate(3 180 120)"><rect x="50" y="34" width="260" height="168" rx="8" fill="var(--card)" opacity="0.6"/></g>
+  <g transform="rotate(-2 180 120)">
+    <rect x="46" y="30" width="268" height="172" rx="8" fill="var(--card)"/>
+    <rect x="66" y="50" width="96" height="11" rx="3" fill="var(--ink)"/>
+    <rect x="66" y="68" width="150" height="6" rx="3" fill="var(--ink-3)"/>
+    <g stroke="var(--rule)" stroke-width="1.5"><path d="M66 112h228M66 142h228M66 172h228"/></g>
+    <rect x="66" y="94" width="168" height="14" fill="var(--hl)" opacity="0.9"/>
+    <rect x="70" y="97" width="58" height="8" rx="2" fill="var(--ink)"/>
+    <rect x="134" y="97" width="44" height="8" rx="2" fill="var(--ink)"/>
+    <rect x="184" y="97" width="46" height="8" rx="2" fill="var(--ink)"/>
+    <rect x="134" y="110" width="96" height="3" fill="var(--biro)"/>
+    <rect x="238" y="93" width="3" height="18" rx="1" fill="var(--biro)"><animate attributeName="opacity" values="1;0;1" dur="1.1s" repeatCount="indefinite"/></rect>
+    <rect x="246" y="99" width="40" height="7" rx="2" fill="var(--ink-3)" opacity="0.5"/>
+    <rect x="66" y="129" width="120" height="7" rx="2" fill="var(--ink-3)" opacity="0.5"/>
+    <rect x="192" y="129" width="70" height="7" rx="2" fill="var(--ink-3)" opacity="0.5"/>
+    <rect x="66" y="159" width="84" height="7" rx="2" fill="var(--ink-3)" opacity="0.5"/>
+    <rect x="200" y="74" width="34" height="18" rx="4" fill="var(--biro)"/>
+    <text x="217" y="87" text-anchor="middle" font-family="Atkinson, sans-serif" font-weight="700" font-size="12" fill="var(--card)">+1</text>
+  </g>
+  <g transform="translate(286 166) rotate(-8)">
+    <rect x="-30" y="-22" width="60" height="44" rx="8" fill="var(--hl)" stroke="#0c1445" stroke-width="2.5"/>
+    <path d="M-12 1l8 8l16-17" fill="none" stroke="#0c1445" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+</svg>`;
 
 // ---- chapter ----------------------------------------------------------------
 
