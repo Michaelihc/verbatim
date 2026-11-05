@@ -21,7 +21,8 @@ syllabus topic and is tagged when it's printed on the data and formulae list.
 ## How it works
 
 - **Jump straight in.** The home page is the chapter list: pick a subject, a pack and a chapter,
-  then *Train* or *Practice*. Or search for any term ("tesla", "flux", "stack") and start there.
+  then *Train* or *Practice*. Filter by AS or A2, switch between a list and a grid, start a
+  random mix of the pack, or search for any term ("tesla", "flux", "stack") and start there.
 - **Train** shows the answer and you type it. **Practice** hides words (some, most, or all of
   them) and you fill them in. The two are separate: you can train for as long as you like, and
   switch modes at any time from the top of the screen.

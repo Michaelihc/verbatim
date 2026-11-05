@@ -284,7 +284,7 @@ function viewHome() {
           </div>
           <a class="btn small train" href="${playHref(pack, '*', 'train')}${level !== 'all' ? `&level=${level}` : ''}">${ICON.shuffle} Start random</a>
         </div>
-        <p class="bar-key"><span class="key prac"></span>Practice: one lap fills it, and it fades each day you skip the chapter <span class="key mast"></span>Mastery: rises as answers move from Trained to Mastered</p>
+        <p class="bar-key"><span class="key-item"><span class="key prac"></span>Practice<span class="key-more">: one lap fills it, and it fades each day you skip the chapter</span></span><span class="key-item"><span class="key mast"></span>Mastery<span class="key-more">: rises as answers move from Trained to Mastered</span></span></p>
       </div>
       <ol class="chapters ${view}">
         ${units.map(({ u, n }) => {
