@@ -234,9 +234,13 @@ main:focus { outline: none; }
 .hero .results { max-width: none; }
 /* Hero laptop: the 3D canvas (js/laptop3d.js) replaces the SVG on wide screens. */
 .hero-art-wrap { position: relative; }
-.hero-3d { display: block; cursor: grab; touch-action: none; border-radius: 12px; }
-.hero-3d.grabbing { cursor: grabbing; }
-.hero-3d:focus-visible { outline: 2px solid var(--hl); outline-offset: 4px; }
+.hero-art-wrap.is-3d { cursor: grab; touch-action: none; border-radius: 12px; }
+.hero-art-wrap.is-3d.grabbing { cursor: grabbing; }
+.hero-art-wrap.is-3d:focus-visible { outline: 2px solid var(--hl); outline-offset: 4px; }
+.hero-3d { position: absolute; display: block; pointer-events: none; }
+/* The search row sits above the laptop's bleed; the page never scrolls sideways because of it. */
+.hero-search, .hero .quick, .hero-copy { position: relative; z-index: 1; }
+html, body { overflow-x: clip; }
 /* Hero laptop (SVG). Colours follow the theme tokens. */
 .hero-art { width: 100%; height: auto; display: block; overflow: visible; }
 .hero-art .lap-floor { fill: #050a3a; opacity: 0.35; filter: blur(6px); }
