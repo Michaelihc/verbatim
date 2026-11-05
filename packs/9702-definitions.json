@@ -165,6 +165,57 @@
               "question": "2(a)"
             }
           ]
+        },
+        {
+          "id": "other-si-base-units",
+          "type": "explain",
+          "term": "SI base units",
+          "prompt": "State the SI base units other than the kilogram, metre and second.",
+          "answer": "The other SI base units are the ampere, the kelvin, the mole and the candela.",
+          "marks": [
+            [
+              "ampere"
+            ],
+            [
+              "kelvin"
+            ],
+            [
+              "mole"
+            ],
+            [
+              "candela"
+            ]
+          ],
+          "notes": "Any two scored the mark.",
+          "sources": [
+            {
+              "paper": "9702/22",
+              "session": "May/June 2017",
+              "question": "1(a)"
+            }
+          ]
+        },
+        {
+          "id": "scalar-and-vector-common-properties",
+          "type": "explain",
+          "term": "What scalars and vectors share",
+          "prompt": "State two properties that are possessed by both scalar and vector physical quantities.",
+          "answer": "Both scalar and vector quantities have a magnitude and a unit.",
+          "marks": [
+            [
+              "magnitude"
+            ],
+            [
+              "unit"
+            ]
+          ],
+          "sources": [
+            {
+              "paper": "9702/23",
+              "session": "May/June 2021",
+              "question": "1(a)(ii)"
+            }
+          ]
         }
       ]
     },
@@ -595,6 +646,28 @@
               "question": "5(b)(i)"
             }
           ]
+        },
+        {
+          "id": "falling-through-a-fluid",
+          "type": "explain",
+          "term": "Falling through a fluid",
+          "prompt": "State and explain the variation of the acceleration of an object as it falls through water.",
+          "answer": "As the object falls its speed increases, so the viscous force increases and the acceleration decreases.",
+          "marks": [
+            [
+              "viscous force increases"
+            ],
+            [
+              "acceleration decreases"
+            ]
+          ],
+          "sources": [
+            {
+              "paper": "9702/22",
+              "session": "October/November 2020",
+              "question": "2(c)(ii)"
+            }
+          ]
         }
       ]
     },
@@ -809,6 +882,57 @@
               "paper": "9702/23",
               "session": "October/November 2024",
               "question": "3(a)"
+            }
+          ]
+        },
+        {
+          "id": "conditions-for-equilibrium",
+          "type": "explain",
+          "term": "Conditions for equilibrium",
+          "prompt": "State the two conditions for an object to be in equilibrium.",
+          "answer": "The resultant force in any direction is zero and the resultant torque about any point is zero.",
+          "marks": [
+            [
+              "resultant force in any direction is zero"
+            ],
+            [
+              "resultant torque about any point is zero"
+            ]
+          ],
+          "sources": [
+            {
+              "paper": "9702/21",
+              "session": "May/June 2020",
+              "question": "3(a)"
+            },
+            {
+              "paper": "9702/21",
+              "session": "May/June 2017",
+              "question": "2(a)"
+            }
+          ]
+        },
+        {
+          "id": "origin-of-upthrust",
+          "type": "explain",
+          "term": "Origin of upthrust",
+          "prompt": "Explain the origin of the upthrust on an object in a liquid.",
+          "answer": "Pressure increases with depth, so the pressure on the bottom of the object is greater than the pressure on the top.",
+          "marks": [
+            [
+              "pressure on the bottom of the object is greater than the pressure on the top"
+            ]
+          ],
+          "sources": [
+            {
+              "paper": "9702/21",
+              "session": "May/June 2017",
+              "question": "3(c)(i)"
+            },
+            {
+              "paper": "9702/22",
+              "session": "February/March 2017",
+              "question": "1(b)(iii)"
             }
           ]
         }
@@ -1462,6 +1586,45 @@
               "question": "4(c)(i)"
             }
           ]
+        },
+        {
+          "id": "polarising-light-not-sound",
+          "type": "explain",
+          "term": "Why light can be polarised but sound cannot",
+          "prompt": "State why light waves can be plane polarised but sound waves cannot.",
+          "answer": "Light waves are transverse and sound waves are longitudinal.",
+          "marks": [
+            [
+              "Light waves are transverse",
+              "sound waves are longitudinal"
+            ]
+          ],
+          "sources": [
+            {
+              "paper": "9702/21",
+              "session": "October/November 2022",
+              "question": "4(a)(ii)"
+            }
+          ]
+        },
+        {
+          "id": "intensity-and-amplitude",
+          "type": "explain",
+          "term": "Intensity and amplitude",
+          "prompt": "State the relationship between the intensity and the amplitude of a wave.",
+          "answer": "The intensity is proportional to the square of the amplitude.",
+          "marks": [
+            [
+              "proportional to the square of the amplitude"
+            ]
+          ],
+          "sources": [
+            {
+              "paper": "9702/23",
+              "session": "May/June 2018",
+              "question": "5(a)"
+            }
+          ]
         }
       ]
     },
@@ -1669,6 +1832,121 @@
               "paper": "9702/21",
               "session": "October/November 2017",
               "question": "3(b)(i)"
+            }
+          ]
+        },
+        {
+          "id": "stationary-wave-conditions",
+          "type": "explain",
+          "term": "Conditions for a stationary wave",
+          "prompt": "State the conditions required for the formation of a stationary wave.",
+          "answer": "Two waves of the same type, travelling at the same speed in opposite directions, overlap, and the waves have the same frequency.",
+          "marks": [
+            [
+              "travelling at the same speed in opposite directions",
+              "overlap"
+            ],
+            [
+              "same frequency"
+            ]
+          ],
+          "sources": [
+            {
+              "paper": "9702/22",
+              "session": "February/March 2018",
+              "question": "4(a)"
+            },
+            {
+              "paper": "9702/22",
+              "session": "October/November 2017",
+              "question": "4(a)"
+            },
+            {
+              "paper": "9702/21",
+              "session": "October/November 2020",
+              "question": "6(a)"
+            }
+          ]
+        },
+        {
+          "id": "stationary-wave-formation",
+          "type": "explain",
+          "term": "How a stationary wave forms on a string",
+          "prompt": "Explain how a stationary wave is formed on a string.",
+          "answer": "The wave travels along the string and reflects at the fixed end, and the incident and reflected waves superpose.",
+          "marks": [
+            [
+              "reflects at the fixed end"
+            ],
+            [
+              "incident and reflected waves superpose"
+            ]
+          ],
+          "sources": [
+            {
+              "paper": "9702/23",
+              "session": "October/November 2018",
+              "question": "4(b)(i)"
+            }
+          ]
+        },
+        {
+          "id": "stationary-and-progressive-waves",
+          "type": "explain",
+          "term": "Stationary and progressive waves",
+          "prompt": "State two ways in which a stationary wave differs from a progressive wave.",
+          "answer": "A stationary wave has nodes and antinodes, it does not transfer energy, and different points on it have different amplitudes, whereas all points on a progressive wave have the same amplitude.",
+          "marks": [
+            [
+              "nodes and antinodes"
+            ],
+            [
+              "does not transfer energy"
+            ],
+            [
+              "different points on it have different amplitudes"
+            ]
+          ],
+          "notes": "Any two points scored.",
+          "sources": [
+            {
+              "paper": "9702/23",
+              "session": "October/November 2022",
+              "question": "4(d)(ii)"
+            },
+            {
+              "paper": "9702/22",
+              "session": "May/June 2020",
+              "question": "4(a)"
+            }
+          ]
+        },
+        {
+          "id": "interference-fringes",
+          "type": "explain",
+          "term": "How interference fringes form",
+          "prompt": "Explain how the pattern of bright and dark interference fringes is formed in a double-slit experiment.",
+          "answer": "Light diffracts at the two slits. The light from each slit superposes at the screen. Where the phase difference is zero a bright fringe is formed, and where the phase difference is 180 degrees a dark fringe is formed.",
+          "marks": [
+            [
+              "diffracts at the two slits"
+            ],
+            [
+              "superposes at the screen"
+            ],
+            [
+              "phase difference is zero a bright fringe"
+            ],
+            [
+              "phase difference is 180 degrees a dark fringe"
+            ]
+          ],
+          "notes": "Any three points scored.",
+          "sources": [
+            {
+              "paper": "9702/22",
+              "session": "February/March 2024",
+              "question": "6(a)(i)"
             }
           ]
         }
@@ -2063,6 +2341,30 @@
               "question": "5(a)"
             }
           ]
+        },
+        {
+          "id": "pd-less-than-emf",
+          "type": "explain",
+          "term": "Why the p.d. is less than the e.m.f.",
+          "prompt": "Explain, in terms of energy, why the potential difference across an external resistor is less than the e.m.f. of the cell.",
+          "answer": "Some energy is dissipated in the internal resistance of the cell.",
+          "marks": [
+            [
+              "energy is dissipated in the internal resistance"
+            ]
+          ],
+          "sources": [
+            {
+              "paper": "9702/22",
+              "session": "May/June 2020",
+              "question": "6(a)(i)"
+            },
+            {
+              "paper": "9702/21",
+              "session": "October/November 2020",
+              "question": "7(c)(i)"
+            }
+          ]
         }
       ]
     },
@@ -2111,6 +2413,117 @@
               "paper": "9702/43",
               "session": "October/November 2015",
               "question": "9(b)(i)"
+            }
+          ]
+        },
+        {
+          "id": "baryons-and-mesons",
+          "type": "explain",
+          "term": "Baryons and mesons",
+          "prompt": "Explain why the neutron is classed as a baryon and a pion is classed as a meson.",
+          "answer": "A baryon such as the neutron consists of three quarks, and a meson such as the pion consists of one quark and one antiquark.",
+          "marks": [
+            [
+              "baryon such as the neutron consists of three quarks"
+            ],
+            [
+              "meson such as the pion consists of one quark and one antiquark"
+            ]
+          ],
+          "sources": [
+            {
+              "paper": "9702/21",
+              "session": "October/November 2022",
+              "question": "6(c)(ii)"
+            },
+            {
+              "paper": "9702/22",
+              "session": "February/March 2023",
+              "question": "7(b)(ii)"
+            }
+          ]
+        },
+        {
+          "id": "quark-and-antiquark",
+          "type": "explain",
+          "term": "A quark and its antiquark",
+          "prompt": "State a similarity and a difference between an up quark and an up antiquark.",
+          "answer": "They have the same mass, but their charges are opposite in sign.",
+          "marks": [
+            [
+              "same mass"
+            ],
+            [
+              "opposite in sign"
+            ]
+          ],
+          "sources": [
+            {
+              "paper": "9702/22",
+              "session": "October/November 2020",
+              "question": "7(a)"
+            }
+          ]
+        },
+        {
+          "id": "beta-minus-and-beta-plus",
+          "type": "explain",
+          "term": "Beta-minus and beta-plus decay",
+          "prompt": "Describe two differences between the decay of a nucleus that emits a beta-minus particle and one that emits a beta-plus particle.",
+          "answer": "In beta-minus decay a neutron changes to a proton and an electron antineutrino is also emitted. In beta-plus decay a proton changes to a neutron and an electron neutrino is also emitted.",
+          "marks": [
+            [
+              "neutron changes to a proton",
+              "proton changes to a neutron"
+            ],
+            [
+              "antineutrino is also emitted",
+              "neutrino is also emitted"
+            ]
+          ],
+          "sources": [
+            {
+              "paper": "9702/22",
+              "session": "May/June 2017",
+              "question": "8(a)"
+            }
+          ]
+        },
+        {
+          "id": "beta-decay-quark-change",
+          "type": "explain",
+          "term": "Quark change in beta-minus decay",
+          "prompt": "State the change in quark composition of a nucleus when it emits a beta-minus particle.",
+          "answer": "A down quark changes to an up quark.",
+          "marks": [
+            [
+              "down quark changes to an up quark"
+            ]
+          ],
+          "sources": [
+            {
+              "paper": "9702/21",
+              "session": "October/November 2021",
+              "question": "6(b)(ii)"
+            }
+          ]
+        },
+        {
+          "id": "evidence-for-neutrinos",
+          "type": "explain",
+          "term": "Evidence for neutrinos",
+          "prompt": "State an observation about beta decay that is explained by the existence of neutrinos.",
+          "answer": "The beta particles emitted from the nucleus have a continuous range of kinetic energies.",
+          "marks": [
+            [
+              "continuous range of kinetic energies"
+            ]
+          ],
+          "sources": [
+            {
+              "paper": "9702/23",
+              "session": "October/November 2022",
+              "question": "6(c)(i)"
             }
           ]
         }
@@ -2434,6 +2847,96 @@
               "question": "1(a)"
             }
           ]
+        },
+        {
+          "id": "negative-gravitational-potential",
+          "type": "explain",
+          "term": "Why gravitational potential is negative",
+          "prompt": "Explain why the gravitational potential near a point mass is negative.",
+          "answer": "The gravitational potential is zero at infinity. The force between masses is attractive, so work is done on a mass to move it away to infinity.",
+          "marks": [
+            [
+              "zero at infinity"
+            ],
+            [
+              "work is done on a mass to move it away"
+            ]
+          ],
+          "sources": [
+            {
+              "paper": "9702/42",
+              "session": "February/March 2024",
+              "question": "1(a)"
+            },
+            {
+              "paper": "9702/41",
+              "session": "May/June 2024",
+              "question": "1(b)(i)"
+            }
+          ]
+        },
+        {
+          "id": "uniform-field-near-earth",
+          "type": "explain",
+          "term": "Why g is constant near the surface",
+          "prompt": "Explain why, for changes in height near the Earth's surface, the gravitational field strength may be considered to be constant.",
+          "answer": "Changes in height are much less than the radius of the Earth, so the radial field lines are almost parallel.",
+          "marks": [
+            [
+              "much less than the radius of the Earth"
+            ],
+            [
+              "field lines are almost parallel"
+            ]
+          ],
+          "sources": [
+            {
+              "paper": "9702/41",
+              "session": "October/November 2017",
+              "question": "3(b)"
+            }
+          ]
+        },
+        {
+          "id": "field-strength-and-free-fall",
+          "type": "explain",
+          "term": "Field strength and free fall",
+          "prompt": "Explain why, at the surface of a planet, the gravitational field strength is numerically equal to the acceleration of free fall.",
+          "answer": "Acceleration is force per unit mass and field strength is force per unit mass, so they are equal.",
+          "marks": [
+            [
+              "Acceleration is force per unit mass and field strength is force per unit mass"
+            ]
+          ],
+          "sources": [
+            {
+              "paper": "9702/42",
+              "session": "October/November 2018",
+              "question": "1(a)(ii)"
+            }
+          ]
+        },
+        {
+          "id": "circular-orbit",
+          "type": "explain",
+          "term": "How a satellite stays in orbit",
+          "prompt": "Explain how a satellite may be in a circular orbit around a planet.",
+          "answer": "The gravitational force of attraction between the satellite and the planet provides the centripetal force on the satellite.",
+          "marks": [
+            [
+              "gravitational force of attraction"
+            ],
+            [
+              "provides the centripetal force"
+            ]
+          ],
+          "sources": [
+            {
+              "paper": "9702/41",
+              "session": "May/June 2017",
+              "question": "1(a)"
+            }
+          ]
         }
       ]
     },
@@ -2596,6 +3099,25 @@
               "question": "3(a)"
             }
           ]
+        },
+        {
+          "id": "liquid-in-glass-thermometer",
+          "type": "explain",
+          "term": "Thermometers and thermodynamic temperature",
+          "prompt": "Explain why temperature measured using a liquid-in-glass thermometer is not a measurement of thermodynamic temperature.",
+          "answer": "The measurement depends on the properties of the liquid used.",
+          "marks": [
+            [
+              "depends on the properties of the liquid"
+            ]
+          ],
+          "sources": [
+            {
+              "paper": "9702/41",
+              "session": "May/June 2024",
+              "question": "2(a)(ii)"
+            }
+          ]
         }
       ]
     },
@@ -2706,6 +3228,97 @@
               "question": "2(a)(ii)"
             }
           ]
+        },
+        {
+          "id": "kinetic-theory-assumptions",
+          "type": "explain",
+          "term": "Assumptions of the kinetic theory",
+          "prompt": "State the basic assumptions of the kinetic theory of gases.",
+          "answer": "The molecules are in continuous random motion, the volume of the molecules is negligible compared with the volume of the gas, there are no forces between molecules except during collisions, all collisions are perfectly elastic, and the time of a collision is negligible compared with the time between collisions.",
+          "marks": [
+            [
+              "continuous random motion"
+            ],
+            [
+              "volume of the molecules is negligible"
+            ],
+            [
+              "no forces between molecules except during collisions"
+            ],
+            [
+              "collisions are perfectly elastic"
+            ],
+            [
+              "time of a collision is negligible"
+            ]
+          ],
+          "notes": "Asked for two (s23/41) or three (w24/42), 1 mark each.",
+          "sources": [
+            {
+              "paper": "9702/41",
+              "session": "May/June 2023",
+              "question": "4(a)"
+            },
+            {
+              "paper": "9702/42",
+              "session": "October/November 2024",
+              "question": "4(a)"
+            }
+          ]
+        },
+        {
+          "id": "gas-pressure-from-molecules",
+          "type": "explain",
+          "term": "How molecules cause gas pressure",
+          "prompt": "Explain how molecular movement causes the pressure exerted by a gas.",
+          "answer": "Molecules collide with the walls of the container. The momentum of a molecule changes during the collision, so the wall exerts a force on the molecule and the molecule exerts a force on the wall. Many molecules exerting forces across the area of the wall cause the pressure.",
+          "marks": [
+            [
+              "collide with the walls of the container"
+            ],
+            [
+              "momentum of a molecule changes"
+            ],
+            [
+              "wall exerts a force on the molecule"
+            ],
+            [
+              "molecule exerts a force on the wall"
+            ],
+            [
+              "Many molecules exerting forces across the area of the wall"
+            ]
+          ],
+          "notes": "Any three points, 1 mark each.",
+          "sources": [
+            {
+              "paper": "9702/42",
+              "session": "October/November 2024",
+              "question": "4(b)"
+            }
+          ]
+        },
+        {
+          "id": "motion-of-gas-molecules",
+          "type": "explain",
+          "term": "Motion of gas molecules",
+          "prompt": "Describe the motion of molecules in a gas, according to the kinetic theory of gases.",
+          "answer": "The molecules move randomly, at constant velocity in straight lines between collisions.",
+          "marks": [
+            [
+              "move randomly"
+            ],
+            [
+              "constant velocity in straight lines between collisions"
+            ]
+          ],
+          "sources": [
+            {
+              "paper": "9702/41",
+              "session": "May/June 2017",
+              "question": "4(a)"
+            }
+          ]
         }
       ]
     },
@@ -2780,6 +3393,53 @@
               "paper": "9702/42",
               "session": "May/June 2023",
               "question": "3(a)"
+            }
+          ]
+        },
+        {
+          "id": "ideal-gas-internal-energy",
+          "type": "explain",
+          "term": "Internal energy of an ideal gas",
+          "prompt": "Explain why the internal energy of an ideal gas is equal to the total kinetic energy of its molecules.",
+          "answer": "Internal energy is the sum of the kinetic and potential energies of the molecules. In an ideal gas there are no forces between the molecules, so their potential energy is zero.",
+          "marks": [
+            [
+              "sum of the kinetic and potential energies of the molecules"
+            ],
+            [
+              "no forces between the molecules"
+            ]
+          ],
+          "sources": [
+            {
+              "paper": "9702/41",
+              "session": "October/November 2021",
+              "question": "3(b)(iii)"
+            }
+          ]
+        },
+        {
+          "id": "internal-energy-and-temperature",
+          "type": "explain",
+          "term": "Internal energy and temperature",
+          "prompt": "Explain why, for an ideal gas, the change in internal energy is directly proportional to the change in thermodynamic temperature.",
+          "answer": "In an ideal gas there are no intermolecular forces, so there is no potential energy. The internal energy is therefore only the kinetic energy of the molecules, and the mean kinetic energy is proportional to the thermodynamic temperature.",
+          "marks": [
+            [
+              "no intermolecular forces, so there is no potential energy"
+            ],
+            [
+              "only the kinetic energy of the molecules"
+            ],
+            [
+              "mean kinetic energy is proportional to the thermodynamic temperature"
+            ]
+          ],
+          "sources": [
+            {
+              "paper": "9702/41",
+              "session": "May/June 2018",
+              "question": "3(a)(ii)"
             }
           ]
         }
@@ -3148,6 +3808,76 @@
             {
               "paper": "9702/42",
               "session": "October/November 2024",
+              "question": "6(a)"
+            }
+          ]
+        },
+        {
+          "id": "gravitational-and-electric-potential",
+          "type": "explain",
+          "term": "Gravitational and electric potential compared",
+          "prompt": "State one similarity and one difference between the gravitational potential due to a point mass and the electric potential due to a point charge.",
+          "answer": "Both are inversely proportional to the distance from the point and both are zero at infinity, but gravitational potential is always negative whereas electric potential can be positive or negative.",
+          "marks": [
+            [
+              "inversely proportional to the distance"
+            ],
+            [
+              "gravitational potential is always negative",
+              "electric potential can be positive or negative"
+            ]
+          ],
+          "sources": [
+            {
+              "paper": "9702/41",
+              "session": "May/June 2023",
+              "question": "1(a)(iii)"
+            },
+            {
+              "paper": "9702/42",
+              "session": "February/March 2023",
+              "question": "1(c)"
+            }
+          ]
+        },
+        {
+          "id": "field-strength-and-potential-gradient",
+          "type": "explain",
+          "term": "Field strength and potential gradient",
+          "prompt": "State the relationship between electric potential and electric field strength at a point.",
+          "answer": "Electric field strength is equal to the negative of the potential gradient.",
+          "marks": [
+            [
+              "field strength is equal to",
+              "potential gradient"
+            ],
+            [
+              "negative"
+            ]
+          ],
+          "sources": [
+            {
+              "paper": "9702/41",
+              "session": "October/November 2018",
+              "question": "6(a)(ii)"
+            }
+          ]
+        },
+        {
+          "id": "field-lines-compared",
+          "type": "explain",
+          "term": "Field lines compared",
+          "prompt": "State a similarity between the gravitational field lines around a point mass and the electric field lines around a point charge.",
+          "answer": "Both have radial field lines.",
+          "marks": [
+            [
+              "radial field lines"
+            ]
+          ],
+          "sources": [
+            {
+              "paper": "9702/42",
+              "session": "February/March 2021",
               "question": "6(a)"
             }
           ]
@@ -3558,6 +4288,76 @@
               "question": "8(a)"
             }
           ]
+        },
+        {
+          "id": "circular-path-in-magnetic-field",
+          "type": "explain",
+          "term": "Why a charge moves in a circle in a magnetic field",
+          "prompt": "Explain why the path of an electron in a uniform magnetic field is the arc of a circle.",
+          "answer": "The magnetic force is always normal to the velocity and its magnitude is constant, because the speed is constant, so it provides the centripetal force.",
+          "marks": [
+            [
+              "always normal to the velocity"
+            ],
+            [
+              "magnitude is constant"
+            ],
+            [
+              "provides the centripetal force"
+            ]
+          ],
+          "sources": [
+            {
+              "paper": "9702/41",
+              "session": "May/June 2017",
+              "question": "7(a)"
+            }
+          ]
+        },
+        {
+          "id": "velocity-selector",
+          "type": "explain",
+          "term": "Velocity selector",
+          "prompt": "Explain how a uniform magnetic field and a uniform electric field may be used as a velocity selector for charged particles.",
+          "answer": "The electric and magnetic fields are at right angles to each other. The particles enter the fields with velocity normal to both fields, and particles with the selected velocity pass through with no deviation.",
+          "marks": [
+            [
+              "at right angles to each other"
+            ],
+            [
+              "velocity normal to both fields"
+            ],
+            [
+              "selected velocity pass through with no deviation"
+            ]
+          ],
+          "sources": [
+            {
+              "paper": "9702/42",
+              "session": "May/June 2018",
+              "question": "8(a)"
+            }
+          ]
+        },
+        {
+          "id": "hall-probe-material",
+          "type": "explain",
+          "term": "Why Hall probes use semiconductors",
+          "prompt": "Explain why a Hall probe is made from silicon rather than copper.",
+          "answer": "Silicon has a much smaller number density of charge carriers, so the Hall voltage is greater.",
+          "marks": [
+            [
+              "smaller number density of charge carriers",
+              "Hall voltage is greater"
+            ]
+          ],
+          "sources": [
+            {
+              "paper": "9702/42",
+              "session": "February/March 2023",
+              "question": "6(b)(ii)"
+            }
+          ]
         }
       ]
     },
@@ -3820,6 +4620,133 @@
               "paper": "9702/42",
               "session": "May/June 2017",
               "question": "11(b)(i)"
+            }
+          ]
+        },
+        {
+          "id": "photoelectric-evidence-for-photons",
+          "type": "explain",
+          "term": "Photoelectric evidence for photons",
+          "prompt": "State three pieces of evidence provided by the photoelectric effect for a particulate nature of electromagnetic radiation.",
+          "answer": "The maximum energy of the emitted electrons depends on the frequency but does not depend on the intensity, the rate of emission depends on the intensity, there is a frequency below which no electrons are emitted, and emission is instantaneous.",
+          "marks": [
+            [
+              "depends on the frequency"
+            ],
+            [
+              "does not depend on the intensity"
+            ],
+            [
+              "rate of emission depends on the intensity"
+            ],
+            [
+              "frequency below which no electrons are emitted"
+            ],
+            [
+              "emission is instantaneous"
+            ]
+          ],
+          "notes": "Any three points, 1 mark each.",
+          "sources": [
+            {
+              "paper": "9702/41",
+              "session": "May/June 2019",
+              "question": "11(a)"
+            }
+          ]
+        },
+        {
+          "id": "photon-model-threshold-frequency",
+          "type": "explain",
+          "term": "Photons and the threshold frequency",
+          "prompt": "Explain how the photon model of electromagnetic radiation accounts for the threshold frequency in the photoelectric effect.",
+          "answer": "Photons are discrete packets of energy, and the energy of a photon depends on the frequency. An electron can only absorb a single photon, so emission is only possible if the photon energy is at least the work function.",
+          "marks": [
+            [
+              "discrete packets of energy"
+            ],
+            [
+              "energy of a photon depends on the frequency"
+            ],
+            [
+              "only absorb a single photon"
+            ],
+            [
+              "photon energy is at least the work function"
+            ]
+          ],
+          "sources": [
+            {
+              "paper": "9702/42",
+              "session": "October/November 2021",
+              "question": "9(b)(ii)"
+            }
+          ]
+        },
+        {
+          "id": "photoelectron-speeds",
+          "type": "explain",
+          "term": "Why most photoelectrons are slower",
+          "prompt": "Explain why most of the emitted photoelectrons have a speed lower than the maximum.",
+          "answer": "Energy is required to bring an electron to the surface of the metal.",
+          "marks": [
+            [
+              "Energy is required to bring an electron to the surface"
+            ]
+          ],
+          "sources": [
+            {
+              "paper": "9702/41",
+              "session": "October/November 2019",
+              "question": "11(b)(ii)"
+            }
+          ]
+        },
+        {
+          "id": "line-spectra-and-energy-levels",
+          "type": "explain",
+          "term": "Line spectra and energy levels",
+          "prompt": "Explain how an emission line spectrum provides evidence for the existence of discrete energy levels in an atom.",
+          "answer": "Each photon energy has a corresponding frequency. A change in electron energy level emits a single photon, whose energy equals the difference in energy levels. Discrete frequencies must come from discrete energy changes, which imply discrete energy levels.",
+          "marks": [
+            [
+              "photon energy has a corresponding frequency"
+            ],
+            [
+              "emits a single photon"
+            ],
+            [
+              "energy equals the difference in energy levels"
+            ],
+            [
+              "discrete energy changes, which imply discrete energy levels"
+            ]
+          ],
+          "notes": "Any three points, 1 mark each.",
+          "sources": [
+            {
+              "paper": "9702/42",
+              "session": "October/November 2022",
+              "question": "9(a)(i)"
+            }
+          ]
+        },
+        {
+          "id": "electron-diffraction-meaning",
+          "type": "explain",
+          "term": "What electron diffraction shows",
+          "prompt": "State what electron diffraction shows about the nature of electrons.",
+          "answer": "Moving electrons behave like waves.",
+          "marks": [
+            [
+              "behave like waves"
+            ]
+          ],
+          "sources": [
+            {
+              "paper": "9702/42",
+              "session": "February/March 2022",
+              "question": "8(b)(ii)"
             }
           ]
         }
@@ -4314,6 +5241,227 @@
               "question": "11(a)(ii)"
             }
           ]
+        },
+        {
+          "id": "ultrasound-diagnosis",
+          "type": "explain",
+          "term": "Ultrasound diagnosis",
+          "prompt": "Explain the main principles behind the use of ultrasound to obtain diagnostic information about internal body structures.",
+          "answer": "Pulses of ultrasound are reflected at boundaries between media. The reflected pulses are detected by the ultrasound transducer and are processed and displayed. The time delay gives information about the depth of the boundary and the intensity of the reflected pulse gives information about the nature of the boundary.",
+          "marks": [
+            [
+              "Pulses of ultrasound"
+            ],
+            [
+              "reflected at boundaries between media"
+            ],
+            [
+              "reflected pulses are detected"
+            ],
+            [
+              "processed and displayed"
+            ],
+            [
+              "time delay gives information about the depth"
+            ],
+            [
+              "intensity of the reflected pulse gives information about the nature of the boundary"
+            ]
+          ],
+          "sources": [
+            {
+              "paper": "9702/42",
+              "session": "February/March 2018",
+              "question": "5(a)"
+            },
+            {
+              "paper": "9702/42",
+              "session": "May/June 2017",
+              "question": "4(a)"
+            }
+          ]
+        },
+        {
+          "id": "ultrasound-generation",
+          "type": "explain",
+          "term": "Generating ultrasound",
+          "prompt": "Explain the principles of the generation of ultrasound waves for use in medical diagnosis.",
+          "answer": "A piezo-electric (quartz) crystal is used. An alternating p.d. across the crystal causes it to vibrate, and resonance occurs when the frequency of the p.d. matches the natural frequency of the crystal, which is in the ultrasound range.",
+          "marks": [
+            [
+              "quartz"
+            ],
+            [
+              "alternating p.d. across the crystal causes it to vibrate"
+            ],
+            [
+              "resonance occurs when the frequency of the p.d. matches the natural frequency"
+            ],
+            [
+              "in the ultrasound range"
+            ]
+          ],
+          "sources": [
+            {
+              "paper": "9702/41",
+              "session": "October/November 2020",
+              "question": "4(a)"
+            }
+          ]
+        },
+        {
+          "id": "ultrasound-detection",
+          "type": "explain",
+          "term": "Detecting ultrasound",
+          "prompt": "Explain the principles of the detection of ultrasound waves used in medical diagnosis.",
+          "answer": "A piezo-electric crystal is used. The ultrasound makes the crystal vibrate, which produces an alternating e.m.f. across the crystal.",
+          "marks": [
+            [
+              "piezo-electric crystal"
+            ],
+            [
+              "makes the crystal vibrate"
+            ],
+            [
+              "alternating e.m.f. across the crystal"
+            ]
+          ],
+          "sources": [
+            {
+              "paper": "9702/42",
+              "session": "February/March 2020",
+              "question": "4(a)(ii)"
+            }
+          ]
+        },
+        {
+          "id": "ultrasound-pulses",
+          "type": "explain",
+          "term": "Why ultrasound is pulsed",
+          "prompt": "Explain why ultrasound used in medical diagnosis is emitted in pulses.",
+          "answer": "The same transducer emits and detects the ultrasound and cannot do both at the same time, so detection occurs in the time between emitted pulses, which lets the reflected signal be distinguished from the emitted signal.",
+          "marks": [
+            [
+              "cannot do both at the same time"
+            ],
+            [
+              "detection occurs in the time between emitted pulses"
+            ],
+            [
+              "reflected signal be distinguished from the emitted signal"
+            ]
+          ],
+          "notes": "Any two points scored.",
+          "sources": [
+            {
+              "paper": "9702/42",
+              "session": "February/March 2020",
+              "question": "4(a)(i)"
+            }
+          ]
+        },
+        {
+          "id": "xray-production",
+          "type": "explain",
+          "term": "Producing X-rays",
+          "prompt": "Explain how X-rays are produced for use in medical diagnosis.",
+          "answer": "Electrons are accelerated by an applied p.d. and hit a metal target. X-rays are produced when the electrons decelerate.",
+          "marks": [
+            [
+              "Electrons are accelerated"
+            ],
+            [
+              "hit a metal target"
+            ],
+            [
+              "X-rays are produced when the electrons decelerate"
+            ]
+          ],
+          "sources": [
+            {
+              "paper": "9702/41",
+              "session": "May/June 2022",
+              "question": "9(a)(i)"
+            }
+          ]
+        },
+        {
+          "id": "xray-continuous-spectrum",
+          "type": "explain",
+          "term": "Continuous X-ray spectrum",
+          "prompt": "Explain why a continuous spectrum of energies of X-ray photons is produced.",
+          "answer": "Electrons decelerate on hitting the target, producing X-ray photons. There is a range of decelerations, and the photon energy depends on the size of the deceleration.",
+          "marks": [
+            [
+              "decelerate on hitting the target"
+            ],
+            [
+              "range of decelerations"
+            ],
+            [
+              "photon energy depends on the size of the deceleration"
+            ]
+          ],
+          "sources": [
+            {
+              "paper": "9702/42",
+              "session": "February/March 2021",
+              "question": "11(a)(i)"
+            }
+          ]
+        },
+        {
+          "id": "xray-intensity-and-hardness",
+          "type": "explain",
+          "term": "X-ray intensity and hardness",
+          "prompt": "State how, in an X-ray tube, the intensity of the X-ray beam and its hardness are controlled.",
+          "answer": "The intensity is controlled by varying the filament current, and the hardness is controlled by varying the accelerating potential difference.",
+          "marks": [
+            [
+              "intensity is controlled by varying the filament current"
+            ],
+            [
+              "hardness is controlled by varying the accelerating potential difference"
+            ]
+          ],
+          "sources": [
+            {
+              "paper": "9702/41",
+              "session": "May/June 2021",
+              "question": "11(a)"
+            }
+          ]
+        },
+        {
+          "id": "ct-scanning",
+          "type": "explain",
+          "term": "CT scanning",
+          "prompt": "Outline the principles of CT scanning.",
+          "answer": "X-rays are used to scan the body in sections, from many angles. The image of each section is two-dimensional, and images of many sections are combined to give a three-dimensional image.",
+          "marks": [
+            [
+              "X-rays"
+            ],
+            [
+              "in sections"
+            ],
+            [
+              "from many angles"
+            ],
+            [
+              "image of each section is two-dimensional"
+            ],
+            [
+              "images of many sections are combined"
+            ]
+          ],
+          "sources": [
+            {
+              "paper": "9702/42",
+              "session": "May/June 2021",
+              "question": "11(b)"
+            }
+          ]
         }
       ]
     },
@@ -4443,6 +5591,60 @@
               "paper": "9702/42",
               "session": "October/November 2023",
               "question": "10(a)"
+            }
+          ]
+        },
+        {
+          "id": "redshift-and-expansion",
+          "type": "explain",
+          "term": "Redshift and the expanding Universe",
+          "prompt": "Explain how redshift leads to the idea that the Universe is expanding.",
+          "answer": "Redshift is the increase in observed wavelength. Radiation from distant galaxies is observed to be redshifted, which shows that the galaxies are moving apart, so the Universe must be expanding.",
+          "marks": [
+            [
+              "increase in observed wavelength"
+            ],
+            [
+              "distant galaxies is observed to be redshifted"
+            ],
+            [
+              "galaxies are moving apart"
+            ],
+            [
+              "Universe must be expanding"
+            ]
+          ],
+          "notes": "Any three points, 1 mark each.",
+          "sources": [
+            {
+              "paper": "9702/41",
+              "session": "October/November 2024",
+              "question": "10(a)"
+            }
+          ]
+        },
+        {
+          "id": "big-bang",
+          "type": "explain",
+          "term": "Hubble's law and the Big Bang",
+          "prompt": "Explain how Hubble's law and the idea of the expanding Universe lead to the Big Bang theory of the origin of the Universe.",
+          "answer": "All parts of the Universe are moving away from each other, and more distant objects are moving away faster, so matter must have been close together and very dense in the past.",
+          "marks": [
+            [
+              "moving away from each other"
+            ],
+            [
+              "more distant objects are moving away faster"
+            ],
+            [
+              "very dense in the past"
+            ]
+          ],
+          "sources": [
+            {
+              "paper": "9702/42",
+              "session": "May/June 2022",
+              "question": "9(b)"
             }
           ]
         }
