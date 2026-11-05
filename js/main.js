@@ -6,6 +6,7 @@ import {
   unitProgress, streak, ACHIEVEMENTS, checkAchievements, comboMult, practiceLevel, creditPractice, PRACTICE_DECAY,
 } from './game.js';
 import { sfx, confetti, floatText, countUp } from './fx.js';
+import { renderDashboard } from './dash.js';
 
 const REPO_URL = 'https://github.com/Michaelihc/verbatim';
 const main = document.getElementById('main');
@@ -582,7 +583,7 @@ function viewPlay(q) {
     S.xp += res.xp;
     S.lapXp += res.xp;
     S.lapResults.set(keyOf(entry), res.rating);
-    pushHistory({ t: Date.now(), p: entry.pack.id, i: entry.item.id, m: mode, wpm: Math.round(res.wpm), acc: +res.acc.toFixed(3), xp: res.xp });
+    pushHistory({ t: Date.now(), p: entry.pack.id, i: entry.item.id, m: mode, wpm: Math.round(res.wpm), acc: +res.acc.toFixed(3), xp: res.xp, r: res.rating });
     const earned = checkAchievements({ mode, level: mode === 'practice' ? level : null, rating: res.rating, rank: res.rank, hints: r.hints, chars: r.chars, wpm: res.wpm });
     save();
 
@@ -766,68 +767,20 @@ function viewPlay(q) {
 
 // ---- progress ---------------------------------------------------------------
 
-function wpmChart() {
-  const h = state.history.slice(-60);
-  if (h.length < 2) return '<p class="muted">Finish a few answers to see your speed over time.</p>';
-  const W = 600, H = 160, pad = 24;
-  const max = Math.max(40, ...h.map(e => e.wpm)) * 1.1;
-  const x = i => pad + (i / (h.length - 1)) * (W - pad * 2);
-  const y = v => H - pad - (v / max) * (H - pad * 2);
-  const roll = h.map((_, i) => { const s = h.slice(Math.max(0, i - 4), i + 1); return s.reduce((a, e) => a + e.wpm, 0) / s.length; });
-  const path = roll.map((v, i) => `${i ? 'L' : 'M'}${x(i).toFixed(1)},${y(v).toFixed(1)}`).join('');
-  const grid = [0, 0.5, 1].map(f => Math.round(max * f / 10) * 10).map(v => `<line x1="${pad}" x2="${W - pad}" y1="${y(v)}" y2="${y(v)}"/><text x="${pad - 6}" y="${y(v) + 4}" text-anchor="end">${v}</text>`).join('');
-  return `<svg class="chart" viewBox="0 0 ${W} ${H}" role="img" aria-label="Typing speed over your last ${h.length} answers, latest ${h.at(-1).wpm} WPM">
-    <g class="grid">${grid}</g>
-    ${h.map((e, i) => `<circle cx="${x(i).toFixed(1)}" cy="${y(e.wpm).toFixed(1)}" r="2.5"><title>${e.wpm} WPM, ${pct(e.acc)}</title></circle>`).join('')}
-    <path d="${path}"/>
-  </svg>`;
-}
-
-function calendar() {
-  const days = 7 * 15;
-  const now = new Date();
-  const start = new Date(now.getFullYear(), now.getMonth(), now.getDate() - days + 1);
-  start.setDate(start.getDate() - start.getDay()); // align to Sunday
-  const goal = state.settings.dailyGoal;
-  let cells = '';
-  for (let d = new Date(start); d <= now; d.setDate(d.getDate() + 1)) {
-    const v = state.days[dayKey(d)] || 0;
-    const lvl = v === 0 ? 0 : v < goal * 0.5 ? 1 : v < goal ? 2 : 3;
-    cells += `<i class="c${lvl}" title="${d.toDateString()}: ${fmt(v)} XP"></i>`;
-  }
-  return `<div class="cal" role="img" aria-label="Daily XP for the last 15 weeks">${cells}</div>`;
-}
-
 function viewProgress() {
   const lv = levelFromXp(state.xp);
-  const t = state.totals;
   const st = streak();
-  const mins = t.ms / 60000;
-  const items = Object.values(state.items);
   main.innerHTML = `
     <header class="prog-head">
       <div class="lvl-badge"><span>Lv</span><b>${lv.level}</b></div>
       <div>
         <h1>${fmt(state.xp)} XP</h1>
-        <p class="rank">${esc(titleFor(lv.level))}</p>
+        <p class="rank">${esc(titleFor(lv.level))}, ${st.count}-day streak, best combo ×${comboMult(state.bestCombo).toFixed(1)}</p>
         <div class="xpbar"><i style="width:${pct(lv.into / lv.span)}"></i></div>
         <p class="muted">${fmt(lv.toNext)} XP to level ${lv.level + 1}</p>
       </div>
     </header>
-    <section class="prog-grid">
-      <dl class="tallies">
-        <div><dt>Answers typed</dt><dd>${fmt(t.items)}</dd></div>
-        <div><dt>Perfects</dt><dd>${fmt(t.perfects || 0)}</dd></div>
-        <div><dt>Average speed</dt><dd>${mins ? Math.round((t.chars / 5) / mins) : 0} <small>WPM</small></dd></div>
-        <div><dt>Accuracy</dt><dd>${t.keystrokes ? pct((t.keystrokes - t.errors) / t.keystrokes) : '0%'}</dd></div>
-        <div><dt>Streak</dt><dd>${st.count} <small>${st.count === 1 ? 'day' : 'days'}</small></dd></div>
-        <div><dt>Best combo</dt><dd>×${comboMult(state.bestCombo).toFixed(1)} <small>${state.bestCombo} in a row</small></dd></div>
-        <div><dt>Mastered</dt><dd>${items.filter(s => s.box >= 5).length}</dd></div>
-        <div><dt>Time typing</dt><dd>${mins < 60 ? `${Math.round(mins)} <small>min</small>` : `${(mins / 60).toFixed(1)} <small>h</small>`}</dd></div>
-      </dl>
-      <div class="panel"><h2>Speed</h2>${wpmChart()}</div>
-      <div class="panel"><h2>Daily XP</h2>${calendar()}</div>
-    </section>
+    <div class="dash" id="dash"></div>
     <section class="panel">
       <h2>Achievements <small>${Object.keys(state.achievements).filter(id => ACHIEVEMENTS.some(a => a.id === id)).length} of ${ACHIEVEMENTS.length}</small></h2>
       <ul class="achs">
@@ -846,6 +799,12 @@ function viewProgress() {
         <button class="btn danger" id="reset">Reset progress</button>
       </div>
     </section>`;
+
+  cleanup = renderDashboard(document.getElementById('dash'), {
+    packs,
+    chapterHref: (pack, unit) => `#/c/${enc(pack.id)}/${enc(unit.id)}`,
+    playItemHref: (pack, unit, item) => playHref(pack, unit, 'train', item),
+  });
 
   document.getElementById('export').addEventListener('click', () => {
     const blob = new Blob([exportState()], { type: 'application/json' });

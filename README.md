@@ -45,6 +45,10 @@ syllabus topic and is tagged when it's printed on the data and formulae list.
 - **Two bars per chapter.** *Practice* (yellow) fills as you finish answers in the chapter, so
   one full lap fills it, and it drains by a seventh for each day you don't practise that chapter.
   *Mastery* (blue) grows as answers move up from Trained to Mastered and doesn't fade.
+- **Stats dashboard.** Filter by time range and subject, then see headline numbers against the
+  previous period, daily XP against your goal, speed and accuracy trends, how your answers
+  split across mastery stages and ratings, the most-examined answers you haven't mastered yet,
+  and every chapter's practice, mastery and exam frequency. Every chart has a table view.
 - **Levels, streaks, a daily goal and 25 achievements.**
 - **Works offline.** A service worker caches the app and every pack on first visit. Packs refresh
   in the background, and new app versions show a reload prompt.
