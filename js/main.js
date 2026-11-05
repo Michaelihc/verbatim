@@ -232,8 +232,8 @@ function viewHome() {
     <section class="hero">
       <div class="hero-top">
         <div>
-          <h1>Type it until you know it.</h1>
-          <p class="lede">Every answer you type is an exam answer, worded the way the mark scheme accepts it. Build speed and learn the words that score, at the same time.</p>
+          <h1 id="hero-line">${esc(HOME_HEADLINES[variant])}</h1>
+          <p class="lede">Practise your typing and study for the exam in one go. Every answer is worded the way the mark scheme accepts it, and the phrases that score marks light up as you type them.</p>
         </div>
         <div class="variant-switch">
           <span>Front page</span>
@@ -328,6 +328,7 @@ function viewHome() {
     state.settings.homeLayout = variant;
     save();
     main.querySelectorAll('[data-variant]').forEach(x => x.setAttribute('aria-checked', x.dataset.variant === variant));
+    document.getElementById('hero-line').textContent = HOME_HEADLINES[variant];
     renderVariant();
   }));
 
@@ -368,7 +369,21 @@ function viewHome() {
   cleanup = () => { document.removeEventListener('keydown', onKey); vcleanup?.(); };
 }
 
+// After an equation, show its symbol form next to the words just typed.
+const symbolsBlock = it => it.formula && it.formula !== it.term ? `
+      <div class="symbols">
+        <span class="symbols-label">In symbols</span>
+        <p class="symbols-eq"><span>${formula(it.formula)}</span></p>
+        <p class="symbols-words">${esc(it.answer)}</p>
+      </div>` : '';
+
 const HOME_VARIANTS = [['type', 'Type now'], ['set', 'Exam set'], ['plan', 'Today’s plan']];
+// Each layout has its own headline, so a layout and its pitch can be judged together.
+const HOME_HEADLINES = {
+  type: 'Every keystroke is revision.',
+  set: 'Type faster. Score more marks.',
+  plan: 'Typing practice that revises for you.',
+};
 const subjectParam = subject => enc(subject === 'all' ? 'all' : subject);
 
 /** Variant A: a live typing card on the front page. Start typing straight away. */
@@ -450,6 +465,7 @@ function typeNow(host, subject) {
     out.className = `result compact r-${res.rating}`;
     out.innerHTML = `
       <div class="verdict"><span class="verdict-word">${esc(RATINGS[res.rating].label)}</span><span class="verdict-xp">+<b>${res.xp}</b> XP</span></div>
+      ${symbolsBlock(e.item)}
       <div class="chips-row">
         ${r.points?.total ? `<span class="pill marks ${r.points.earned === r.points.total ? 'full' : ''}">${r.points.earned}/${r.points.total} mark points</span>` : ''}
         ${res.combo >= 2 ? `<span class="pill combo-pill">${ICON.flame} ${res.combo} in a row</span>` : ''}
@@ -469,7 +485,7 @@ function typeNow(host, subject) {
     next.addEventListener('click', load);
     next.focus({ preventScroll: true });
     out.addEventListener('pointerdown', () => clearTimeout(timer));
-    if (state.settings.autoAdvance && res.rank >= 3) timer = setTimeout(load, 1800);
+    if (state.settings.autoAdvance && res.rank >= 3) timer = setTimeout(load, 1800 + (e.item.formula && e.item.formula !== e.item.term ? 1500 : 0));
   }
 
   load();
@@ -802,6 +818,9 @@ function viewPlay(q) {
 
     const it = entry.item;
     const auto = state.settings.autoAdvance && res.rank >= 3;
+    // Give the symbol form time to land before moving on.
+    const hasSymbols = it.formula && it.formula !== it.term;
+    const autoMs = (res.rating === 'perfect' ? 1300 : 1700) + (hasSymbols ? 1500 : 0);
     const extra = (it.alt?.length || it.notes || it.sources?.length) ? `
       <details class="more"><summary>Mark scheme notes</summary>
         ${it.alt?.length ? `<p><b>Also accepted:</b> ${it.alt.map(esc).join('; ')}</p>` : ''}
@@ -815,12 +834,7 @@ function viewPlay(q) {
         <span class="verdict-word">${esc(RATINGS[res.rating].label)}${res.rating === 'perfect' ? '!' : ''}</span>
         <span class="verdict-xp">+<b>0</b> XP</span>
       </div>
-      ${it.formula && it.formula !== it.term ? `
-      <div class="symbols">
-        <span class="symbols-label">In symbols</span>
-        <p class="symbols-eq"><span>${formula(it.formula)}</span></p>
-        <p class="symbols-words">${esc(it.answer)}</p>
-      </div>` : ''}
+      ${symbolsBlock(it)}
       <div class="chips-row">
         ${res.combo >= 2 ? `<span class="pill combo-pill">${ICON.flame} ${res.combo} in a row, ×${res.comboMult.toFixed(1)}</span>` : ''}
         ${res.bonus ? `<span class="pill bonus ${res.bonus.kind}">${ICON.bolt} ${esc(res.bonus.label)}</span>` : ''}
@@ -838,7 +852,7 @@ function viewPlay(q) {
         <button class="btn primary" id="next" type="button">Next <kbd>Enter</kbd></button>
         <button class="btn" id="retry" type="button">${ICON.replay} Again <kbd>R</kbd></button>
       </div>
-      ${auto ? `<div class="auto" style="--t:${res.rating === 'perfect' ? 1300 : 1700}ms"><i></i></div>` : ''}`;
+      ${auto ? `<div class="auto" style="--t:${autoMs}ms"><i></i></div>` : ''}`;
     card.append(result);
     card.classList.add('done', `r-${res.rating}`);
     result.querySelector('#next').addEventListener('click', next);
@@ -846,7 +860,7 @@ function viewPlay(q) {
     result.querySelector('#next').focus({ preventScroll: true });
     result.addEventListener('pointerdown', clearAuto);
     result.querySelector('.more')?.addEventListener('toggle', clearAuto);
-    if (auto) autoTimer = setTimeout(next, res.rating === 'perfect' ? 1300 : 1700);
+    if (auto) autoTimer = setTimeout(next, autoMs);
     const rect = result.getBoundingClientRect();
     if (rect.bottom > innerHeight) result.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
 
