@@ -7,6 +7,7 @@ import {
 } from './game.js';
 import { sfx, confetti, floatText, countUp } from './fx.js';
 import { renderDashboard } from './dash.js';
+import { nextUp, examSet, todayPlan, doneToday, setEntries, studyMode } from './plan.js';
 
 const REPO_URL = 'https://github.com/Michaelihc/verbatim';
 const main = document.getElementById('main');
@@ -222,35 +223,42 @@ function viewHome() {
     sub: `${MODES[last.mode]?.label || 'Train'}, ${lastPack.title}`,
   } : null;
   const due = dueItems().length;
+  let variant = HOME_VARIANTS.some(([k]) => k === state.settings.homeLayout) ? state.settings.homeLayout : 'type';
   const today = state.days[dayKey()] || 0;
   const goal = state.settings.dailyGoal;
   const st = streak();
 
   main.innerHTML = `
     <section class="hero">
-      <h1>Type it until you know it.</h1>
-      <p class="lede">Train with the answer in front of you. Practise with words hidden. Every answer is worded the way the mark scheme accepts it.</p>
+      <div class="hero-top">
+        <div>
+          <h1>Type it until you know it.</h1>
+          <p class="lede">Every answer you type is an exam answer, worded the way the mark scheme accepts it. Build speed and learn the words that score, at the same time.</p>
+        </div>
+        <div class="variant-switch">
+          <span>Front page</span>
+          <div class="seg seg-small" role="radiogroup" aria-label="Front page layout">
+            ${HOME_VARIANTS.map(([k, l]) => `<button type="button" role="radio" data-variant="${k}" aria-checked="${variant === k}">${l}</button>`).join('')}
+          </div>
+        </div>
+      </div>
       <div class="search" role="search">
         ${ICON.search}
         <input id="q" type="search" placeholder="Find a term, like tesla or flux" autocomplete="off" spellcheck="false" aria-label="Search topics and terms">
         <kbd>/</kbd>
       </div>
       <div class="results" id="results" hidden></div>
+      <div id="variant"></div>
       <div class="quick">
         ${cont ? `<a class="quick-card go" href="${cont.href}" id="continue">
           <span class="qc-icon">${ICON.play}</span>
           <span class="qc-text"><small>Continue: ${esc(cont.sub)}</small><b>${esc(cont.title)}</b></span>
           <kbd>Enter</kbd>
         </a>` : ''}
-        ${due ? `<a class="quick-card due" href="#/play?review=1">
+        ${due && variant === 'set' ? `<a class="quick-card due" href="#/play?review=1">
           <span class="qc-icon">${ICON.replay}</span>
           <span class="qc-text"><small>Spaced review</small><b>${plural(due, 'answer')} due</b></span>
         </a>` : ''}
-        <a class="quick-card stat" href="#/progress">
-          ${ring(today / goal, 44, 5)}
-          <span class="qc-text"><small>Today</small><b>${fmt(today)} / ${fmt(goal)} XP</b></span>
-          <span class="qc-streak ${st.today ? 'lit' : ''}">${ICON.flame}${st.count}</span>
-        </a>
       </div>
     </section>
     <section class="shelf" id="shelf"></section>
@@ -296,7 +304,7 @@ function viewHome() {
     shelf.querySelectorAll('[data-subject]').forEach(b => b.addEventListener('click', () => {
       subject = b.dataset.subject;
       packId = packIn(subject)[0]?.id;
-      renderShelf(); save();
+      renderShelf(); renderVariant(); save();
     }));
     shelf.querySelectorAll('[data-pack]').forEach(b => b.addEventListener('click', () => {
       packId = b.dataset.pack;
@@ -304,6 +312,24 @@ function viewHome() {
     }));
   }
   renderShelf();
+
+  // Front-page variants: each one mixes typing practice with exam study.
+  const vhost = document.getElementById('variant');
+  let vcleanup = null;
+  function renderVariant() {
+    vcleanup?.(); vcleanup = null;
+    if (variant === 'type') vcleanup = typeNow(vhost, subject);
+    else if (variant === 'set') examSetCard(vhost, subject);
+    else planCard(vhost, subject);
+  }
+  renderVariant();
+  main.querySelectorAll('[data-variant]').forEach(b => b.addEventListener('click', () => {
+    variant = b.dataset.variant;
+    state.settings.homeLayout = variant;
+    save();
+    main.querySelectorAll('[data-variant]').forEach(x => x.setAttribute('aria-checked', x.dataset.variant === variant));
+    renderVariant();
+  }));
 
   // Search
   const input = document.getElementById('q');
@@ -334,12 +360,182 @@ function viewHome() {
   });
 
   const onKey = e => {
-    if (document.activeElement === input) return;
+    if (document.activeElement === input || document.activeElement?.classList.contains('type-input')) return;
     if (e.key === '/' ) { e.preventDefault(); input.focus(); }
-    else if (e.key === 'Enter' && cont && document.activeElement === document.body) { e.preventDefault(); go(cont.href); }
+    else if (e.key === 'Enter' && cont && variant !== 'type' && document.activeElement === document.body) { e.preventDefault(); go(cont.href); }
   };
   document.addEventListener('keydown', onKey);
-  cleanup = () => document.removeEventListener('keydown', onKey);
+  cleanup = () => { document.removeEventListener('keydown', onKey); vcleanup?.(); };
+}
+
+const HOME_VARIANTS = [['type', 'Type now'], ['set', 'Exam set'], ['plan', 'Today’s plan']];
+const subjectParam = subject => enc(subject === 'all' ? 'all' : subject);
+
+/** Variant A: a live typing card on the front page. Start typing straight away. */
+function typeNow(host, subject) {
+  const skip = new Set();
+  let typer = null, timer = 0, combo = 0, count = 0, earnedXp = 0;
+
+  function load() {
+    clearTimeout(timer);
+    const e = nextUp(packs, subject, skip);
+    if (!e) {
+      typer?.destroy(); typer = null;
+      host.innerHTML = `<section class="variant v-type"><p class="v-empty">Everything here is mastered. Pick a chapter below to keep it fresh.</p></section>`;
+      return;
+    }
+    const { pack, unit, item } = e;
+    const how = studyMode(e.stage);
+    host.innerHTML = `
+      <section class="variant v-type" aria-label="Type now">
+        <div class="v-type-meta">
+          <span class="why">${esc(e.why)}</span>
+          <span class="how">${how.mode === 'train' ? ICON.play : ICON.pen}${esc(how.label)}</span>
+          ${count ? `<span class="tally">${plural(count, 'answer')} here, +${fmt(earnedXp)} XP</span>` : ''}
+        </div>
+        <article class="card mode-${how.mode} home-card" style="--h:${hueOf(pack, unit)}">
+          <div class="card-progress"><i></i></div>
+          <header class="card-head">
+            <div class="tags">
+              <span class="tag">${esc(unit.title)}</span>
+              ${e.cites ? `<span class="tag stage-tag">In ${plural(e.cites, 'mark scheme')}</span>` : ''}
+              ${item.points?.length ? `<span class="tag">${plural(item.points.length, 'mark point')}</span>` : ''}
+            </div>
+            <h2 class="card-term">${esc(item.term)}</h2>
+            <p class="card-q">${esc(item.prompt)}</p>
+            ${item.formula && item.formula !== item.term ? `<p class="formula">${formula(item.formula)}</p>` : ''}
+          </header>
+          <div class="answer" id="home-answer"></div>
+          <footer class="card-foot">
+            <button class="btn small ghost" id="skip" type="button">Skip</button>
+            <a class="btn small ghost" href="${playHref(pack, unit, how.mode, item)}">Keep going full screen</a>
+            <span class="live" id="home-live"></span>
+          </footer>
+        </article>
+      </section>`;
+    const card = host.querySelector('.home-card');
+    const live = host.querySelector('#home-live');
+    const bar = card.querySelector('.card-progress i');
+    typer?.destroy();
+    typer = new Typer(host.querySelector('#home-answer'), {
+      text: item.answer,
+      kind: pack.kind === 'code' ? 'code' : 'prose',
+      mask: chooseMask(item.answer, maskRatio(how.mode, how.level), `${pack.id}/${item.id}`),
+      settings: { ...state.settings, practiceLevel: how.level || state.settings.practiceLevel },
+      points: state.settings.markPoints ? item.points : null,
+      showKeys: how.mode === 'train',
+      onPoint: n => { if (state.settings.sound) sfx.mark(n); },
+      onKey: ok => { if (!state.settings.sound) return; if (!ok) sfx.miss(); else if (state.settings.keySound) sfx.key(); },
+      onProgress: st => {
+        live.innerHTML = st.pos ? `<span><b>${Math.round(st.wpm)}</b> wpm</span><span><b>${pct(st.acc)}</b> right</span>` : '<span>Start typing</span>';
+        bar.style.width = pct(st.pos / st.total);
+      },
+      onDone: r => done(e, how, r),
+    });
+    host.querySelector('#skip').addEventListener('click', () => { skip.add(`${pack.id}/${item.id}`); load(); });
+    typer.focus();
+  }
+
+  function done(e, how, r) {
+    const res = applyResult({ ...r, packId: e.pack.id, itemId: e.item.id, mode: how.mode, level: how.level }, combo);
+    combo = res.combo; count++; earnedXp += res.xp;
+    creditPractice(e.pack, e.unit, e.item.id);
+    pushHistory({ t: Date.now(), p: e.pack.id, i: e.item.id, m: how.mode, wpm: Math.round(res.wpm), acc: +res.acc.toFixed(3), xp: res.xp, r: res.rating });
+    const earned = checkAchievements({ mode: how.mode, level: how.level, rating: res.rating, rank: res.rank, hints: r.hints, chars: r.chars, wpm: res.wpm });
+    save();
+    skip.add(`${e.pack.id}/${e.item.id}`);
+    const card = host.querySelector('.home-card');
+    card.classList.add('done', `r-${res.rating}`);
+    const out = document.createElement('section');
+    out.className = `result compact r-${res.rating}`;
+    out.innerHTML = `
+      <div class="verdict"><span class="verdict-word">${esc(RATINGS[res.rating].label)}</span><span class="verdict-xp">+<b>${res.xp}</b> XP</span></div>
+      <div class="chips-row">
+        ${r.points?.total ? `<span class="pill marks ${r.points.earned === r.points.total ? 'full' : ''}">${r.points.earned}/${r.points.total} mark points</span>` : ''}
+        ${res.combo >= 2 ? `<span class="pill combo-pill">${ICON.flame} ${res.combo} in a row</span>` : ''}
+        ${res.bonus ? `<span class="pill bonus ${res.bonus.kind}">${ICON.bolt} ${esc(res.bonus.label)}</span>` : ''}
+        ${res.stageAfter > res.stageBefore ? `<span class="pill up">↑ ${esc(STAGES[res.stageAfter])}</span>` : ''}
+      </div>
+      ${r.points?.missed?.length ? `<p class="tip missed">Missed: ${r.points.missed.map(m => `<q>${esc(m)}</q>`).join(', ')}</p>` : ''}
+      <div class="result-actions"><button class="btn primary" id="hnext" type="button">Next <kbd>Enter</kbd></button></div>`;
+    card.append(out);
+    if (state.settings.sound) { sfx.done(res.rank, res.combo); if (res.bonus) sfx.lucky(res.bonus.kind === 'jackpot'); }
+    const vr = out.querySelector('.verdict-word').getBoundingClientRect();
+    if (res.bonus || res.rating === 'perfect') confetti({ x: vr.left + vr.width / 2, y: vr.top + vr.height / 2, count: res.bonus ? 110 : 40, spread: 1 });
+    if (res.levelAfter > res.levelBefore) toast(`<b>Level ${res.levelAfter}!</b>`, 'level');
+    if (res.dailyGoalHit) toast('<b>Daily goal reached.</b> Streak safe for today.', 'goal');
+    achToast(earned.filter(a => !(a.id === 'goal' && res.dailyGoalHit)));
+    const next = out.querySelector('#hnext');
+    next.addEventListener('click', load);
+    next.focus({ preventScroll: true });
+    out.addEventListener('pointerdown', () => clearTimeout(timer));
+    if (state.settings.autoAdvance && res.rank >= 3) timer = setTimeout(load, 1800);
+  }
+
+  load();
+  return () => { clearTimeout(timer); typer?.destroy(); };
+}
+
+/** Variant B: today's exam set, a short paper of the questions that matter most. */
+function examSetCard(host, subject) {
+  const set = examSet(packs, subject);
+  if (!set.length) { host.innerHTML = `<section class="variant v-set"><p class="v-empty">No exam questions for this subject yet.</p></section>`; return; }
+  const marks = set.reduce((n, e) => n + (e.item.points?.length || 0), 0);
+  const done = doneToday(set);
+  const sp = subjectParam(subject);
+  host.innerHTML = `
+    <section class="variant v-set" aria-label="Today's exam set">
+      <header class="v-head">
+        <div>
+          <h2>Today’s exam set</h2>
+          <p>${set.length} questions worth ${marks} mark points, from what comes up most in the mark schemes and what you know least. A new set every day.</p>
+        </div>
+        <div class="v-ring">${ring(done / set.length, 52, 6)}<span><b>${done}</b>/${set.length}</span></div>
+      </header>
+      <ol class="set-list">
+        ${set.map(e => `<li><a href="${playHref(e.pack, e.unit, 'train', e.item)}">
+          <span class="q-main"><b>${esc(e.item.term)}</b><small>${esc(e.unit.title)}, in ${plural(e.cites, 'mark scheme')}</small></span>
+          ${e.item.points?.length ? `<span class="q-marks">${plural(e.item.points.length, 'point')}</span>` : ''}
+          ${pips(e.stage)}
+        </a></li>`).join('')}
+      </ol>
+      <div class="row v-actions">
+        <a class="btn big primary" href="#/play?set=exam&subject=${sp}&mode=practice">${ICON.pen} Answer from memory</a>
+        <a class="btn big" href="#/play?set=exam&subject=${sp}&mode=train">${ICON.play} Type them out first</a>
+      </div>
+    </section>`;
+}
+
+/** Variant C: today's plan, three short sessions in order. */
+function planCard(host, subject) {
+  const plan = todayPlan(packs, subject);
+  const sp = subjectParam(subject);
+  const steps = [
+    { key: 'review', items: plan.review, title: 'Spaced review', mode: 'practice', desc: plan.review.length ? 'Answers you recalled before, due again so they stick.' : 'Nothing is due today.' },
+    { key: 'weak', items: plan.weak, title: 'Weak spots', mode: 'practice', desc: plan.weak.length ? 'Often-examined answers you haven’t secured yet. Fill the gaps from memory.' : 'No weak spots yet. Train some answers first.' },
+    { key: 'new', items: plan.fresh, title: plan.freshUnit ? `New in ${plan.freshUnit.unit.title}` : 'New answers', mode: 'train', desc: plan.fresh.length ? 'Type them out with the answer in front of you.' : 'Nothing new left here.' },
+  ];
+  const firstOpen = steps.findIndex(s => s.items.length && doneToday(s.items) < s.items.length);
+  host.innerHTML = `
+    <section class="variant v-plan" aria-label="Today's plan">
+      <header class="v-head"><div><h2>Today’s plan</h2><p>Three short sessions. Each one trains your typing and revises for the exam at the same time.</p></div></header>
+      <ol class="plan-steps">
+        ${steps.map((st, i) => {
+          const total = st.items.length;
+          const d = doneToday(st.items);
+          const complete = total > 0 && d >= total;
+          return `<li class="${complete ? 'complete' : ''} ${total ? '' : 'is-empty'}">
+            <span class="step-n">${complete ? '✓' : i + 1}</span>
+            <div class="step-main">
+              <b>${esc(st.title)}</b>
+              <p>${esc(st.desc)}</p>
+              ${total ? `<span class="step-bar"><i style="width:${pct(d / total)}"></i></span><small>${d} of ${total} done today, about ${Math.max(1, Math.round(total * 0.75))} min</small>` : ''}
+            </div>
+            ${total ? `<a class="btn ${i === firstOpen ? 'primary' : ''}" href="#/play?set=${st.key}&subject=${sp}&mode=${st.mode}">${complete ? 'Again' : 'Start'}</a>` : ''}
+          </li>`;
+        }).join('')}
+      </ol>
+    </section>`;
 }
 
 // ---- chapter ----------------------------------------------------------------
@@ -391,7 +587,23 @@ function viewChapter(packId, unitId) {
 
 // ---- play -------------------------------------------------------------------
 
+const SETS = {
+  exam: { title: 'Exam set', done: 'Exam set done.' },
+  weak: { title: 'Weak spots', done: 'Weak spots done.' },
+  new: { title: 'New answers', done: 'New answers done.' },
+  review: { title: 'Spaced review', done: 'Every due answer reviewed.' },
+};
+
 function buildSession(q) {
+  if (SETS[q.get('set')]) {
+    const subject = q.get('subject') || 'all';
+    const items = setEntries(packs, q.get('set'), subject).map(({ pack, unit, item }) => ({ pack, unit, item }));
+    const marks = items.reduce((n, e) => n + (e.item.points?.length || 0), 0);
+    return items.length ? {
+      title: SETS[q.get('set')].title, review: true, set: q.get('set'), doneText: SETS[q.get('set')].done,
+      sub: `${plural(items.length, 'question')}${marks ? `, ${marks} mark points` : ''}${subject !== 'all' ? `, ${subject}` : ''}`, items,
+    } : null;
+  }
   if (q.get('review')) {
     const items = dueItems();
     return items.length ? { title: 'Spaced review', sub: `${plural(items.length, 'answer')} due`, items, review: true } : null;
@@ -429,7 +641,7 @@ function viewPlay(q) {
   }
   const S = {
     ...setup,
-    mode: q.get('mode') === 'practice' || setup.review ? 'practice' : 'train',
+    mode: q.get('mode') === 'practice' || (setup.review && !setup.set) ? 'practice' : 'train',
     lap: 1, order: [], pos: 0, combo: 0, xp: 0, lapXp: 0, lapResults: new Map(),
   };
   // Lap 1 goes in syllabus order (from the chosen answer), so every answer comes round once.
@@ -509,7 +721,7 @@ function viewPlay(q) {
           return `<i class="${i === S.pos && phase !== 'lap' ? 'now' : ''} ${r && i < done ? `r-${r}` : ''}"></i>`;
         }).join('')}</span>`
       : `<span class="lap-bar"><i style="width:${pct(done / n)}"></i></span>`;
-    lapEl.innerHTML = `<span class="lap-label">${S.review ? 'Review' : `Lap ${S.lap}`}</span><span class="lap-count">${Math.min(done, n)}/${n}</span>${dots}`;
+    lapEl.innerHTML = `<span class="lap-label">${S.set ? esc(S.title) : S.review ? 'Review' : `Lap ${S.lap}`}</span><span class="lap-count">${Math.min(done, n)}/${n}</span>${dots}`;
   }
 
   function clearAuto() { clearTimeout(autoTimer); autoTimer = 0; card?.querySelector('.auto')?.remove(); }
@@ -583,6 +795,7 @@ function viewPlay(q) {
     S.xp += res.xp;
     S.lapXp += res.xp;
     S.lapResults.set(keyOf(entry), res.rating);
+    if (r.points?.total) S.lapPts = [(S.lapPts?.[0] || 0) + r.points.earned, (S.lapPts?.[1] || 0) + r.points.total];
     pushHistory({ t: Date.now(), p: entry.pack.id, i: entry.item.id, m: mode, wpm: Math.round(res.wpm), acc: +res.acc.toFixed(3), xp: res.xp, r: res.rating });
     const earned = checkAchievements({ mode, level: mode === 'practice' ? level : null, rating: res.rating, rank: res.rank, hints: r.hints, chars: r.chars, wpm: res.wpm });
     save();
@@ -680,7 +893,8 @@ function viewPlay(q) {
     card.className = 'card lap-card';
     card.innerHTML = `
       <h2>${clean === n ? 'Clean sweep' : clean >= n * 0.7 ? 'Strong lap' : 'Lap done'}</h2>
-      <p class="muted">${S.review ? 'Every due answer reviewed.' : `Lap ${S.lap} of ${esc(S.title)} is done.`}</p>
+      <p class="muted">${S.review ? esc(S.doneText || 'Every due answer reviewed.') : `Lap ${S.lap} of ${esc(S.title)} is done.`}</p>
+      ${S.lapPts?.[1] ? `<p class="lap-marks"><b>${S.lapPts[0]}</b> of ${S.lapPts[1]} mark points scored</p>` : ''}
       <p class="lap-xp">+<b>${fmt(S.lapXp)}</b> XP</p>
       <ul class="lap-counts">
         ${Object.entries(counts).filter(([, c]) => c).map(([k, c]) => `<li class="r-${k}"><b>${c}</b>${esc(RATINGS[k].label)}</li>`).join('')}
@@ -712,7 +926,7 @@ function viewPlay(q) {
     let order = [...weak, ...shuffled(rest)];
     if (order.length > 1 && order[0] === prevLast) order.push(order.shift());
     S.order = order;
-    S.lap++; S.pos = 0; S.lapXp = 0; S.lapResults = new Map();
+    S.lap++; S.pos = 0; S.lapXp = 0; S.lapResults = new Map(); S.lapPts = null;
     show();
   }
 
@@ -865,6 +1079,7 @@ function viewSettings() {
     <section class="panel settings">
       <h2>Typing</h2>
       ${choice('practiceLevel', 'Practice mode hides', Object.entries(LEVELS).map(([k, l]) => [k, l.label]))}
+      ${choice('homeLayout', 'Front page', HOME_VARIANTS)}
       ${toggle('markPoints', 'Show mark points', 'The phrases that earn marks in the mark scheme are underlined, and light up with +1 as you type each one correctly. Physics and Computer Science definitions.')}
       ${toggle('stopOnError', 'Stop on mistakes', 'A wrong key is rejected, so you must type the right one before moving on.')}
       ${toggle('ignoreCase', 'Ignore capital letters', 'Accept “a” for “A”. Pseudocode keywords should still be in capitals in the exam.')}
