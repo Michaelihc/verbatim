@@ -583,6 +583,31 @@ body[data-view='play'] main { padding-top: 1rem; }
 .r-good .verdict-word { --swipe: var(--mark-orange); }
 .r-ok .verdict-word { color: var(--ink-2); font-size: clamp(1.7rem, 1.4rem + 1.5vw, 2.4rem); }
 .verdict-xp { font: 850 1.6rem/1 var(--display); font-stretch: 115%; font-variant-numeric: tabular-nums; }
+/* Equations: the symbol form, revealed as the reward for typing the words. */
+.symbols {
+  margin: 0.2rem 0 0.8rem; padding: 0.7rem 1rem 0.75rem;
+  background: var(--card-2); border-left: 4px solid var(--biro); border-radius: 0 6px 6px 0;
+  animation: symbols-in 0.45s 0.18s cubic-bezier(0.2, 0.9, 0.3, 1.15) backwards;
+}
+@keyframes symbols-in { from { opacity: 0; transform: translateY(10px); } }
+.symbols-label { display: block; font-size: 0.75rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-2); }
+.symbols-eq {
+  margin: 0.15rem 0 0.3rem;
+  font: 700 clamp(1.45rem, 1.1rem + 2vw, 2.4rem)/1.25 var(--sans); letter-spacing: 0.01em;
+  color: var(--biro); overflow-wrap: anywhere;
+}
+.symbols-eq sub { font-size: 0.62em; }
+/* A highlighter stroke under the symbols (on every wrapped line), drawn once the block lands. */
+.symbols-eq > span {
+  --stroke: calc(var(--tab-swipe-h) * 0.6);
+  padding: 0 0.1em;
+  background: linear-gradient(var(--tab-swipe), var(--tab-swipe)) left 0 bottom 0.04em / 100% var(--stroke) no-repeat;
+  -webkit-box-decoration-break: clone; box-decoration-break: clone;
+  animation: stroke-in 0.4s 0.45s cubic-bezier(0.3, 0.9, 0.3, 1) backwards;
+}
+@keyframes stroke-in { from { background-size: 0 var(--stroke); } }
+.symbols-words { margin: 0; font-size: 0.9rem; color: var(--ink-2); overflow-wrap: anywhere; }
+@media (prefers-reduced-motion: reduce) { .symbols, .symbols-eq > span { animation-delay: 0s; } }
 .chips-row { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 0.6rem; }
 .chips-row:empty { display: none; }
 .pill { display: inline-flex; align-items: center; gap: 0.3rem; font-size: 0.88rem; font-weight: 700; padding: 0.2rem 0.6rem; border-radius: 4px; background: var(--card-2); color: var(--ink); animation: pop-in 0.3s cubic-bezier(0.2, 1.6, 0.4, 1) backwards; }
