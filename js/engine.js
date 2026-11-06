@@ -140,7 +140,7 @@ export class Typer {
       }
     }
 
-    this.kb = this.settings.showKeyboard ? createKeyboard() : null;
+    this.kb = this.settings.showKeyboard ? createKeyboard({ legend: !!this.settings.kbLegend }) : null;
     this.host.replaceChildren(sheet, input, ...(this.kb ? [this.kb.el] : []));
     this.sheet = sheet;
     this.input = input;
