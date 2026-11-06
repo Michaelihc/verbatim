@@ -720,6 +720,55 @@ a.kb-key { text-decoration: none; } a.kb-key:hover, a.kb-key:focus-visible { out
 .focus-form input { width: 14rem; max-width: 52vw; padding: 0.3rem 0.6rem; border-radius: 6px; border: 2px solid transparent; font: inherit; font-size: 0.9rem; background: var(--card); color: var(--ink); }
 .focus-form input:focus { outline: none; border-color: var(--hl); }
 
+/* Typing hub */
+.hub-head { padding-top: 1.25rem; }
+.hub-head .lede { color: var(--on-desk-2); max-width: 60ch; }
+.next-up { display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 1rem; padding: 1rem 1.25rem; margin: 1.25rem 0 1.5rem;
+  background: var(--card); color: var(--ink); border-radius: 8px; box-shadow: var(--shadow-card); text-decoration: none; border-left: 6px solid var(--hl); }
+.next-up .qc-icon { width: 2.8rem; height: 2.8rem; }
+.nu-text { display: grid; gap: 0.15rem; min-width: 0; }
+.nu-text small { font-size: 0.78rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--ink-3); }
+.nu-text b { font-size: 1.2rem; }
+.nu-text span { color: var(--ink-2); font-size: 0.92rem; }
+.next-up:hover .btn.primary { transform: translateY(-1px); }
+.next-up.k-due .qc-icon, .quick-card.k-due .qc-icon { background: var(--mark-good); }
+.next-up.k-drill .qc-icon, .quick-card.k-drill .qc-icon { background: var(--mark-orange); }
+.tools { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; margin-bottom: 1.25rem; }
+.tool-card { display: flex; flex-direction: column; gap: 0.5rem; padding: 1.1rem 1.25rem 1.2rem; background: var(--card); color: var(--ink); border-radius: 8px; box-shadow: var(--shadow-card); }
+.tool-goal { margin: 0; font-size: 0.78rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--biro); }
+.tool-card h2 { margin: 0; font-size: 1.35rem; }
+.tool-card h2 a { color: inherit; text-decoration: none; } .tool-card h2 a:hover { text-decoration: underline; }
+.tool-what { margin: 0; color: var(--ink-2); font-size: 0.95rem; }
+.tool-status { display: grid; gap: 0.35rem; padding: 0.6rem 0.75rem; background: var(--card-2); border-radius: 6px; margin-top: 0.2rem; }
+.tool-status small { color: var(--ink-2); }
+.tool-num b { font-size: 1.6rem; font-variant-numeric: tabular-nums; margin-right: 0.2rem; }
+.tool-actions { display: flex; flex-wrap: wrap; gap: 0.5rem; align-items: center; margin-top: auto; padding-top: 0.4rem; }
+.tool-card .chips { display: flex; flex-wrap: wrap; gap: 0.35rem; }
+.tool-card .chip-link { background: var(--card); color: var(--ink); box-shadow: inset 0 0 0 1px var(--rule); }
+.tool-card .chip-link:hover { background: var(--hl); color: #0c1445; }
+.tool-card .focus-form input { background: var(--card); border-color: var(--rule); flex: 1; width: auto; max-width: none; }
+.mini-letters { display: flex; flex-wrap: wrap; gap: 2px; }
+.mini-letters i { font: 700 0.72rem/1 var(--mono); font-style: normal; width: 1.15rem; height: 1.3rem; display: grid; place-items: center; border-radius: 3px; color: var(--ink-3); box-shadow: inset 0 0 0 1px var(--rule); }
+.mini-letters i.open { background: var(--card); color: var(--ink); box-shadow: inset 0 -3px 0 var(--biro); }
+.mini-letters i.ready { background: var(--mark-good); color: #0c1445; box-shadow: none; }
+.hub-keys-head { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; }
+.hub-keys-head a { font-size: 0.9rem; color: var(--biro); }
+.hub-keys .kb { margin-top: 0.6rem; }
+.hub-settings .setting { margin-top: 0.2rem; }
+@media (max-width: 760px) {
+  .tools { grid-template-columns: 1fr; }
+  .next-up { grid-template-columns: auto 1fr; }
+  .next-up .btn { grid-column: 1 / -1; justify-self: start; }
+}
+
+/* Tabs across the top of each typing tool */
+.tool-tabs { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.25rem; margin: -0.25rem auto 1rem; max-width: 900px; }
+.tool-tabs a { color: var(--on-desk-2); text-decoration: none; font-weight: 700; font-size: 0.92rem; padding: 0.35rem 0.8rem; border-radius: 999px; display: inline-flex; align-items: center; gap: 0.35rem; }
+.tool-tabs a:hover { color: var(--on-desk); background: rgb(255 255 255 / 0.08); }
+.tool-tabs a[aria-current] { background: var(--card); color: var(--ink); }
+.tool-tabs .tool-home { margin-right: 0.5rem; box-shadow: inset 0 0 0 1px rgb(255 255 255 / 0.25); }
+.tool-tabs .tool-home svg { width: 0.95rem; height: 0.95rem; }
+
 /* On-screen keyboard */
 .okb { display: grid; gap: 4px; max-width: 560px; margin: 1.2rem auto 0; user-select: none; }
 .okb-row { display: flex; gap: 4px; }
