@@ -44,12 +44,28 @@ export function titleFor(level) {
 // ---- Modes and mastery ----------------------------------------------------
 
 // Stage 0 new, 1 typed out in train mode, 2 filled the gaps, 3-5 recalled from memory.
-export const STAGES = ['New', 'Trained', 'Gaps', 'Recalled', 'Secure', 'Mastered'];
+const MASTERY = ['New', 'Trained', 'Gaps', 'Recalled', 'Secure', 'Mastered'];
 const INTERVAL_DAYS = [0, 1, 2, 4, 9, 21];
 
 // Practice mode (hidden words, recall stages, spaced review) is switched off while Train is
 // reworked into a typing trainer. Its code stays in place; set this to true to bring it back.
 export const PRACTICE_ENABLED = false;
+
+// Fluency: what Train can prove. Typed once; Accurate (98% of keys right, nothing left wrong);
+// Fluent (accurate at or above your usual speed); Automatic (fluent on three separate days,
+// each after a growing gap). Fluent answers come back for a speed check after 1, 3, 7, 14, 30
+// and 60 days.
+const FLUENCY = ['New', 'Typed', 'Accurate', 'Fluent', 'Automatic'];
+export const ACCURATE_KEYS = 0.98;
+const CHECK_GAPS = [0, 1, 3, 7, 14, 30, 60];
+const USUAL_MIN_CHARS = 40;   // answers shorter than this are too noisy to set your usual speed
+
+// While Practice is off, progress means fluency; with it on, mastery.
+export const STAGES = PRACTICE_ENABLED ? MASTERY : FLUENCY;
+export const TOP = STAGES.length - 1;
+export const PROGRESS = PRACTICE_ENABLED
+  ? { name: 'Mastery', top: 'mastered', blurb: 'Grows as answers go from Trained to Gaps, Recalled, Secure and Mastered.' }
+  : { name: 'Fluency', top: 'automatic', blurb: 'Grows as answers go from Typed to Accurate, Fluent (at your usual speed) and Automatic (fluent on three separate days).' };
 
 export const MODES = {
   train:    { label: 'Train', blurb: 'The answer is on screen. Type it out, over and over, until your fingers know it.' },
@@ -66,13 +82,61 @@ export function maskRatio(mode, level) {
   return mode === 'practice' ? (LEVELS[level] || LEVELS.gaps).mask : 0;
 }
 
+const fluencyOf = s => s?.fl ?? (s?.seen ? 1 : 0);
+
 export function stageOf(packId, itemId) {
-  return itemState(packId, itemId)?.box ?? 0;
+  const s = itemState(packId, itemId);
+  return PRACTICE_ENABLED ? s?.box ?? 0 : fluencyOf(s);
 }
 
 export function isDue(packId, itemId, now = Date.now()) {
   const s = itemState(packId, itemId);
-  return !!s && s.box >= 3 && s.due <= now;
+  if (!s) return false;
+  return PRACTICE_ENABLED ? s.box >= 3 && s.due <= now : fluencyOf(s) >= 3 && (s.flDue || 0) <= now;
+}
+
+/**
+ * Your usual speed: the median net WPM of your last 40 Train answers of 40+ characters.
+ * Null until there are five of them.
+ */
+export function usualWpm() {
+  const recent = state.history.filter(e => e.v === 2 && e.m === 'train' && e.c >= USUAL_MIN_CHARS).slice(-40).map(e => e.wpm);
+  if (recent.length < 5) return null;
+  recent.sort((a, b) => a - b);
+  const h = recent.length >> 1;
+  return recent.length % 2 ? recent[h] : (recent[h - 1] + recent[h]) / 2;
+}
+
+const startOfDay = (t, plusDays = 0) => { const d = new Date(t); d.setHours(0, 0, 0, 0); d.setDate(d.getDate() + plusDays); return d.getTime(); };
+
+/** Move an answer through the fluency stages after a Train attempt. */
+function updateFluency(s, { acc, uncorrected, hints, wpm, usual, now }) {
+  const before = fluencyOf(s);
+  let fl = Math.max(before, 1);
+  const accurate = acc >= ACCURATE_KEYS && uncorrected === 0 && hints === 0;
+  const fluent = accurate && usual != null && wpm >= usual;
+  const today = dayKey(now);
+  s.flN ||= 0;
+  if (accurate) fl = Math.max(fl, 2);
+  if (fluent) {
+    if (!s.flN) {
+      s.flN = 1;
+      s.flDay = today;
+      s.flDue = startOfDay(now, CHECK_GAPS[1]);
+    } else if (s.flDay !== today && now >= (s.flDue || 0)) {
+      s.flN += 1;
+      s.flDay = today;
+      s.flDue = startOfDay(now, CHECK_GAPS[Math.min(s.flN, CHECK_GAPS.length - 1)]);
+    }
+    fl = Math.max(fl, s.flN >= 3 ? 4 : 3);
+  } else if (!accurate && before >= 3 && (s.flDue || 0) <= now) {
+    // A speed check with slips: step back one fluent day and check again tomorrow.
+    s.flN = Math.max(1, s.flN - 1);
+    fl = s.flN >= 3 ? 4 : 3;
+    s.flDue = startOfDay(now, 1);
+  }
+  s.fl = fl;
+  return { before, after: fl, accurate, fluent };
 }
 
 // ---- Ratings --------------------------------------------------------------
@@ -117,12 +181,14 @@ export function applyResult(result, combo) {
   const answerAcc = chars ? Math.max(0, 1 - uncorrected / chars) : 0;
   const corrected = Math.max(0, result.errors - uncorrected);
   const minutes = Math.max(ms, 1) / 60000;
-  const wpm = (chars / 5) / minutes;
+  // Net speed: only correct characters the learner typed count.
+  const wpm = ((result.net ?? chars) / 5) / minutes;
+  const usual = mode === 'train' ? usualWpm() : null;
   const rating = rate(answerAcc, acc, hints);
   const rank = RATINGS[rating].rank;
   const s = ensureItem(packId, itemId);
   const firstClear = s.clears === 0;
-  const before = s.box;
+  const boxBefore = s.box;
   const prevBestWpm = s.bestWpm;
 
   // Mastery: a clean attempt promotes up to what the mode can prove; a poor recall demotes.
@@ -134,11 +200,16 @@ export function applyResult(result, combo) {
   } else if (level === 'recall' && rank === 1 && s.box > 2) {
     s.box -= 1;
   }
-  if (mode === 'practice' || s.box !== before) s.due = Date.now() + INTERVAL_DAYS[s.box] * DAY;
+  if (mode === 'practice' || s.box !== boxBefore) s.due = Date.now() + INTERVAL_DAYS[s.box] * DAY;
+  const fluency = mode === 'train'
+    ? updateFluency(s, { acc, uncorrected, hints, wpm, usual, now: Date.now() })
+    : { before: fluencyOf(s), after: fluencyOf(s), accurate: false, fluent: false };
+  const before = PRACTICE_ENABLED ? boxBefore : fluency.before;
+  const after = PRACTICE_ENABLED ? s.box : fluency.after;
   s.seen += 1;
   if (rank >= 2) s.clears += 1;
   if (level === 'recall' && rank >= 3) s.recallClears += 1;
-  s.bestWpm = Math.max(s.bestWpm, Math.round(wpm));
+  if (rank >= 2) s.bestWpm = Math.max(s.bestWpm, Math.round(wpm));
   s.bestAcc = Math.max(s.bestAcc, acc);
   s.last = Date.now();
   s.lastRating = rating;
@@ -157,7 +228,7 @@ export function applyResult(result, combo) {
   const ratingMult = rating === 'perfect' ? 1.25 : 1;
   let xp = base * accMult * speedMult * hintMult * ratingMult * mult;
   if (firstClear && rank >= 2) xp += 10;
-  const gained = Math.max(0, s.box - before);
+  const gained = Math.max(0, after - before);
   xp += gained * 8;
   xp = rank === 1 ? Math.max(1, Math.round(xp * 0.4)) : Math.max(1, Math.round(xp));
   const bonus = rollBonus(rank);
@@ -185,7 +256,8 @@ export function applyResult(result, combo) {
     acc, answerAcc, corrected, uncorrected, wpm, rating, rank, xp, baseXp, bonus,
     combo: nextCombo, comboBefore: combo, comboMult: mult,
     bestWpm: prevBestWpm > 0 && Math.round(wpm) > prevBestWpm && rank >= 3 ? Math.round(wpm) : 0,
-    stageBefore: before, stageAfter: s.box,
+    stageBefore: before, stageAfter: after,
+    usual, fluent: fluency.fluent, accurate: fluency.accurate,
     levelBefore, levelAfter,
     dailyGoalHit: dailyBefore < state.settings.dailyGoal && state.days[today] >= state.settings.dailyGoal,
   };
@@ -199,10 +271,10 @@ export function unitProgress(pack, unit) {
   for (const it of unit.items) {
     const b = stageOf(pack.id, it.id);
     if (b >= 1) started++;
-    if (b >= 5) mastered++;
+    if (b >= TOP) mastered++;
     stageSum += b;
   }
-  return { n, started, mastered, share: n ? stageSum / (n * 5) : 0 };
+  return { n, started, mastered, share: n ? stageSum / (n * TOP) : 0 };
 }
 
 // ---- Practice bar ---------------------------------------------------------
@@ -273,6 +345,10 @@ const ALL_ACHIEVEMENTS = [
   { id: 'goal', name: 'Goal met', desc: 'Reach your daily XP goal.', test: c => c.goalMet },
   { id: 'master-1', practice: true, name: 'Mastered one', desc: 'Bring any answer to “Mastered”.', test: c => c.mastered >= 1 },
   { id: 'master-25', practice: true, name: 'Mastered 25', desc: 'Bring 25 answers to “Mastered”.', test: c => c.mastered >= 25 },
+  { id: 'fluent-1', name: 'Up to speed', desc: 'Type an answer accurately at or above your usual speed.', test: c => c.fluent >= 1 },
+  { id: 'auto-1', name: 'On autopilot', desc: 'Bring any answer to “Automatic”.', test: c => c.automatic >= 1 },
+  { id: 'auto-25', name: 'Muscle memory', desc: 'Bring 25 answers to “Automatic”.', test: c => c.automatic >= 25 },
+  { id: 'drill-10', name: 'Weak spots', desc: 'Finish 10 weak-spot drill rounds.', test: c => c.drills >= 10 },
   { id: 'grade-c', name: 'Level 7', desc: 'Reach level 7.', test: c => c.level >= 7 },
   { id: 'grade-a', name: 'Level 13', desc: 'Reach level 13.', test: c => c.level >= 13 },
   { id: 'grade-astar', name: 'Level 21', desc: 'Reach level 21.', test: c => c.level >= 21 },
@@ -293,6 +369,9 @@ export function checkAchievements(last) {
     streak: streak().count,
     goalMet: Object.values(state.days).some(v => v >= state.settings.dailyGoal),
     mastered: Object.values(state.items).filter(s => s.box >= 5).length,
+    fluent: Object.values(state.items).filter(s => (s.fl || 0) >= 3).length,
+    automatic: Object.values(state.items).filter(s => (s.fl || 0) >= 4).length,
+    drills: state.totals.drills || 0,
     level: levelFromXp(state.xp).level,
     last,
   };

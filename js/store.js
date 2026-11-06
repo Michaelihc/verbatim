@@ -13,6 +13,7 @@ export const DEFAULT_SETTINGS = {
   keySound: false,        // a soft tick on every key
   autoAdvance: true,      // clean answers roll straight into the next one
   markPoints: true,       // highlight the phrases that earn marks
+  drills: true,           // offer a quick drill of the words you slipped on
   homeLayout: 'type',     // front page: type | set | plan
   textSize: 'm',          // s | m | l
   layout: 'overlay',      // overlay: type over the text | stacked: type on a line below it
@@ -30,6 +31,7 @@ function fresh() {
     history: [],
     achievements: {},
     chapters: {},           // practice bar per chapter: { level, day, items }
+    skill: { keys: {}, pairs: {}, words: {} }, // typing skill model, see skill.js
     totals: { chars: 0, keystrokes: 0, errors: 0, items: 0, ms: 0, hints: 0, perfects: 0, laps: 0, lucky: 0 },
     bestCombo: 0,
   };

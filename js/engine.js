@@ -2,6 +2,12 @@
 //
 // Input arrives through a hidden textarea so phone keyboards and IMEs work. Its value mirrors
 // what the learner has typed; each `input` event is diffed against the previous value.
+//
+// Speed is net: correct characters the learner typed (not ones filled in for them) per minute of
+// typing time. Typing time adds up the gaps between keys, each capped at PAUSE_CAP, so a pause to
+// think doesn't sink the score; the time cut off is reported separately as pauses.
+
+import { PAUSE_CAP } from './skill.js';
 
 const STOP_WORDS = new Set(['that', 'this', 'with', 'from', 'which', 'when', 'where', 'there', 'their', 'than', 'then', 'they', 'have', 'into', 'each', 'also', 'such', 'between']);
 
@@ -58,6 +64,12 @@ export class Typer {
     this.keystrokes = 0;
     this.errors = 0;
     this.startedAt = 0;
+    this.lastAt = 0;
+    this.activeMs = 0;      // typing time: gaps between keys, each capped at PAUSE_CAP
+    this.pauseMs = 0;       // the time cut off by the cap
+    this.log = [];          // first press at each position: { i, c, ok, dt, flow }
+    this.logged = new Set();
+    this.lastPress = null;  // { i, ok } of the previous key
     this.finished = false;
     this.render();
     this.bind();
@@ -263,10 +275,24 @@ export class Typer {
   press(c) {
     const pos = this.typed.length;
     const want = this.text[pos];
-    if (!this.startedAt) this.startedAt = performance.now();
     let got = c === '\r' ? '\n' : c;
     if (this.kind !== 'code' && got === '\n') return;
+    const now = performance.now();
+    if (!this.startedAt) this.startedAt = now;
+    const dt = this.lastAt ? now - this.lastAt : null;
+    if (dt != null) {
+      const capped = Math.min(dt, PAUSE_CAP);
+      this.activeMs += capped;
+      this.pauseMs += dt - capped;
+    }
+    this.lastAt = now;
     const ok = this.same(got, want);
+    if (!this.logged.has(pos)) {
+      this.logged.add(pos);
+      const flow = !!this.lastPress && this.lastPress.ok && this.lastPress.i === pos - 1;
+      this.log.push({ i: pos, c: want, ok, dt: dt == null ? null : Math.round(dt), flow });
+    }
+    this.lastPress = { i: pos, ok };
     this.keystrokes++;
     if (!ok) this.errors++;
     this.onKeyResult(ok);
@@ -345,10 +371,14 @@ export class Typer {
     return this.startedAt ? performance.now() - this.startedAt : 0;
   }
 
+  /** Correct characters the learner typed themselves. */
+  netChars() {
+    return this.typed.filter(t => t.ok && !t.auto).length;
+  }
+
   stats() {
-    const ms = this.elapsed();
-    const correct = this.typed.filter(t => t.ok).length;
-    const wpm = ms > 1500 ? (correct / 5) / (ms / 60000) : 0;
+    const ms = this.activeMs;
+    const wpm = ms > 1500 ? (this.netChars() / 5) / (ms / 60000) : 0;
     const acc = this.keystrokes ? (this.keystrokes - this.errors) / this.keystrokes : 1;
     return {
       pos: this.typed.length,
@@ -376,10 +406,13 @@ export class Typer {
     });
     this.onDone({
       chars: this.text.length - auto,
+      net: this.netChars(),
       keystrokes: this.keystrokes,
       errors: this.errors,
       uncorrected: left,
-      ms: Math.max(this.elapsed(), 300),
+      ms: Math.max(this.activeMs, 300),
+      pauseMs: Math.round(this.pauseMs),
+      log: this.log,
       hints: this.hints,
       revealed: this.revealed.size,
       points: {

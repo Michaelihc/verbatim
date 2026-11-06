@@ -21,13 +21,24 @@ syllabus topic and is tagged when it's printed on the data and formulae list.
 ## How it works
 
 - **Jump straight in.** The home page is the chapter list: pick a subject, a pack and a chapter,
-  then *Train* or *Practice*. Filter by AS or A2, switch between a list and a grid, start a
-  random mix of the pack, or search for any term ("tesla", "flux", "stack") and start there.
-- **Train** shows the answer and you type it. **Practice** hides words (some, most, or all of
-  them) and you fill them in. The two are separate: you can train for as long as you like, and
-  switch modes at any time from the top of the screen.
+  then *Train*. Filter by AS or A2, switch between a list and a grid, start a random mix of the
+  pack, or search for any term ("tesla", "flux", "stack") and start there.
+- **Train** shows the answer and you type it. (Practice mode, which hides words for you to fill
+  in from memory, is switched off for now: `PRACTICE_ENABLED` in `js/game.js`.)
+- **Honest speed.** WPM is net: only correct characters you typed count, not ones filled in for
+  you, and it is the same while you type and at the end. Gaps over 2 seconds between keys count
+  as pauses, shown separately, not typing time. Answers under 40 characters are marked as a rough
+  speed; the session speed at the top of the screen adds up every answer and is steadier.
+- **Your usual speed** is the median of your last 40 answers of 40+ characters. It is the bar for
+  Fluent, so the target fits your own pace.
 - **Endless laps.** A session goes round every answer in the chapter, then starts another lap with
-  the ones you slipped on first. It never ends until you leave.
+  the ones you slipped on first, then the answers with the most of your weak letter pairs and
+  words. It never ends until you leave.
+- **Weak spots.** Verbatim keeps a running average of how fast and how accurately you type each
+  key (Shift counts as its own key), letter pair and word, judged against your own medians. After
+  an answer, press *D* to type the words you slipped on or typed slowly, three times each. The
+  *Weak spots drill* builds rounds of real words from the subject you last trained around your
+  slowest pairs, keys and words, and rebuilds them as you improve.
 - **Ratings, not marks.** Each answer gets *Perfect*, *Great*, *Good* or *Keep going*, with XP that
   counts up, a sound that climbs in pitch with your combo, and confetti for the best ones. Clean
   answers roll straight into the next one.
@@ -42,16 +53,20 @@ syllabus topic and is tagged when it's printed on the data and formulae list.
 - **Combo.** Every Great or Perfect in a row adds ×0.1 to your XP multiplier, up to ×3. A rough
   answer breaks it.
 - **Bonus drops.** Now and then an answer pays double, or (rarely) five times.
-- **Mastery and reviews.** Answers move from New to Trained, Gaps, Recalled, Secure and Mastered.
-  Answers recalled from memory come back for spaced review after 4, 9 and then 21 days.
+- **Fluency and speed checks.** Answers move from New to Typed, Accurate (98% of keys right,
+  nothing left wrong), Fluent (accurate at or above your usual speed) and Automatic (fluent on
+  three separate days, each after a gap). Fluent answers come back as a *Speed check* after 1, 3,
+  7, 14, 30 and 60 days; a check with slips steps the answer back and asks again the next day.
 - **Two bars per chapter.** *Practice* (yellow) fills as you finish answers in the chapter, so
   one full lap fills it, and it drains by a seventh for each day you don't practise that chapter.
-  *Mastery* (blue) grows as answers move up from Trained to Mastered and doesn't fade.
+  *Fluency* (blue) grows as answers move up from Typed to Automatic.
 - **Stats dashboard.** Filter by time range and subject, then see headline numbers against the
-  previous period, daily XP against your goal, speed and accuracy trends, how your answers
-  split across mastery stages and ratings, the most-examined answers you haven't mastered yet,
-  and every chapter's practice, mastery and exam frequency. Every chart has a table view.
-- **Levels, streaks, a daily goal and 25 achievements.**
+  previous period, your usual speed, daily XP against your goal, speed and accuracy trends, a
+  keyboard heatmap of the keys that hold you back, your slowest letter pairs and the words you
+  trip on, how your answers split across fluency stages and ratings, the most-examined answers
+  that aren't automatic yet, and every chapter's practice, fluency and exam frequency. Every chart
+  has a table view.
+- **Levels, streaks, a daily goal and achievements.**
 - **Works offline.** A service worker caches the app and every pack on first visit. Packs refresh
   in the background, and new app versions show a reload prompt.
 - **Your data stays in your browser** (localStorage). Export and import it from the Stats page.

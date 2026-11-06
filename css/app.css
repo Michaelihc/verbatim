@@ -305,6 +305,7 @@ html, body { overflow-x: clip; }
 .qc-icon { display: grid; place-items: center; width: 2.4rem; height: 2.4rem; border-radius: 6px; background: var(--hl); color: #0c1445; flex: none; }
 .qc-icon svg { width: 1.15rem; height: 1.15rem; }
 .quick-card.due .qc-icon { background: var(--mark-good); }
+.quick-card.drill .qc-icon { background: var(--mark-orange); }
 .qc-text { display: grid; min-width: 0; flex: 1; }
 .qc-text b { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .qc-text small { color: var(--ink-2); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
@@ -426,7 +427,7 @@ html, body { overflow-x: clip; }
 .pips { display: inline-flex; gap: 3px; flex: none; }
 .pips i { width: 8px; height: 8px; border-radius: 2px; background: var(--card-2); box-shadow: inset 0 0 0 1px var(--rule); }
 .pips i.on { background: var(--biro); box-shadow: none; }
-.pips i.on:nth-child(5) { background: var(--hl); box-shadow: inset 0 0 0 1px #0c144533; }
+.pips i.on:last-child { background: var(--hl); box-shadow: inset 0 0 0 1px #0c144533; }
 
 /* ---- play ---------------------------------------------------------------- */
 
@@ -688,6 +689,23 @@ body[data-view='play'] main { padding-top: 1rem; }
 .pill.bonus.jackpot { background: var(--flame); color: #2a0c00; animation: pop-in 0.3s cubic-bezier(0.2, 1.6, 0.4, 1) backwards, glow 0.8s ease-in-out infinite alternate; }
 @keyframes glow { to { box-shadow: 0 2px 0 #0c1445, 0 0 22px 4px #ff7a1a99; } }
 .pill.pb { background: var(--mark-orange); }
+.pill.fast { background: var(--mark-good); }
+.rstats .rough { color: var(--ink-3); }
+.drill-targets { display: flex; flex-wrap: wrap; align-items: center; gap: 0.35rem; margin: 0.4rem 0 0; color: var(--ink-2); font-size: 0.92rem; }
+.drill-targets .chip { font-family: var(--mono, monospace); font-weight: 700; color: var(--ink); background: var(--card-2); border-radius: 4px; padding: 0.05rem 0.45rem; }
+.result-actions #drill q { font-weight: 700; }
+
+/* Keyboard heatmap */
+.kb { display: grid; gap: 4px; max-width: 640px; }
+.kb-row { display: flex; gap: 4px; }
+.kb-row.r1 { padding-left: 2%; } .kb-row.r2 { padding-left: 4%; } .kb-row.r3 { padding-left: 7%; }
+.kb-key { flex: 1 1 0; min-width: 0; aspect-ratio: 1; display: grid; place-items: center; border-radius: 5px; font: 700 0.85rem/1 var(--mono, monospace); color: var(--ink);
+  background: color-mix(in srgb, var(--bad) calc(var(--v, 0) * 75%), var(--card-2)); }
+.kb-key.none { background: transparent; box-shadow: inset 0 0 0 1px var(--rule); color: var(--ink-3); }
+.kb-key.wide { flex: 2.2 1 0; aspect-ratio: auto; height: 2.4rem; }
+.kb-key.space { flex: 6 1 0; aspect-ratio: auto; height: 2.4rem; }
+.sw.kb-lo { background: var(--card-2); } .sw.kb-hi { background: color-mix(in srgb, var(--bad) 75%, var(--card-2)); } .sw.kb-none { box-shadow: inset 0 0 0 1px var(--rule); }
+.rank-bars.weak + .btn { margin-top: 0.8rem; }
 .pill.up { background: var(--mark-good); }
 .pill.marks { background: var(--card-2); color: var(--biro); }
 .pill.marks.full { background: var(--biro); color: var(--card); }
