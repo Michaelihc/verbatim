@@ -230,7 +230,7 @@ const showPair = k => k.replace(/ /g, '␣');
 const times = r => r.ratio == null ? '–' : `${r.ratio.toFixed(1)}×`;
 
 /** A keyboard shaded by how much each key holds you back (time against your median, plus errors). */
-function keyboard(keys, focusHref) {
+export function keyboardHeatmap(keys, focusHref) {
   const vals = Object.values(keys).map(k => k.cost);
   if (!vals.length) return '<p class="viz-empty">Type a few answers to map your keyboard.</p>';
   const max = Math.max(0.5, ...vals);
@@ -306,7 +306,7 @@ export function renderDashboard(host, { packs, playHref, chapterHref, playItemHr
           table(['Day', 'Accuracy'], D.days.filter(d => d.acc != null).map(d => [shortDate(d.t), pct(d.acc)])))}
         ${card('c-tests', 'Speed tests', 'Your best and latest timed test at each length, all text types. Net WPM.', testsBody(testHref),
           (state.tests || []).length ? table(['Date', 'Length', 'Text', 'WPM', 'Raw', 'Accuracy', 'Consistency'], [...state.tests].reverse().slice(0, 30).map(t => [shortDate(t.t), `${t.d}s`, t.src, String(t.wpm), String(t.raw), pct(t.acc), t.cons == null ? '–' : `${t.cons}%`])) : '', { wide: true })}
-        ${card('c-keys', 'Your keyboard', 'Darker keys hold you back: slower than your median key, or often mistyped. Shift counts as its own key. Click a key, pair or word to drill it.', keyboard(keys, focusHref),
+        ${card('c-keys', 'Your keyboard', 'Darker keys hold you back: slower than your median key, or often mistyped. Shift counts as its own key. Click a key, pair or word to drill it.', keyboardHeatmap(keys, focusHref),
           keyRows.length ? table(['Key', 'Time', 'Against median', 'Errors', 'Presses'], keyRows) : '', { wide: true })}
         ${card('c-pairs', 'Slowest letter pairs', 'Transitions between two keys, worst first. Time is against your median pair; the number is how often you have typed it.',
           weakList(pairs, r => showPair(r.k), drillHref, focusHref, r => r.k),

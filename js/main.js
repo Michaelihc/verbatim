@@ -3,12 +3,13 @@ import { loadPacks, findItem } from './packs.js';
 import { Typer, chooseMask } from './engine.js';
 import {
   levelFromXp, titleFor, STAGES, TOP, PROGRESS, MODES, LEVELS, RATINGS, maskRatio, stageOf, isDue, applyResult,
-  unitProgress, streak, ACHIEVEMENTS, PRACTICE_ENABLED, checkAchievements, comboMult, practiceLevel, creditPractice, PRACTICE_DECAY,
+  unitProgress, streak, ACHIEVEMENTS, PRACTICE_ENABLED, usualWpm, checkAchievements, comboMult, practiceLevel, creditPractice, PRACTICE_DECAY,
 } from './game.js';
 import { course, letterStatus, focusLetter, maybeUnlock, courseRound, ORDER as COURSE_ORDER, TARGETS as COURSE_TARGETS } from './course.js';
+import { keyTable } from './skill.js';
 import { recordAttempt, troubleWords, wordDrill, drillRound, vocabulary, keyTerms, parseFocus, weakTargets, textCost, hasEnoughData, weakest } from './skill.js';
 import { sfx, confetti, floatText, countUp } from './fx.js';
-import { renderDashboard } from './dash.js';
+import { renderDashboard, keyboardHeatmap } from './dash.js';
 
 const REPO_URL = 'https://github.com/Michaelihc/verbatim';
 const main = document.getElementById('main');
@@ -173,13 +174,15 @@ function route() {
     view = 'home';
   }
   document.querySelectorAll('[data-nav]').forEach(a => {
-    const on = a.dataset.nav === view || (['c', 'play'].includes(view) && a.dataset.nav === 'home');
+    const on = a.dataset.nav === view || (['c', 'play'].includes(view) && a.dataset.nav === 'home')
+      || (['drill', 'test', 'course'].includes(view) && a.dataset.nav === 'typing');
     a.toggleAttribute('aria-current', on);
   });
   document.body.dataset.view = ['drill', 'test', 'course'].includes(view) ? 'play' : view;
   window.scrollTo(0, 0);
   if (view === 'c') return viewChapter(parts[1], parts[2]);
   if (view === 'play') return viewPlay(q);
+  if (view === 'typing') return viewTyping();
   if (view === 'drill') return viewDrill(q);
   if (view === 'test') return viewTest(q);
   if (view === 'course') return viewCourse();
@@ -228,19 +231,8 @@ function viewHome() {
   const packIn = s => packs.filter(p => p.subject === s);
   let packId = packIn(subject).some(p => p.id === ui.pack) ? ui.pack : packIn(subject)[0]?.id;
 
-  const last = state.lastPlay;
-  const lastPack = last && packs.find(p => p.id === last.pack);
-  const lastUnit = lastPack && (last.unit === '*' ? '*' : lastPack.units.find(u => u.id === last.unit));
-  const cont = lastUnit ? {
-    href: playHref(lastPack, lastUnit, last.mode === 'practice' && PRACTICE_ENABLED ? 'practice' : 'train'),
-    title: lastUnit === '*' ? `All ${kindOf(lastPack).noun}` : lastUnit.title,
-    sub: `${(PRACTICE_ENABLED && MODES[last.mode]?.label) || 'Train'}, ${lastPack.title}`,
-  } : null;
-  const due = dueItems().length;
-  const testBest = Math.max(0, ...(state.tests || []).filter(t => t.d === (state.ui?.testD || 60)).map(t => t.wpm));
-  const weakSpots = hasEnoughData()
-    ? [...weakest('pairs', 2, k => /^[a-z]{2}$/.test(k)).map(w => w.k), ...weakest('keys', 1, k => /^[a-z]$/.test(k) || k === 'shift').map(w => w.k === 'shift' ? 'Shift' : w.k)]
-    : [];
+  const cont = continueInfo();
+  const next = nextUp(cont);
   const today = state.days[dayKey()] || 0;
   const goal = state.settings.dailyGoal;
   const st = streak();
@@ -266,21 +258,13 @@ function viewHome() {
           <span class="qc-text"><small>Continue: ${esc(cont.sub)}</small><b>${esc(cont.title)}</b></span>
           <kbd>Enter</kbd>
         </a>` : ''}
-        ${due ? `<a class="quick-card due" href="#/play?review=1">
-          <span class="qc-icon">${ICON.replay}</span>
-          <span class="qc-text"><small>${reviewName}</small><b>${plural(due, 'answer')} due</b></span>
+        ${next.kind !== 'train' ? `<a class="quick-card next k-${next.kind}" href="${next.href}" title="${esc(next.why)}">
+          <span class="qc-icon">${next.icon}</span>
+          <span class="qc-text"><small>Next up</small><b>${esc(next.title)}</b></span>
         </a>` : ''}
-        ${weakSpots.length ? `<a class="quick-card drill" href="#/drill">
-          <span class="qc-icon">${ICON.bolt}</span>
-          <span class="qc-text"><small>Weak spots drill</small><b>${weakSpots.map(esc).join(', ')}</b></span>
-        </a>` : ''}
-        <a class="quick-card tool" href="#/test">
-          <span class="qc-icon">${ICON.flame}</span>
-          <span class="qc-text"><small>Speed test</small><b>${testBest ? `Best ${testBest} WPM` : `${state.ui?.testD || 60} seconds`}</b></span>
-        </a>
-        <a class="quick-card tool" href="#/course">
+        <a class="quick-card tool" href="#/typing">
           <span class="qc-icon">${ICON.grid}</span>
-          <span class="qc-text"><small>Key course</small><b>${course().n} of ${COURSE_ORDER.length} letters</b></span>
+          <span class="qc-text"><small>Typing practice</small><b>Course, drills and speed tests</b></span>
         </a>
       </div>
     </section>
@@ -884,6 +868,7 @@ function viewPlay(q) {
           ? `<a class="btn primary" href="#/" id="again">Back to chapters <kbd>Enter</kbd></a>`
           : `<button class="btn primary" id="again" type="button">Keep going <kbd>Enter</kbd></button>
              ${MODES[other] ? `<button class="btn" id="switch" type="button">${other === 'train' ? ICON.play : ICON.pen} Switch to ${MODES[other].label}</button>` : ''}`}
+        ${hasEnoughData() ? `<a class="btn" href="#/drill">${ICON.bolt} Drill weak spots</a>` : ''}
         <a class="btn ghost" href="${exit}">Done</a>
       </div>
       ${!S.review ? `<p class="muted small">${S.mode === 'train' ? `Next lap starts with the ones you slipped on${hasEnoughData() ? ', then the answers with the most of your weak letter pairs' : ''}.` : 'Weakest answers come first next lap.'}</p>` : ''}`;
@@ -965,6 +950,174 @@ function viewPlay(q) {
   show();
 }
 
+// ---- typing hub ---------------------------------------------------------------
+//
+// One place for everything that builds typing skill, each tool labelled by the goal it serves,
+// with a single suggestion of what to do next.
+
+const TOOLS = [
+  ['course', 'Key course', '#/course'],
+  ['drill', 'Weak spots', '#/drill'],
+  ['test', 'Speed test', '#/test'],
+];
+
+/** Tabs across the top of each typing tool, so they're one click apart. */
+function toolTabs(active) {
+  return `<nav class="tool-tabs" aria-label="Typing tools">
+    <a class="tool-home" href="#/typing">${ICON.grid}<span>All typing</span></a>
+    ${TOOLS.map(([k, label, href]) => `<a href="${href}" ${k === active ? 'aria-current="page"' : ''}>${label}</a>`).join('')}
+  </nav>`;
+}
+function mountToolTabs(active) {
+  main.querySelector('.play-top')?.insertAdjacentHTML('afterend', toolTabs(active));
+}
+
+const daysAgo = t => Math.floor((Date.now() - t) / 86400000);
+
+/**
+ * The single most useful thing to do next, and why: due speed checks first, then a baseline
+ * test, the key course while speed or accuracy is low, weak spots once they're known, a retest
+ * after a week, and otherwise typing answers.
+ */
+function nextUp(cont) {
+  const due = dueItems().length;
+  if (due) return { icon: ICON.replay, kind: 'due', title: `Speed check: ${plural(due, 'answer')}`, why: 'They were fluent. Check they still are before they slip.', href: '#/play?review=1', cta: 'Start speed check' };
+  const tests = state.tests || [];
+  if (!tests.length) return { icon: ICON.flame, kind: 'test', title: 'Take a 60-second speed test', why: 'It sets your baseline, so you can see yourself improve.', href: '#/test?d=60&src=answers', cta: 'Start test' };
+  const lastTest = tests.at(-1);
+  const c = course();
+  if ((lastTest.wpm < 30 || lastTest.acc < 0.9) && c.n < COURSE_ORDER.length) {
+    return { icon: ICON.grid, kind: 'course', title: c.n > 6 ? 'Continue the key course' : 'Start the key course', why: `Your last test was ${lastTest.wpm} WPM at ${pct(lastTest.acc)} accuracy. Learning the keys properly is the fastest way up from there.`, href: '#/course', cta: c.n > 6 ? 'Continue course' : 'Start course' };
+  }
+  if (hasEnoughData()) {
+    const t = weakTargets().slice(0, 3);
+    if (t.length) return { icon: ICON.bolt, kind: 'drill', title: `Drill your weak spots: ${t.map(x => x.label).join(', ')}`, why: 'These keys, pairs and words slow you down most. Each round is built from your subject’s key terms.', href: '#/drill', cta: 'Start drill' };
+  }
+  if (daysAgo(lastTest.t) >= 7) return { icon: ICON.flame, kind: 'test', title: 'Retake the speed test', why: `Your last one was ${plural(daysAgo(lastTest.t), 'day')} ago at ${lastTest.wpm} WPM. See how far you’ve come.`, href: `#/test?d=${lastTest.d}&src=${lastTest.src}`, cta: 'Start test' };
+  return cont
+    ? { icon: ICON.play, kind: 'train', title: `Keep training: ${cont.title}`, why: 'Typing answers builds speed and memory at the same time.', href: cont.href, cta: 'Continue' }
+    : { icon: ICON.play, kind: 'train', title: 'Train a chapter', why: 'Typing answers builds speed and memory at the same time.', href: '#/', cta: 'Pick a chapter' };
+}
+
+function continueInfo() {
+  const last = state.lastPlay;
+  const lastPack = last && packs.find(p => p.id === last.pack);
+  const lastUnit = lastPack && (last.unit === '*' ? '*' : lastPack.units.find(u => u.id === last.unit));
+  return lastUnit ? {
+    href: playHref(lastPack, lastUnit, last.mode === 'practice' && PRACTICE_ENABLED ? 'practice' : 'train'),
+    title: lastUnit === '*' ? `All ${kindOf(lastPack).noun}` : lastUnit.title,
+    sub: `${(PRACTICE_ENABLED && MODES[last.mode]?.label) || 'Train'}, ${lastPack.title}`,
+  } : null;
+}
+
+function viewTyping() {
+  const next = nextUp(continueInfo());
+  const c = course();
+  const st = letterStatus();
+  const tests = state.tests || [];
+  const bestAt = d => Math.max(0, ...tests.filter(t => t.d === d).map(t => t.wpm));
+  const lastTest = tests.at(-1);
+  const weak = hasEnoughData() ? weakTargets() : [];
+  const due = dueItems().length;
+  const usual = usualWpm();
+  const fluentCount = Object.values(state.items).filter(s => (s.fl || 0) >= 3).length;
+  const nextCheck = Object.values(state.items).filter(s => (s.fl || 0) >= 3 && s.flDue > Date.now()).map(s => s.flDue).sort((a, b) => a - b)[0];
+  const { subject } = subjectPacks();
+  const s = state.settings;
+  const toggle = (key, label, help) => `
+    <label class="setting">
+      <input type="checkbox" data-key="${key}" ${s[key] ? 'checked' : ''}>
+      <span><b>${label}</b><small>${help}</small></span>
+    </label>`;
+
+  main.innerHTML = `
+    <header class="hub-head">
+      <h1>Typing</h1>
+      <p class="lede">Get faster and more accurate, using the words in your syllabus${subject ? ` (${esc(subject)})` : ''}.</p>
+    </header>
+
+    <a class="next-up k-${next.kind}" href="${next.href}">
+      <span class="qc-icon">${next.icon}</span>
+      <span class="nu-text"><small>Next up</small><b>${esc(next.title)}</b><span>${esc(next.why)}</span></span>
+      <span class="btn primary">${esc(next.cta)}</span>
+    </a>
+
+    <section class="tools" aria-label="Typing tools">
+      <article class="tool-card">
+        <p class="tool-goal">Learn the keys</p>
+        <h2><a href="#/course">Key course</a></h2>
+        <p class="tool-what">For touch typing from scratch. Letters unlock one at a time, each once you’re quick and accurate on the ones before.</p>
+        <div class="tool-status">
+          <span class="mini-letters">${st.map(x => `<i class="${x.unlocked ? (x.ready ? 'ready' : 'open') : ''}">${x.l}</i>`).join('')}</span>
+          <small>${c.n} of ${COURSE_ORDER.length} letters at ${c.target} WPM</small>
+        </div>
+        <div class="tool-actions"><a class="btn primary" href="#/course">${c.n > 6 ? 'Continue course' : 'Start course'}</a></div>
+      </article>
+
+      <article class="tool-card">
+        <p class="tool-goal">Fix weak spots</p>
+        <h2><a href="#/drill">Weak spots drill</a></h2>
+        <p class="tool-what">Rounds of key terms and words built around what slows you down, or around anything you choose.</p>
+        <div class="tool-status">
+          ${weak.length
+            ? `<span class="chips">${weak.map(t => `<a class="chip-link mono" href="${drillLink(t.kind === 'word' ? t.label : t.k === 'shift' ? 'shift' : t.k)}">${esc(t.label)}</a>`).join('')}</span><small>Your slowest or most mistyped, worst first. Click one to drill only that.</small>`
+            : '<small>Your weak spots appear after about five answers or a speed test. You can still drill any pair, key or word below.</small>'}
+        </div>
+        <form class="focus-form" id="hub-focus"><input id="hub-focus-in" type="text" placeholder="Drill a pair, key or word, like th" aria-label="Drill a pair, key or word" autocomplete="off" spellcheck="false" maxlength="30"><button class="btn small" type="submit">Drill</button></form>
+        <div class="tool-actions"><a class="btn primary" href="#/drill">Drill weak spots</a></div>
+      </article>
+
+      <article class="tool-card">
+        <p class="tool-goal">Measure your speed</p>
+        <h2><a href="#/test">Speed test</a></h2>
+        <p class="tool-what">A timed test on answers, key terms or your own notes, with net and raw WPM, accuracy and consistency.</p>
+        <div class="tool-status">
+          ${lastTest
+            ? `<span class="tool-num"><b>${bestAt(60) || bestAt(lastTest.d)}</b> WPM best${bestAt(60) ? ' at 60s' : ` at ${lastTest.d}s`}</span><small>Latest ${lastTest.wpm} WPM at ${pct(lastTest.acc)}, ${daysAgo(lastTest.t) ? `${plural(daysAgo(lastTest.t), 'day')} ago` : 'today'}.</small>`
+            : '<small>No tests yet. Take one to get a benchmark.</small>'}
+        </div>
+        <div class="tool-actions">${[15, 30, 60, 120].map(d => `<a class="btn ${d === 60 ? 'primary' : 'small'}" href="#/test?d=${d}">${d}s</a>`).join('')}</div>
+      </article>
+
+      <article class="tool-card">
+        <p class="tool-goal">Keep answers fluent</p>
+        <h2><a href="${due ? '#/play?review=1' : '#/'}">Speed checks</a></h2>
+        <p class="tool-what">Answers you type accurately at your usual speed${usual ? ` (${Math.round(usual)} WPM)` : ''} become Fluent, then come back after 1, 3, 7 and more days so they stay that way.</p>
+        <div class="tool-status">
+          ${due ? `<span class="tool-num"><b>${due}</b> due now</span>`
+            : fluentCount ? `<small>${plural(fluentCount, 'answer')} fluent. Next check ${nextCheck ? new Date(nextCheck).toLocaleDateString(undefined, { weekday: 'long' }) : 'soon'}.</small>`
+            : `<small>${usual ? 'Train a chapter: accurate answers at your usual speed become Fluent.' : 'Train a few longer answers first so Verbatim learns your usual speed.'}</small>`}
+        </div>
+        <div class="tool-actions">${due ? `<a class="btn primary" href="#/play?review=1">Start speed check</a>` : `<a class="btn" href="#/">Train a chapter</a>`}</div>
+      </article>
+    </section>
+
+    ${hasEnoughData() ? `<section class="panel hub-keys">
+      <div class="hub-keys-head"><h2>Your keyboard</h2><a href="#/progress">All typing stats →</a></div>
+      <p class="muted small">Darker keys hold you back. Click one to drill it.</p>
+      ${keyboardHeatmap(keyTable(), f => drillLink(f))}
+    </section>` : ''}
+
+    <section class="panel settings hub-settings">
+      <h2>Typing settings</h2>
+      ${toggle('showKeyboard', 'On-screen keyboard', 'Shows the next key and which finger should press it.')}
+      ${toggle('noBackspace', 'No backspace', 'Mistakes stay where they are, to build accuracy first.')}
+      ${toggle('drills', 'Offer quick drills', 'After an answer, press D to type the words you slipped on.')}
+      ${toggle('stopOnError', 'Stop on mistakes', 'A wrong key is rejected until you type the right one.')}
+      <p class="muted small"><a href="#/settings">All settings</a></p>
+    </section>`;
+
+  main.querySelectorAll('[data-key]').forEach(el => el.addEventListener('change', () => {
+    state.settings[el.dataset.key] = el.checked;
+    save();
+  }));
+  const fin = document.getElementById('hub-focus-in');
+  document.getElementById('hub-focus').addEventListener('submit', e => {
+    e.preventDefault();
+    if (fin.value.trim()) go(drillLink(fin.value.trim()));
+  });
+}
+
 // ---- weak spots drill -------------------------------------------------------
 
 // Drills use the subject you last trained, so physics drills stay physics.
@@ -996,7 +1149,7 @@ function viewDrill(q) {
   main.innerHTML = `
     <div class="play">
       <div class="play-top">
-        <a class="icon-btn" href="#/" title="Leave (Esc)" aria-label="Leave">${ICON.x}</a>
+        <a class="icon-btn" href="#/typing" title="Back to typing (Esc)" aria-label="Leave">${ICON.x}</a>
         <div class="play-where"><b>${focus ? `Drill: ${esc(focus.label)}` : 'Weak spots'}</b><span>${subject ? `${esc(subject)} ` : ''}${what} ${focus ? `with ${esc(focus.label)} in them` : 'built around the keys, pairs and words that slow you down'}</span></div>
         <div class="hud">
           <span class="sspeed" title="Session speed: net WPM over every round">${ICON.play}<b id="sspeed">–</b></span>
@@ -1017,6 +1170,7 @@ function viewDrill(q) {
       <div class="stage" id="stage"></div>
       <p class="play-help">${src === 'terms' ? 'Key terms are answer names and the phrases mark schemes give marks for.' : 'Words come from the answers in the subject.'} Each round is rebuilt from your latest typing. <kbd>Esc</kbd> leaves.</p>
     </div>`;
+  mountToolTabs('drill');
   const stage = document.getElementById('stage');
   const focusIn = document.getElementById('focus-in');
   document.getElementById('focus-form').addEventListener('submit', e => {
@@ -1033,7 +1187,7 @@ function viewDrill(q) {
     if (!r || !r.text) {
       stage.innerHTML = `<div class="empty"><p>${!r
         ? 'Type a few more answers first. Drills start once Verbatim has seen enough of your typing to find your weak spots. You can still pick a pair or key to drill above.'
-        : `No ${what} in ${subject ? esc(subject) : 'these packs'} contain “${esc(focus?.label || '')}”. Try ${src === 'terms' ? 'Words, or ' : ''}another pair.`}</p><a class="btn" href="#/">Back to chapters</a></div>`;
+        : `No ${what} in ${subject ? esc(subject) : 'these packs'} contain “${esc(focus?.label || '')}”. Try ${src === 'terms' ? 'Words, or ' : ''}another pair.`}</p><a class="btn" href="#/typing">Back to typing</a></div>`;
       phase = 'none';
       return;
     }
@@ -1094,7 +1248,7 @@ function viewDrill(q) {
 
   const onKey = e => {
     if (e.target === focusIn) return;
-    if (e.key === 'Escape') { e.preventDefault(); go('#/'); return; }
+    if (e.key === 'Escape') { e.preventDefault(); go('#/typing'); return; }
     if (phase === 'result' && (e.key === 'Enter' || e.key === ' ')) { e.preventDefault(); round(); }
   };
   document.addEventListener('keydown', onKey);
@@ -1176,7 +1330,7 @@ function viewTest(q) {
   main.innerHTML = `
     <div class="play">
       <div class="play-top">
-        <a class="icon-btn" href="#/" title="Leave (Esc)" aria-label="Leave">${ICON.x}</a>
+        <a class="icon-btn" href="#/typing" title="Back to typing (Esc)" aria-label="Leave">${ICON.x}</a>
         <div class="play-where"><b>Speed test</b><span>${d} seconds of ${src === 'custom' ? 'your own text' : `${subject ? `${esc(subject)} ` : ''}${TEST_SOURCES[src].toLowerCase()}`}</span></div>
         <div class="hud">
           <span class="tleft" title="Time left"><b id="tleft">${d}</b>s</span>
@@ -1192,6 +1346,7 @@ function viewTest(q) {
       <div class="stage" id="stage"></div>
       <p class="play-help">The clock starts with your first key. <kbd>Enter</kbd> after a test starts another. <kbd>Esc</kbd> leaves.</p>
     </div>`;
+  mountToolTabs('test');
   const stage = document.getElementById('stage');
   const tleft = document.getElementById('tleft');
   let typer = null, timer = 0, t0 = 0, samples = [], last = null, phase = 'typing', text = '';
@@ -1304,7 +1459,7 @@ function viewTest(q) {
 
   const onKey = e => {
     if (e.target?.id === 'custom') return;
-    if (e.key === 'Escape') { e.preventDefault(); go('#/'); return; }
+    if (e.key === 'Escape') { e.preventDefault(); go('#/typing'); return; }
     if (phase === 'result' && e.key === 'Enter') { e.preventDefault(); start(); }
   };
   document.addEventListener('keydown', onKey);
@@ -1320,7 +1475,7 @@ function viewCourse() {
   main.innerHTML = `
     <div class="play">
       <div class="play-top">
-        <a class="icon-btn" href="#/" title="Leave (Esc)" aria-label="Leave">${ICON.x}</a>
+        <a class="icon-btn" href="#/typing" title="Back to typing (Esc)" aria-label="Leave">${ICON.x}</a>
         <div class="play-where"><b>Key course</b><span>Learn the keyboard a few letters at a time, with syllabus words</span></div>
         <div class="hud"><span class="sxp" title="XP this session">${ICON.bolt}<b id="sxp">0</b></span></div>
       </div>
@@ -1331,6 +1486,7 @@ function viewCourse() {
       <div class="stage" id="stage"></div>
       <p class="play-help">A new letter unlocks when every unlocked letter reaches the target speed with under 6% errors. Turn on the on-screen keyboard in settings to see which finger to use. <kbd>Esc</kbd> leaves.</p>
     </div>`;
+  mountToolTabs('course');
   const stage = document.getElementById('stage');
   const lettersEl = document.getElementById('letters');
   let typer = null, phase = 'typing', xpSum = 0;
@@ -1405,7 +1561,7 @@ function viewCourse() {
     typer?.focus();
   }));
   const onKey = e => {
-    if (e.key === 'Escape') { e.preventDefault(); go('#/'); return; }
+    if (e.key === 'Escape') { e.preventDefault(); go('#/typing'); return; }
     if (phase === 'result' && (e.key === 'Enter' || e.key === ' ')) { e.preventDefault(); round(); }
   };
   document.addEventListener('keydown', onKey);

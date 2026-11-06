@@ -23,6 +23,12 @@ syllabus topic and is tagged when it's printed on the data and formulae list.
 - **Jump straight in.** The home page is the chapter list: pick a subject, a pack and a chapter,
   then *Train*. Filter by AS or A2, switch between a list and a grid, start a random mix of the
   pack, or search for any term ("tesla", "flux", "stack") and start there.
+- **Two sections.** *Learn* is the chapter list, for typing answers until you know them.
+  *Typing* gathers the skill tools (key course, weak spots drill, speed test and speed checks),
+  each labelled by the goal it serves and showing where you stand, plus the typing settings.
+  Both pages suggest one thing to do next and say why: due speed checks, a baseline speed test,
+  the key course while speed or accuracy is low, your weak spots, or a retest after a week. Each
+  tool has tabs to the others.
 - **Train** shows the answer and you type it. (Practice mode, which hides words for you to fill
   in from memory, is switched off for now: `PRACTICE_ENABLED` in `js/game.js`.)
 - **Honest speed.** WPM is net: only correct characters you typed count, not ones filled in for
