@@ -7,6 +7,7 @@ import {
 } from './game.js';
 import { course, letterStatus, focusLetter, maybeUnlock, courseRound, ORDER as COURSE_ORDER, TARGETS as COURSE_TARGETS } from './course.js';
 import { keyTable } from './skill.js';
+import { buildSnapshot, snapshotFileName, downloadJson, readExerciseSet, addExerciseSet, exercisesPending, recordExercise, removeExercise, GUIDE_URL, SITE } from './agent.js';
 import { fingerFor } from './kb.js';
 import { recordAttempt, troubleWords, wordDrill, drillRound, vocabulary, keyTerms, parseFocus, weakTargets, textCost, hasEnoughData, weakest } from './skill.js';
 import { sfx, confetti, floatText, countUp } from './fx.js';
@@ -176,14 +177,18 @@ function route() {
   }
   document.querySelectorAll('[data-nav]').forEach(a => {
     const on = a.dataset.nav === view || (['c', 'play'].includes(view) && a.dataset.nav === 'home')
-      || (['drill', 'test', 'course'].includes(view) && a.dataset.nav === 'typing');
+      || (['drill', 'test', 'course', 'ex', 'load'].includes(view) && a.dataset.nav === 'typing')
+      || (view === 'snapshot' && a.dataset.nav === 'progress');
     a.toggleAttribute('aria-current', on);
   });
-  document.body.dataset.view = ['drill', 'test', 'course'].includes(view) ? 'play' : view;
+  document.body.dataset.view = ['drill', 'test', 'course', 'ex'].includes(view) ? 'play' : view;
   window.scrollTo(0, 0);
   if (view === 'c') return viewChapter(parts[1], parts[2]);
   if (view === 'play') return viewPlay(q);
   if (view === 'typing') return viewTyping();
+  if (view === 'snapshot') return viewSnapshot(q);
+  if (view === 'load') return viewLoad(q);
+  if (view === 'ex') return viewExercise(parts[1]);
   if (view === 'drill') return viewDrill(q);
   if (view === 'test') return viewTest(q);
   if (view === 'course') return viewCourse();
@@ -1035,6 +1040,189 @@ function viewPlay(q) {
   offerWarmup();
 }
 
+// ---- AI coach: snapshot, exercise links, exercises -----------------------------
+
+const COACH_PROMPT = `Analyse my Verbatim typing data and give me feedback and exercises, following the instructions at ${GUIDE_URL}`;
+
+function coachSection() {
+  return `<section class="panel coach">
+    <h2>AI coach</h2>
+    <p class="muted small">Let Claude Code, Codex or another agent on your computer read your typing data, give feedback and send exercises back. Paste this to it:</p>
+    <div class="copy-box"><code id="coach-prompt">${esc(COACH_PROMPT)}</code><button class="btn small" type="button" data-copy="coach-prompt">Copy</button></div>
+    <p class="muted small">The agent opens a link that saves a snapshot of your data to Downloads, reads it there, and replies with exercises as a link you approve. Nothing leaves your computer. Using a web chat instead? <a href="#/snapshot">Download a snapshot</a> and attach it.</p>
+  </section>`;
+}
+
+function bindCopy(root) {
+  root.querySelectorAll('[data-copy]').forEach(b => b.addEventListener('click', async () => {
+    const text = document.getElementById(b.dataset.copy)?.textContent || '';
+    try { await navigator.clipboard.writeText(text); b.textContent = 'Copied'; } catch { b.textContent = 'Select and copy'; }
+    setTimeout(() => { b.textContent = 'Copy'; }, 2000);
+  }));
+}
+
+function exercisesSection() {
+  const list = state.exercises || [];
+  if (!list.length) return '';
+  const sets = new Map();
+  for (const x of list) { if (!sets.has(x.setId)) sets.set(x.setId, []); sets.get(x.setId).push(x); }
+  const done = list.filter(x => x.results.length).length;
+  return `<section class="panel exercises" id="exercises">
+    <div class="hub-keys-head"><h2>Your exercises <small>${done} of ${list.length} done</small></h2>${done ? '<button class="btn small ghost" type="button" id="clear-done">Clear finished</button>' : ''}</div>
+    ${[...sets.values()].map(xs => `<div class="ex-set">
+      <p class="ex-set-head"><b>${esc(xs[0].set)}</b>${xs[0].from ? ` <span class="muted">from ${esc(xs[0].from)}</span>` : ''}</p>
+      ${xs[0].setNote ? `<p class="muted small">${esc(xs[0].setNote)}</p>` : ''}
+      <ol class="ex-list">${xs.map(x => {
+        const best = x.results.length ? x.results.reduce((a, b) => (b.wpm > a.wpm ? b : a)) : null;
+        return `<li class="${best ? 'done' : ''}">
+          <a class="ex-main" href="#/ex/${esc(x.id)}"><b>${esc(x.title)}</b><small>${x.kind === 'test' ? `${x.seconds}s timed test` : 'Drill'}${x.note ? `: ${esc(x.note)}` : ''}</small></a>
+          <span class="ex-status">${best ? `✓ ${best.wpm} WPM, ${pct(best.acc)}` : 'To do'}</span>
+          <a class="btn small ${best ? '' : 'primary'}" href="#/ex/${esc(x.id)}">${best ? 'Again' : 'Start'}</a>
+          <button class="btn small ghost" type="button" data-remove-ex="${esc(x.id)}" aria-label="Remove ${esc(x.title)}" title="Remove">${ICON.x}</button>
+        </li>`;
+      }).join('')}</ol>
+    </div>`).join('')}
+  </section>`;
+}
+
+/** #/snapshot: save the learner's typing data to their Downloads folder, for an agent to read. */
+function viewSnapshot(q) {
+  const full = q.get('full') === '1';
+  const name = snapshotFileName(full);
+  const snap = buildSnapshot(packs, { full });
+  const size = downloadJson(snap, name);
+  main.innerHTML = `
+    <section class="panel snapshot">
+      <h1>Snapshot saved</h1>
+      <p><b>${esc(name)}</b> (${fmt(size / 1024)} KB) is in your Downloads folder. ${full ? 'It is the full version.' : `<a href="#/snapshot?full=1">Full version</a> adds every answer and the whole skill model.`}</p>
+      <p class="muted">It holds your speed, accuracy, speed tests, weak keys, pairs and words, trends and exercise results, with a field guide. It stays on your computer unless you share it.</p>
+      <p>If an agent opened this page for you, you can close this tab: it will read the file from Downloads.</p>
+      <div class="row">
+        <button class="btn" id="again" type="button">Download again</button>
+        <a class="btn ghost" href="${GUIDE_URL}" rel="noopener">Guide for agents</a>
+        <a class="btn ghost" href="#/typing">Back to typing</a>
+      </div>
+    </section>`;
+  document.getElementById('again').addEventListener('click', () => downloadJson(buildSnapshot(packs, { full }), snapshotFileName(full)));
+}
+
+/** #/load?x=...: preview an exercise set from a link and add it only when the learner agrees. */
+function viewLoad(q) {
+  let set;
+  try { set = readExerciseSet(q); } catch (err) {
+    main.innerHTML = `<section class="panel"><h1>Couldn’t load these exercises</h1><p>${esc(err.message)}</p><a class="btn" href="#/typing">Back to typing</a></section>`;
+    return;
+  }
+  main.innerHTML = `
+    <section class="panel load-set">
+      <h1>Load ${plural(set.exercises.length, 'exercise')}?</h1>
+      <p><b>${esc(set.title)}</b>${set.from ? ` from ${esc(set.from)}` : ''}. Only load exercises from someone you trust: they are added to your list and change nothing else.</p>
+      ${set.note ? `<p class="muted">${esc(set.note)}</p>` : ''}
+      <ol class="ex-preview">${set.exercises.map(x => `<li><b>${esc(x.title)}</b> <span class="muted small">${x.kind === 'test' ? `${x.seconds}s timed test` : 'Drill'}, ${fmt(x.text.length)} characters</span>
+        ${x.note ? `<p class="muted small">${esc(x.note)}</p>` : ''}<p class="ex-text">${esc(x.text.slice(0, 160))}${x.text.length > 160 ? '…' : ''}</p></li>`).join('')}</ol>
+      <div class="row">
+        <button class="btn primary" id="do-load" type="button">Load exercises</button>
+        <a class="btn ghost" href="#/typing">Cancel</a>
+      </div>
+    </section>`;
+  document.getElementById('do-load').addEventListener('click', () => {
+    const n = addExerciseSet(set);
+    toast(n ? `<b>${plural(n, 'exercise')} loaded.</b> They’re under Your exercises.` : 'These exercises were already loaded.');
+    history.replaceState(null, '', '#/typing');
+    go('#/typing');
+  });
+}
+
+/** #/ex/<id>: run one loaded exercise, untimed (drill) or against the clock (test). */
+function viewExercise(id) {
+  const x = (state.exercises || []).find(e => e.id === id);
+  if (!x) { main.innerHTML = `<div class="empty"><p>That exercise isn’t loaded any more.</p><a class="btn" href="#/typing">Back to typing</a></div>`; return; }
+  const list = state.exercises;
+  main.innerHTML = `
+    <div class="play">
+      <div class="play-top">
+        <a class="icon-btn" href="#/typing" title="Back to typing (Esc)" aria-label="Leave">${ICON.x}</a>
+        <div class="play-where"><b>${esc(x.title)}</b><span>${esc(x.set)}${x.from ? `, from ${esc(x.from)}` : ''} · ${list.indexOf(x) + 1} of ${list.length}</span></div>
+        <div class="hud">${x.kind === 'test' ? `<span class="tleft" title="Time left"><b id="tleft">${x.seconds}</b>s</span>` : ''}</div>
+      </div>
+      ${x.note ? `<p class="ex-note">${esc(x.note)}</p>` : ''}
+      <div class="stage" id="stage"></div>
+      <p class="play-help">${x.kind === 'test' ? 'The clock starts with your first key.' : 'Type it through once.'} <kbd>Esc</kbd> leaves.</p>
+    </div>`;
+  const stage = document.getElementById('stage');
+  let typer = null, timer = 0, t0 = 0, phase = 'typing';
+
+  function start() {
+    clearInterval(timer); timer = 0; t0 = 0; phase = 'typing';
+    typer?.destroy();
+    let text = x.text;
+    if (x.kind === 'test') { const need = x.seconds * 22; while (text.length < need) text += ` ${x.text}`; }
+    const card = document.createElement('article');
+    card.className = `card mode-train ${x.kind === 'test' ? 'test-card' : 'drill-card'}`;
+    card.innerHTML = `<div class="answer" id="answer"></div><footer class="card-foot"><span class="live" id="live"></span></footer>`;
+    stage.replaceChildren(card);
+    const live = card.querySelector('#live');
+    typer = new Typer(card.querySelector('#answer'), {
+      text, kind: 'prose', mask: new Set(), settings: { ...state.settings, ignorePunctuation: false },
+      onKey: ok => {
+        if (!state.settings.sound) return;
+        if (!ok) sfx.miss();
+        else if (state.settings.keySound) sfx.key();
+      },
+      onProgress: s => {
+        if (!t0 && s.pos) {
+          t0 = performance.now();
+          if (x.kind === 'test') timer = setInterval(() => {
+            const el = (performance.now() - t0) / 1000;
+            document.getElementById('tleft').textContent = Math.max(0, Math.ceil(x.seconds - el));
+            if (el >= x.seconds) { clearInterval(timer); typer.finishNow(); }
+          }, 100);
+        }
+        live.innerHTML = s.pos ? `<span><b>${Math.round(s.wpm)}</b> wpm</span><span><b>${pct(s.acc)}</b> right</span>` : '';
+      },
+      onDone: r => finish(card, text, r),
+    });
+    typer.focus();
+  }
+
+  function finish(card, text, r) {
+    clearInterval(timer); timer = 0;
+    phase = 'result';
+    const minutes = x.kind === 'test' && t0 ? Math.max(1, Math.min(x.seconds, (performance.now() - t0) / 1000)) / 60 : Math.max(r.ms, 300) / 60000;
+    const wpm = Math.round((r.net / 5) / minutes);
+    const raw = Math.round((r.keystrokes / 5) / minutes);
+    const acc = keyAccOf(r);
+    recordAttempt(text, r.log);
+    recordExercise(x.id, { t: Date.now(), wpm, raw, acc: +acc.toFixed(3) });
+    const xp = Math.max(1, Math.round((r.net / 5) * Math.pow(acc, 3)));
+    state.xp += xp;
+    state.days[dayKey()] = (state.days[dayKey()] || 0) + xp;
+    save();
+    const nextEx = list.slice(list.indexOf(x) + 1).find(e => !e.results.length) || list.find(e => !e.results.length && e !== x);
+    const out = document.createElement('section');
+    out.className = 'result';
+    out.innerHTML = `
+      <p class="rstats"><span><b>${wpm}</b> WPM</span><span><b>${raw}</b> raw</span><span><b>${pct(acc)}</b> keys right</span><span>+<b>${fmt(xp)}</b> XP</span></p>
+      <div class="result-actions">
+        ${nextEx ? `<a class="btn primary" id="next" href="#/ex/${esc(nextEx.id)}">Next: ${esc(nextEx.title)} <kbd>Enter</kbd></a>` : `<a class="btn primary" id="next" href="#/typing">All done <kbd>Enter</kbd></a>`}
+        <button class="btn" id="again" type="button">Again</button>
+      </div>
+      ${nextEx ? '' : '<p class="muted small">Finished the set. Ask your agent to take a new snapshot to see how it went.</p>'}`;
+    card.append(out);
+    if (state.settings.sound) sfx.done(acc >= 0.98 ? 4 : acc >= 0.93 ? 3 : 2, 0);
+    out.querySelector('#again').addEventListener('click', start);
+    out.querySelector('#next').focus({ preventScroll: true });
+  }
+
+  const onKey = e => {
+    if (e.key === 'Escape') { e.preventDefault(); go('#/typing'); return; }
+    if (phase === 'result' && e.key === 'Enter' && document.activeElement?.id !== 'again') { e.preventDefault(); document.getElementById('next')?.click(); }
+  };
+  document.addEventListener('keydown', onKey);
+  cleanup = () => { clearInterval(timer); document.removeEventListener('keydown', onKey); typer?.destroy(); };
+  start();
+}
+
 // ---- typing hub ---------------------------------------------------------------
 //
 // One place for everything that builds typing skill, each tool labelled by the goal it serves,
@@ -1067,6 +1255,8 @@ const daysAgo = t => Math.floor((Date.now() - t) / 86400000);
 function nextUp(cont) {
   const due = dueItems().length;
   if (due) return { icon: ICON.replay, kind: 'due', title: `Speed check: ${plural(due, 'answer')}`, why: 'They were fluent. Check they still are before they slip.', href: '#/play?review=1', cta: 'Start speed check' };
+  const todo = exercisesPending();
+  if (todo.length) return { icon: ICON.list, kind: 'ex', title: `Your exercises: ${plural(todo.length, 'to do', 'to do')}`, why: todo[0].from ? `Set by ${todo[0].from}: ${todo[0].set}.` : `From “${todo[0].set}”.`, href: `#/ex/${todo[0].id}`, cta: 'Start' };
   const tests = state.tests || [];
   if (!tests.length) return { icon: ICON.flame, kind: 'test', title: 'Take a 60-second speed test', why: 'It sets your baseline, so you can see yourself improve.', href: '#/test?d=60&src=answers', cta: 'Start test' };
   const lastTest = tests.at(-1);
@@ -1127,6 +1317,8 @@ function viewTyping() {
       <span class="btn primary">${esc(next.cta)}</span>
     </a>
 
+    ${exercisesSection()}
+
     <section class="tools" aria-label="Typing tools">
       <article class="tool-card">
         <p class="tool-goal">Learn the keys</p>
@@ -1183,6 +1375,8 @@ function viewTyping() {
       ${keyboardHeatmap(keyTable(), f => drillLink(f))}
     </section>` : ''}
 
+    ${coachSection()}
+
     <section class="panel settings hub-settings">
       <h2>Typing settings</h2>
       ${toggle('showKeyboard', 'On-screen keyboard', 'Shows the next key and which finger should press it.')}
@@ -1197,6 +1391,13 @@ function viewTyping() {
     state.settings[el.dataset.key] = el.checked;
     save();
   }));
+  main.querySelectorAll('[data-remove-ex]').forEach(b => b.addEventListener('click', () => { removeExercise(b.dataset.removeEx); viewTyping(); }));
+  main.querySelector('#clear-done')?.addEventListener('click', () => {
+    state.exercises = (state.exercises || []).filter(x => !x.results.length);
+    save();
+    viewTyping();
+  });
+  bindCopy(main);
   const fin = document.getElementById('hub-focus-in');
   document.getElementById('hub-focus').addEventListener('submit', e => {
     e.preventDefault();
@@ -1714,6 +1915,7 @@ function viewProgress() {
     <section class="panel">
       <h2>Your data</h2>
       <p>Progress is stored in this browser only. Export it to move to another device.</p>
+      <p>For an AI coach, download a <b>snapshot</b>: your typing data with a field guide, saved to your Downloads folder. <a href="#/snapshot">Snapshot</a> · <a href="#/snapshot?full=1">Full snapshot</a> · <a href="${GUIDE_URL}" rel="noopener">Guide for agents</a></p>
       <div class="row">
         <button class="btn" id="export">Export progress</button>
         <label class="btn">Import progress<input type="file" id="import" accept="application/json" hidden></label>

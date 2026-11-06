@@ -762,6 +762,29 @@ a.kb-key { text-decoration: none; } a.kb-key:hover, a.kb-key:focus-visible { out
   .next-up .btn { grid-column: 1 / -1; justify-self: start; }
 }
 
+/* AI coach, exercises, snapshot */
+.coach .copy-box { display: flex; gap: 0.5rem; align-items: center; background: var(--card-2); border-radius: 6px; padding: 0.55rem 0.7rem; margin: 0.4rem 0 0.6rem; }
+.coach .copy-box code { flex: 1; font-size: 0.88rem; overflow-wrap: anywhere; }
+.next-up.k-ex .qc-icon, .quick-card.k-ex .qc-icon { background: var(--mark-good); }
+.exercises h2 small { color: var(--ink-2); font-size: 0.7em; margin-left: 0.4rem; }
+.ex-set { margin-top: 0.6rem; }
+.ex-set-head { margin: 0 0 0.2rem; }
+.ex-list { list-style: none; padding: 0; margin: 0.3rem 0 0; display: grid; gap: 0.1rem; }
+.ex-list li { display: grid; grid-template-columns: minmax(0, 1fr) auto auto auto; gap: 0.6rem; align-items: center; padding: 0.45rem 0; border-bottom: 1px solid var(--rule); }
+.ex-main { display: grid; text-decoration: none; color: inherit; min-width: 0; }
+.ex-main small { color: var(--ink-2); }
+.ex-list li.done .ex-main b { color: var(--ink-2); }
+.ex-status { font-size: 0.85rem; color: var(--ink-2); white-space: nowrap; }
+.ex-list li.done .ex-status { color: var(--good, var(--ink)); font-weight: 700; }
+.ex-list .btn.ghost svg { width: 0.9rem; height: 0.9rem; }
+.ex-note { max-width: 900px; margin: -0.3rem auto 0.8rem; color: var(--on-desk-2); text-align: center; }
+.ex-preview { display: grid; gap: 0.6rem; margin: 0.8rem 0 1rem; padding-left: 1.3rem; }
+.ex-preview p { margin: 0.15rem 0 0; }
+.ex-text { font-family: var(--mono); font-size: 0.85rem; color: var(--ink-2); background: var(--card-2); padding: 0.3rem 0.5rem; border-radius: 4px; overflow-wrap: anywhere; }
+.snapshot h1, .load-set h1 { padding-top: 0; }
+main > .panel.snapshot, main > .panel.load-set { margin-top: 1.5rem; }
+@media (max-width: 600px) { .ex-list li { grid-template-columns: minmax(0, 1fr) auto; } .ex-status { grid-column: 1; } }
+
 /* Tabs across the top of each typing tool */
 .tool-tabs { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.25rem; margin: -0.25rem auto 1rem; max-width: 900px; }
 .tool-tabs a { color: var(--on-desk-2); text-decoration: none; font-weight: 700; font-size: 0.92rem; padding: 0.35rem 0.8rem; border-radius: 999px; display: inline-flex; align-items: center; gap: 0.35rem; }

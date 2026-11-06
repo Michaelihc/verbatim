@@ -1,0 +1,8 @@
+# Verbatim
+
+> A typing trainer for Cambridge International AS & A Level definitions. Learners' progress is stored only in their own browser.
+
+If a user asks you to analyse their Verbatim typing data, give feedback or set exercises, follow
+the instructions for agents:
+
+- [Instructions for AI agents](https://michaelihc.github.io/verbatim/agents.md): how to get the user's data snapshot (open, don't fetch, the snapshot link), what each field means, how to analyse it, and how to hand exercises back as a link.
