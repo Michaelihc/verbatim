@@ -6,7 +6,8 @@
 // magnitude, an ordinal ramp for mastery stages, the app's rating colours for ratings.
 
 import { state, dayKey, save } from './store.js';
-import { STAGES, RATINGS, unitProgress, practiceLevel, stageOf } from './game.js';
+import { STAGES, TOP, PROGRESS, RATINGS, unitProgress, practiceLevel, stageOf, usualWpm } from './game.js';
+import { weakest, keyTable } from './skill.js';
 
 const DAY = 86400000;
 const RANGES = [['7', '7 days'], ['30', '30 days'], ['90', '90 days'], ['all', 'All time']];
@@ -60,6 +61,7 @@ function buildData(packs, view) {
   const kpis = [
     { label: 'Answers typed', value: cur.length, prev: prev.length, show: v => fmt(v) },
     { label: 'XP earned', value: sumXp(start, today + DAY), prev: sumXp(prevStart, start), show: v => fmt(v) },
+    { label: 'Usual speed', value: usualWpm(), prev: null, show: v => `${Math.round(v)}`, unit: 'WPM', tip: 'Median net speed of your last 40 answers of 40+ characters' },
     { label: 'Average speed', value: mean(cur.map(e => e.wpm)), prev: mean(prev.map(e => e.wpm)), show: v => `${Math.round(v)}`, unit: 'WPM' },
     { label: 'Accuracy', value: mean(cur.map(e => e.acc)), prev: mean(prev.map(e => e.acc)), show: pct, points: true },
     { label: 'Perfect rate', value: perfectRate(cur), prev: perfectRate(prev), show: pct, points: true },
@@ -73,7 +75,7 @@ function buildData(packs, view) {
   }
   const stageCounts = STAGES.map((_, s) => items.filter(x => x.stage === s).length);
   const ratingCounts = RATING_ORDER.map(r => cur.filter(e => e.r === r).length);
-  const focus = items.filter(x => x.cites > 0 && x.stage < 5)
+  const focus = items.filter(x => x.cites > 0 && x.stage < TOP)
     .sort((a, b) => b.cites - a.cites || a.stage - b.stage).slice(0, 8);
 
   const topics = inPacks.map(pack => ({
@@ -119,7 +121,7 @@ function tile(k, view) {
       delta = `<span class="kpi-delta ${dir}">${txt} <span>vs previous ${view.range} days</span></span>`;
     }
   }
-  return `<div class="kpi"><span class="kpi-label">${esc(k.label)}</span>
+  return `<div class="kpi"${k.tip ? ` title="${esc(k.tip)}"` : ''}><span class="kpi-label">${esc(k.label)}</span>
     <span class="kpi-value">${has ? esc(k.show(k.value)) : '–'}${has && k.unit ? ` <small>${esc(k.unit)}</small>` : ''}</span>${delta}</div>`;
 }
 
@@ -206,9 +208,59 @@ function segmented(parts, total, cls) {
   <ul class="viz-legend">${parts.map(p => `<li><i class="sw p${p.key}"></i>${esc(p.name)}</li>`).join('')}</ul>`;
 }
 
+// ---- speed tests ----------------------------------------------------------------------
+
+function testsBody(testHref) {
+  const tests = state.tests || [];
+  if (!tests.length) return `<p class="viz-empty">No tests yet. <a href="${testHref}">Take a speed test</a> to get a benchmark you can compare over time.</p>`;
+  const rows = [15, 30, 60, 120].map(d => {
+    const ts = tests.filter(t => t.d === d);
+    if (!ts.length) return '';
+    const best = ts.reduce((a, b) => (b.wpm > a.wpm ? b : a));
+    const lastT = ts.at(-1);
+    return `<li><b>${d}s</b><span>Best <b>${best.wpm}</b> WPM at ${pct(best.acc)}</span><span>Latest <b>${lastT.wpm}</b> WPM, ${pct(lastT.acc)}${lastT.cons != null ? `, ${lastT.cons}% consistent` : ''}</span><span class="muted-cell">${ts.length} ${ts.length === 1 ? 'test' : 'tests'}</span></li>`;
+  }).join('');
+  return `<ul class="test-pbs">${rows}</ul><a class="btn small" href="${testHref}">Take a speed test</a>`;
+}
+
+// ---- weak spots -----------------------------------------------------------------------
+
+const KB_ROWS = ['1234567890-=', 'qwertyuiop[]', "asdfghjkl;'", 'zxcvbnm,./'];
+const showPair = k => k.replace(/ /g, '␣');
+const times = r => r.ratio == null ? '–' : `${r.ratio.toFixed(1)}×`;
+
+/** A keyboard shaded by how much each key holds you back (time against your median, plus errors). */
+function keyboard(keys, focusHref) {
+  const vals = Object.values(keys).map(k => k.cost);
+  if (!vals.length) return '<p class="viz-empty">Type a few answers to map your keyboard.</p>';
+  const max = Math.max(0.5, ...vals);
+  const cell = (k, label = k, cls = '') => {
+    const e = keys[k];
+    if (!e) return `<span class="kb-key none ${cls}">${esc(label)}</span>`;
+    const tip = `${label}: ${e.ms == null ? 'not timed yet' : `${e.ms} ms (${times(e)} your median)`}, ${pct(e.err)} errors, ${fmt(e.n)} presses`;
+    return `<a class="kb-key ${cls}" style="--v:${Math.min(1, e.cost / max).toFixed(2)}" title="${esc(tip)}. Click to drill it." href="${focusHref(k)}">${esc(label)}</a>`;
+  };
+  return `<div class="kb" role="img" aria-label="Keyboard heatmap; see table view for values">
+    ${KB_ROWS.map((row, i) => `<div class="kb-row r${i}">${[...row].map(k => cell(k)).join('')}</div>`).join('')}
+    <div class="kb-row r4">${cell('shift', 'Shift', 'wide')}${cell('space', 'Space', 'space')}${cell('enter', 'Enter', 'wide')}</div>
+  </div>
+  <ul class="viz-legend"><li><i class="sw kb-lo"></i>Quick and clean</li><li><i class="sw kb-hi"></i>Slow or error-prone</li><li><i class="sw kb-none"></i>Not enough presses yet</li></ul>`;
+}
+
+function weakList(rows, label, href, focusHref, key = label) {
+  if (!rows.length) return '<p class="viz-empty">Nothing stands out yet. Keep typing and this fills in.</p>';
+  const max = Math.max(...rows.map(r => r.cost));
+  return `<ol class="rank-bars weak">${rows.map(r => `<li>
+      <a class="rank-name" href="${focusHref(key(r))}" title="Drill ${esc(label(r))}"><b>${esc(label(r))}</b><small>${r.ms == null ? '' : `${times(r)} time · `}${pct(r.err)} errors</small></a>
+      <span class="rank-track"><i style="width:${(r.cost / max) * 100}%"></i></span>
+      <span class="rank-val">${fmt(r.n)}</span>
+    </li>`).join('')}</ol>
+    <a class="btn small" href="${href}">Drill these</a>`;
+}
+
 // ---- render -------------------------------------------------------------------------
 
-export function renderDashboard(host, { packs, playHref, chapterHref, playItemHref }) {
+export function renderDashboard(host, { packs, playHref, chapterHref, playItemHref, drillHref = '#/drill', focusHref = f => `#/drill?focus=${encodeURIComponent(f)}`, testHref = '#/test' }) {
   const view = { range: '30', subject: 'all', sort: 'syllabus', ...(state.ui?.dash || {}) };
 
   function draw() {
@@ -228,6 +280,10 @@ export function renderDashboard(host, { packs, playHref, chapterHref, playItemHr
       mastery: (a, b) => a.mastery - b.mastery || a.order - b.order,
       examined: (a, b) => (b.cites ?? -1) - (a.cites ?? -1) || a.order - b.order,
     };
+    const keys = keyTable();
+    const pairs = weakest('pairs', 8, k => !k.includes('\n'));
+    const words = weakest('words', 8);
+    const keyRows = Object.entries(keys).sort((a, b) => b[1].cost - a[1].cost).map(([k, e]) => [k, e.ms == null ? '–' : `${e.ms} ms`, times(e), pct(e.err), fmt(e.n)]);
     const dayRows = D.days.map(d => [shortDate(d.t), fmt(d.xp), String(d.n), d.wpm == null ? '–' : String(Math.round(d.wpm)), d.acc == null ? '–' : pct(d.acc)]);
     const maxCites = Math.max(1, ...D.focus.map(f => f.cites));
 
@@ -242,32 +298,42 @@ export function renderDashboard(host, { packs, playHref, chapterHref, playItemHr
       <div class="viz-grid-2">
         ${card('c-xp', 'Daily XP', `Each column is one day in ${rangeName}. The line is your daily goal.`, xpColumns(D.days, w, goal),
           table(['Day', 'XP', 'Answers', 'WPM', 'Accuracy'], dayRows), { wide: true })}
-        ${card('c-wpm', 'Typing speed', 'Average words per minute on the days you practised.',
+        ${card('c-wpm', 'Typing speed', 'Average net words per minute on the days you practised.',
           D.days.some(d => d.wpm != null) ? lineChart(D.days, 'wpm', wHalf, { show: v => `${Math.round(v)}`, label: 'Average typing speed per day' }) : '<p class="viz-empty">Finish a few answers to see your speed.</p>',
           table(['Day', 'WPM'], D.days.filter(d => d.wpm != null).map(d => [shortDate(d.t), String(Math.round(d.wpm))])))}
         ${card('c-acc', 'Accuracy', 'Share of keys typed right, averaged per day.',
           D.days.some(d => d.acc != null) ? lineChart(D.days, 'acc', wHalf, { min: p => Math.max(0, Math.floor(Math.min(...p) * 10) / 10 - 0.1), max: 1, show: pct, label: 'Average accuracy per day' }) : '<p class="viz-empty">Finish a few answers to see your accuracy.</p>',
           table(['Day', 'Accuracy'], D.days.filter(d => d.acc != null).map(d => [shortDate(d.t), pct(d.acc)])))}
-        ${card('c-stage', 'Mastery split', `Where all ${fmt(totalItems)} answers sit, from New to Mastered.`, segmented(stageParts, totalItems, 'stages'),
+        ${card('c-tests', 'Speed tests', 'Your best and latest timed test at each length, all text types. Net WPM.', testsBody(testHref),
+          (state.tests || []).length ? table(['Date', 'Length', 'Text', 'WPM', 'Raw', 'Accuracy', 'Consistency'], [...state.tests].reverse().slice(0, 30).map(t => [shortDate(t.t), `${t.d}s`, t.src, String(t.wpm), String(t.raw), pct(t.acc), t.cons == null ? '–' : `${t.cons}%`])) : '', { wide: true })}
+        ${card('c-keys', 'Your keyboard', 'Darker keys hold you back: slower than your median key, or often mistyped. Shift counts as its own key. Click a key, pair or word to drill it.', keyboard(keys, focusHref),
+          keyRows.length ? table(['Key', 'Time', 'Against median', 'Errors', 'Presses'], keyRows) : '', { wide: true })}
+        ${card('c-pairs', 'Slowest letter pairs', 'Transitions between two keys, worst first. Time is against your median pair; the number is how often you have typed it.',
+          weakList(pairs, r => showPair(r.k), drillHref, focusHref, r => r.k),
+          pairs.length ? table(['Pair', 'Against median', 'Errors', 'Times typed'], pairs.map(r => [showPair(r.k), times(r), pct(r.err), fmt(r.n)])) : '')}
+        ${card('c-words', 'Words you trip on', 'Words you often mistype or type slowly, worst first.',
+          weakList(words, r => Object.keys(r.forms || {})[0] || r.k, drillHref, focusHref),
+          words.length ? table(['Word', 'Against median', 'Errors', 'Times typed'], words.map(r => [Object.keys(r.forms || {})[0] || r.k, times(r), pct(r.err), fmt(r.n)])) : '')}
+        ${card('c-stage', `${PROGRESS.name} split`, `Where all ${fmt(totalItems)} answers sit, from ${STAGES[0]} to ${STAGES[TOP]}.`, segmented(stageParts, totalItems, 'stages'),
           table(['Stage', 'Answers', 'Share'], stageParts.map(p => [p.name, String(p.value), totalItems ? pct(p.value / totalItems) : '0%'])))}
         ${card('c-rating', 'Ratings', `How your answers in ${rangeName} were rated.`,
           D.hasRatings ? segmented(ratingParts, totalRated, 'ratings') : '<p class="viz-empty">Ratings are recorded from now on. Finish an answer to start the chart.</p>',
           D.hasRatings ? table(['Rating', 'Answers', 'Share'], ratingParts.map(p => [p.name, String(p.value), pct(p.value / totalRated)])) : '')}
-        ${card('c-focus', 'Focus next', 'The answers cited by the most mark schemes that you haven’t mastered yet.',
+        ${card('c-focus', 'Focus next', `The answers cited by the most mark schemes that aren’t ${PROGRESS.top} yet.`,
           D.focus.length ? `<ol class="rank-bars">${D.focus.map(f => `<li>
               <a class="rank-name" href="${playItemHref(f.pack, f.unit, f.item)}"><b>${esc(f.item.term)}</b><small>${esc(f.unit.title)}, ${esc(STAGES[f.stage].toLowerCase())}</small></a>
               <span class="rank-track"><i style="width:${(f.cites / maxCites) * 100}%"></i></span>
               <span class="rank-val">${f.cites}</span>
-            </li>`).join('')}</ol>` : '<p class="viz-empty">Everything cited by the mark schemes is mastered. Impressive.</p>',
+            </li>`).join('')}</ol>` : `<p class="viz-empty">Everything cited by the mark schemes is ${PROGRESS.top}. Impressive.</p>`,
           D.focus.length ? table(['Answer', 'Chapter', 'Stage', 'Mark schemes'], D.focus.map(f => [f.item.term, f.unit.title, STAGES[f.stage], String(f.cites)])) : '')}
         ${card('c-cal', 'Practice calendar', 'Daily XP over the last 15 weeks, all subjects. Darker is more.', calendarGrid(goal), '', { tableToggle: false })}
       </div>
 
       <section class="viz-card wide topics" id="c-topics">
         <header class="viz-head">
-          <div><h2>Topics</h2><p>Practice fills with a lap and fades daily. Mastery grows with each stage. Answers are from ${esc(rangeName)}.</p></div>
+          <div><h2>Topics</h2><p>Practice fills with a lap and fades daily. ${PROGRESS.name} grows with each stage. Answers are from ${esc(rangeName)}.</p></div>
           <label class="sort">Sort by <select id="sort">
-            ${[['syllabus', 'Syllabus order'], ['practice', 'Least practised'], ['mastery', 'Least mastered'], ['examined', 'Most examined']].map(([k, l]) => `<option value="${k}" ${view.sort === k ? 'selected' : ''}>${l}</option>`).join('')}
+            ${[['syllabus', 'Syllabus order'], ['practice', 'Least practised'], ['mastery', `Least ${PROGRESS.top}`], ['examined', 'Most examined']].map(([k, l]) => `<option value="${k}" ${view.sort === k ? 'selected' : ''}>${l}</option>`).join('')}
           </select></label>
         </header>
         ${D.topics.map(({ pack, rows }, pi) => {
@@ -280,7 +346,7 @@ export function renderDashboard(host, { packs, playHref, chapterHref, playItemHr
               <span class="cell-bar"><span class="bar mast"><i style="width:${pct(avg('mastery'))}"></i></span><span class="cell-num">${pct(avg('mastery'))}</span></span>
             </summary>
             <div class="topic-scroll"><table class="topic-table">
-            <thead><tr><th>Chapter</th><th><i class="sw prac"></i>Practice</th><th><i class="sw mast"></i>Mastery</th><th class="num">Answers</th><th>Mark schemes citing it</th></tr></thead>
+            <thead><tr><th>Chapter</th><th><i class="sw prac"></i>Practice</th><th><i class="sw mast"></i>${PROGRESS.name}</th><th class="num">Answers</th><th>Mark schemes citing it</th></tr></thead>
             <tbody>
                 ${[...rows].sort(sorters[view.sort]).map(r => `<tr>
                   <td><a href="${chapterHref(pack, r.unit)}">${esc(r.unit.title)}</a></td>

@@ -2,7 +2,7 @@
 // background, so new content appears on the next visit without blocking this one.
 // `node tools/validate.mjs` checks that SHELL lists every shipped file. Bump VERSION on each release.
 
-const VERSION = 'v1';
+const VERSION = 'v2';
 const SHELL_CACHE = `verbatim-shell-${VERSION}`;
 const DATA_CACHE = 'verbatim-packs';
 
@@ -18,6 +18,9 @@ const SHELL = [
   'js/engine.js',
   'js/fx.js',
   'js/dash.js',
+  'js/skill.js',
+  'js/kb.js',
+  'js/course.js',
   'js/laptop3d.js',
   'js/vendor/three.module.min.js',
   'fonts/atkinson-400.woff2',
