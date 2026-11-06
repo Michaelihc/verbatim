@@ -5,6 +5,7 @@ import {
   levelFromXp, titleFor, STAGES, TOP, PROGRESS, MODES, LEVELS, RATINGS, maskRatio, stageOf, isDue, applyResult,
   unitProgress, streak, ACHIEVEMENTS, PRACTICE_ENABLED, checkAchievements, comboMult, practiceLevel, creditPractice, PRACTICE_DECAY,
 } from './game.js';
+import { course, letterStatus, focusLetter, maybeUnlock, courseRound, ORDER as COURSE_ORDER, TARGETS as COURSE_TARGETS } from './course.js';
 import { recordAttempt, troubleWords, wordDrill, drillRound, vocabulary, keyTerms, parseFocus, weakTargets, textCost, hasEnoughData, weakest } from './skill.js';
 import { sfx, confetti, floatText, countUp } from './fx.js';
 import { renderDashboard } from './dash.js';
@@ -175,11 +176,13 @@ function route() {
     const on = a.dataset.nav === view || (['c', 'play'].includes(view) && a.dataset.nav === 'home');
     a.toggleAttribute('aria-current', on);
   });
-  document.body.dataset.view = view === 'drill' ? 'play' : view;
+  document.body.dataset.view = ['drill', 'test', 'course'].includes(view) ? 'play' : view;
   window.scrollTo(0, 0);
   if (view === 'c') return viewChapter(parts[1], parts[2]);
   if (view === 'play') return viewPlay(q);
   if (view === 'drill') return viewDrill(q);
+  if (view === 'test') return viewTest(q);
+  if (view === 'course') return viewCourse();
   if (view === 'progress') return viewProgress();
   if (view === 'settings') return viewSettings();
   return viewHome();
@@ -234,6 +237,7 @@ function viewHome() {
     sub: `${(PRACTICE_ENABLED && MODES[last.mode]?.label) || 'Train'}, ${lastPack.title}`,
   } : null;
   const due = dueItems().length;
+  const testBest = Math.max(0, ...(state.tests || []).filter(t => t.d === (state.ui?.testD || 60)).map(t => t.wpm));
   const weakSpots = hasEnoughData()
     ? [...weakest('pairs', 2, k => /^[a-z]{2}$/.test(k)).map(w => w.k), ...weakest('keys', 1, k => /^[a-z]$/.test(k) || k === 'shift').map(w => w.k === 'shift' ? 'Shift' : w.k)]
     : [];
@@ -270,6 +274,14 @@ function viewHome() {
           <span class="qc-icon">${ICON.bolt}</span>
           <span class="qc-text"><small>Weak spots drill</small><b>${weakSpots.map(esc).join(', ')}</b></span>
         </a>` : ''}
+        <a class="quick-card tool" href="#/test">
+          <span class="qc-icon">${ICON.flame}</span>
+          <span class="qc-text"><small>Speed test</small><b>${testBest ? `Best ${testBest} WPM` : `${state.ui?.testD || 60} seconds`}</b></span>
+        </a>
+        <a class="quick-card tool" href="#/course">
+          <span class="qc-icon">${ICON.grid}</span>
+          <span class="qc-text"><small>Key course</small><b>${course().n} of ${COURSE_ORDER.length} letters</b></span>
+        </a>
       </div>
     </section>
     <section class="shelf" id="shelf"></section>
@@ -1090,6 +1102,317 @@ function viewDrill(q) {
   round();
 }
 
+// ---- speed test -------------------------------------------------------------
+//
+// A timed test, as in dedicated typing tutors, on CAIE text: answers, key terms, or the learner's
+// own notes. The clock starts with the first key. Speed is net WPM over the whole test; raw counts
+// every key pressed; consistency is how steady the speed was from second to second.
+
+const TEST_DURATIONS = [15, 30, 60, 120];
+const TEST_SOURCES = { answers: 'Answers', terms: 'Key terms', custom: 'Your text' };
+
+function subjectPacks() {
+  const subject = packs.find(p => p.id === state.lastPlay?.pack)?.subject || state.ui?.subject;
+  const from = packs.filter(p => p.subject === subject);
+  return { subject: from.length ? subject : null, packs: from.length ? from : packs };
+}
+
+function testText(src, minChars) {
+  const { packs: use } = subjectPacks();
+  let pool;
+  if (src === 'custom') {
+    const t = (state.customText || '').replace(/\s+/g, ' ').trim();
+    if (!t) return '';
+    pool = [t];
+  } else if (src === 'terms') {
+    pool = drillVocab('terms').vocab.map(x => x.w);
+  } else {
+    pool = use.filter(p => p.kind === 'definition').flatMap(p => p.units.flatMap(u => u.items.map(i => i.answer)));
+  }
+  if (!pool.length) return '';
+  const out = [];
+  let len = 0;
+  while (len < minChars) {
+    for (const t of src === 'custom' ? pool : shuffled(pool)) { out.push(t); len += t.length + 1; if (len >= minChars) break; }
+  }
+  return out.join(' ');
+}
+
+/** Consistency 0-100 from per-second speeds: 100 means perfectly even. */
+function consistency(xs) {
+  const v = xs.filter(x => x != null);
+  if (v.length < 2) return null;
+  const mean = v.reduce((a, b) => a + b, 0) / v.length;
+  if (!mean) return 0;
+  const cov = Math.sqrt(v.reduce((a, b) => a + (b - mean) ** 2, 0) / v.length) / mean;
+  return 100 * (1 - Math.tanh(cov + cov ** 3 / 3 + cov ** 5 / 5));
+}
+
+function testChart(samples) {
+  const w = 600, h = 170, l = 34, r = 8, t = 10, b = 22;
+  const n = samples.length;
+  if (n < 2) return '';
+  const max = Math.max(20, ...samples.map(s => s.raw));
+  const top = Math.ceil(max / 20) * 20;
+  const x = i => l + (i / (n - 1)) * (w - l - r);
+  const y = v => t + (h - t - b) * (1 - v / top);
+  const line = key => samples.map((s, i) => `${i ? 'L' : 'M'}${x(i).toFixed(1)},${y(s[key]).toFixed(1)}`).join('');
+  return `<svg class="test-chart" viewBox="0 0 ${w} ${h}" role="img" aria-label="Speed each second: net and raw words per minute, with mistakes marked">
+    ${[0, top / 2, top].map(v => `<line class="viz-grid" x1="${l}" x2="${w - r}" y1="${y(v)}" y2="${y(v)}"/><text class="viz-y" x="${l - 6}" y="${y(v) + 4}" text-anchor="end">${v}</text>`).join('')}
+    <path class="tc-raw" d="${line('raw')}"/>
+    <path class="tc-net" d="${line('net')}"/>
+    ${samples.map((s, i) => s.err ? `<text class="tc-err" x="${x(i)}" y="${t + 8}" text-anchor="middle">×</text>` : '').join('')}
+    <text class="viz-x" x="${l}" y="${h - 4}">1s</text><text class="viz-x" x="${w - r}" y="${h - 4}" text-anchor="end">${n}s</text>
+  </svg>
+  <ul class="viz-legend"><li><i class="sw tc-net-sw"></i>Net WPM</li><li><i class="sw tc-raw-sw"></i>Raw WPM</li><li><span class="tc-err">×</span> Mistakes that second</li></ul>`;
+}
+
+function viewTest(q) {
+  const d = TEST_DURATIONS.includes(Number(q.get('d'))) ? Number(q.get('d')) : (state.ui?.testD || 60);
+  const src = TEST_SOURCES[q.get('src')] ? q.get('src') : (state.ui?.testSrc || 'answers');
+  state.ui = { ...state.ui, testD: d, testSrc: src };
+  const { subject } = subjectPacks();
+  const link = (dd, ss) => `#/test?d=${dd}&src=${ss}`;
+  main.innerHTML = `
+    <div class="play">
+      <div class="play-top">
+        <a class="icon-btn" href="#/" title="Leave (Esc)" aria-label="Leave">${ICON.x}</a>
+        <div class="play-where"><b>Speed test</b><span>${d} seconds of ${src === 'custom' ? 'your own text' : `${subject ? `${esc(subject)} ` : ''}${TEST_SOURCES[src].toLowerCase()}`}</span></div>
+        <div class="hud">
+          <span class="tleft" title="Time left"><b id="tleft">${d}</b>s</span>
+        </div>
+      </div>
+      <div class="play-controls">
+        <div class="seg" role="radiogroup" aria-label="Length">${TEST_DURATIONS.map(x => `<a role="radio" aria-checked="${x === d}" href="${link(x, src)}">${x}s</a>`).join('')}</div>
+        <div class="seg" role="radiogroup" aria-label="Text">${Object.entries(TEST_SOURCES).map(([k, l]) => `<a role="radio" aria-checked="${k === src}" href="${link(d, k)}">${l}</a>`).join('')}</div>
+      </div>
+      ${src === 'custom' ? `<details class="custom-text" ${state.customText ? '' : 'open'}><summary>Your text</summary>
+        <textarea id="custom" rows="5" placeholder="Paste your own notes or answers to type them as a test." spellcheck="false">${esc(state.customText || '')}</textarea>
+        <button class="btn small" id="save-custom" type="button">Save and start</button></details>` : ''}
+      <div class="stage" id="stage"></div>
+      <p class="play-help">The clock starts with your first key. <kbd>Enter</kbd> after a test starts another. <kbd>Esc</kbd> leaves.</p>
+    </div>`;
+  const stage = document.getElementById('stage');
+  const tleft = document.getElementById('tleft');
+  let typer = null, timer = 0, t0 = 0, samples = [], last = null, phase = 'typing', text = '';
+
+  document.getElementById('save-custom')?.addEventListener('click', () => {
+    state.customText = document.getElementById('custom').value.slice(0, 20000);
+    save();
+    document.querySelector('.custom-text').open = false;
+    start();
+  });
+
+  function sample(force) {
+    const el = (performance.now() - t0) / 1000;
+    while (samples.length < Math.min(Math.floor(el), d) || (force && samples.length < Math.ceil(Math.min(el, d)))) {
+      const now = { k: typer.keystrokes, n: typer.netChars(), e: typer.errors };
+      samples.push({ raw: (now.k - last.k) * 12, net: Math.max(0, now.n - last.n) * 12, err: now.e - last.e });
+      last = now;
+    }
+  }
+
+  function tick() {
+    const el = (performance.now() - t0) / 1000;
+    sample(false);
+    tleft.textContent = Math.max(0, Math.ceil(d - el));
+    if (el >= d) { clearInterval(timer); timer = 0; typer.finishNow(); }
+  }
+
+  function start() {
+    clearInterval(timer);
+    timer = 0; t0 = 0; samples = []; phase = 'typing';
+    tleft.textContent = d;
+    typer?.destroy();
+    text = testText(src, d * 22 + 150);
+    if (!text) {
+      stage.innerHTML = `<div class="empty"><p>${src === 'custom' ? 'Paste some text above to test yourself on it.' : 'No text to test on in this subject.'}</p></div>`;
+      return;
+    }
+    const card = document.createElement('article');
+    card.className = 'card mode-train test-card';
+    card.innerHTML = `<div class="answer" id="answer"></div><footer class="card-foot"><span class="live" id="live"></span></footer>`;
+    stage.replaceChildren(card);
+    const live = card.querySelector('#live');
+    typer = new Typer(card.querySelector('#answer'), {
+      text, kind: 'prose', mask: new Set(), settings: { ...state.settings, ignorePunctuation: false },
+      onKey: ok => {
+        if (!state.settings.sound) return;
+        if (!ok) sfx.miss();
+        else if (state.settings.keySound) sfx.key();
+      },
+      onProgress: s => {
+        if (!t0 && s.pos) { t0 = performance.now(); last = { k: 0, n: 0, e: 0 }; timer = setInterval(tick, 100); }
+        const el = t0 ? (performance.now() - t0) / 60000 : 0;
+        live.innerHTML = el > 0.03 ? `<span><b>${Math.round((typer?.netChars() ?? 0) / 5 / el)}</b> wpm</span><span><b>${pct(s.acc)}</b> right</span>` : '';
+      },
+      onDone: r => finish(card, r),
+    });
+    typer.focus();
+  }
+
+  function finish(card, r) {
+    clearInterval(timer); timer = 0;
+    phase = 'result';
+    if (!t0) return;
+    sample(true);
+    const secs = Math.min(d, (performance.now() - t0) / 1000);
+    const minutes = Math.max(secs, 1) / 60;
+    const wpm = (r.net / 5) / minutes;
+    const raw = (r.keystrokes / 5) / minutes;
+    const acc = keyAccOf(r);
+    const cons = consistency(samples.map(s => s.raw));
+    recordAttempt(text, r.log);
+    const prevBest = Math.max(0, ...state.tests.filter(x => x.d === d && x.src === src).map(x => x.wpm));
+    const rec = { t: Date.now(), d, src, subject, wpm: Math.round(wpm), raw: Math.round(raw), acc: +acc.toFixed(3), cons: cons == null ? null : Math.round(cons) };
+    state.tests.push(rec);
+    if (state.tests.length > 300) state.tests.splice(0, state.tests.length - 300);
+    const xp = Math.max(1, Math.round((r.net / 5) * Math.pow(acc, 3)));
+    state.xp += xp;
+    state.days[dayKey()] = (state.days[dayKey()] || 0) + xp;
+    const earned = checkAchievements(null);
+    save();
+    achToast(earned);
+    const pb = rec.wpm > prevBest && prevBest > 0;
+    const slips = troubleWords(text, r.log, 6);
+    const out = document.createElement('section');
+    out.className = 'result test-result';
+    out.innerHTML = `
+      <div class="test-big">
+        <div><span>WPM</span><b>${rec.wpm}</b></div>
+        <div><span>Accuracy</span><b>${pct(acc)}</b></div>
+        <div><span>Raw</span><b>${rec.raw}</b></div>
+        <div><span>Consistency</span><b>${rec.cons == null ? '–' : `${rec.cons}%`}</b></div>
+      </div>
+      <div class="chips-row">
+        ${pb ? `<span class="pill pb">New best for ${d}s: ${rec.wpm} WPM</span>` : prevBest ? `<span class="pill">Best for ${d}s: ${prevBest} WPM</span>` : ''}
+        <span class="pill">+${fmt(xp)} XP</span>
+        <span class="pill">${fmt(r.net)} correct, ${fmt(r.errors)} wrong keys</span>
+      </div>
+      ${testChart(samples)}
+      ${slips.length ? `<p class="tip missed">Drill what slowed you down: ${slips.map(w => `<a href="${drillLink(w)}">${esc(w)}</a>`).join(', ')}</p>` : ''}
+      <div class="result-actions">
+        <button class="btn primary" id="again" type="button">Another test <kbd>Enter</kbd></button>
+        <a class="btn ghost" href="#/progress">Stats</a>
+      </div>`;
+    card.append(out);
+    if (state.settings.sound) sfx.done(acc >= 0.98 ? 4 : acc >= 0.93 ? 3 : 2, 0);
+    if (pb) confetti({ count: 120, spread: 1.6 });
+    out.querySelector('#again').addEventListener('click', start);
+    out.querySelector('#again').focus({ preventScroll: true });
+  }
+
+  const onKey = e => {
+    if (e.target?.id === 'custom') return;
+    if (e.key === 'Escape') { e.preventDefault(); go('#/'); return; }
+    if (phase === 'result' && e.key === 'Enter') { e.preventDefault(); start(); }
+  };
+  document.addEventListener('keydown', onKey);
+  cleanup = () => { clearInterval(timer); document.removeEventListener('keydown', onKey); typer?.destroy(); };
+  start();
+}
+
+// ---- key course -------------------------------------------------------------
+
+function viewCourse() {
+  const c = course();
+  const { vocab } = drillVocab('words');
+  main.innerHTML = `
+    <div class="play">
+      <div class="play-top">
+        <a class="icon-btn" href="#/" title="Leave (Esc)" aria-label="Leave">${ICON.x}</a>
+        <div class="play-where"><b>Key course</b><span>Learn the keyboard a few letters at a time, with syllabus words</span></div>
+        <div class="hud"><span class="sxp" title="XP this session">${ICON.bolt}<b id="sxp">0</b></span></div>
+      </div>
+      <div class="play-controls">
+        <div class="seg" role="radiogroup" aria-label="Target speed per key">${COURSE_TARGETS.map(t => `<button type="button" role="radio" data-target="${t}" aria-checked="${t === c.target}">${t} WPM</button>`).join('')}</div>
+      </div>
+      <div class="letters" id="letters"></div>
+      <div class="stage" id="stage"></div>
+      <p class="play-help">A new letter unlocks when every unlocked letter reaches the target speed with under 6% errors. Turn on the on-screen keyboard in settings to see which finger to use. <kbd>Esc</kbd> leaves.</p>
+    </div>`;
+  const stage = document.getElementById('stage');
+  const lettersEl = document.getElementById('letters');
+  let typer = null, phase = 'typing', xpSum = 0;
+
+  function paintLetters() {
+    const st = letterStatus();
+    const f = focusLetter(st);
+    lettersEl.innerHTML = `${st.map(s => `<span class="letter ${s.unlocked ? 'open' : 'locked'} ${s.unlocked && s.ready ? 'ready' : ''} ${s.l === f ? 'focus' : ''}" style="--p:${s.share.toFixed(2)}" title="${s.unlocked ? `${s.l}: ${s.ms ? `${Math.round(12000 / s.ms)} WPM` : 'not timed yet'}${s.err != null ? `, ${pct(s.err)} errors` : ''}${s.ready ? ', at target' : ''}` : `${s.l}: locked`}">${s.l}</span>`).join('')}
+      <p class="letters-key">${course().n} of ${COURSE_ORDER.length} letters. Focus: <b>${f}</b></p>`;
+  }
+
+  function round() {
+    phase = 'typing';
+    typer?.destroy();
+    paintLetters();
+    const r = courseRound(vocab);
+    const card = document.createElement('article');
+    card.className = 'card mode-train drill-card';
+    card.innerHTML = `
+      <header class="card-head"><div class="tags"><span class="tag">Focus: ${esc(r.focus)}</span><span class="tag">Target ${course().target} WPM</span></div></header>
+      <div class="answer" id="answer"></div>
+      <footer class="card-foot"><span class="live" id="live"></span></footer>`;
+    stage.replaceChildren(card);
+    const live = card.querySelector('#live');
+    typer = new Typer(card.querySelector('#answer'), {
+      text: r.text, kind: 'prose', mask: new Set(), settings: { ...state.settings, ignorePunctuation: false, ignoreCase: false },
+      onKey: ok => {
+        if (!state.settings.sound) return;
+        if (!ok) sfx.miss();
+        else if (state.settings.keySound) sfx.key();
+      },
+      onProgress: s => { live.innerHTML = s.pos ? `<span><b>${Math.round(s.wpm)}</b> wpm</span><span><b>${pct(s.acc)}</b> right</span>` : ''; },
+      onDone: res => done(card, r, res),
+    });
+    typer.focus();
+  }
+
+  function done(card, r, res) {
+    phase = 'result';
+    recordAttempt(r.text, res.log);
+    const acc = keyAccOf(res);
+    const xp = Math.max(1, Math.round((res.net / 5) * Math.pow(acc, 3)));
+    xpSum += xp;
+    state.xp += xp;
+    state.days[dayKey()] = (state.days[dayKey()] || 0) + xp;
+    const fresh = maybeUnlock();
+    const earned = checkAchievements(null);
+    save();
+    achToast(earned);
+    document.getElementById('sxp').textContent = fmt(xpSum);
+    paintLetters();
+    const out = document.createElement('section');
+    out.className = 'result';
+    const doneAll = course().n >= COURSE_ORDER.length && letterStatus().every(s => s.ready);
+    out.innerHTML = `
+      <p class="rstats"><span><b>${Math.round(wpmOf(res))}</b> WPM</span><span><b>${pct(acc)}</b> keys right</span><span>+<b>${fmt(xp)}</b> XP</span></p>
+      ${fresh ? `<p class="unlock">New letter: <b>${esc(fresh)}</b></p>` : ''}
+      ${doneAll ? `<p class="tip missed">Every letter is at your target. Next: capitals with a <a href="${drillLink('shift', 'terms')}">Shift drill</a>, or a <a href="#/test">speed test</a>.</p>` : ''}
+      <div class="result-actions"><button class="btn primary" id="next" type="button">Next round <kbd>Enter</kbd></button></div>`;
+    card.append(out);
+    if (fresh) { confetti({ count: 120, spread: 1.6 }); if (state.settings.sound) sfx.fanfare(); }
+    else if (state.settings.sound) sfx.done(acc >= 0.98 ? 4 : acc >= 0.93 ? 3 : 2, 0);
+    out.querySelector('#next').addEventListener('click', round);
+    out.querySelector('#next').focus({ preventScroll: true });
+  }
+
+  main.querySelectorAll('[data-target]').forEach(b => b.addEventListener('click', () => {
+    course().target = Number(b.dataset.target);
+    save();
+    main.querySelectorAll('[data-target]').forEach(x => x.setAttribute('aria-checked', x === b));
+    paintLetters();
+    typer?.focus();
+  }));
+  const onKey = e => {
+    if (e.key === 'Escape') { e.preventDefault(); go('#/'); return; }
+    if (phase === 'result' && (e.key === 'Enter' || e.key === ' ')) { e.preventDefault(); round(); }
+  };
+  document.addEventListener('keydown', onKey);
+  cleanup = () => { document.removeEventListener('keydown', onKey); typer?.destroy(); };
+  round();
+}
+
 // ---- progress ---------------------------------------------------------------
 
 function viewProgress() {
@@ -1131,6 +1454,7 @@ function viewProgress() {
     playItemHref: (pack, unit, item) => playHref(pack, unit, 'train', item),
     drillHref: '#/drill',
     focusHref: focus => drillLink(focus),
+    testHref: '#/test',
   });
 
   document.getElementById('export').addEventListener('click', () => {
@@ -1194,6 +1518,8 @@ function viewSettings() {
       ${PRACTICE_ENABLED ? choice('practiceLevel', 'Practice mode hides', Object.entries(LEVELS).map(([k, l]) => [k, l.label])) : ''}
       ${toggle('markPoints', 'Show mark points', 'The phrases that earn marks in the mark scheme are underlined, and light up with +1 as you type each one correctly. Physics and Computer Science definitions.')}
       ${toggle('drills', 'Offer quick drills', 'After an answer, press D to type the words you slipped on or typed slowly, three times each.')}
+      ${toggle('showKeyboard', 'On-screen keyboard', 'Shows the next key and which finger should press it, so you can keep your eyes on the screen.')}
+      ${toggle('noBackspace', 'No backspace', 'Mistakes stay where they are, as in a confidence test. Builds accuracy before speed.')}
       ${toggle('stopOnError', 'Stop on mistakes', 'A wrong key is rejected, so you must type the right one before moving on.')}
       ${toggle('ignoreCase', 'Ignore capital letters', 'Accept “a” for “A”. Pseudocode keywords should still be in capitals in the exam.')}
       ${toggle('ignorePunctuation', 'Skip punctuation', 'Commas, full stops and brackets are typed for you.')}

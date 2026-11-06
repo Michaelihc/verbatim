@@ -8,6 +8,7 @@
 // think doesn't sink the score; the time cut off is reported separately as pauses.
 
 import { PAUSE_CAP } from './skill.js';
+import { createKeyboard } from './kb.js';
 
 const STOP_WORDS = new Set(['that', 'this', 'with', 'from', 'which', 'when', 'where', 'there', 'their', 'than', 'then', 'they', 'have', 'into', 'each', 'also', 'such', 'between']);
 
@@ -139,7 +140,8 @@ export class Typer {
       }
     }
 
-    this.host.replaceChildren(sheet, input);
+    this.kb = this.settings.showKeyboard ? createKeyboard() : null;
+    this.host.replaceChildren(sheet, input, ...(this.kb ? [this.kb.el] : []));
     this.sheet = sheet;
     this.input = input;
   }
@@ -160,6 +162,7 @@ export class Typer {
       s.classList.toggle('shown', this.revealed.has(i));
     }
     this.paintPoints(pos);
+    this.kb?.show(this.finished ? null : this.text[pos]);
     const cur = this.spans[pos];
     // Follow the cursor only once typing has started, so a card lower on the page doesn't
     // yank the page down when it loads.
@@ -228,6 +231,12 @@ export class Typer {
 
   onKey(e) {
     if (this.finished) return;
+    // No-backspace mode: every key stands, as in a confidence test.
+    if (this.settings.noBackspace && (e.key === 'Backspace' || e.key === 'Delete')) {
+      e.preventDefault();
+      this.flash();
+      return;
+    }
     if (e.key === 'Tab') {
       e.preventDefault();
       const pos = this.typed.length;
@@ -246,6 +255,7 @@ export class Typer {
     while (p < prev.length && p < val.length && prev[p] === val[p]) p++;
     // Deletions: drop typed characters, along with any auto-filled ones just before them.
     if (val.length < prev.length || p < prev.length) {
+      if (this.settings.noBackspace) { this.syncInput(); this.flash(); return; }
       this.truncate(p);
     }
     const added = val.slice(p);
@@ -420,6 +430,30 @@ export class Typer {
         total: this.points.length,
         missed: this.points.filter((p, k) => !this.earned[k]).map(p => p.ranges.map(([a, b]) => this.text.slice(a, b)).join(' ... ')),
       },
+    });
+  }
+
+  /** End now, partway through: for timed tests. Reports only what was typed. */
+  finishNow() {
+    if (this.finished) return;
+    this.finished = true;
+    this.input.blur();
+    this.input.disabled = true;
+    this.paint();
+    const auto = this.typed.filter(t => t.auto).length;
+    this.onDone({
+      chars: this.typed.length - auto,
+      net: this.netChars(),
+      keystrokes: this.keystrokes,
+      errors: this.errors,
+      uncorrected: this.typed.filter(t => !t.ok).length,
+      ms: Math.max(this.activeMs, 300),
+      pauseMs: Math.round(this.pauseMs),
+      log: this.log,
+      hints: this.hints,
+      revealed: this.revealed.size,
+      partial: true,
+      points: { earned: 0, total: 0, missed: [] },
     });
   }
 

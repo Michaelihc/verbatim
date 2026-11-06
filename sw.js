@@ -19,6 +19,8 @@ const SHELL = [
   'js/fx.js',
   'js/dash.js',
   'js/skill.js',
+  'js/kb.js',
+  'js/course.js',
   'js/laptop3d.js',
   'js/vendor/three.module.min.js',
   'fonts/atkinson-400.woff2',

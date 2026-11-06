@@ -208,6 +208,21 @@ function segmented(parts, total, cls) {
   <ul class="viz-legend">${parts.map(p => `<li><i class="sw p${p.key}"></i>${esc(p.name)}</li>`).join('')}</ul>`;
 }
 
+// ---- speed tests ----------------------------------------------------------------------
+
+function testsBody(testHref) {
+  const tests = state.tests || [];
+  if (!tests.length) return `<p class="viz-empty">No tests yet. <a href="${testHref}">Take a speed test</a> to get a benchmark you can compare over time.</p>`;
+  const rows = [15, 30, 60, 120].map(d => {
+    const ts = tests.filter(t => t.d === d);
+    if (!ts.length) return '';
+    const best = ts.reduce((a, b) => (b.wpm > a.wpm ? b : a));
+    const lastT = ts.at(-1);
+    return `<li><b>${d}s</b><span>Best <b>${best.wpm}</b> WPM at ${pct(best.acc)}</span><span>Latest <b>${lastT.wpm}</b> WPM, ${pct(lastT.acc)}${lastT.cons != null ? `, ${lastT.cons}% consistent` : ''}</span><span class="muted-cell">${ts.length} ${ts.length === 1 ? 'test' : 'tests'}</span></li>`;
+  }).join('');
+  return `<ul class="test-pbs">${rows}</ul><a class="btn small" href="${testHref}">Take a speed test</a>`;
+}
+
 // ---- weak spots -----------------------------------------------------------------------
 
 const KB_ROWS = ['1234567890-=', 'qwertyuiop[]', "asdfghjkl;'", 'zxcvbnm,./'];
@@ -245,7 +260,7 @@ function weakList(rows, label, href, focusHref, key = label) {
 
 // ---- render -------------------------------------------------------------------------
 
-export function renderDashboard(host, { packs, playHref, chapterHref, playItemHref, drillHref = '#/drill', focusHref = f => `#/drill?focus=${encodeURIComponent(f)}` }) {
+export function renderDashboard(host, { packs, playHref, chapterHref, playItemHref, drillHref = '#/drill', focusHref = f => `#/drill?focus=${encodeURIComponent(f)}`, testHref = '#/test' }) {
   const view = { range: '30', subject: 'all', sort: 'syllabus', ...(state.ui?.dash || {}) };
 
   function draw() {
@@ -289,6 +304,8 @@ export function renderDashboard(host, { packs, playHref, chapterHref, playItemHr
         ${card('c-acc', 'Accuracy', 'Share of keys typed right, averaged per day.',
           D.days.some(d => d.acc != null) ? lineChart(D.days, 'acc', wHalf, { min: p => Math.max(0, Math.floor(Math.min(...p) * 10) / 10 - 0.1), max: 1, show: pct, label: 'Average accuracy per day' }) : '<p class="viz-empty">Finish a few answers to see your accuracy.</p>',
           table(['Day', 'Accuracy'], D.days.filter(d => d.acc != null).map(d => [shortDate(d.t), pct(d.acc)])))}
+        ${card('c-tests', 'Speed tests', 'Your best and latest timed test at each length, all text types. Net WPM.', testsBody(testHref),
+          (state.tests || []).length ? table(['Date', 'Length', 'Text', 'WPM', 'Raw', 'Accuracy', 'Consistency'], [...state.tests].reverse().slice(0, 30).map(t => [shortDate(t.t), `${t.d}s`, t.src, String(t.wpm), String(t.raw), pct(t.acc), t.cons == null ? '–' : `${t.cons}%`])) : '', { wide: true })}
         ${card('c-keys', 'Your keyboard', 'Darker keys hold you back: slower than your median key, or often mistyped. Shift counts as its own key. Click a key, pair or word to drill it.', keyboard(keys, focusHref),
           keyRows.length ? table(['Key', 'Time', 'Against median', 'Errors', 'Presses'], keyRows) : '', { wide: true })}
         ${card('c-pairs', 'Slowest letter pairs', 'Transitions between two keys, worst first. Time is against your median pair; the number is how often you have typed it.',

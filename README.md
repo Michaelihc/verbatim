@@ -56,6 +56,17 @@ syllabus topic and is tagged when it's printed on the data and formulae list.
 - **Combo.** Every Great or Perfect in a row adds ×0.1 to your XP multiplier, up to ×3. A rough
   answer breaks it.
 - **Bonus drops.** Now and then an answer pays double, or (rarely) five times.
+- **Speed tests.** Timed tests of 15, 30, 60 or 120 seconds on the subject's answers, its key
+  terms, or your own pasted notes. Results show net WPM, raw WPM (every key pressed), accuracy and
+  consistency (how steady your speed was second to second), a per-second chart with mistakes
+  marked, your best at that length, and links to drill the words that slowed you down.
+- **Key course.** Learn the keyboard a few letters at a time, starting with six. Rounds use real
+  syllabus words made only of the letters you have, topped up with made-up words in the same
+  letter patterns, and lean on the letter that needs most work. A new letter unlocks once every
+  unlocked letter reaches your target speed (25 to 60 WPM) with under 6% errors.
+- **On-screen keyboard** (settings): lights up the next key and the finger to press it with, and
+  the Shift key on the other hand for capitals.
+- **No backspace** (settings): mistakes stay, as in a confidence test, to build accuracy first.
 - **Fluency and speed checks.** Answers move from New to Typed, Accurate (98% of keys right,
   nothing left wrong), Fluent (accurate at or above your usual speed) and Automatic (fluent on
   three separate days, each after a gap). Fluent answers come back as a *Speed check* after 1, 3,

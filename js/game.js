@@ -348,6 +348,8 @@ const ALL_ACHIEVEMENTS = [
   { id: 'fluent-1', name: 'Up to speed', desc: 'Type an answer accurately at or above your usual speed.', test: c => c.fluent >= 1 },
   { id: 'auto-1', name: 'On autopilot', desc: 'Bring any answer to “Automatic”.', test: c => c.automatic >= 1 },
   { id: 'auto-25', name: 'Muscle memory', desc: 'Bring 25 answers to “Automatic”.', test: c => c.automatic >= 25 },
+  { id: 'test-1', name: 'Benchmarked', desc: 'Finish a speed test.', test: c => c.tests >= 1 },
+  { id: 'course-all', name: 'Full keyboard', desc: 'Unlock every letter in the key course.', test: c => c.letters >= 26 },
   { id: 'drill-10', name: 'Weak spots', desc: 'Finish 10 weak-spot drill rounds.', test: c => c.drills >= 10 },
   { id: 'grade-c', name: 'Level 7', desc: 'Reach level 7.', test: c => c.level >= 7 },
   { id: 'grade-a', name: 'Level 13', desc: 'Reach level 13.', test: c => c.level >= 13 },
@@ -372,6 +374,8 @@ export function checkAchievements(last) {
     fluent: Object.values(state.items).filter(s => (s.fl || 0) >= 3).length,
     automatic: Object.values(state.items).filter(s => (s.fl || 0) >= 4).length,
     drills: state.totals.drills || 0,
+    tests: (state.tests || []).length,
+    letters: state.course?.n || 0,
     level: levelFromXp(state.xp).level,
     last,
   };

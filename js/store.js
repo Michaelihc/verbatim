@@ -14,6 +14,8 @@ export const DEFAULT_SETTINGS = {
   autoAdvance: true,      // clean answers roll straight into the next one
   markPoints: true,       // highlight the phrases that earn marks
   drills: true,           // offer a quick drill of the words you slipped on
+  showKeyboard: false,    // on-screen keyboard showing the next key and finger
+  noBackspace: false,     // mistakes can't be fixed, as in a confidence test
   homeLayout: 'type',     // front page: type | set | plan
   textSize: 'm',          // s | m | l
   layout: 'overlay',      // overlay: type over the text | stacked: type on a line below it
@@ -32,6 +34,9 @@ function fresh() {
     achievements: {},
     chapters: {},           // practice bar per chapter: { level, day, items }
     skill: { keys: {}, pairs: {}, words: {} }, // typing skill model, see skill.js
+    tests: [],              // speed tests: { t, d, src, subject, wpm, raw, acc, cons }
+    course: { n: 6, target: 35 }, // key course: letters unlocked, target WPM per key
+    customText: '',
     totals: { chars: 0, keystrokes: 0, errors: 0, items: 0, ms: 0, hints: 0, perfects: 0, laps: 0, lucky: 0 },
     bestCombo: 0,
   };
