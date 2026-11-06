@@ -3,7 +3,7 @@ import { loadPacks, findItem } from './packs.js';
 import { Typer, chooseMask } from './engine.js';
 import {
   levelFromXp, titleFor, STAGES, MODES, LEVELS, RATINGS, maskRatio, stageOf, isDue, applyResult,
-  unitProgress, streak, ACHIEVEMENTS, checkAchievements, comboMult, practiceLevel, creditPractice, PRACTICE_DECAY,
+  unitProgress, streak, ACHIEVEMENTS, PRACTICE_ENABLED, checkAchievements, comboMult, practiceLevel, creditPractice, PRACTICE_DECAY,
 } from './game.js';
 import { sfx, confetti, floatText, countUp } from './fx.js';
 import { renderDashboard } from './dash.js';
@@ -222,11 +222,11 @@ function viewHome() {
   const lastPack = last && packs.find(p => p.id === last.pack);
   const lastUnit = lastPack && (last.unit === '*' ? '*' : lastPack.units.find(u => u.id === last.unit));
   const cont = lastUnit ? {
-    href: playHref(lastPack, lastUnit, last.mode === 'practice' ? 'practice' : 'train'),
+    href: playHref(lastPack, lastUnit, last.mode === 'practice' && PRACTICE_ENABLED ? 'practice' : 'train'),
     title: lastUnit === '*' ? `All ${kindOf(lastPack).noun}` : lastUnit.title,
-    sub: `${MODES[last.mode]?.label || 'Train'}, ${lastPack.title}`,
+    sub: `${(PRACTICE_ENABLED && MODES[last.mode]?.label) || 'Train'}, ${lastPack.title}`,
   } : null;
-  const due = dueItems().length;
+  const due = PRACTICE_ENABLED ? dueItems().length : 0;
   const today = state.days[dayKey()] || 0;
   const goal = state.settings.dailyGoal;
   const st = streak();
@@ -312,7 +312,7 @@ function viewHome() {
             ${bars(pack, u, p)}
             <div class="chap-actions">
               <a class="btn train" href="${playHref(pack, u, 'train')}">${ICON.play} Train</a>
-              <a class="btn practice" href="${playHref(pack, u, 'practice')}">${ICON.pen} Practice</a>
+              ${PRACTICE_ENABLED ? `<a class="btn practice" href="${playHref(pack, u, 'practice')}">${ICON.pen} Practice</a>` : ''}
             </div>
           </li>`;
         }).join('')}
@@ -350,13 +350,13 @@ function viewHome() {
       ${chapters.map(({ pack, unit }) => `<div class="res res-chap" style="--h:${hueOf(pack, unit)}">
         <a class="res-main" href="#/c/${enc(pack.id)}/${enc(unit.id)}"><b>${esc(unit.title)}</b><small>Chapter in ${esc(pack.title)}</small></a>
         <a class="btn small train" href="${playHref(pack, unit, 'train')}">${ICON.play} Train</a>
-        <a class="btn small practice" href="${playHref(pack, unit, 'practice')}">${ICON.pen} Practice</a>
+        ${PRACTICE_ENABLED ? `<a class="btn small practice" href="${playHref(pack, unit, 'practice')}">${ICON.pen} Practice</a>` : ''}
       </div>`).join('')}
       ${items.map(({ pack, unit, item }) => `<div class="res" style="--h:${hueOf(pack, unit)}">
         <a class="res-main" href="${playHref(pack, unit, 'train', item)}"><b>${esc(item.term)}</b><small>${esc(unit.title)}</small></a>
         ${item.formula && item.formula !== item.term ? `<span class="res-formula">${formula(item.formula)}</span>` : ''}
         <a class="btn small train" href="${playHref(pack, unit, 'train', item)}">${ICON.play} Train</a>
-        <a class="btn small practice" href="${playHref(pack, unit, 'practice', item)}">${ICON.pen} Practice</a>
+        ${PRACTICE_ENABLED ? `<a class="btn small practice" href="${playHref(pack, unit, 'practice', item)}">${ICON.pen} Practice</a>` : ''}
       </div>`).join('')}`
       : `<p class="res-none">Nothing matches “${esc(input.value.trim())}”.</p>`;
   });
@@ -458,14 +458,14 @@ function viewChapter(packId, unitId) {
       </div>
       <div class="row big-actions">
         <a class="btn big train" href="${playHref(pack, unit, 'train')}">${ICON.play} Train</a>
-        <a class="btn big practice" href="${playHref(pack, unit, 'practice')}">${ICON.pen} Practice</a>
+        ${PRACTICE_ENABLED ? `<a class="btn big practice" href="${playHref(pack, unit, 'practice')}">${ICON.pen} Practice</a>` : ''}
       </div>
     </header>
     ${groupsOf(pack, unit.items).map((g, _, all) => `
     ${all.length > 1 ? `<div class="group-head">
       <h2>${esc(g.label)}</h2>
       <a class="btn small train" href="${playHref(pack, unit, 'train', null, g.type)}">${ICON.play} Train</a>
-      <a class="btn small practice" href="${playHref(pack, unit, 'practice', null, g.type)}">${ICON.pen} Practice</a>
+      ${PRACTICE_ENABLED ? `<a class="btn small practice" href="${playHref(pack, unit, 'practice', null, g.type)}">${ICON.pen} Practice</a>` : ''}
     </div>` : ''}
     <ol class="terms">
       ${g.items.map(it => {
@@ -491,6 +491,7 @@ function viewChapter(packId, unitId) {
 
 function buildSession(q) {
   if (q.get('review')) {
+    if (!PRACTICE_ENABLED) return null;
     const items = dueItems();
     return items.length ? { title: 'Spaced review', sub: `${plural(items.length, 'answer')} due`, items, review: true } : null;
   }
@@ -528,7 +529,7 @@ function viewPlay(q) {
   }
   const S = {
     ...setup,
-    mode: q.get('mode') === 'practice' || setup.review ? 'practice' : 'train',
+    mode: PRACTICE_ENABLED && (q.get('mode') === 'practice' || setup.review) ? 'practice' : 'train',
     lap: 1, order: [], pos: 0, combo: 0, xp: 0, lapXp: 0, lapResults: new Map(),
   };
   // Lap 1 goes in syllabus order (from the chosen answer), so every answer comes round once.
@@ -556,9 +557,9 @@ function viewPlay(q) {
         <button class="icon-btn" id="mute" type="button" aria-label="Sound"></button>
       </div>
       <div class="play-controls">
-        <div class="seg" role="radiogroup" aria-label="Mode">
+        ${Object.keys(MODES).length > 1 ? `<div class="seg" role="radiogroup" aria-label="Mode">
           ${Object.entries(MODES).map(([k, m]) => `<button type="button" role="radio" data-mode="${k}" title="${esc(m.blurb)}">${k === 'train' ? ICON.play : ICON.pen}${m.label}</button>`).join('')}
-        </div>
+        </div>` : ''}
         <div class="seg seg-small" role="radiogroup" aria-label="How much is hidden" id="levels">
           ${Object.entries(LEVELS).map(([k, l]) => `<button type="button" role="radio" data-level="${k}">${l.label}</button>`).join('')}
         </div>
@@ -794,7 +795,7 @@ function viewPlay(q) {
         ${S.review
           ? `<a class="btn primary" href="#/" id="again">Back to chapters <kbd>Enter</kbd></a>`
           : `<button class="btn primary" id="again" type="button">Keep going <kbd>Enter</kbd></button>
-             <button class="btn" id="switch" type="button">${other === 'train' ? ICON.play : ICON.pen} Switch to ${MODES[other].label}</button>`}
+             ${MODES[other] ? `<button class="btn" id="switch" type="button">${other === 'train' ? ICON.play : ICON.pen} Switch to ${MODES[other].label}</button>` : ''}`}
         <a class="btn ghost" href="${exit}">Done</a>
       </div>
       ${!S.review ? `<p class="muted small">${S.mode === 'train' ? 'Next lap starts with the ones you slipped on.' : 'Weakest answers come first next lap.'}</p>` : ''}`;
@@ -806,7 +807,7 @@ function viewPlay(q) {
     card.querySelector('#again').focus({ preventScroll: true });
     if (S.review) return;
     card.querySelector('#again').addEventListener('click', newLap);
-    card.querySelector('#switch').addEventListener('click', () => { setMode(other); newLap(); });
+    card.querySelector('#switch')?.addEventListener('click', () => { setMode(other); newLap(); });
   }
 
   function newLap() {
@@ -969,7 +970,7 @@ function viewSettings() {
     </section>
     <section class="panel settings">
       <h2>Typing</h2>
-      ${choice('practiceLevel', 'Practice mode hides', Object.entries(LEVELS).map(([k, l]) => [k, l.label]))}
+      ${PRACTICE_ENABLED ? choice('practiceLevel', 'Practice mode hides', Object.entries(LEVELS).map(([k, l]) => [k, l.label])) : ''}
       ${toggle('markPoints', 'Show mark points', 'The phrases that earn marks in the mark scheme are underlined, and light up with +1 as you type each one correctly. Physics and Computer Science definitions.')}
       ${toggle('stopOnError', 'Stop on mistakes', 'A wrong key is rejected, so you must type the right one before moving on.')}
       ${toggle('ignoreCase', 'Ignore capital letters', 'Accept “a” for “A”. Pseudocode keywords should still be in capitals in the exam.')}

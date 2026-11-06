@@ -47,9 +47,13 @@ export function titleFor(level) {
 export const STAGES = ['New', 'Trained', 'Gaps', 'Recalled', 'Secure', 'Mastered'];
 const INTERVAL_DAYS = [0, 1, 2, 4, 9, 21];
 
+// Practice mode (hidden words, recall stages, spaced review) is switched off while Train is
+// reworked into a typing trainer. Its code stays in place; set this to true to bring it back.
+export const PRACTICE_ENABLED = false;
+
 export const MODES = {
   train:    { label: 'Train', blurb: 'The answer is on screen. Type it out, over and over, until your fingers know it.' },
-  practice: { label: 'Practice', blurb: 'Words are hidden. Fill them in from memory.' },
+  ...(PRACTICE_ENABLED ? { practice: { label: 'Practice', blurb: 'Words are hidden. Fill them in from memory.' } } : {}),
 };
 
 export const LEVELS = {
@@ -247,14 +251,14 @@ export function streak() {
 
 // ---- Achievements ---------------------------------------------------------
 
-export const ACHIEVEMENTS = [
+const ALL_ACHIEVEMENTS = [
   { id: 'first', name: 'First answer', desc: 'Finish your first answer.', test: c => c.items >= 1 },
   { id: 'items-25', name: 'Warmed up', desc: 'Finish 25 answers.', test: c => c.items >= 25 },
   { id: 'items-100', name: 'In the zone', desc: 'Finish 100 answers.', test: c => c.items >= 100 },
   { id: 'items-500', name: 'Machine', desc: 'Finish 500 answers.', test: c => c.items >= 500 },
   { id: 'perfect', name: 'Flawless', desc: 'Get a Perfect: no mistakes, no hints.', test: c => c.last?.rating === 'perfect' },
   { id: 'perfect-25', name: 'Clean hands', desc: 'Get 25 Perfects.', test: c => c.perfects >= 25 },
-  { id: 'recall', name: 'From memory', desc: 'Get Great or better in Practice, from memory.', test: c => c.last?.level === 'recall' && c.last.rank >= 3 },
+  { id: 'recall', practice: true, name: 'From memory', desc: 'Get Great or better in Practice, from memory.', test: c => c.last?.level === 'recall' && c.last.rank >= 3 },
   { id: 'lap', name: 'Full lap', desc: 'Type every answer in a chapter in one go.', test: c => c.laps >= 1 },
   { id: 'laps-10', name: 'Ten laps', desc: 'Finish 10 chapter laps.', test: c => c.laps >= 10 },
   { id: 'lucky', name: 'Lucky drop', desc: 'Catch a bonus XP drop.', test: c => c.lucky >= 1 },
@@ -267,13 +271,16 @@ export const ACHIEVEMENTS = [
   { id: 'streak-7', name: 'A full week', desc: 'Practise seven days in a row.', test: c => c.streak >= 7 },
   { id: 'streak-30', name: 'Habit', desc: 'Practise thirty days in a row.', test: c => c.streak >= 30 },
   { id: 'goal', name: 'Goal met', desc: 'Reach your daily XP goal.', test: c => c.goalMet },
-  { id: 'master-1', name: 'Mastered one', desc: 'Bring any answer to “Mastered”.', test: c => c.mastered >= 1 },
-  { id: 'master-25', name: 'Mastered 25', desc: 'Bring 25 answers to “Mastered”.', test: c => c.mastered >= 25 },
+  { id: 'master-1', practice: true, name: 'Mastered one', desc: 'Bring any answer to “Mastered”.', test: c => c.mastered >= 1 },
+  { id: 'master-25', practice: true, name: 'Mastered 25', desc: 'Bring 25 answers to “Mastered”.', test: c => c.mastered >= 25 },
   { id: 'grade-c', name: 'Level 7', desc: 'Reach level 7.', test: c => c.level >= 7 },
   { id: 'grade-a', name: 'Level 13', desc: 'Reach level 13.', test: c => c.level >= 13 },
   { id: 'grade-astar', name: 'Level 21', desc: 'Reach level 21.', test: c => c.level >= 21 },
   { id: 'examiner', name: 'Level 30', desc: 'Reach level 30.', test: c => c.level >= 30 },
 ];
+
+// Achievements that only Practice can earn are left out while it is switched off.
+export const ACHIEVEMENTS = ALL_ACHIEVEMENTS.filter(a => PRACTICE_ENABLED || !a.practice);
 
 /** Check achievements; returns the newly earned ones. `last` is the latest attempt summary. */
 export function checkAchievements(last) {
