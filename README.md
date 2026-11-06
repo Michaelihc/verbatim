@@ -37,8 +37,11 @@ syllabus topic and is tagged when it's printed on the data and formulae list.
 - **Weak spots.** Verbatim keeps a running average of how fast and how accurately you type each
   key (Shift counts as its own key), letter pair and word, judged against your own medians. After
   an answer, press *D* to type the words you slipped on or typed slowly, three times each. The
-  *Weak spots drill* builds rounds of real words from the subject you last trained around your
-  slowest pairs, keys and words, and rebuilds them as you improve.
+  *Weak spots drill* builds rounds from the subject you last trained, either from its key terms
+  (answer names and the phrases mark schemes give marks for) or its words, around your slowest
+  pairs, keys and words, and rebuilds them as you improve. Aim a drill at one thing instead by
+  picking it, typing any pair, key or word ("th", "Shift", "frequency"), or clicking it on the
+  dashboard's keyboard, pair or word lists.
 - **Ratings, not marks.** Each answer gets *Perfect*, *Great*, *Good* or *Keep going*, with XP that
   counts up, a sound that climbs in pitch with your combo, and confetti for the best ones. Clean
   answers roll straight into the next one.

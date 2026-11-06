@@ -215,7 +215,7 @@ const showPair = k => k.replace(/ /g, '␣');
 const times = r => r.ratio == null ? '–' : `${r.ratio.toFixed(1)}×`;
 
 /** A keyboard shaded by how much each key holds you back (time against your median, plus errors). */
-function keyboard(keys) {
+function keyboard(keys, focusHref) {
   const vals = Object.values(keys).map(k => k.cost);
   if (!vals.length) return '<p class="viz-empty">Type a few answers to map your keyboard.</p>';
   const max = Math.max(0.5, ...vals);
@@ -223,7 +223,7 @@ function keyboard(keys) {
     const e = keys[k];
     if (!e) return `<span class="kb-key none ${cls}">${esc(label)}</span>`;
     const tip = `${label}: ${e.ms == null ? 'not timed yet' : `${e.ms} ms (${times(e)} your median)`}, ${pct(e.err)} errors, ${fmt(e.n)} presses`;
-    return `<span class="kb-key ${cls}" style="--v:${Math.min(1, e.cost / max).toFixed(2)}" title="${esc(tip)}">${esc(label)}</span>`;
+    return `<a class="kb-key ${cls}" style="--v:${Math.min(1, e.cost / max).toFixed(2)}" title="${esc(tip)}. Click to drill it." href="${focusHref(k)}">${esc(label)}</a>`;
   };
   return `<div class="kb" role="img" aria-label="Keyboard heatmap; see table view for values">
     ${KB_ROWS.map((row, i) => `<div class="kb-row r${i}">${[...row].map(k => cell(k)).join('')}</div>`).join('')}
@@ -232,11 +232,11 @@ function keyboard(keys) {
   <ul class="viz-legend"><li><i class="sw kb-lo"></i>Quick and clean</li><li><i class="sw kb-hi"></i>Slow or error-prone</li><li><i class="sw kb-none"></i>Not enough presses yet</li></ul>`;
 }
 
-function weakList(rows, label, href) {
+function weakList(rows, label, href, focusHref, key = label) {
   if (!rows.length) return '<p class="viz-empty">Nothing stands out yet. Keep typing and this fills in.</p>';
   const max = Math.max(...rows.map(r => r.cost));
   return `<ol class="rank-bars weak">${rows.map(r => `<li>
-      <span class="rank-name"><b>${esc(label(r))}</b><small>${r.ms == null ? '' : `${times(r)} time · `}${pct(r.err)} errors</small></span>
+      <a class="rank-name" href="${focusHref(key(r))}" title="Drill ${esc(label(r))}"><b>${esc(label(r))}</b><small>${r.ms == null ? '' : `${times(r)} time · `}${pct(r.err)} errors</small></a>
       <span class="rank-track"><i style="width:${(r.cost / max) * 100}%"></i></span>
       <span class="rank-val">${fmt(r.n)}</span>
     </li>`).join('')}</ol>
@@ -245,7 +245,7 @@ function weakList(rows, label, href) {
 
 // ---- render -------------------------------------------------------------------------
 
-export function renderDashboard(host, { packs, playHref, chapterHref, playItemHref, drillHref = '#/drill' }) {
+export function renderDashboard(host, { packs, playHref, chapterHref, playItemHref, drillHref = '#/drill', focusHref = f => `#/drill?focus=${encodeURIComponent(f)}` }) {
   const view = { range: '30', subject: 'all', sort: 'syllabus', ...(state.ui?.dash || {}) };
 
   function draw() {
@@ -289,13 +289,13 @@ export function renderDashboard(host, { packs, playHref, chapterHref, playItemHr
         ${card('c-acc', 'Accuracy', 'Share of keys typed right, averaged per day.',
           D.days.some(d => d.acc != null) ? lineChart(D.days, 'acc', wHalf, { min: p => Math.max(0, Math.floor(Math.min(...p) * 10) / 10 - 0.1), max: 1, show: pct, label: 'Average accuracy per day' }) : '<p class="viz-empty">Finish a few answers to see your accuracy.</p>',
           table(['Day', 'Accuracy'], D.days.filter(d => d.acc != null).map(d => [shortDate(d.t), pct(d.acc)])))}
-        ${card('c-keys', 'Your keyboard', 'Darker keys hold you back: slower than your median key, or often mistyped. Shift counts as its own key. All subjects.', keyboard(keys),
+        ${card('c-keys', 'Your keyboard', 'Darker keys hold you back: slower than your median key, or often mistyped. Shift counts as its own key. Click a key, pair or word to drill it.', keyboard(keys, focusHref),
           keyRows.length ? table(['Key', 'Time', 'Against median', 'Errors', 'Presses'], keyRows) : '', { wide: true })}
         ${card('c-pairs', 'Slowest letter pairs', 'Transitions between two keys, worst first. Time is against your median pair; the number is how often you have typed it.',
-          weakList(pairs, r => showPair(r.k), drillHref),
+          weakList(pairs, r => showPair(r.k), drillHref, focusHref, r => r.k),
           pairs.length ? table(['Pair', 'Against median', 'Errors', 'Times typed'], pairs.map(r => [showPair(r.k), times(r), pct(r.err), fmt(r.n)])) : '')}
         ${card('c-words', 'Words you trip on', 'Words you often mistype or type slowly, worst first.',
-          weakList(words, r => Object.keys(r.forms || {})[0] || r.k, drillHref),
+          weakList(words, r => Object.keys(r.forms || {})[0] || r.k, drillHref, focusHref),
           words.length ? table(['Word', 'Against median', 'Errors', 'Times typed'], words.map(r => [Object.keys(r.forms || {})[0] || r.k, times(r), pct(r.err), fmt(r.n)])) : '')}
         ${card('c-stage', `${PROGRESS.name} split`, `Where all ${fmt(totalItems)} answers sit, from ${STAGES[0]} to ${STAGES[TOP]}.`, segmented(stageParts, totalItems, 'stages'),
           table(['Stage', 'Answers', 'Share'], stageParts.map(p => [p.name, String(p.value), totalItems ? pct(p.value / totalItems) : '0%'])))}

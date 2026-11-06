@@ -5,7 +5,7 @@ import {
   levelFromXp, titleFor, STAGES, TOP, PROGRESS, MODES, LEVELS, RATINGS, maskRatio, stageOf, isDue, applyResult,
   unitProgress, streak, ACHIEVEMENTS, PRACTICE_ENABLED, checkAchievements, comboMult, practiceLevel, creditPractice, PRACTICE_DECAY,
 } from './game.js';
-import { recordAttempt, troubleWords, wordDrill, drillRound, vocabulary, textCost, hasEnoughData, weakest } from './skill.js';
+import { recordAttempt, troubleWords, wordDrill, drillRound, vocabulary, keyTerms, parseFocus, weakTargets, textCost, hasEnoughData, weakest } from './skill.js';
 import { sfx, confetti, floatText, countUp } from './fx.js';
 import { renderDashboard } from './dash.js';
 
@@ -179,7 +179,7 @@ function route() {
   window.scrollTo(0, 0);
   if (view === 'c') return viewChapter(parts[1], parts[2]);
   if (view === 'play') return viewPlay(q);
-  if (view === 'drill') return viewDrill();
+  if (view === 'drill') return viewDrill(q);
   if (view === 'progress') return viewProgress();
   if (view === 'settings') return viewSettings();
   return viewHome();
@@ -955,43 +955,73 @@ function viewPlay(q) {
 
 // ---- weak spots drill -------------------------------------------------------
 
-// Drills use words from the subject you last trained, so physics drills stay physics.
+// Drills use the subject you last trained, so physics drills stay physics.
 const vocabCache = new Map();
-function drillVocab() {
+function drillVocab(src) {
   const subject = packs.find(p => p.id === state.lastPlay?.pack)?.subject || state.ui?.subject;
   const from = packs.filter(p => p.subject === subject);
   const use = from.length ? from : packs;
-  const key = use.map(p => p.id).join();
-  if (!vocabCache.has(key)) vocabCache.set(key, vocabulary(use.flatMap(p => p.units.flatMap(u => u.items.map(i => i.answer)))));
-  return vocabCache.get(key);
+  const key = `${src}:${use.map(p => p.id).join()}`;
+  if (!vocabCache.has(key)) {
+    const items = use.flatMap(p => p.units.flatMap(u => u.items));
+    vocabCache.set(key, src === 'terms'
+      ? keyTerms(use.filter(p => p.kind !== 'equation').flatMap(p => p.units.flatMap(u => u.items)))
+      : vocabulary(items.map(i => i.answer)));
+  }
+  return { vocab: vocabCache.get(key), subject: from.length ? subject : null };
 }
 
-function viewDrill() {
-  const vocab = drillVocab();
+const drillLink = (focus, src) => `#/drill?${new URLSearchParams({ ...(src ? { src } : {}), ...(focus ? { focus } : {}) })}`;
+
+function viewDrill(q) {
+  const src = q.get('src') === 'words' || q.get('src') === 'terms' ? q.get('src') : (state.ui?.drillSrc || 'terms');
+  const focus = parseFocus(q.get('focus'));
+  state.ui = { ...state.ui, drillSrc: src };
+  const { vocab, subject } = drillVocab(src);
+  const weak = hasEnoughData() ? weakTargets() : [];
   const D = { round: 0, net: 0, activeMs: 0, xp: 0 };
+  const what = src === 'terms' ? 'key terms' : 'words';
   main.innerHTML = `
     <div class="play">
       <div class="play-top">
         <a class="icon-btn" href="#/" title="Leave (Esc)" aria-label="Leave">${ICON.x}</a>
-        <div class="play-where"><b>Weak spots</b><span>Syllabus words built around the keys, pairs and words that slow you down</span></div>
+        <div class="play-where"><b>${focus ? `Drill: ${esc(focus.label)}` : 'Weak spots'}</b><span>${subject ? `${esc(subject)} ` : ''}${what} ${focus ? `with ${esc(focus.label)} in them` : 'built around the keys, pairs and words that slow you down'}</span></div>
         <div class="hud">
           <span class="sspeed" title="Session speed: net WPM over every round">${ICON.play}<b id="sspeed">–</b></span>
           <span class="sxp" title="XP this session">${ICON.bolt}<b id="sxp">0</b></span>
         </div>
       </div>
+      <div class="play-controls drill-controls">
+        <div class="seg" role="radiogroup" aria-label="Drill with">
+          ${[['terms', 'Key terms'], ['words', 'Words']].map(([k, l]) => `<a role="radio" aria-checked="${src === k}" href="${drillLink(focus && q.get('focus'), k)}">${l}</a>`).join('')}
+        </div>
+        <div class="focus-pick" role="group" aria-label="Aim at">
+          <a class="chip-link ${focus ? '' : 'on'}" href="${drillLink(null, src)}">My weak spots</a>
+          ${weak.map(t => `<a class="chip-link mono ${focus && focus.k === t.k ? 'on' : ''}" href="${drillLink(t.kind === 'word' ? t.label : t.k === 'shift' ? 'shift' : t.k, src)}">${esc(t.label)}</a>`).join('')}
+          ${focus && !weak.some(t => t.k === focus.k) ? `<a class="chip-link mono on" href="${drillLink(q.get('focus'), src)}">${esc(focus.label)}</a>` : ''}
+          <form class="focus-form" id="focus-form"><input id="focus-in" type="text" placeholder="Any pair, key or word, like th" aria-label="Drill a pair, key or word" autocomplete="off" spellcheck="false" maxlength="30"><button class="btn small" type="submit">Drill</button></form>
+        </div>
+      </div>
       <div class="stage" id="stage"></div>
-      <p class="play-help">Each round is rebuilt from your latest typing. <kbd>Esc</kbd> leaves.</p>
+      <p class="play-help">${src === 'terms' ? 'Key terms are answer names and the phrases mark schemes give marks for.' : 'Words come from the answers in the subject.'} Each round is rebuilt from your latest typing. <kbd>Esc</kbd> leaves.</p>
     </div>`;
   const stage = document.getElementById('stage');
+  const focusIn = document.getElementById('focus-in');
+  document.getElementById('focus-form').addEventListener('submit', e => {
+    e.preventDefault();
+    if (focusIn.value.trim()) go(drillLink(focusIn.value.trim(), src));
+  });
   let typer = null;
   let phase = 'typing';
 
   function round() {
     phase = 'typing';
     typer?.destroy();
-    const r = drillRound(vocab);
-    if (!r) {
-      stage.innerHTML = `<div class="empty"><p>Type a few more answers first. Drills start once Verbatim has seen enough of your typing to find your weak spots.</p><a class="btn" href="#/">Back to chapters</a></div>`;
+    const r = drillRound(vocab, { focus, words: src === 'words' });
+    if (!r || !r.text) {
+      stage.innerHTML = `<div class="empty"><p>${!r
+        ? 'Type a few more answers first. Drills start once Verbatim has seen enough of your typing to find your weak spots. You can still pick a pair or key to drill above.'
+        : `No ${what} in ${subject ? esc(subject) : 'these packs'} contain “${esc(focus?.label || '')}”. Try ${src === 'terms' ? 'Words, or ' : ''}another pair.`}</p><a class="btn" href="#/">Back to chapters</a></div>`;
       phase = 'none';
       return;
     }
@@ -1000,8 +1030,8 @@ function viewDrill() {
     card.className = 'card mode-train drill-card';
     card.innerHTML = `
       <header class="card-head">
-        <div class="tags"><span class="tag">Round ${D.round}</span></div>
-        <p class="drill-targets">Working on ${r.targets.map(t => `<span class="chip">${esc(t.label)}</span>`).join('')}</p>
+        <div class="tags"><span class="tag">Round ${D.round}</span><span class="tag">${src === 'terms' ? 'Key terms' : 'Words'}</span></div>
+        ${focus ? '' : `<p class="drill-targets">Working on ${r.targets.map(t => `<span class="chip">${esc(t.label)}</span>`).join('')}</p>`}
       </header>
       <div class="answer" id="answer"></div>
       <footer class="card-foot"><span class="live" id="live"></span></footer>`;
@@ -1051,6 +1081,7 @@ function viewDrill() {
   }
 
   const onKey = e => {
+    if (e.target === focusIn) return;
     if (e.key === 'Escape') { e.preventDefault(); go('#/'); return; }
     if (phase === 'result' && (e.key === 'Enter' || e.key === ' ')) { e.preventDefault(); round(); }
   };
@@ -1099,6 +1130,7 @@ function viewProgress() {
     chapterHref: (pack, unit) => `#/c/${enc(pack.id)}/${enc(unit.id)}`,
     playItemHref: (pack, unit, item) => playHref(pack, unit, 'train', item),
     drillHref: '#/drill',
+    focusHref: focus => drillLink(focus),
   });
 
   document.getElementById('export').addEventListener('click', () => {

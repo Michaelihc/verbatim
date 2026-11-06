@@ -189,37 +189,72 @@ function pickWeighted(list, rnd = Math.random) {
 }
 
 /**
- * A drill round: real words from the syllabus that contain your weakest pairs and keys, plus the
- * words you trip on. Returns { text, targets } or null when there isn't enough data yet.
+ * Key terms: the names of the answers and the phrases the mark schemes give marks for.
+ * items: [{ term, answer, points }] from the packs.
  */
-export function drillRound(vocab, size = 14) {
-  if (!vocab.length) return null;
-  const pairs = weakest('pairs', 3, k => /^[a-z]{2}$/.test(k));
-  const keys = weakest('keys', 2, k => /^[a-z]$/.test(k) || k === 'shift');
-  const words = weakest('words', 3);
-  if (!pairs.length && !keys.length && !words.length) return null;
-  const targets = [
-    ...pairs.map(p => ({ kind: 'pair', k: p.k, label: p.k })),
-    ...keys.map(p => ({ kind: 'key', k: p.k, label: p.k === 'shift' ? 'Shift' : p.k })),
-    ...words.map(p => ({ kind: 'word', k: p.k, label: Object.keys(p.forms || {})[0] || p.k })),
+export function keyTerms(items) {
+  const seen = new Map();
+  const add = t => {
+    t = t.replace(/\s+/g, ' ').replace(/^[\s,.;:]+|[\s,.;:]+$/g, '');
+    if (t.length < 3 || t.length > 60 || /[=\n]/.test(t) || !/[A-Za-z]{3}/.test(t)) return;
+    seen.set(t, (seen.get(t) || 0) + 1);
+  };
+  for (const it of items) {
+    if (it.term) add(it.term);
+    for (const pt of it.points || []) for (const [a, b] of pt.ranges) add(it.answer.slice(a, b));
+  }
+  return [...seen].map(([w, n]) => ({ w, low: w.toLowerCase(), n }));
+}
+
+/**
+ * Turn what someone typed into a drill target: one character is a key, two letters a pair,
+ * "shift" the Shift key, anything longer a word or phrase.
+ */
+export function parseFocus(raw) {
+  const f = String(raw || '').trim();
+  if (!f) return null;
+  if (f.toLowerCase() === 'shift') return { kind: 'key', k: 'shift', label: 'Shift' };
+  if (f.toLowerCase() === 'space') return { kind: 'key', k: ' ', label: 'Space' };
+  if (f.length === 1) return { kind: 'key', k: f.toLowerCase(), label: f.toLowerCase() };
+  if (f.length === 2) return { kind: 'pair', k: f.toLowerCase(), label: f.toLowerCase() };
+  return { kind: 'word', k: f.toLowerCase(), label: f };
+}
+
+/** The weak spots an automatic drill aims at, worst first. */
+export function weakTargets() {
+  return [
+    ...weakest('pairs', 3, k => /^[a-z]{2}$/.test(k)).map(p => ({ kind: 'pair', k: p.k, label: p.k })),
+    ...weakest('keys', 2, k => /^[a-z]$/.test(k) || k === 'shift').map(p => ({ kind: 'key', k: p.k, label: p.k === 'shift' ? 'Shift' : p.k })),
+    ...weakest('words', 3).map(p => ({ kind: 'word', k: p.k, label: Object.keys(p.forms || {})[0] || p.k })),
   ];
+}
+
+const matches = (x, t) => t.k === 'shift' ? /[A-Z]/.test(x.w) : x.low.includes(t.k);
+
+/**
+ * A drill round of real syllabus text aimed at your weak spots, or at one target you chose.
+ * vocab: words (vocabulary) or key terms (keyTerms). Returns { text, targets }, or
+ * { text: null, targets } when nothing in the vocabulary fits, or null without enough data.
+ */
+export function drillRound(vocab, { focus = null, words = true } = {}) {
+  if (!vocab.length) return null;
+  const targets = focus ? [focus] : weakTargets();
+  if (!targets.length) return null;
+  const size = words ? 14 : 8;
+  const maxChars = words ? 110 : 150;
   const out = [];
+  let chars = 0;
   const used = new Map();
-  const add = w => { if (!w) return; out.push(w); used.set(w, (used.get(w) || 0) + 1); };
-  const fresh = list => list.filter(x => (used.get(x.w) || 0) < 2);
-  for (const t of words.slice(0, 3)) add(Object.keys(t.forms || {})[0]);
+  const add = w => { if (!w) return; out.push(w); chars += w.length + 1; used.set(w, (used.get(w) || 0) + 1); };
+  // A word you trip on goes in as itself, not just inside longer words.
+  if (words) for (const t of targets) if (t.kind === 'word' && vocab.some(x => x.low === t.k)) add(vocab.find(x => x.low === t.k && x.w === t.label)?.w || vocab.find(x => x.low === t.k).w);
+  const pools = targets.map(t => vocab.filter(x => matches(x, t)));
+  if (pools.every(p => !p.length)) return out.length ? { text: out.join(' '), targets } : { text: null, targets };
   let guard = 0;
-  while (out.length < size && guard++ < 200) {
-    const t = targets[guard % targets.length];
-    let pool;
-    if (t.kind === 'pair') pool = vocab.filter(x => x.low.includes(t.k));
-    else if (t.k === 'shift') pool = vocab.filter(x => /[A-Z]/.test(x.w));
-    else if (t.kind === 'key') pool = vocab.filter(x => x.low.includes(t.k));
-    else continue; // weak words went in up front
-    pool = fresh(pool);
+  while (out.length < size && chars < maxChars && guard++ < 300) {
+    const pool = pools[guard % pools.length].filter(x => (used.get(x.w) || 0) < (focus ? 3 : 2));
     if (pool.length) add(pickWeighted(pool).w);
   }
-  if (!out.length) return null;
   for (let i = out.length - 1; i > 0; i--) { const j = (Math.random() * (i + 1)) | 0; [out[i], out[j]] = [out[j], out[i]]; }
   return { text: out.join(' '), targets };
 }
