@@ -7,6 +7,7 @@ import {
 } from './game.js';
 import { course, letterStatus, focusLetter, maybeUnlock, courseRound, ORDER as COURSE_ORDER, TARGETS as COURSE_TARGETS } from './course.js';
 import { keyTable } from './skill.js';
+import { fingerFor } from './kb.js';
 import { recordAttempt, troubleWords, wordDrill, drillRound, vocabulary, keyTerms, parseFocus, weakTargets, textCost, hasEnoughData, weakest } from './skill.js';
 import { sfx, confetti, floatText, countUp } from './fx.js';
 import { renderDashboard, keyboardHeatmap } from './dash.js';
@@ -623,6 +624,84 @@ function viewPlay(q) {
     lapEl.innerHTML = `<span class="lap-label">${S.review ? 'Review' : `Lap ${S.lap}`}</span><span class="lap-count">${Math.min(done, n)}/${n}</span>${dots}`;
   }
 
+  // Warm-up: 30 seconds on your weak spots, made of this chapter's own key terms when they fit.
+  const WARMUP_S = 30;
+  function warmupText() {
+    const chapterItems = S.items.map(e => e.item);
+    const local = keyTerms(chapterItems);
+    let r = local.length >= 4 ? drillRound(local, { words: false }) : null;
+    if (!r?.text) r = drillRound(drillVocab('terms').vocab, { words: false });
+    return r;
+  }
+  function warmUp() {
+    clearAuto();
+    phase = 'warmup';
+    typer?.destroy();
+    const r = warmupText();
+    if (!r?.text) { show(); return; }
+    card = document.createElement('article');
+    card.className = 'card mode-train drill-card';
+    card.innerHTML = `
+      <header class="card-head">
+        <div class="tags"><span class="tag">Warm-up</span><span class="tag" id="wleft">${WARMUP_S}s</span></div>
+        <p class="drill-targets">Working on ${r.targets.map(t => `<span class="chip">${esc(t.label)}</span>`).join('')}</p>
+      </header>
+      <div class="answer" id="answer"></div>
+      <footer class="card-foot"><span class="live" id="live"></span><button class="btn small ghost" id="skip" type="button">Skip to the answers</button></footer>`;
+    stage.replaceChildren(card);
+    const live = card.querySelector('#live');
+    const left = card.querySelector('#wleft');
+    let t0 = 0, timer = 0;
+    card.querySelector('#skip').addEventListener('click', () => { clearInterval(timer); show(); });
+    typer = new Typer(card.querySelector('#answer'), {
+      text: r.text, kind: 'prose', mask: new Set(), settings: { ...state.settings, ignorePunctuation: false }, onKey: keyTick,
+      onProgress: s => {
+        if (!t0 && s.pos) {
+          t0 = performance.now();
+          timer = setInterval(() => {
+            const el = (performance.now() - t0) / 1000;
+            left.textContent = `${Math.max(0, Math.ceil(WARMUP_S - el))}s`;
+            if (el >= WARMUP_S) { clearInterval(timer); typer.finishNow(); }
+          }, 200);
+        }
+        live.innerHTML = s.pos ? `<span><b>${Math.round(s.wpm)}</b> wpm</span><span><b>${pct(s.acc)}</b> right</span>` : '';
+      },
+      onDone: res => {
+        clearInterval(timer);
+        recordAttempt(r.text, res.log);
+        save();
+        phase = 'warmed';
+        card.querySelector('#skip')?.remove();
+        const out = document.createElement('section');
+        out.className = 'result';
+        out.innerHTML = `
+          <p class="rstats"><span><b>${Math.round(wpmOf(res))}</b> WPM</span><span><b>${pct(keyAccOf(res))}</b> keys right</span></p>
+          <div class="result-actions"><button class="btn primary" id="next" type="button">Start the answers <kbd>Enter</kbd></button></div>`;
+        card.append(out);
+        out.querySelector('#next').addEventListener('click', show);
+        out.querySelector('#next').focus({ preventScroll: true });
+      },
+    });
+    const prevCleanup = cleanup;
+    cleanup = () => { clearInterval(timer); prevCleanup?.(); };
+    typer.focus();
+  }
+
+  /** Before the first answer: offer the warm-up, without getting in the way of typing. */
+  function offerWarmup() {
+    if (!state.settings.warmup || S.review || S.mode !== 'train' || !hasEnoughData()) return;
+    const bar = document.createElement('div');
+    bar.className = 'warmup-offer';
+    bar.innerHTML = `<span>${ICON.bolt} Warm up first? 30 seconds on your weak spots, using this chapter's key terms.</span>
+      <button class="btn small" type="button" id="do-warmup">Warm up</button>
+      <button class="btn small ghost" type="button" id="no-warmup" aria-label="Dismiss">${ICON.x}</button>`;
+    stage.before(bar);
+    const drop = () => bar.remove();
+    bar.querySelector('#do-warmup').addEventListener('click', () => { drop(); warmUp(); });
+    bar.querySelector('#no-warmup').addEventListener('click', () => { drop(); typer?.focus(); });
+    S.dropWarmup = drop;
+  }
+
   const keyTick = ok => {
     if (!sound()) return;
     if (!ok) sfx.miss();
@@ -735,6 +814,7 @@ function viewPlay(q) {
 
   function finish(entry, r, level) {
     phase = 'result';
+    S.dropWarmup?.();
     const mode = S.mode;
     const res = applyResult({ ...r, packId: entry.pack.id, itemId: entry.item.id, mode, level }, S.combo);
     creditPractice(entry.pack, entry.unit, entry.item.id);
@@ -868,6 +948,7 @@ function viewPlay(q) {
           ? `<a class="btn primary" href="#/" id="again">Back to chapters <kbd>Enter</kbd></a>`
           : `<button class="btn primary" id="again" type="button">Keep going <kbd>Enter</kbd></button>
              ${MODES[other] ? `<button class="btn" id="switch" type="button">${other === 'train' ? ICON.play : ICON.pen} Switch to ${MODES[other].label}</button>` : ''}`}
+        ${S.unit && S.mode === 'train' ? `<a class="btn" id="lap-test" href="#/test?d=60&src=chapter&pack=${enc(S.pack.id)}&unit=${enc(S.unit.id)}">${ICON.flame} 1-minute test on this chapter</a>` : ''}
         ${hasEnoughData() ? `<a class="btn" href="#/drill">${ICON.bolt} Drill weak spots</a>` : ''}
         <a class="btn ghost" href="${exit}">Done</a>
       </div>
@@ -937,7 +1018,10 @@ function viewPlay(q) {
       else if (e.key.toLowerCase() === 'r') { e.preventDefault(); show(); }
       else if (e.key.toLowerCase() === 'd' && S.trouble.length) { e.preventDefault(); quickDrill(S.trouble); }
       else clearAuto();
-    } else if (phase === 'lap' && e.key === 'Enter' && document.activeElement?.id !== 'switch') {
+    } else if (phase === 'warmed' && (e.key === 'Enter' || e.key === ' ')) {
+      e.preventDefault();
+      show();
+    } else if (phase === 'lap' && e.key === 'Enter' && !['switch', 'lap-test'].includes(document.activeElement?.id)) {
       e.preventDefault();
       if (S.review) go('#/'); else newLap();
     }
@@ -948,6 +1032,7 @@ function viewPlay(q) {
   paintControls();
   paintHud(false);
   show();
+  offerWarmup();
 }
 
 // ---- typing hub ---------------------------------------------------------------
@@ -1103,6 +1188,7 @@ function viewTyping() {
       ${toggle('showKeyboard', 'On-screen keyboard', 'Shows the next key and which finger should press it.')}
       ${toggle('noBackspace', 'No backspace', 'Mistakes stay where they are, to build accuracy first.')}
       ${toggle('drills', 'Offer quick drills', 'After an answer, press D to type the words you slipped on.')}
+      ${toggle('warmup', 'Offer a warm-up', 'When you start a chapter, offer 30 seconds on your weak spots using its key terms.')}
       ${toggle('stopOnError', 'Stop on mistakes', 'A wrong key is rejected until you type the right one.')}
       <p class="muted small"><a href="#/settings">All settings</a></p>
     </section>`;
@@ -1271,10 +1357,12 @@ function subjectPacks() {
   return { subject: from.length ? subject : null, packs: from.length ? from : packs };
 }
 
-function testText(src, minChars) {
+function testText(src, minChars, unit = null) {
   const { packs: use } = subjectPacks();
   let pool;
-  if (src === 'custom') {
+  if (src === 'chapter') {
+    pool = (unit?.items || []).map(i => i.answer.replace(/\s+/g, ' '));
+  } else if (src === 'custom') {
     const t = (state.customText || '').replace(/\s+/g, ' ').trim();
     if (!t) return '';
     pool = [t];
@@ -1323,22 +1411,27 @@ function testChart(samples) {
 
 function viewTest(q) {
   const d = TEST_DURATIONS.includes(Number(q.get('d'))) ? Number(q.get('d')) : (state.ui?.testD || 60);
-  const src = TEST_SOURCES[q.get('src')] ? q.get('src') : (state.ui?.testSrc || 'answers');
-  state.ui = { ...state.ui, testD: d, testSrc: src };
-  const { subject } = subjectPacks();
-  const link = (dd, ss) => `#/test?d=${dd}&src=${ss}`;
+  const cPack = packs.find(p => p.id === q.get('pack'));
+  const cUnit = q.get('src') === 'chapter' ? cPack?.units.find(u => u.id === q.get('unit')) : null;
+  const src = cUnit ? 'chapter' : TEST_SOURCES[q.get('src')] ? q.get('src') : (state.ui?.testSrc || 'answers');
+  if (!cUnit) state.ui = { ...state.ui, testD: d, testSrc: src };
+  const subject = cUnit ? cPack.subject : subjectPacks().subject;
+  // A test started from a chapter returns to it.
+  const exitTo = cUnit ? playHref(cPack, cUnit, 'train') : '#/typing';
+  const unitKey = cUnit ? `${cPack.id}/${cUnit.id}` : null;
+  const link = (dd, ss) => ss === 'chapter' && cUnit ? `#/test?d=${dd}&src=chapter&pack=${enc(cPack.id)}&unit=${enc(cUnit.id)}` : `#/test?d=${dd}&src=${ss}`;
   main.innerHTML = `
     <div class="play">
       <div class="play-top">
-        <a class="icon-btn" href="#/typing" title="Back to typing (Esc)" aria-label="Leave">${ICON.x}</a>
-        <div class="play-where"><b>Speed test</b><span>${d} seconds of ${src === 'custom' ? 'your own text' : `${subject ? `${esc(subject)} ` : ''}${TEST_SOURCES[src].toLowerCase()}`}</span></div>
+        <a class="icon-btn" href="${exitTo}" title="${cUnit ? 'Back to the chapter' : 'Back to typing'} (Esc)" aria-label="Leave">${ICON.x}</a>
+        <div class="play-where"><b>${cUnit ? 'Chapter test' : 'Speed test'}</b><span>${d} seconds of ${cUnit ? `${esc(cUnit.title)} answers` : src === 'custom' ? 'your own text' : `${subject ? `${esc(subject)} ` : ''}${TEST_SOURCES[src].toLowerCase()}`}</span></div>
         <div class="hud">
           <span class="tleft" title="Time left"><b id="tleft">${d}</b>s</span>
         </div>
       </div>
       <div class="play-controls">
         <div class="seg" role="radiogroup" aria-label="Length">${TEST_DURATIONS.map(x => `<a role="radio" aria-checked="${x === d}" href="${link(x, src)}">${x}s</a>`).join('')}</div>
-        <div class="seg" role="radiogroup" aria-label="Text">${Object.entries(TEST_SOURCES).map(([k, l]) => `<a role="radio" aria-checked="${k === src}" href="${link(d, k)}">${l}</a>`).join('')}</div>
+        ${cUnit ? '' : `<div class="seg" role="radiogroup" aria-label="Text">${Object.entries(TEST_SOURCES).map(([k, l]) => `<a role="radio" aria-checked="${k === src}" href="${link(d, k)}">${l}</a>`).join('')}</div>`}
       </div>
       ${src === 'custom' ? `<details class="custom-text" ${state.customText ? '' : 'open'}><summary>Your text</summary>
         <textarea id="custom" rows="5" placeholder="Paste your own notes or answers to type them as a test." spellcheck="false">${esc(state.customText || '')}</textarea>
@@ -1346,7 +1439,7 @@ function viewTest(q) {
       <div class="stage" id="stage"></div>
       <p class="play-help">The clock starts with your first key. <kbd>Enter</kbd> after a test starts another. <kbd>Esc</kbd> leaves.</p>
     </div>`;
-  mountToolTabs('test');
+  if (!cUnit) mountToolTabs('test');
   const stage = document.getElementById('stage');
   const tleft = document.getElementById('tleft');
   let typer = null, timer = 0, t0 = 0, samples = [], last = null, phase = 'typing', text = '';
@@ -1379,7 +1472,7 @@ function viewTest(q) {
     timer = 0; t0 = 0; samples = []; phase = 'typing';
     tleft.textContent = d;
     typer?.destroy();
-    text = testText(src, d * 22 + 150);
+    text = testText(src, d * 22 + 150, cUnit);
     if (!text) {
       stage.innerHTML = `<div class="empty"><p>${src === 'custom' ? 'Paste some text above to test yourself on it.' : 'No text to test on in this subject.'}</p></div>`;
       return;
@@ -1418,8 +1511,8 @@ function viewTest(q) {
     const acc = keyAccOf(r);
     const cons = consistency(samples.map(s => s.raw));
     recordAttempt(text, r.log);
-    const prevBest = Math.max(0, ...state.tests.filter(x => x.d === d && x.src === src).map(x => x.wpm));
-    const rec = { t: Date.now(), d, src, subject, wpm: Math.round(wpm), raw: Math.round(raw), acc: +acc.toFixed(3), cons: cons == null ? null : Math.round(cons) };
+    const prevBest = Math.max(0, ...state.tests.filter(x => x.d === d && x.src === src && (x.unit || null) === unitKey).map(x => x.wpm));
+    const rec = { t: Date.now(), d, src, subject, ...(unitKey ? { unit: unitKey } : {}), wpm: Math.round(wpm), raw: Math.round(raw), acc: +acc.toFixed(3), cons: cons == null ? null : Math.round(cons) };
     state.tests.push(rec);
     if (state.tests.length > 300) state.tests.splice(0, state.tests.length - 300);
     const xp = Math.max(1, Math.round((r.net / 5) * Math.pow(acc, 3)));
@@ -1440,14 +1533,16 @@ function viewTest(q) {
         <div><span>Consistency</span><b>${rec.cons == null ? '–' : `${rec.cons}%`}</b></div>
       </div>
       <div class="chips-row">
-        ${pb ? `<span class="pill pb">New best for ${d}s: ${rec.wpm} WPM</span>` : prevBest ? `<span class="pill">Best for ${d}s: ${prevBest} WPM</span>` : ''}
+        ${pb ? `<span class="pill pb">New best for ${cUnit ? 'this chapter' : `${d}s`}: ${rec.wpm} WPM</span>` : prevBest ? `<span class="pill">Best for ${cUnit ? 'this chapter' : `${d}s`}: ${prevBest} WPM</span>` : ''}
+        ${cUnit && usualWpm() ? `<span class="pill">Usual speed in Train: ${Math.round(usualWpm())} WPM</span>` : ''}
         <span class="pill">+${fmt(xp)} XP</span>
         <span class="pill">${fmt(r.net)} correct, ${fmt(r.errors)} wrong keys</span>
       </div>
       ${testChart(samples)}
       ${slips.length ? `<p class="tip missed">Drill what slowed you down: ${slips.map(w => `<a href="${drillLink(w)}">${esc(w)}</a>`).join(', ')}</p>` : ''}
       <div class="result-actions">
-        <button class="btn primary" id="again" type="button">Another test <kbd>Enter</kbd></button>
+        ${cUnit ? `<a class="btn primary" href="${exitTo}">Back to ${esc(cUnit.title)}</a><button class="btn" id="again" type="button">Test again</button>`
+          : `<button class="btn primary" id="again" type="button">Another test <kbd>Enter</kbd></button>`}
         <a class="btn ghost" href="#/progress">Stats</a>
       </div>`;
     card.append(out);
@@ -1459,8 +1554,8 @@ function viewTest(q) {
 
   const onKey = e => {
     if (e.target?.id === 'custom') return;
-    if (e.key === 'Escape') { e.preventDefault(); go('#/typing'); return; }
-    if (phase === 'result' && e.key === 'Enter') { e.preventDefault(); start(); }
+    if (e.key === 'Escape') { e.preventDefault(); go(exitTo); return; }
+    if (phase === 'result' && e.key === 'Enter') { e.preventDefault(); if (cUnit) go(exitTo); else start(); }
   };
   document.addEventListener('keydown', onKey);
   cleanup = () => { clearInterval(timer); document.removeEventListener('keydown', onKey); typer?.destroy(); };
@@ -1471,6 +1566,7 @@ function viewTest(q) {
 
 function viewCourse() {
   const c = course();
+  const guideOn = () => course().kb !== false;
   const { vocab } = drillVocab('words');
   main.innerHTML = `
     <div class="play">
@@ -1481,10 +1577,23 @@ function viewCourse() {
       </div>
       <div class="play-controls">
         <div class="seg" role="radiogroup" aria-label="Target speed per key">${COURSE_TARGETS.map(t => `<button type="button" role="radio" data-target="${t}" aria-checked="${t === c.target}">${t} WPM</button>`).join('')}</div>
+        <div class="seg seg-small" role="group" aria-label="Finger guide"><button type="button" role="switch" id="kb-toggle" aria-checked="${guideOn()}">${ICON.grid}Finger guide</button></div>
       </div>
+      <details class="hands" ${c.rounds ? '' : 'open'}>
+        <summary>How to place your hands</summary>
+        <div class="hands-body">
+          <ol>
+            <li>Rest your left fingers on <kbd>A</kbd> <kbd>S</kbd> <kbd>D</kbd> <kbd>F</kbd> and your right fingers on <kbd>J</kbd> <kbd>K</kbd> <kbd>L</kbd> <kbd>;</kbd>. This is the home row. Thumbs rest on the space bar.</li>
+            <li>Feel for the small bumps on <kbd>F</kbd> and <kbd>J</kbd>. Your index fingers sit on them, so you can find the home row without looking.</li>
+            <li>Each key belongs to one finger: the coloured line under each key on the finger guide shows which. Reach from the home row, press, and come back.</li>
+            <li>Capitals: hold Shift with the little finger of the <em>other</em> hand.</li>
+            <li>Keep your eyes on the screen. Slow and accurate first; speed follows.</li>
+          </ol>
+        </div>
+      </details>
       <div class="letters" id="letters"></div>
       <div class="stage" id="stage"></div>
-      <p class="play-help">A new letter unlocks when every unlocked letter reaches the target speed with under 6% errors. Turn on the on-screen keyboard in settings to see which finger to use. <kbd>Esc</kbd> leaves.</p>
+      <p class="play-help">A new letter unlocks when every unlocked letter reaches the target speed with under 6% errors. The finger guide lights up the next key and the finger to use. <kbd>Esc</kbd> leaves.</p>
     </div>`;
   mountToolTabs('course');
   const stage = document.getElementById('stage');
@@ -1494,8 +1603,8 @@ function viewCourse() {
   function paintLetters() {
     const st = letterStatus();
     const f = focusLetter(st);
-    lettersEl.innerHTML = `${st.map(s => `<span class="letter ${s.unlocked ? 'open' : 'locked'} ${s.unlocked && s.ready ? 'ready' : ''} ${s.l === f ? 'focus' : ''}" style="--p:${s.share.toFixed(2)}" title="${s.unlocked ? `${s.l}: ${s.ms ? `${Math.round(12000 / s.ms)} WPM` : 'not timed yet'}${s.err != null ? `, ${pct(s.err)} errors` : ''}${s.ready ? ', at target' : ''}` : `${s.l}: locked`}">${s.l}</span>`).join('')}
-      <p class="letters-key">${course().n} of ${COURSE_ORDER.length} letters. Focus: <b>${f}</b></p>`;
+    lettersEl.innerHTML = `${st.map(s => `<span class="letter ${s.unlocked ? 'open' : 'locked'} ${s.unlocked && s.ready ? 'ready' : ''} ${s.l === f ? 'focus' : ''}" style="--p:${s.share.toFixed(2)}" title="${s.unlocked ? `${s.l} (${fingerFor(s.l)}): ${s.ms ? `${Math.round(12000 / s.ms)} WPM` : 'not timed yet'}${s.err != null ? `, ${pct(s.err)} errors` : ''}${s.ready ? ', at target' : ''}` : `${s.l}: locked`}">${s.l}</span>`).join('')}
+      <p class="letters-key">${course().n} of ${COURSE_ORDER.length} letters. Focus: <b>${f}</b>, ${fingerFor(f)}</p>`;
   }
 
   function round() {
@@ -1506,13 +1615,14 @@ function viewCourse() {
     const card = document.createElement('article');
     card.className = 'card mode-train drill-card';
     card.innerHTML = `
-      <header class="card-head"><div class="tags"><span class="tag">Focus: ${esc(r.focus)}</span><span class="tag">Target ${course().target} WPM</span></div></header>
+      <header class="card-head"><div class="tags"><span class="tag">Focus: ${esc(r.focus)}, ${esc(fingerFor(r.focus))}</span><span class="tag">Target ${course().target} WPM</span></div></header>
       <div class="answer" id="answer"></div>
       <footer class="card-foot"><span class="live" id="live"></span></footer>`;
     stage.replaceChildren(card);
     const live = card.querySelector('#live');
     typer = new Typer(card.querySelector('#answer'), {
-      text: r.text, kind: 'prose', mask: new Set(), settings: { ...state.settings, ignorePunctuation: false, ignoreCase: false },
+      text: r.text, kind: 'prose', mask: new Set(),
+      settings: { ...state.settings, ignorePunctuation: false, ignoreCase: false, showKeyboard: guideOn() || state.settings.showKeyboard, kbLegend: true },
       onKey: ok => {
         if (!state.settings.sound) return;
         if (!ok) sfx.miss();
@@ -1533,6 +1643,7 @@ function viewCourse() {
     state.xp += xp;
     state.days[dayKey()] = (state.days[dayKey()] || 0) + xp;
     const fresh = maybeUnlock();
+    course().rounds = (course().rounds || 0) + 1;
     const earned = checkAchievements(null);
     save();
     achToast(earned);
@@ -1543,7 +1654,7 @@ function viewCourse() {
     const doneAll = course().n >= COURSE_ORDER.length && letterStatus().every(s => s.ready);
     out.innerHTML = `
       <p class="rstats"><span><b>${Math.round(wpmOf(res))}</b> WPM</span><span><b>${pct(acc)}</b> keys right</span><span>+<b>${fmt(xp)}</b> XP</span></p>
-      ${fresh ? `<p class="unlock">New letter: <b>${esc(fresh)}</b></p>` : ''}
+      ${fresh ? `<p class="unlock">New letter: <b>${esc(fresh)}</b>. Type it with your ${esc(fingerFor(fresh))}.</p>` : ''}
       ${doneAll ? `<p class="tip missed">Every letter is at your target. Next: capitals with a <a href="${drillLink('shift', 'terms')}">Shift drill</a>, or a <a href="#/test">speed test</a>.</p>` : ''}
       <div class="result-actions"><button class="btn primary" id="next" type="button">Next round <kbd>Enter</kbd></button></div>`;
     card.append(out);
@@ -1553,6 +1664,12 @@ function viewCourse() {
     out.querySelector('#next').focus({ preventScroll: true });
   }
 
+  document.getElementById('kb-toggle').addEventListener('click', e => {
+    course().kb = !guideOn();
+    save();
+    e.currentTarget.setAttribute('aria-checked', guideOn());
+    if (phase === 'typing') round();
+  });
   main.querySelectorAll('[data-target]').forEach(b => b.addEventListener('click', () => {
     course().target = Number(b.dataset.target);
     save();
@@ -1674,6 +1791,7 @@ function viewSettings() {
       ${PRACTICE_ENABLED ? choice('practiceLevel', 'Practice mode hides', Object.entries(LEVELS).map(([k, l]) => [k, l.label])) : ''}
       ${toggle('markPoints', 'Show mark points', 'The phrases that earn marks in the mark scheme are underlined, and light up with +1 as you type each one correctly. Physics and Computer Science definitions.')}
       ${toggle('drills', 'Offer quick drills', 'After an answer, press D to type the words you slipped on or typed slowly, three times each.')}
+      ${toggle('warmup', 'Offer a warm-up', 'When you start a chapter, offer 30 seconds on your weak spots using that chapter’s key terms.')}
       ${toggle('showKeyboard', 'On-screen keyboard', 'Shows the next key and which finger should press it, so you can keep your eyes on the screen.')}
       ${toggle('noBackspace', 'No backspace', 'Mistakes stay where they are, as in a confidence test. Builds accuracy before speed.')}
       ${toggle('stopOnError', 'Stop on mistakes', 'A wrong key is rejected, so you must type the right one before moving on.')}

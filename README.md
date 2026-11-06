@@ -37,6 +37,9 @@ syllabus topic and is tagged when it's printed on the data and formulae list.
   speed; the session speed at the top of the screen adds up every answer and is steadier.
 - **Your usual speed** is the median of your last 40 answers of 40+ characters. It is the bar for
   Fluent, so the target fits your own pace.
+- **Warm-up and chapter test.** When a chapter session starts, Verbatim offers 30 seconds on your
+  weak spots using that chapter's key terms (switch it off in settings). At the end of a lap, a
+  one-minute test on the chapter's answers gives a benchmark and returns you to the chapter.
 - **Endless laps.** A session goes round every answer in the chapter, then starts another lap with
   the ones you slipped on first, then the answers with the most of your weak letter pairs and
   words. It never ends until you leave.
@@ -69,7 +72,9 @@ syllabus topic and is tagged when it's printed on the data and formulae list.
 - **Key course.** Learn the keyboard a few letters at a time, starting with six. Rounds use real
   syllabus words made only of the letters you have, topped up with made-up words in the same
   letter patterns, and lean on the letter that needs most work. A new letter unlocks once every
-  unlocked letter reaches your target speed (25 to 60 WPM) with under 6% errors.
+  unlocked letter reaches your target speed (25 to 60 WPM) with under 6% errors. It opens with how
+  to place your hands on the home row, names the finger for each letter, and shows a finger guide
+  (a colour-coded keyboard that lights up the next key) unless you switch it off.
 - **On-screen keyboard** (settings): lights up the next key and the finger to press it with, and
   the Shift key on the other hand for capitals.
 - **No backspace** (settings): mistakes stay, as in a confidence test, to build accuracy first.

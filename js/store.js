@@ -15,6 +15,7 @@ export const DEFAULT_SETTINGS = {
   markPoints: true,       // highlight the phrases that earn marks
   drills: true,           // offer a quick drill of the words you slipped on
   showKeyboard: false,    // on-screen keyboard showing the next key and finger
+  warmup: true,           // offer a 30-second weak-spots warm-up when a chapter session starts
   noBackspace: false,     // mistakes can't be fixed, as in a confidence test
   homeLayout: 'type',     // front page: type | set | plan
   textSize: 'm',          // s | m | l
@@ -35,7 +36,7 @@ function fresh() {
     chapters: {},           // practice bar per chapter: { level, day, items }
     skill: { keys: {}, pairs: {}, words: {} }, // typing skill model, see skill.js
     tests: [],              // speed tests: { t, d, src, subject, wpm, raw, acc, cons }
-    course: { n: 6, target: 35 }, // key course: letters unlocked, target WPM per key
+    course: { n: 6, target: 35, kb: true, rounds: 0 }, // key course: letters unlocked, target WPM per key, finger guide
     customText: '',
     totals: { chars: 0, keystrokes: 0, errors: 0, items: 0, ms: 0, hints: 0, perfects: 0, laps: 0, lucky: 0 },
     bestCombo: 0,

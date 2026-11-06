@@ -17,14 +17,25 @@ export const FINGER_NAMES = {
   ri: 'right index finger', rm: 'right middle finger', rr: 'right ring finger', rp: 'right little finger', th: 'thumb',
 };
 
-export function createKeyboard() {
+/** Which finger types a character, in words: "left ring finger + right Shift". */
+export function fingerFor(ch) {
+  const { key, shift } = physical(ch);
+  const f = FINGER[key];
+  if (!f) return '';
+  return FINGER_NAMES[f] + (shift ? ` + ${f.startsWith('l') ? 'right' : 'left'} Shift` : '');
+}
+
+const LEGEND = [['p', 'Little'], ['r', 'Ring'], ['m', 'Middle'], ['i', 'Index'], ['th', 'Thumbs']];
+const HOME = new Set([...'asdfjkl;']);
+
+export function createKeyboard({ legend = false } = {}) {
   const el = document.createElement('div');
   el.className = 'okb';
   el.setAttribute('aria-hidden', 'true');
   const keyEl = {};
   const mk = (k, label, cls = '') => {
     const s = document.createElement('span');
-    s.className = `okb-key f-${FINGER[k] || 'lp'} ${cls}`;
+    s.className = `okb-key f-${FINGER[k] || 'lp'} ${cls} ${HOME.has(k) ? 'home' : ''} ${k === 'f' || k === 'j' ? 'bump' : ''}`;
     s.textContent = label;
     keyEl[k] = s;
     return s;
@@ -45,6 +56,13 @@ export function createKeyboard() {
   const hint = document.createElement('p');
   hint.className = 'okb-hint';
   el.append(hint);
+  if (legend) {
+    const lg = document.createElement('p');
+    lg.className = 'okb-legend';
+    lg.innerHTML = LEGEND.map(([f, name]) => `<span><i class="okb-sw f-${f === 'th' ? 'th' : `l${f}`}"></i>${name}</span>`).join('')
+      + '<span class="okb-home-note">Home row underlined; feel for the bumps on F and J</span>';
+    el.append(lg);
+  }
 
   let lit = [];
   function show(ch) {

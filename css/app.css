@@ -215,17 +215,18 @@ main:focus { outline: none; }
   padding: 1.75rem 0 0.25rem;
   display: grid;
   grid-template-columns: minmax(0, 1fr) 360px;
-  grid-template-areas: "copy art" "search quick";
+  grid-template-areas: "copy art" "search search" "quick quick";
   column-gap: 1rem;
   row-gap: 1.6rem;
 }
 .hero-copy { grid-area: copy; align-self: center; }
 .hero-art-wrap { grid-area: art; align-self: end; }
 .hero-search { grid-area: search; min-width: 0; }
-.hero .quick { grid-area: quick; margin: 0; display: grid; gap: 0.6rem; align-content: start; }
+/* Search runs the full width; the quick cards share an even row beneath it, however many there are. */
+.hero .quick { grid-area: quick; margin: -0.6rem 0 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr)); gap: 0.75rem; align-content: start; }
 .hero h1 { font-family: var(--sans); font-weight: 700; font-stretch: normal; letter-spacing: -0.02em; line-height: 1.08; font-size: clamp(2.3rem, 1.3rem + 3vw, 3.7rem); max-width: 18ch; margin-bottom: 0.45rem; text-wrap: balance; }
 .lede { color: var(--on-desk-2); font-size: 1.15rem; line-height: 1.45; max-width: 60ch; margin: 0; }
-/* The search box and the Continue card share a row and a height. */
+/* The search box and the quick cards share a height. */
 .hero .search { margin-top: 0; max-width: none; height: 3.6rem; }
 .hero .search input { padding: 0; }
 .hero .quick-card { height: 3.6rem; padding: 0 0.9rem; }
@@ -779,7 +780,30 @@ a.kb-key { text-decoration: none; } a.kb-key:hover, a.kb-key:focus-visible { out
 .okb-key.f-lp, .okb-key.f-rp { --fc: #c084fc; } .okb-key.f-lr, .okb-key.f-rr { --fc: #60a5fa; }
 .okb-key.f-lm, .okb-key.f-rm { --fc: #34d399; } .okb-key.f-li, .okb-key.f-ri { --fc: #fbbf24; } .okb-key.f-th { --fc: #f87171; }
 .okb-key.next { background: var(--fc); color: #0c1445; transform: translateY(-2px); }
-.okb-hint { margin: 0.2rem 0 0; text-align: center; font-size: 0.85rem; color: var(--ink-3); min-height: 1.2em; }
+.okb-hint { margin: 0.2rem 0 0; text-align: center; font-size: 0.95rem; font-weight: 700; color: var(--ink); min-height: 1.3em; }
+.okb-key.home { text-decoration: underline; text-underline-offset: 3px; }
+.okb-key.bump::after { content: ''; position: absolute; bottom: 7px; width: 0.55rem; height: 2px; border-radius: 1px; background: currentColor; opacity: 0.7; }
+.okb-key { position: relative; }
+.okb-legend { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.35rem 0.9rem; margin: 0.1rem 0 0; font-size: 0.8rem; color: var(--ink-2); }
+.okb-legend span { display: inline-flex; align-items: center; gap: 0.3rem; }
+.okb-sw { display: inline-block; width: 0.9rem; height: 0.35rem; border-radius: 2px; background: var(--fc); }
+.okb-sw.f-lp { --fc: #c084fc; } .okb-sw.f-lr { --fc: #60a5fa; } .okb-sw.f-lm { --fc: #34d399; } .okb-sw.f-li { --fc: #fbbf24; } .okb-sw.f-th { --fc: #f87171; }
+.okb-home-note { color: var(--ink-3); }
+
+/* Key course: how to place your hands */
+.hands { max-width: 900px; margin: 0 auto 1rem; background: var(--card); color: var(--ink); border-radius: 8px; padding: 0.6rem 1rem; box-shadow: var(--shadow-card); }
+.hands summary { cursor: pointer; font-weight: 700; }
+.hands ol { margin: 0.6rem 0 0.2rem; padding-left: 1.3rem; display: grid; gap: 0.35rem; color: var(--ink-2); }
+.hands kbd { font-family: var(--mono); font-weight: 700; color: var(--ink); background: var(--card-2); border-radius: 3px; padding: 0 0.3rem; }
+.seg [role='switch'] { font: inherit; font-weight: 700; display: inline-flex; align-items: center; gap: 0.35rem; border: 0; background: none; color: var(--on-desk-2); padding: 0.3rem 0.75rem; border-radius: 6px; cursor: pointer; font-size: 0.85rem; }
+.seg [role='switch'] svg { width: 0.95rem; height: 0.95rem; }
+.seg [role='switch'][aria-checked='true'] { background: var(--card); color: var(--ink); }
+
+/* Learn: warm-up offer above the first answer */
+.warmup-offer { max-width: 900px; margin: 0 auto 0.75rem; display: flex; align-items: center; gap: 0.6rem; padding: 0.5rem 0.6rem 0.5rem 1rem; border-radius: 8px; background: rgb(255 255 255 / 0.1); color: var(--on-desk); font-size: 0.92rem; }
+.warmup-offer > span { flex: 1; display: inline-flex; align-items: center; gap: 0.4rem; }
+.warmup-offer svg { width: 1rem; height: 1rem; color: var(--hl); }
+.warmup-offer .btn.ghost { color: var(--on-desk-2); }
 
 /* Speed test */
 .tleft b { font-variant-numeric: tabular-nums; }
