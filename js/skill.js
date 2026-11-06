@@ -6,7 +6,7 @@
 // so a weakness you fix fades out of the list. Everything is judged against your own medians,
 // so "slow" means slow for you, at any speed.
 
-import { state } from './store.js';
+import { state, dayKey } from './store.js';
 
 export const PAUSE_CAP = 2000;   // longer gaps count as thinking, not typing
 const MIN_N = 6;                 // samples before a key, pair or word is judged
@@ -79,6 +79,25 @@ export function recordAttempt(text, log) {
     for (const [k] of words.slice(0, words.length - WORD_CAP)) delete m.words[k];
   }
   version++;
+  recordDay(m);
+}
+
+const DAILY_DAYS = 90;
+const DAILY_PAIRS = 150;
+
+/**
+ * Keep one record per day of each key's and the most-typed pairs' running time and error rate
+ * (error rate in thousandths), so trends over days and weeks can be shown and analysed.
+ */
+function recordDay(m) {
+  const daily = state.skillDaily ||= {};
+  const pick = (map, limit) => Object.fromEntries(Object.entries(map)
+    .filter(([, e]) => e.n >= MIN_N && e.t >= MIN_N)
+    .sort((a, b) => b[1].n - a[1].n).slice(0, limit)
+    .map(([k, e]) => [k, [e.ms, Math.round(e.err * 1000)]]));
+  daily[dayKey()] = { keys: pick(m.keys, 80), pairs: pick(m.pairs, DAILY_PAIRS) };
+  const days = Object.keys(daily).sort();
+  for (const d of days.slice(0, Math.max(0, days.length - DAILY_DAYS))) delete daily[d];
 }
 
 function median(xs) {

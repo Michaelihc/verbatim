@@ -21,6 +21,7 @@ const SHELL = [
   'js/skill.js',
   'js/kb.js',
   'js/course.js',
+  'js/agent.js',
   'js/laptop3d.js',
   'js/vendor/three.module.min.js',
   'fonts/atkinson-400.woff2',
@@ -72,7 +73,8 @@ self.addEventListener('fetch', event => {
     event.respondWith(staleWhileRevalidate(req, event));
     return;
   }
-  if (req.mode === 'navigate') {
+  // The app shell answers navigations, except documents meant to be read as they are (agents.md).
+  if (req.mode === 'navigate' && !/\.(md|txt|json)$/.test(url.pathname)) {
     event.respondWith(caches.match('index.html', { cacheName: SHELL_CACHE }).then(r => r || fetch(req)));
     return;
   }

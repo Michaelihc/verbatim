@@ -38,6 +38,8 @@ function fresh() {
     tests: [],              // speed tests: { t, d, src, subject, wpm, raw, acc, cons }
     course: { n: 6, target: 35, kb: true, rounds: 0 }, // key course: letters unlocked, target WPM per key, finger guide
     customText: '',
+    exercises: [],          // exercise sets loaded from #/load links, see agent.js
+    skillDaily: {},         // one record per day of key and pair speed, see skill.js
     totals: { chars: 0, keystrokes: 0, errors: 0, items: 0, ms: 0, hints: 0, perfects: 0, laps: 0, lucky: 0 },
     bestCombo: 0,
   };

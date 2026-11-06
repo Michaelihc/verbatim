@@ -94,6 +94,14 @@ syllabus topic and is tagged when it's printed on the data and formulae list.
 - **Levels, streaks, a daily goal and achievements.**
 - **Works offline.** A service worker caches the app and every pack on first visit. Packs refresh
   in the background, and new app versions show a reload prompt.
+- **AI coach.** Tell Claude Code, Codex or another agent on your computer to "analyse my Verbatim
+  typing data following https://michaelihc.github.io/verbatim/agents.md". The guide has the agent
+  open `#/snapshot` in your browser, which saves your typing data (speed, accuracy, speed tests,
+  weak keys, pairs and words, daily trends, exercise results, with a field guide) to Downloads as
+  `verbatim-snapshot-*.json`; `#/snapshot?full=1` adds every answer and the whole skill model. The
+  agent replies with feedback and an exercise set as a `#/load?x=...` link: Verbatim previews it,
+  adds it only if you agree, and lists it under Typing, Your exercises. Results go into the next
+  snapshot. With a web chat, download a snapshot from the Stats page and attach it.
 - **Your data stays in your browser** (localStorage). Export and import it from the Stats page.
 
 ### Why it's built this way
