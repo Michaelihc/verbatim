@@ -215,17 +215,18 @@ main:focus { outline: none; }
   padding: 1.75rem 0 0.25rem;
   display: grid;
   grid-template-columns: minmax(0, 1fr) 360px;
-  grid-template-areas: "copy art" "search quick";
+  grid-template-areas: "copy art" "search search" "quick quick";
   column-gap: 1rem;
   row-gap: 1.6rem;
 }
 .hero-copy { grid-area: copy; align-self: center; }
 .hero-art-wrap { grid-area: art; align-self: end; }
 .hero-search { grid-area: search; min-width: 0; }
-.hero .quick { grid-area: quick; margin: 0; display: grid; gap: 0.6rem; align-content: start; }
+/* Search runs the full width; the quick cards share an even row beneath it, however many there are. */
+.hero .quick { grid-area: quick; margin: -0.6rem 0 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr)); gap: 0.75rem; align-content: start; }
 .hero h1 { font-family: var(--sans); font-weight: 700; font-stretch: normal; letter-spacing: -0.02em; line-height: 1.08; font-size: clamp(2.3rem, 1.3rem + 3vw, 3.7rem); max-width: 18ch; margin-bottom: 0.45rem; text-wrap: balance; }
 .lede { color: var(--on-desk-2); font-size: 1.15rem; line-height: 1.45; max-width: 60ch; margin: 0; }
-/* The search box and the Continue card share a row and a height. */
+/* The search box and the quick cards share a height. */
 .hero .search { margin-top: 0; max-width: none; height: 3.6rem; }
 .hero .search input { padding: 0; }
 .hero .quick-card { height: 3.6rem; padding: 0 0.9rem; }
