@@ -529,6 +529,7 @@ function buildSession(q) {
 }
 
 const keyOf = e => `${e.pack.id}/${e.item.id}`;
+const PLAY_SESSION_KEY = 'verbatim:play-session:v1';
 
 function shuffled(arr) {
   const a = [...arr];
@@ -554,6 +555,48 @@ function viewPlay(q) {
     const start = order.findIndex(e => e.item.id === q.get('item'));
     if (start > 0) order = [...order.slice(start), ...order.slice(0, start)];
     S.order = order;
+  }
+  // Keep the lap in this tab across reloads, without keeping unfinished keystrokes.
+  const sessionScope = () => {
+    const params = new URLSearchParams(q);
+    params.set('mode', S.mode);
+    params.sort();
+    return params.toString();
+  };
+  const content = JSON.stringify(S.items.map(e => [keyOf(e), e.item.answer]));
+  let resumePhase = 'typing';
+  let resumed = false;
+  try {
+    const saved = JSON.parse(sessionStorage.getItem(PLAY_SESSION_KEY));
+    if (saved?.scope === sessionScope() && saved.content === content) {
+      const entries = new Map(S.items.map(e => [keyOf(e), e]));
+      const order = saved.order.map(k => entries.get(k));
+      if (order.length === S.items.length && order.every(Boolean) && new Set(order).size === order.length
+        && Number.isInteger(saved.pos) && saved.pos >= 0 && saved.pos < order.length
+        && Number.isInteger(saved.lap) && saved.lap > 0
+        && ['typing', 'result', 'lap'].includes(saved.phase)) {
+        const results = new Map(saved.results);
+        for (const k of ['lap', 'pos', 'combo', 'xp', 'lapXp', 'net', 'activeMs', 'lapPts']) S[k] = saved[k];
+        S.order = order;
+        S.lapResults = results;
+        resumePhase = saved.phase;
+        resumed = true;
+      }
+    }
+  } catch (err) {
+    console.warn('Could not restore the current lap', err);
+  }
+  function saveSession(savedPhase = phase) {
+    try {
+      sessionStorage.setItem(PLAY_SESSION_KEY, JSON.stringify({
+        scope: sessionScope(), content, phase: savedPhase,
+        order: S.order.map(keyOf), results: [...S.lapResults],
+        lap: S.lap, pos: S.pos, combo: S.combo, xp: S.xp, lapXp: S.lapXp,
+        net: S.net, activeMs: S.activeMs, lapPts: S.lapPts,
+      }));
+    } catch (err) {
+      console.warn('Could not save the current lap', err);
+    }
   }
   const remember = () => {
     if (S.pack) { state.lastPlay = { pack: S.pack.id, unit: S.unitId, mode: S.mode }; save(); }
@@ -766,6 +809,7 @@ function viewPlay(q) {
   function show() {
     clearAuto();
     phase = 'typing';
+    saveSession();
     const entry = S.order[S.pos];
     const { pack, item } = entry;
     const level = state.settings.practiceLevel;
@@ -839,6 +883,7 @@ function viewPlay(q) {
     pushHistory({ v: 2, t: Date.now(), p: entry.pack.id, i: entry.item.id, m: mode, c: r.chars, wpm: Math.round(res.wpm), acc: +res.acc.toFixed(3), xp: res.xp, r: res.rating });
     const earned = checkAchievements({ mode, level: mode === 'practice' ? level : null, rating: res.rating, rank: res.rank, hints: r.hints, chars: r.chars, wpm: res.wpm });
     save();
+    saveSession();
 
     const it = entry.item;
     const auto = state.settings.autoAdvance && res.rank >= 3;
@@ -926,12 +971,13 @@ function viewPlay(q) {
     else lapDone();
   }
 
-  function lapDone() {
+  function lapDone(restoring = false) {
     phase = 'lap';
     typer?.destroy(); typer = null;
-    state.totals.laps = (state.totals.laps || 0) + 1;
-    const earned = checkAchievements(null);
-    save();
+    if (!restoring) state.totals.laps = (state.totals.laps || 0) + 1;
+    const earned = restoring ? [] : checkAchievements(null);
+    if (!restoring) save();
+    saveSession();
     const counts = { perfect: 0, great: 0, good: 0, ok: 0 };
     for (const r of S.lapResults.values()) counts[r]++;
     const n = S.order.length;
@@ -1032,12 +1078,19 @@ function viewPlay(q) {
     }
   };
   document.addEventListener('keydown', onKey);
-  cleanup = () => { clearAuto(); document.removeEventListener('keydown', onKey); typer?.destroy(); };
+  cleanup = () => {
+    clearAuto(); document.removeEventListener('keydown', onKey); typer?.destroy();
+    try { sessionStorage.removeItem(PLAY_SESSION_KEY); } catch { /* Storage may be unavailable. */ }
+  };
 
   paintControls();
   paintHud(false);
-  show();
-  offerWarmup();
+  sxpEl.textContent = fmt(S.xp);
+  paintSpeed();
+  if (resumePhase === 'lap') lapDone(true);
+  else if (resumePhase === 'result') { phase = 'result'; next(); }
+  else show();
+  if (!resumed) offerWarmup();
 }
 
 // ---- AI coach: snapshot, exercise links, exercises -----------------------------
